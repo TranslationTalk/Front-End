@@ -23,7 +23,7 @@ const StarsInput = ({ placeholder, currentValue, onClick }) => {
           <Star
             key={star}
             src={star > currentValue ? grayStar : blueStar}
-            alt={star > currentValue ? 'grayStar' : 'blueStar'}
+            alt={`별점 ${star}점 선택`}
             onClick={() => onClick(star)}
           />
         ))}
