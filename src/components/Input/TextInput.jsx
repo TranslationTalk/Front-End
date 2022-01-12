@@ -1,5 +1,6 @@
 /*
-text input을 받는 common input component
+common input component:
+text를 받는 input
 */
 import React from 'react'
 import PropTypes from 'prop-types'
