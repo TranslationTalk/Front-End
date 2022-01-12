@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import styled from 'styled-components'
 import CheckBoxInput from './components/Input/CheckBoxInput'
 import SelectInput from './components/Input/SelectInput'
+import TextAreaInput from './components/Input/TextAreaInput'
 import TextInput from './components/Input/TextInput'
 
 function App() {
@@ -46,6 +47,11 @@ function App() {
         id="taxPossible"
         onChange={handleChange}
         label="세금명세서 가능 여부"
+      />
+      <TextAreaInput
+        id="introduction"
+        placeholder="자기 소개"
+        onChange={handleChange}
       />
     </div>
   )
