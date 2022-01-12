@@ -23,7 +23,7 @@ const Select = styled.select`
 `
 
 SelectInput.propTypes = {
-  id: PropTypes.string.isRequired,
+  id: PropTypes.string,
   onChange: PropTypes.func.isRequired,
   value: PropTypes.string.isRequired,
   options: PropTypes.array.isRequired,
