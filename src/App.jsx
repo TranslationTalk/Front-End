@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
+import CheckBoxInput from './components/Input/CheckBoxInput'
 import SelectInput from './components/Input/SelectInput'
 import TextInput from './components/Input/TextInput'
 
@@ -8,13 +9,19 @@ function App() {
     name: '',
     career: '',
     language: '',
+    taxPossible: false,
     introduction: '',
   })
 
   const handleChange = e => {
     console.log(e.target.id)
     console.log(e.target.value)
-    setFormData(prev => ({ ...prev, [e.target.id]: e.target.value }))
+    console.log(e.target.checked)
+    setFormData(prev => ({
+      ...prev,
+      [e.target.id]: e.target.value,
+      taxPossible: e.target.checked ?? false,
+    }))
   }
 
   console.log(formData)
@@ -34,6 +41,11 @@ function App() {
         onChange={handleChange}
         defaultOption="가능 언어"
         options={['한국어', '영어', '일본어']}
+      />
+      <CheckBoxInput
+        id="taxPossible"
+        onChange={handleChange}
+        label="세금명세서 가능 여부"
       />
     </div>
   )
