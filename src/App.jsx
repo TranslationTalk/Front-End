@@ -32,6 +32,7 @@ function App() {
         id="language"
         value={formData.language}
         onChange={handleChange}
+        defaultOption="가능 언어"
         options={['한국어', '영어', '일본어']}
       />
     </div>

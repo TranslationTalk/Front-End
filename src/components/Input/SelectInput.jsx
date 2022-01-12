@@ -6,8 +6,9 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
-const SelectInput = ({ id, onChange, value, options }) => (
+const SelectInput = ({ id, defaultOption, onChange, value, options }) => (
   <Select id={id} onChange={onChange} value={value}>
+    <option value="">{defaultOption}</option>
     {options.map(option => (
       <option key={option} value={option}>
         {option}
@@ -26,6 +27,7 @@ SelectInput.propTypes = {
   id: PropTypes.string,
   onChange: PropTypes.func.isRequired,
   value: PropTypes.string.isRequired,
+  defaultOption: PropTypes.string.isRequired,
   options: PropTypes.array.isRequired,
 }
 
