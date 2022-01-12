@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
 import CheckBoxInput from './components/Input/CheckBoxInput'
+import FileInput from './components/Input/FileInput'
 import SelectInput from './components/Input/SelectInput'
 import TextAreaInput from './components/Input/TextAreaInput'
 import TextInput from './components/Input/TextInput'
@@ -12,6 +13,7 @@ function App() {
     language: '',
     taxPossible: false,
     introduction: '',
+    fileUrl: '',
   })
 
   const handleChange = e => {
@@ -52,6 +54,11 @@ function App() {
         id="introduction"
         placeholder="자기 소개"
         onChange={handleChange}
+      />
+      <FileInput
+        id="fileUrl"
+        onChange={handleChange}
+        value={formData.fileUrl}
       />
     </div>
   )
