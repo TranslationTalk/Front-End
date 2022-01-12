@@ -1,8 +1,22 @@
 import styled from 'styled-components'
 import React from 'react'
+import downBtn from '../../assets/images/downBtn.png'
+import topBtn from '../../assets/images/topBtn.png'
 
 // longBtn, shortBtn
 function Button(props) {
+  React.useEffect(() => {
+    setTimeout(window.addEventListener('scroll', getScrollY), 1000)
+
+    return () => window.removeEventListener('scroll', getScrollY)
+  }, [])
+  const [topLocation, setTopLocation] = React.useState(0)
+  // const [innerHeight, setInnerHeight] = React.useState(0)
+  const innerHeight = window.innerHeight
+  const getScrollY = () => {
+    setTopLocation(window.scrollY)
+  }
+
   const prop = props
 
   const {
@@ -17,6 +31,7 @@ function Button(props) {
     border,
     longBtn,
     shortBtn,
+    topDownBtn,
   } = prop
 
   const styles = {
@@ -49,6 +64,38 @@ function Button(props) {
     )
   }
 
+  if (topDownBtn) {
+    return (
+      <>
+        <TopDownButton>
+          <TopBtnImgArea
+            topLocation={topLocation}
+            innerHeight={innerHeight}
+            scrollHeight={document.body.scrollHeight}
+          >
+            <img
+              src={topBtn}
+              alt="상단버튼"
+              onClick={() => window.scrollTo(0, 0)}
+            />
+          </TopBtnImgArea>
+
+          <DownBtnImgArea
+            topLocation={topLocation}
+            innerHeight={innerHeight}
+            scrollHeight={document.body.scrollHeight}
+          >
+            <img
+              src={downBtn}
+              alt="하단버튼"
+              onClick={() => window.scrollTo(0, document.body.scrollHeight)}
+            />
+          </DownBtnImgArea>
+        </TopDownButton>
+      </>
+    )
+  }
+
   return (
     <>
       <CustomButton {...styles} onClick={_onClick}>
@@ -59,7 +106,7 @@ function Button(props) {
 }
 
 Button.defaultProps = {
-  bgc: `#3D51FF`,
+  bgColor: `#3D51FF`,
   color: `#FFFFFF`,
 }
 
@@ -82,7 +129,7 @@ const LongButton = styled.button`
   font-size: 16px;
   border: 1px solid #999;
   border-radius: 4px;
-  background-color: ${props => props.bgc};
+  background-color: ${props => props.bgColor};
   color: ${props => props.color};
   cursor: pointer;
 `
@@ -94,9 +141,31 @@ const ShortButton = styled.button`
   font-size: 16px;
   border: 1px solid #999;
   border-radius: 4px;
-  background-color: ${props => props.bgc};
+  background-color: ${props => props.bgColor};
   color: ${props => props.color};
   cursor: pointer;
+`
+
+const TopDownButton = styled.div`
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+`
+
+const TopBtnImgArea = styled.div`
+  transition: 0.5s;
+  position: relative;
+  ${props => (props.topLocation < 200 ? `opacity:0;` : `opacity:1`)};
+  ${props =>
+    props.topLocation + props.innerHeight > props.scrollHeight - 200
+      ? `transform: translateY(42px)`
+      : ''}
+`
+
+const DownBtnImgArea = styled.div`
+  transition: 0.5s;
+  opacity: ${props =>
+    props.topLocation + props.innerHeight < props.scrollHeight - 200 ? 1 : 0};
 `
 
 export default Button
