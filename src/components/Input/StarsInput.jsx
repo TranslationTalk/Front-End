@@ -10,6 +10,8 @@ onClick에는 (star) => setCurrentStar(star) 현재 별점을 클릭된 별점�
 import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
+import blueStar from '../../assets/images/blueStar.png'
+import grayStar from '../../assets/images/grayStar.png'
 
 const starsArr = [1, 2, 3, 4, 5]
 
@@ -20,7 +22,8 @@ const StarsInput = ({ placeholder, currentValue, onClick }) => {
         {starsArr.map(star => (
           <Star
             key={star}
-            starColor={star > currentValue ? 'gray' : 'gold'}
+            src={star > currentValue ? grayStar : blueStar}
+            alt={`별점 ${star}점 선택`}
             onClick={() => onClick(star)}
           />
         ))}
@@ -44,11 +47,10 @@ const Stars = styled.div`
   align-items: center;
 `
 
-const Star = styled.div`
+const Star = styled.img`
   width: 30px;
   height: 30px;
-  background-color: ${props => props.starColor};
-  margin: 5px;
+  margin: 0 5px;
 `
 
 StarsInput.propTypes = {
