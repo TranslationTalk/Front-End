@@ -4,5 +4,6 @@ import Span from './atoms/Span'
 import StatusMessage from './Message/StatusMessage'
 import Input from './Input/index'
 import Tag from './Tag/Tag'
+import TranslatorInfo from './profileInfo/TranslatorInfo'
 
-export { Button, Div, Span, StatusMessage, Input, Tag }
+export { Button, Div, Span, StatusMessage, Input, Tag, TranslatorInfo }
