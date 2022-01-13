@@ -7,14 +7,13 @@ reloadEvent: reload 클릭 시 발생할 이벤트(fetch) 함수
 import React from 'react'
 import propTypes from 'prop-types'
 import styled from 'styled-components'
-import { ReactComponent as HamburgerIcon } from '../../assets/icons/HamburgerIcon.svg'
 import { ReactComponent as ReloadIcon } from '../../assets/icons/ReloadIcon.svg'
+import { HamburgerMenu } from '../index'
 
 const PageHeader = ({ title, useReloadButton, reloadEvent }) => {
   return (
     <Container>
-      {/* 형래님 작업하신 Menu에서 HamburgerMenu로 사용하면 됨 */}
-      <HamburgerIcon width="25" height="25" />
+      <HamburgerMenu />
       <Title>{title}</Title>
       {useReloadButton && (
         <SvgWrap>
@@ -27,11 +26,11 @@ const PageHeader = ({ title, useReloadButton, reloadEvent }) => {
 
 const Container = styled.div`
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
   align-items: center;
   height: 50px;
-  background-color: violet;
   padding: 0 15px;
+  background-color: violet;
   position: relative;
 `
 
