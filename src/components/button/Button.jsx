@@ -1,10 +1,15 @@
+/* 
+===Button Component===
+긴 버튼은 longBtn, 짧은 버튼은 shortBtn  
+background-color는 bgColor로, color는 color로 props내려주시면 됩니다.
+
+외의 일반 버튼 사용시, 커스터마이징을 원하시면 props로 내려주시면 됩니다.
+*/
+
 import styled from 'styled-components'
 import React from 'react'
 
-// longBtn, shortBtn
-function Button(props) {
-  const prop = props
-
+const Button = prop => {
   const {
     content,
     _onClick,
@@ -59,18 +64,20 @@ function Button(props) {
 }
 
 Button.defaultProps = {
-  bgc: `#3D51FF`,
-  color: `#FFFFFF`,
+  bgColor: `#3D51FF`,
+  color: `#000`,
+  width: '100px',
+  height: '20px',
 }
 
 const CustomButton = styled.button`
-  ${props => (props.width ? `width: ${props.width}` : '')};
-  ${props => (props.height ? `height: ${props.height}` : '')};
-  ${props => (props.bgColor ? `background-color: ${props.bgColor}` : '')};
-  ${props => (props.color ? `color: ${props.color}` : '')};
+  ${props => (props.width ? `width: ${props.width};` : '')}
+  ${props => (props.height ? `height: ${props.height};` : '')}
+  ${props => (props.bgColor ? `background-color: ${props.bgColor};` : '')}
+  ${props => (props.color ? `color: ${props.color};` : '')}
   ${props => (props.margin ? `margin: ${props.margin};` : '')}
-  ${props => (props.padding ? `padding: ${props.padding}` : '')};
-  ${props => (props.border ? `border: ${props.border}` : '')};
+  ${props => (props.padding ? `padding: ${props.padding};` : '')}
+  ${props => (props.border ? `border: ${props.border};` : '')}
   box-sizing: border-box;
   border-radius: 5px;
 `
@@ -82,7 +89,7 @@ const LongButton = styled.button`
   font-size: 16px;
   border: 1px solid #999;
   border-radius: 4px;
-  background-color: ${props => props.bgc};
+  background-color: ${props => props.bgColor};
   color: ${props => props.color};
   cursor: pointer;
 `
@@ -94,7 +101,7 @@ const ShortButton = styled.button`
   font-size: 16px;
   border: 1px solid #999;
   border-radius: 4px;
-  background-color: ${props => props.bgc};
+  background-color: ${props => props.bgColor};
   color: ${props => props.color};
   cursor: pointer;
 `
