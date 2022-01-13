@@ -1,24 +1,15 @@
+/* 
+===Button Component===
+긴 버튼은 longBtn, 짧은 버튼은 shortBtn  
+background-color는 bgColor로, color는 color로 props내려주시면 됩니다.
+
+외의 일반 버튼 사용시, 커스터마이징을 원하시면 props로 내려주시면 됩니다.
+*/
+
 import styled from 'styled-components'
 import React from 'react'
-import downBtn from '../../assets/images/downBtn.png'
-import topBtn from '../../assets/images/topBtn.png'
 
-// longBtn, shortBtn
-function Button(props) {
-  React.useEffect(() => {
-    setTimeout(window.addEventListener('scroll', getScrollY), 1000)
-
-    return () => window.removeEventListener('scroll', getScrollY)
-  }, [])
-  const [topLocation, setTopLocation] = React.useState(0)
-  // const [innerHeight, setInnerHeight] = React.useState(0)
-  const innerHeight = window.innerHeight
-  const getScrollY = () => {
-    setTopLocation(window.scrollY)
-  }
-
-  const prop = props
-
+const Button = prop => {
   const {
     content,
     _onClick,
@@ -31,7 +22,6 @@ function Button(props) {
     border,
     longBtn,
     shortBtn,
-    topDownBtn,
   } = prop
 
   const styles = {
@@ -64,38 +54,6 @@ function Button(props) {
     )
   }
 
-  if (topDownBtn) {
-    return (
-      <>
-        <TopDownButton>
-          <TopBtnImgArea
-            topLocation={topLocation}
-            innerHeight={innerHeight}
-            scrollHeight={document.body.scrollHeight}
-          >
-            <img
-              src={topBtn}
-              alt="상단버튼"
-              onClick={() => window.scrollTo(0, 0)}
-            />
-          </TopBtnImgArea>
-
-          <DownBtnImgArea
-            topLocation={topLocation}
-            innerHeight={innerHeight}
-            scrollHeight={document.body.scrollHeight}
-          >
-            <img
-              src={downBtn}
-              alt="하단버튼"
-              onClick={() => window.scrollTo(0, document.body.scrollHeight)}
-            />
-          </DownBtnImgArea>
-        </TopDownButton>
-      </>
-    )
-  }
-
   return (
     <>
       <CustomButton {...styles} onClick={_onClick}>
@@ -107,17 +65,19 @@ function Button(props) {
 
 Button.defaultProps = {
   bgColor: `#3D51FF`,
-  color: `#FFFFFF`,
+  color: `#000`,
+  width: '100px',
+  height: '20px',
 }
 
 const CustomButton = styled.button`
-  ${props => (props.width ? `width: ${props.width}` : '')};
-  ${props => (props.height ? `height: ${props.height}` : '')};
-  ${props => (props.bgColor ? `background-color: ${props.bgColor}` : '')};
-  ${props => (props.color ? `color: ${props.color}` : '')};
+  ${props => (props.width ? `width: ${props.width};` : '')}
+  ${props => (props.height ? `height: ${props.height};` : '')}
+  ${props => (props.bgColor ? `background-color: ${props.bgColor};` : '')}
+  ${props => (props.color ? `color: ${props.color};` : '')}
   ${props => (props.margin ? `margin: ${props.margin};` : '')}
-  ${props => (props.padding ? `padding: ${props.padding}` : '')};
-  ${props => (props.border ? `border: ${props.border}` : '')};
+  ${props => (props.padding ? `padding: ${props.padding};` : '')}
+  ${props => (props.border ? `border: ${props.border};` : '')}
   box-sizing: border-box;
   border-radius: 5px;
 `
@@ -144,28 +104,6 @@ const ShortButton = styled.button`
   background-color: ${props => props.bgColor};
   color: ${props => props.color};
   cursor: pointer;
-`
-
-const TopDownButton = styled.div`
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-`
-
-const TopBtnImgArea = styled.div`
-  transition: 0.5s;
-  position: relative;
-  ${props => (props.topLocation < 200 ? `opacity:0;` : `opacity:1`)};
-  ${props =>
-    props.topLocation + props.innerHeight > props.scrollHeight - 200
-      ? `transform: translateY(42px)`
-      : ''}
-`
-
-const DownBtnImgArea = styled.div`
-  transition: 0.5s;
-  opacity: ${props =>
-    props.topLocation + props.innerHeight < props.scrollHeight - 200 ? 1 : 0};
 `
 
 export default Button
