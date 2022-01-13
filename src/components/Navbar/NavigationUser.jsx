@@ -49,7 +49,7 @@ const NavigationUser = () => {
 }
 
 const NavContainer = styled.div`
-  width: 480px;
+  width: 100%;
   height: 5.6rem;
   display: flex;
   justify-content: center;
@@ -60,7 +60,7 @@ const NavContainer = styled.div`
 `
 
 const LinkElement = styled(NavLink)`
-  width: ${480 / 3}px;
+  width: ${100 / 3}%;
   display: flex;
   flex-direction: column;
   align-items: center;
