@@ -1,3 +1,9 @@
+/*
+< (백 아이콘)있는 페이지에 사용하는 Header
+title: 페이지 타이틀
+useReloadButton: ReloadButton 사용 여부
+reloadEvent: reload 클릭 시 발생할 이벤트(fetch) 함수
+*/
 import React from 'react'
 import propTypes from 'prop-types'
 import styled from 'styled-components'
