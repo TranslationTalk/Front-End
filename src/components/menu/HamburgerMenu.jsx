@@ -1,6 +1,6 @@
 /* 
 ===HamburgerMenu component===
-햄버거메뉴 컴포넌트는 틀이 바뀌지 않으므로 따로 설정같은 것 안해주시고 사용하셔도 됩니다.
+햄버거메뉴 컴포넌트는 틀이 바뀌지 않으므로 따로 설정같은 것 안해주시고 사용하셔도 되지만, 부모컴포넌트의 포지션 설정을 해주셔야합니다.  
 
 state 이용 / 햄버거 모양 클릭시 click 변수의 값을 false로, 닫기버튼 클릭시 true로, 
 click 변수값을 styled-components에 props로 전달, 왼쪽에서 밀려나오는 애니메이션을 구현해주었습니다.
@@ -58,13 +58,15 @@ const ModalArea = styled.div`
 `
 
 const ModalInner = styled.div`
+  width: 250px;
   box-sizing: border-box;
   position: fixed;
+  overflow: hidden;
   box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.5);
   background-color: #fff;
-  left: -25%;
+  left: -250px;
   transition: 0.5s;
-  transform: ${props => (props.click ? 'translateX(105%)' : 'translateX(0)')};
+  transform: ${props => (props.click ? 'translateX(250px)' : 'translateX(0)')};
   margin: 0 auto;
 `
 
