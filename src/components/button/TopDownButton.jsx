@@ -9,7 +9,7 @@ import topBtn from '../../assets/images/topBtn.png'
 
 const TopDownButton = () => {
   React.useEffect(() => {
-    setTimeout(window.addEventListener('scroll', getScrollY), 1000)
+    window.addEventListener('scroll', getScrollY)
 
     return () => window.removeEventListener('scroll', getScrollY)
   }, [])
