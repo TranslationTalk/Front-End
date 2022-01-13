@@ -34,7 +34,7 @@ const HamburgerMenu = () => {
 }
 
 const BurgerWrap = styled.div`
-  position: fixed;
+  position: absolute;
   top: 10px;
   left: 10px;
 `
