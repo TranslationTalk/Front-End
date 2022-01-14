@@ -22,12 +22,11 @@ const HamburgerMenu = () => {
           <img src={Hamburger} alt="hamburger" />
         </HamburgerTap>
 
-        <ModalArea click={click} tabIndex="-1">
-          <ModalInner click={click} tabIndex="0">
-            12345asdfjkasdkfsakdfgkasgdkfgaskdhgfhjasgdjfg
-            <CloseModal onClick={() => setClick(false)}> XXX</CloseModal>
-          </ModalInner>
-        </ModalArea>
+        <ModalArea click={click} tabIndex="-1"></ModalArea>
+        <ModalInner click={click} tabIndex="0">
+          12345asdfjkasdkfsakdfgkafg
+          <CloseModal onClick={() => setClick(false)}> XXX</CloseModal>
+        </ModalInner>
       </BurgerWrap>
     </>
   )
@@ -59,15 +58,16 @@ const ModalArea = styled.div`
 
 const ModalInner = styled.div`
   width: 250px;
-  box-sizing: border-box;
-  position: fixed;
-  overflow: hidden;
+  position: absolute;
+  top: 0;
   box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.5);
   background-color: #fff;
-  left: -250px;
+  left: -270px;
   transition: 0.5s;
-  transform: ${props => (props.click ? 'translateX(250px)' : 'translateX(0)')};
-  margin: 0 auto;
+  visibility: ${props => (props.click ? 'visible' : 'hidden')};
+  transform: ${props =>
+    props.click ? 'translateX(260px)' : 'translateX(1px)'};
+  z-index: 100;
 `
 
 const CloseModal = styled.div`
