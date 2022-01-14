@@ -14,7 +14,11 @@ import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { StatusMessage } from '../index'
 
+// 현재시간
 const currentTime = new Date()
+const date = currentTime.getDate()
+const hour = currentTime.getHours()
+const min = currentTime.getMinutes()
 
 const EstimateCard = prop => {
   const {
@@ -27,19 +31,19 @@ const EstimateCard = prop => {
     offerPrice,
   } = prop
 
-  const date = currentTime.getDate()
-  const hour = currentTime.getHours()
-  const min = currentTime.getMinutes()
+  // 마감날짜
+  const deadlineDate = deadline.match(/.+(?=T)/g)
+  const deadlineDay = new Date(deadlineDate).getDate()
+  const deadlineHour = new Date(deadlineDate).getHours()
+  const deadlineMin = new Date(deadlineDate).getMinutes()
 
-  let countTime
-  const deadlineDay = Number(deadline.match(/[0-9].(?=T)/g))
-  const deadlineHour = Number(deadline.match(/(?<=T).[0-9]/g))
-  const deadlineMin = Number(deadline.match(/(?<=:).+.(?=:)/g))
-
+  // 남은 시간
   let countDay = deadlineDay - date
   let countHour = deadlineHour - hour
   let countMin = deadlineMin - min
 
+  // 메시지
+  let timeMessage
   if (countMin < 0) {
     countHour--
     countMin += 60
@@ -49,12 +53,10 @@ const EstimateCard = prop => {
     countHour += 24
   }
   if (countDay < 0) {
-    countTime = '견적 기간이 끝났습니다.'
+    timeMessage = '견적 기간이 끝났습니다.'
   } else {
-    countTime = `남은 시간 ${countDay}일 ${countHour}시간 ${countMin}분`
+    timeMessage = `남은 시간 ${countDay}일 ${countHour}시간 ${countMin}분`
   }
-
-  const deadlineDate = deadline.match(/.+(?=T)/g)
 
   return (
     <Card>
@@ -64,9 +66,9 @@ const EstimateCard = prop => {
         {beforeLanguage} &#62; {afterLanguage}
       </p>
       <p>{isText}</p>
-      <p>{`${deadlineDate} ${deadlineHour}시간 ${deadlineMin}분`}</p>
+      <p>{`${deadlineDate} (${deadlineHour}시${deadlineMin}분)`}</p>
       <p>{offerPrice.toLocaleString('ko-KR')} 원</p>
-      <StatusMessage text={countTime} color="red" icon="!" />
+      <StatusMessage text={timeMessage} color="red" icon="!" />
     </Card>
   )
 }
