@@ -43,7 +43,7 @@ const SummaryCard = prop => {
         번역 상세 요청: <span>{field}</span>
       </p>
       <p>
-        마감기한: <span>{deadline}</span>
+        마감기한: <span>{deadline.match(/.+(?=T)/g)}</span>
       </p>
       {isText ? (
         <a href={fileUrl} download>
