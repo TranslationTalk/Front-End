@@ -22,6 +22,7 @@ const Button = prop => {
     border,
     longBtn,
     shortBtn,
+    type,
   } = prop
 
   const styles = {
@@ -56,7 +57,7 @@ const Button = prop => {
 
   return (
     <>
-      <CustomButton {...styles} onClick={_onClick}>
+      <CustomButton {...styles} onClick={_onClick} type={type}>
         {content}
       </CustomButton>
     </>
@@ -68,6 +69,8 @@ Button.defaultProps = {
   color: `#000`,
   width: '100px',
   height: '20px',
+  type: 'button',
+  margin: 'auto',
 }
 
 const CustomButton = styled.button`
@@ -87,8 +90,8 @@ const LongButton = styled.button`
   height: 44px;
   margin: 10px;
   font-size: 16px;
-  border: 1px solid #999;
   border-radius: 4px;
+  border: ${props => (props.border ? `${props.border}` : 'none')};
   background-color: ${props => props.bgColor};
   color: ${props => props.color};
   cursor: pointer;
@@ -99,8 +102,9 @@ const ShortButton = styled.button`
   height: 44px;
   margin: 10px;
   font-size: 16px;
-  border: 1px solid #999;
+  outline: none;
   border-radius: 4px;
+  border: ${props => (props.border ? `${props.border}` : 'none')};
   background-color: ${props => props.bgColor};
   color: ${props => props.color};
   cursor: pointer;
