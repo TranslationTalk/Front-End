@@ -33,9 +33,9 @@ const EstimateCard = prop => {
 
   // 마감날짜
   const deadlineDate = deadline.match(/.+(?=T)/g)
-  const deadlineDay = new Date(deadlineDate).getDate()
-  const deadlineHour = new Date(deadlineDate).getHours()
-  const deadlineMin = new Date(deadlineDate).getMinutes()
+  const deadlineDay = new Date(deadline).getDate()
+  const deadlineHour = new Date(deadline).getHours()
+  const deadlineMin = new Date(deadline).getMinutes()
 
   // 남은 시간
   let countDay = deadlineDay - date
