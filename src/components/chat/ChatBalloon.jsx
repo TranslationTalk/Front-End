@@ -73,7 +73,8 @@ const Chat = styled.div`
   & .massage {
     position: relative;
     margin: 0 10px;
-    max-width: 50%;
+    width: 50%;
+    min-width: 150px;
     word-break: break-all;
     ${prop => (prop.isSelf ? rightTriangle : leftTriangle)}
     }
