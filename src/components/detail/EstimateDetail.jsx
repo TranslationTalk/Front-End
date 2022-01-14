@@ -1,5 +1,7 @@
 /**
- * offerPice: number (여기서 ,포함된 string으로 변경)
+ * EstimateDetail
+ * 견적 Detail에서 사용되는 견적서
+ * offerPice: 견적 가격 number (여기서 ,포함된 string으로 변경)
  * comment: string (150자 이상 시 150자 자르고 ... 더보기/숨기기 기능)
  * confirmedDate: string (yyyy-mm-dd)
  */
@@ -125,9 +127,9 @@ const Notification = styled.div`
 `
 
 EstimateDetail.propTypes = {
-  offerPrice: propTypes.number,
+  offerPrice: propTypes.number.isRequired,
   comment: propTypes.string,
-  confirmedDate: propTypes.string,
+  confirmedDate: propTypes.string.isRequired,
 }
 
 export default EstimateDetail
