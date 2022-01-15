@@ -1,9 +1,10 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import styled from 'styled-components'
 
 const All = () => {
   return (
-    <div>
+    <Test>
       <br />
       <h2>공통</h2>
       <Link to="/">로그인</Link>
@@ -29,8 +30,22 @@ const All = () => {
       <Link to="/translator/mypage">마이페이지</Link>
       <Link to="/translator/translation/list">내번역</Link>
       <Link to="/translator/estimate/:id">견적서 디테일</Link>
-    </div>
+    </Test>
   )
 }
+const Test = styled.div`
+  & h2 {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  & a {
+    display: block;
+    line-height: 28px;
+    &:hover {
+      color: blue;
+    }
+  }
+`
 
 export default All
