@@ -21,8 +21,9 @@ const All = () => {
       <Link to="/client/request/list">견적 요청 List</Link>
       <Link to="/client/estimate/list">받은 견적 List</Link>
       <Link to="/client/estimate/list/:id">번역가 상세페이지</Link>
+      <br />
       <h2>번역가</h2>
-      <Link to="/translator/form">번역가 가입form</Link>
+      <Link to="/translator/signup">번역가 가입form</Link>
       <Link to="/translator/list">번역 의뢰 List</Link>
       <Link to="/translator/estimate/form">견적서 작성 폼</Link>
       <Link to="/translator/mypage">마이페이지</Link>
