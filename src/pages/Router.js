@@ -1,18 +1,4 @@
 import React from 'react'
-<<<<<<< HEAD
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
-import Login from './login/Login'
-
-const Router = () => {
-  return (
-    <>
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Login />}></Route>
-        </Routes>
-      </BrowserRouter>
-    </>
-=======
 import { Route, Routes } from 'react-router-dom'
 // common
 import Login from './common/Login'
@@ -68,7 +54,6 @@ const Router = () => {
         />
       </Routes>
     </div>
->>>>>>> 133e3377d4e2135f8d4f4237adefaf2ae31268ec
   )
 }
 
