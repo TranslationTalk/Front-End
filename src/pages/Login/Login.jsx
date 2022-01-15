@@ -107,7 +107,6 @@ function Login() {
 
 const MainWrap = styled.div`
   max-width: 360px;
-  width: 100%;
   height: 748px;
   margin: auto;
   background-image: url(${loginBg});

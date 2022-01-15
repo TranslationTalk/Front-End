@@ -1,17 +1,8 @@
 import React from 'react'
-import styled from 'styled-components'
+import Router from './pages/Router'
 
 function App() {
-  return (
-    <div className="App">
-      <StyledDiv>App components 번역톡 프로젝트!!!!</StyledDiv>
-    </div>
-  )
+  return <Router />
 }
-
-const StyledDiv = styled.div`
-  color: red;
-  font-size: 30px;
-`
 
 export default App
