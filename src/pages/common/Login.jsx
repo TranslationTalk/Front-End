@@ -45,7 +45,12 @@ function Login() {
         </LoginWrap>
         <DeveloperWrap>
           <ButtonWrap>
-            <Button type="submit" content="제출하기" />
+            <Button
+              content="링크페이지"
+              _onClick={() => {
+                location.href = '/test'
+              }}
+            />
           </ButtonWrap>
           <TextInput onChange={func} placeholder="아이디를 입력해주세요." />
           <ButtonWrap>
