@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import { Button, PageHeader, TextInput } from '../../components/index'
+import { Button, PageHeader } from '../../components/index'
 import { apis } from '../../utils/axios'
 import loginBg from '../../assets/images/loginBg.png'
 import loginBottom from '../../assets/images/loginBottom.png'
@@ -8,12 +8,6 @@ import loginTopLogo from '../../assets/images/loginTopLogo.png'
 import loginLogo from '../../assets/images/loginLogo.png'
 
 function Login() {
-  const [id, setId] = React.useState('')
-
-  const func = e => {
-    setId(e.target.value)
-  }
-
   return (
     <>
       <MainWrap>
@@ -52,58 +46,6 @@ function Login() {
               }}
             />
           </ButtonWrap>
-          <TextInput onChange={func} placeholder="아이디를 입력해주세요." />
-          <ButtonWrap>
-            <Button
-              shortBtn
-              content="개발자 유저로 회원가입"
-              _onClick={() => {
-                const auth = 'client'
-                console.log(id, auth)
-                apis
-                  .developerSignup(id, auth)
-                  .then(() => alert(`개발자 유저로 회원가입 성공 id는 ${id}`))
-                  .catch(e => alert(`${e}실패`))
-              }}
-            />
-          </ButtonWrap>
-          <ButtonWrap>
-            <Button
-              shortBtn
-              content="개발자 번역가로 회원가입"
-              _onClick={() => {
-                const auth = 'translator'
-                apis
-                  .developerSignup(id, auth)
-                  .then(() => alert(`개발자 번역가로 회원가입 성공 id는 ${id}`))
-                  .catch(e => alert(`${e}실패`))
-              }}
-            />
-          </ButtonWrap>
-          <ButtonWrap>
-            <Button
-              shortBtn
-              content="개발자 로그인"
-              _onClick={async () => {
-                console.log(id)
-                const res = await apis.developerLogin(id)
-                console.log(res)
-                sessionStorage.setItem('token', res.data.token)
-              }}
-            />
-          </ButtonWrap>
-          <ButtonWrap>
-            <Button
-              shortBtn
-              content="번역요청"
-              _onClick={() => {
-                apis
-                  .requestList()
-                  .then(res => console.log(res))
-                  .catch(e => console.log(e))
-              }}
-            />
-          </ButtonWrap>
         </DeveloperWrap>
       </MainWrap>
     </>
@@ -112,7 +54,6 @@ function Login() {
 
 const MainWrap = styled.div`
   max-width: 360px;
-  width: 100%;
   height: 748px;
   margin: auto;
   background-image: url(${loginBg});
@@ -133,14 +74,15 @@ const LoginWrap = styled.div`
   top: 205px;
 `
 
+const TranslatorLogin = styled.span`
+  cursor: pointer;
+  color: #fff;
+`
+
 const ButtonWrap = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-`
-const TranslatorLogin = styled.span`
-  cursor: pointer;
-  color: #fff;
 `
 
 const DeveloperWrap = styled.div`

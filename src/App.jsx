@@ -17,5 +17,4 @@ const Wrap = styled.div`
   max-width: 768px;
   margin: auto;
 `
-
 export default App
