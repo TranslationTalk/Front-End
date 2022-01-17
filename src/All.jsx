@@ -1,18 +1,27 @@
+import { useObserver } from 'mobx-react'
 import React from 'react'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 import { Button } from './components/index'
 import { apis } from './utils/axios'
+import indexStore from './mobx/indexStore'
 
 const All = () => {
   const [id, setId] = React.useState('')
-  const [auth, setAuth] = React.useState(null)
+
+  const { login } = indexStore()
+
+  const setAuth = auth => {
+    login.setAuth(auth)
+  }
+
+  const auth = login.auth
 
   const func = e => {
     setId(e.target.value)
   }
 
-  return (
+  return useObserver(() => (
     <Test>
       <Input onChange={func} placeholder="아이디를 입력해주세요." />
       <DeveloperWrap>
@@ -120,7 +129,7 @@ const All = () => {
       <Link to="/translator/translation/list">내번역</Link>
       <Link to="/translator/estimate/:id">견적서 디테일</Link>
     </Test>
-  )
+  ))
 }
 const Test = styled.div`
   & h2 {
