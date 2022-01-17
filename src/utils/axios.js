@@ -57,3 +57,31 @@ export const apis = {
   estimatesList: () => instance.get(`api/estimate/list`),
   sendEstimate: (id, obj) => instance.post(`api/estimate/list/${id}`, obj),
 }
+
+export const requestAPIs = {
+  // 견적 요청
+  estimateRequest: (
+    field,
+    deadline,
+    beforeLanguage,
+    afterLanguage,
+    email,
+    phoneNumber,
+    youtubeUrl,
+    requestFile,
+    isText,
+    needs,
+  ) =>
+    instance.post(`api/request`, {
+      field,
+      deadline,
+      beforeLanguage,
+      afterLanguage,
+      email,
+      phoneNumber,
+      youtubeUrl,
+      requestFile,
+      isText,
+      needs,
+    }),
+}

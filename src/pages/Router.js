@@ -33,7 +33,14 @@ const Router = () => {
         {/* client */}
         <Route path="/client/main" element={<ClientHome />} />
         <Route path="/client/request/list" element={<RequestList />} />
-        <Route path="/client/request" element={<ClientRequestForm />} />
+        <Route
+          path="/client/request/text"
+          element={<ClientRequestForm isText={true} />}
+        />
+        <Route
+          path="/client/request/youtube"
+          element={<ClientRequestForm isText={false} />}
+        />
         <Route
           path="/client/estimate/list/:id"
           element={<TranslatorDetail />}
