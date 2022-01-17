@@ -11,13 +11,40 @@ import { apis } from '../../utils/axios'
 const TranslatorSignupForm = () => {
   const [name, setName] = useState(null)
   const [career, setCareer] = useState(null)
-
+  const profileFile =
+    'https://tistory1.daumcdn.net/tistory/user/264290/profile/profileImg?v=1635480821401'
+  const [languag, setLanguage] = useState(null)
+  const [languag2, setLanguage2] = useState(null)
+  const language = languag + ', ' + languag2
+  const [introduce, setIntroduce] = useState(null)
   const [taxPossible, setTaxPossible] = useState(false)
   const [cashPossible, setCashPossible] = useState(false)
   const [isBusiness, setIsBusiness] = useState(false)
 
   const submit = () => {
-    apis.postTranslatorMypage(name, career)
+    console.log(
+      name,
+      career,
+      profileFile,
+      language,
+      introduce,
+      taxPossible,
+      cashPossible,
+      isBusiness,
+    )
+    apis
+      .postTranslatorMypage(
+        name,
+        career,
+        profileFile,
+        language,
+        introduce,
+        taxPossible,
+        cashPossible,
+        isBusiness,
+      )
+      .then(res => console.log(res))
+      .catch(e => console.log(e))
   }
 
   return (
@@ -27,7 +54,7 @@ const TranslatorSignupForm = () => {
       <SelectInput
         id="select1"
         onChange={e => {
-          console.log(e.target.value)
+          setLanguage(e.target.value)
         }}
         defaultOption="가능언어"
         options={[
@@ -43,7 +70,7 @@ const TranslatorSignupForm = () => {
       <SelectInput
         id="select2"
         onChange={e => {
-          console.log(e.target.value)
+          setLanguage2(e.target.value)
         }}
         defaultOption="가능언어2"
         options={[
@@ -58,7 +85,10 @@ const TranslatorSignupForm = () => {
       />
       <TextInput placeholder="이메일" />
       <TextInput placeholder="전화번호" />
-      <TextInput placeholder="자기소개" />
+      <TextInput
+        placeholder="자기소개"
+        onChange={e => setIntroduce(e.target.value)}
+      />
       <Span>⦿ 번역톡은 번역 및 결제를 책임지지 않습니다.</Span>
       <CheckBoxInput
         label="세금명세서 가능 여부"
