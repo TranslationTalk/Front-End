@@ -23,7 +23,7 @@ import BottomIndicator from './indicator/BottomIndicator'
 // Input
 import CheckBoxInput from './input/CheckBoxInput'
 import FileInput from './input/FileInput'
-import SelecInput from './input/SelectInput'
+import SelectInput from './input/SelectInput'
 import StarsInput from './input/StarsInput'
 import TextAreaInput from './input/TextAreaInput'
 import TextInput from './input/TextInput'
@@ -45,7 +45,7 @@ export {
   TopDownButton,
   CheckBoxInput,
   FileInput,
-  SelecInput,
+  SelectInput,
   StarsInput,
   TextAreaInput,
   TextInput,
