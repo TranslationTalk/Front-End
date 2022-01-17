@@ -10,14 +10,14 @@ const TranslationList = () => {
   // mobx에서 mobx에 있는 함수를 사용해서 비동기 처리해야함
   // 그 함수로 useEffect 안에도 넣고, PageHeader의 reloadEvent에도 넣어야 한다.
   useEffect(() => {
-    const fetchRequestList = async () => {
+    const fetchEstimateList = async () => {
       const {
         data: { data },
-      } = await apis.requestList()
+      } = await apis.requestList() // sendEstimate이것으로 바꿔야 하나 지금 프로필을 만들 수 없어 임시로 client 요청하는 중
       console.log(data)
       setEstimates(data)
     }
-    fetchRequestList()
+    fetchEstimateList()
   }, [])
 
   const handleClick = estimate => {
@@ -42,6 +42,7 @@ const TranslationList = () => {
           afterLanguage={estimate.afterLanguage}
           isText={estimate.isText}
           deadline={estimate.deadline}
+          createdTime={estimate.createdAt}
           onClick={() => handleClick(estimate)}
         />
       ))}
@@ -55,6 +56,8 @@ const TranslationList = () => {
           afterLanguage={estimate.afterLanguage}
           isText={estimate.isText}
           deadline={estimate.deadline}
+          createdTime={estimate.createdAt}
+          onClick={() => handleClick(estimate)}
         />
       ))}
     </div>

@@ -34,8 +34,6 @@ const EstimateCard = prop => {
     onClick,
   } = prop
 
-  console.log(createdTime)
-
   // 마감날짜
   const createdDate = createdTime.match(/.+(?=T)/g)
   const createdDay = new Date(createdTime).getDate()
