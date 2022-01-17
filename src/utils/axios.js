@@ -26,6 +26,11 @@ export const apis = {
     instance.post(`api/auth/dev/signup`, { id, auth }),
   developerLogin: id => instance.post(`api/auth/dev/login`, { id }),
 
+  // 번역가 마이페이지
+  getTranslatorMypage: () => instance.get('api/translator/mypage'), // 마이페이지 정보 요청
+  postTranslatorMypage: () => instance.post('api/translator/mypage'), // 첫 로그인시 정보 작성
+  modifyTranslatorMypage: () => instance.post('api/translator/mypage/modify'), // 마이페이지 정보 수정
+
   // 번역 요청
   requestList: () => instance.get(`api/request/list`),
 }
