@@ -67,7 +67,7 @@ const EstimateCard = prop => {
       </p>
       <p>{isText}</p>
       <p>{`${deadlineDate} (${deadlineHour}시${deadlineMin}분)`}</p>
-      <p>{offerPrice.toLocaleString('ko-KR')} 원</p>
+      {offerPrice && <p>{offerPrice.toLocaleString('ko-KR')} 원</p>}
       <StatusMessage text={timeMessage} color="red" icon="!" />
     </Card>
   )
