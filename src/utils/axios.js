@@ -52,4 +52,8 @@ export const apis = {
 
   // 번역 요청
   requestList: () => instance.get(`api/request/list`),
+
+  // translator
+  estimatesList: () => instance.get(`api/estimate/list`),
+  sendEstimate: (id, obj) => instance.post(`api/estimate/list/${id}`, obj),
 }

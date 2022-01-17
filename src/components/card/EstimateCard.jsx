@@ -7,6 +7,7 @@
   isText: 번역할 언어가 text이면 true, youtube이면 false // bool
   deadline: 요청 마감 날짜 "2022-01-10T04:33:14.000Z" //string 
   offerPrice: 요청 가격 //number
+  onClick: 카드를 클릭했을 때 발생하는 이벤트 함수. 이동하려면 안에 navigate를 담고 있으면 됩니다 // func
 */
 
 import React from 'react'
@@ -29,18 +30,20 @@ const EstimateCard = prop => {
     isText,
     deadline,
     offerPrice,
+    createdTime,
+    onClick,
   } = prop
 
   // 마감날짜
-  const deadlineDate = deadline.match(/.+(?=T)/g)
-  const deadlineDay = new Date(deadline).getDate()
-  const deadlineHour = new Date(deadline).getHours()
-  const deadlineMin = new Date(deadline).getMinutes()
+  const createdDate = createdTime.match(/.+(?=T)/g)
+  const createdDay = new Date(createdTime).getDate()
+  const createdHour = new Date(createdTime).getHours()
+  const createdMin = new Date(createdTime).getMinutes()
 
   // 남은 시간
-  let countDay = deadlineDay - date
-  let countHour = deadlineHour - hour
-  let countMin = deadlineMin - min
+  let countDay = createdDay + 3 - date
+  let countHour = createdHour - hour
+  let countMin = createdMin - min
 
   // 메시지
   let timeMessage
@@ -59,15 +62,16 @@ const EstimateCard = prop => {
   }
 
   return (
-    <Card>
+    <Card onClick={onClick}>
       <p>{userName} 님의 요청</p>
       <p>{field}</p>
       <p>
         {beforeLanguage} &#62; {afterLanguage}
       </p>
       <p>{isText}</p>
-      <p>{`${deadlineDate} (${deadlineHour}시${deadlineMin}분)`}</p>
-      <p>{offerPrice.toLocaleString('ko-KR')} 원</p>
+      <p>{deadline}</p>
+      <p>{`${createdDate} (${countHour}시${countMin}분)`}</p>
+      {offerPrice && <p>{offerPrice.toLocaleString('ko-KR')} 원</p>}
       <StatusMessage text={timeMessage} color="red" icon="!" />
     </Card>
   )
@@ -88,6 +92,8 @@ EstimateCard.propTypes = {
   isText: PropTypes.bool,
   deadline: PropTypes.string,
   offerPrice: PropTypes.number,
+  createdTime: PropTypes.string,
+  onClick: PropTypes.func,
 }
 
 export default EstimateCard
