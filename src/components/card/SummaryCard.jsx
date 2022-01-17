@@ -7,6 +7,7 @@
   isText: 번역할것이 text면 true/ youtube영상이면 false //bool
   deadline: 마감날짜 '2022-01-10T04:33:14.000Z' //string
   fileUrl: text또는 youtubeurl //string
+  needs: 고객 세부 요청 사항 text // string
 */
 
 import React from 'react'
@@ -23,6 +24,7 @@ const SummaryCard = prop => {
     isText,
     deadline,
     fileUrl,
+    needs,
   } = prop
 
   return (
@@ -40,7 +42,7 @@ const SummaryCard = prop => {
         번역 후 언어: <span>{afterLanguage}</span>
       </p>
       <p>
-        번역 상세 요청: <span>{field}</span>
+        번역 상세 요청: <span>{needs}</span>
       </p>
       <p>
         마감기한: <span>{deadline.match(/.+(?=T)/g)}</span>
@@ -82,6 +84,7 @@ SummaryCard.propTypes = {
   isText: PropTypes.bool,
   deadline: PropTypes.string,
   fileUrl: PropTypes.string,
+  needs: PropTypes.string,
 }
 
 export default SummaryCard
