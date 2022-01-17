@@ -30,19 +30,22 @@ const EstimateCard = prop => {
     isText,
     deadline,
     offerPrice,
+    createdTime,
     onClick,
   } = prop
 
+  console.log(createdTime)
+
   // 마감날짜
-  const deadlineDate = deadline.match(/.+(?=T)/g)
-  const deadlineDay = new Date(deadline).getDate()
-  const deadlineHour = new Date(deadline).getHours()
-  const deadlineMin = new Date(deadline).getMinutes()
+  const createdDate = createdTime.match(/.+(?=T)/g)
+  const createdDay = new Date(createdTime).getDate()
+  const createdHour = new Date(createdTime).getHours()
+  const createdMin = new Date(createdTime).getMinutes()
 
   // 남은 시간
-  let countDay = deadlineDay - date
-  let countHour = deadlineHour - hour
-  let countMin = deadlineMin - min
+  let countDay = createdDay + 3 - date
+  let countHour = createdHour - hour
+  let countMin = createdMin - min
 
   // 메시지
   let timeMessage
@@ -68,7 +71,8 @@ const EstimateCard = prop => {
         {beforeLanguage} &#62; {afterLanguage}
       </p>
       <p>{isText}</p>
-      <p>{`${deadlineDate} (${deadlineHour}시${deadlineMin}분)`}</p>
+      <p>{deadline}</p>
+      <p>{`${createdDate} (${countHour}시${countMin}분)`}</p>
       {offerPrice && <p>{offerPrice.toLocaleString('ko-KR')} 원</p>}
       <StatusMessage text={timeMessage} color="red" icon="!" />
     </Card>
@@ -90,6 +94,7 @@ EstimateCard.propTypes = {
   isText: PropTypes.bool,
   deadline: PropTypes.string,
   offerPrice: PropTypes.number,
+  createdTime: PropTypes.string,
   onClick: PropTypes.func,
 }
 
