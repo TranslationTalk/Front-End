@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { EstimateCard, PageHeader } from '../../components'
 import { apis } from '../../utils/axios'
 
 const TranslationList = () => {
   const [estimates, setEstimates] = useState([])
+  const navigate = useNavigate()
 
   // mobx에서 mobx에 있는 함수를 사용해서 비동기 처리해야함
   // 그 함수로 useEffect 안에도 넣고, PageHeader의 reloadEvent에도 넣어야 한다.
@@ -17,6 +19,14 @@ const TranslationList = () => {
     }
     fetchRequestList()
   }, [])
+
+  const handleClick = estimate => {
+    navigate('/translator/estimate/form', {
+      state: {
+        estimate,
+      },
+    })
+  }
 
   return (
     <div>
@@ -32,6 +42,7 @@ const TranslationList = () => {
           afterLanguage={estimate.afterLanguage}
           isText={estimate.isText}
           deadline={estimate.deadline}
+          onClick={() => handleClick(estimate)}
         />
       ))}
       <h2>번역의뢰 리스트</h2>

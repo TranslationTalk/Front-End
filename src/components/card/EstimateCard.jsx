@@ -7,6 +7,7 @@
   isText: 번역할 언어가 text이면 true, youtube이면 false // bool
   deadline: 요청 마감 날짜 "2022-01-10T04:33:14.000Z" //string 
   offerPrice: 요청 가격 //number
+  onClick: 카드를 클릭했을 때 발생하는 이벤트 함수. 이동하려면 안에 navigate를 담고 있으면 됩니다 // func
 */
 
 import React from 'react'
@@ -29,6 +30,7 @@ const EstimateCard = prop => {
     isText,
     deadline,
     offerPrice,
+    onClick,
   } = prop
 
   // 마감날짜
@@ -59,7 +61,7 @@ const EstimateCard = prop => {
   }
 
   return (
-    <Card>
+    <Card onClick={onClick}>
       <p>{userName} 님의 요청</p>
       <p>{field}</p>
       <p>
@@ -88,6 +90,7 @@ EstimateCard.propTypes = {
   isText: PropTypes.bool,
   deadline: PropTypes.string,
   offerPrice: PropTypes.number,
+  onClick: PropTypes.func,
 }
 
 export default EstimateCard
