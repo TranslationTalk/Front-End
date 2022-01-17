@@ -13,7 +13,7 @@ const TranslationList = () => {
     const fetchEstimateList = async () => {
       const {
         data: { data },
-      } = await apis.requestList() // sendEstimate이것으로 바꿔야 하나 지금 프로필을 만들 수 없어 임시로 client 요청하는 중
+      } = await apis.estimatesList() // sendEstimate이것으로 바꿔야 하나 지금 프로필을 만들 수 없어 임시로 client 요청하는 중
       console.log(data)
       setEstimates(data)
     }
@@ -36,7 +36,7 @@ const TranslationList = () => {
       {estimates.map(estimate => (
         <EstimateCard
           key={estimate.id}
-          userName={estimate.clientId.toString()} // userName DB에 없음..
+          userName={estimate.User.username}
           field={estimate.field}
           beforeLanguage={estimate.beforeLanguage}
           afterLanguage={estimate.afterLanguage}
@@ -50,7 +50,7 @@ const TranslationList = () => {
       {estimates.map(estimate => (
         <EstimateCard
           key={estimate.id}
-          userName={estimate.clientId.toString()} // userName DB에 없음..
+          userName={estimate.User.username}
           field={estimate.field}
           beforeLanguage={estimate.beforeLanguage}
           afterLanguage={estimate.afterLanguage}

@@ -40,7 +40,7 @@ const EstimateForm = () => {
       <SubPageHeader title="견적서 작성" />
       <h2>견적서</h2>
       <SummaryCard
-        userName={estimate.clientId.toString()}
+        userName={estimate.User.username}
         field={estimate.field}
         beforeLanguage={estimate.beforeLanguage}
         afterLanguage={estimate.afterLanguage}
