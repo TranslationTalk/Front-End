@@ -1,7 +1,7 @@
-import storeTest from './storeTest'
+import login from './login'
 
 const indexStore = () => ({
-  storeTest,
+  login,
 })
 
 export default indexStore
