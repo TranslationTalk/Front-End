@@ -56,6 +56,10 @@ export const apis = {
   // translator
   estimatesList: () => instance.get(`api/estimate/list`),
   sendEstimate: (id, obj) => instance.post(`api/estimate/list/${id}`, obj),
+
+  // 채팅
+  chatList: () => instance.get(`api/chatroom`),
+  chatRoom: () => instance.post(`api/chatroom/:requestId`),
 }
 
 export const requestAPIs = {
