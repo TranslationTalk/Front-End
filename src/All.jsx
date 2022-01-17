@@ -106,12 +106,8 @@ const All = () => {
       <br />
       <h2>유저</h2>
       <Link to="/client/main">번역 요청 페이지</Link>
-      <Link to={{ pathname: '/client/request', state: { isText: true } }}>
-        번역 요청 Form-택스트번역
-      </Link>
-      <Link to={{ pathname: '/client/request', state: { isText: false } }}>
-        번역 요청 Form-영상번역
-      </Link>
+      <Link to={'/client/request/text'}>번역 요청 Form-택스트번역</Link>
+      <Link to={'/client/request/youtube'}>번역 요청 Form-영상번역</Link>
       <Link to="/client/request/list">견적 요청 List</Link>
       <Link to="/client/estimate/list">받은 견적 List</Link>
       <Link to="/client/estimate/list/:id">번역가 상세페이지</Link>

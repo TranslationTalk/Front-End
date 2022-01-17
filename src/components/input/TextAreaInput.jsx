@@ -6,8 +6,8 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
-const TextAreaInput = ({ id, placeholder, onChange }) => (
-  <TextArea id={id} placeholder={placeholder} onChange={onChange} />
+const TextAreaInput = ({ id, name, placeholder, onChange }) => (
+  <TextArea id={id} name={name} placeholder={placeholder} onChange={onChange} />
 )
 
 const TextArea = styled.textarea`
@@ -18,6 +18,7 @@ const TextArea = styled.textarea`
 
 TextAreaInput.propTypes = {
   id: PropTypes.string,
+  name: PropTypes.string,
   placeholder: PropTypes.string,
   onChange: PropTypes.func.isRequired,
 }
