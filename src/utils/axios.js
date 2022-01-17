@@ -29,3 +29,31 @@ export const apis = {
   // 번역 요청
   requestList: () => instance.get(`api/request/list`),
 }
+
+export const requestAPIs = {
+  // 견적 요청
+  estimateRequest: (
+    field,
+    deadline,
+    beforeLanguage,
+    afterLanguage,
+    email,
+    phoneNumber,
+    youtubeUrl,
+    requestFile,
+    isText,
+    needs,
+  ) =>
+    instance.post(`api/request`, {
+      field,
+      deadline,
+      beforeLanguage,
+      afterLanguage,
+      email,
+      phoneNumber,
+      youtubeUrl,
+      requestFile,
+      isText,
+      needs,
+    }),
+}
