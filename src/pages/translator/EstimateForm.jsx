@@ -46,17 +46,9 @@ const EstimateForm = () => {
         onChange={handleChange}
       />
       <h2>목표일정</h2>
-      <TextInput
-        id="confirmedDate"
-        value={formData.confirmedDate}
-        onChange={handleChange}
-      />
+      <TextInput id="confirmedDate" onChange={handleChange} />
       <h2>금액</h2>
-      <TextInput
-        id="confirmedPrice"
-        value={formData.confirmedPrice}
-        onChange={handleChange}
-      />
+      <TextInput id="confirmedPrice" onChange={handleChange} />
       <span>원</span>
       <Button longBtn content="견적 보내기" />
     </form>
