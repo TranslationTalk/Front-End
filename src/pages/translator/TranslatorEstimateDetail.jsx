@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { useLocation } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 import { Button, SubPageHeader, SummaryCard, VideoCard } from '../../components'
 import { apis } from '../../utils/axios'
 
@@ -8,16 +8,24 @@ const TranslatorEstimateDetail = () => {
     state: { estimate },
   } = useLocation()
   const [estimateDetail, setEstimateDetail] = useState(null)
+  const navigate = useNavigate()
+
   useEffect(() => {
     const fetchEstimate = async () => {
       const {
         data: { data },
       } = await apis.getEstimate(estimate.id)
-      console.log(data)
       setEstimateDetail(data)
     }
     fetchEstimate()
   }, [])
+
+  const handleClick = () => {
+    // chat 경로 바뀜 translator/chat/
+    navigate(`/chat/${estimateDetail.roomId}`, {
+      state: { roomId: estimateDetail.roomId },
+    })
+  }
 
   return (
     <div>
@@ -38,7 +46,7 @@ const TranslatorEstimateDetail = () => {
       <p>{estimateDetail?.confirmedDate}</p>
       <h2>금액</h2>
       <p>{estimateDetail?.offerPrice}</p>
-      <Button longBtn content="상담하기" />
+      <Button longBtn content="상담하기" _onClick={handleClick} />
     </div>
   )
 }
