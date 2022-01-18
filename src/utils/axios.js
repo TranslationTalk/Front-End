@@ -58,8 +58,12 @@ export const apis = {
   sendEstimate: (id, obj) => instance.post(`api/estimate/list/${id}`, obj),
 
   // 채팅
-  chatList: () => instance.get(`api/chatroom`),
+  chatList: () => instance.get(`api/chatroom/1`),
   chatRoom: () => instance.post(`api/chatroom/:requestId`),
+
+  //리뷰
+  getReview: () => instance.get(`api/review/1`),
+  postReview: () => instance.get(`api/review/:requestId`),
 }
 
 export const requestAPIs = {
