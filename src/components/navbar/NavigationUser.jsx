@@ -5,13 +5,11 @@ position fixed
 import React from 'react'
 import styled from 'styled-components'
 import { NavLink, useLocation } from 'react-router-dom'
-import { ReactComponent as ChatIcon } from '../../assets/icons/chat.svg'
+import { ReactComponent as TranslationIcon } from '../../assets/icons/Translation.svg'
+import { ReactComponent as MyDocIcon } from '../../assets/icons/MyDoc.svg'
+import { ReactComponent as ChatIcon } from '../../assets/icons/Chat.svg'
 
-// 스타일 많이 달라질 것으로 예상
-// icon 변경해야하고, active시 스타일 어떻게 할지 아직 모름
 const selectedAttr = {
-  width: '30',
-  height: '30',
   fill: 'black',
 }
 
@@ -22,25 +20,25 @@ const NavigationUser = () => {
     <NavContainer>
       <LinkElement to="/client/main">
         {location === '/client/main' ? (
-          <ChatIcon width="20" height="20" {...selectedAttr} />
+          <TranslationIcon {...selectedAttr} />
         ) : (
-          <ChatIcon width="20" height="20" />
+          <TranslationIcon />
         )}
         <NavName isHere={location === '/client/main'}>번역 요청</NavName>
       </LinkElement>
       <LinkElement to="/client/request/list">
         {location === '/client/request/list' ? (
-          <ChatIcon width="20" height="20" {...selectedAttr} />
+          <MyDocIcon {...selectedAttr} />
         ) : (
-          <ChatIcon width="20" height="20" />
+          <MyDocIcon />
         )}
         <NavName isHere={location === '/client/request/list'}>내 견적</NavName>
       </LinkElement>
       <LinkElement to="/chat/list">
         {location === '/chat/list' ? (
-          <ChatIcon width="20" height="20" {...selectedAttr} />
+          <ChatIcon {...selectedAttr} />
         ) : (
-          <ChatIcon width="20" height="20" />
+          <ChatIcon />
         )}
         <NavName isHere={location === '/chat/list'}>내 상담</NavName>
       </LinkElement>
