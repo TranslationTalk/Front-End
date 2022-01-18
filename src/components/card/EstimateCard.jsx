@@ -25,6 +25,7 @@ const EstimateCard = prop => {
   const {
     userName,
     field,
+    status,
     beforeLanguage,
     afterLanguage,
     isText,
@@ -35,7 +36,7 @@ const EstimateCard = prop => {
   } = prop
 
   // 마감날짜
-  const createdDate = createdTime.match(/.+(?=T)/g)
+  const createdDate = createdTime?.match(/.+(?=T)/g)
   const createdDay = new Date(createdTime).getDate()
   const createdHour = new Date(createdTime).getHours()
   const createdMin = new Date(createdTime).getMinutes()
@@ -70,9 +71,10 @@ const EstimateCard = prop => {
       </p>
       <p>{isText}</p>
       <p>{deadline}</p>
-      <p>{`${createdDate} (${countHour}시${countMin}분)`}</p>
+      {status && <StatusMessage text={status} color="red" icon="!" />}
+      {createdTime && <p>{`${createdDate} (${countHour}시${countMin}분)`}</p>}
       {offerPrice && <p>{offerPrice.toLocaleString('ko-KR')} 원</p>}
-      <StatusMessage text={timeMessage} color="red" icon="!" />
+      {createdTime && <StatusMessage text={timeMessage} color="red" icon="!" />}
     </Card>
   )
 }
@@ -94,6 +96,7 @@ EstimateCard.propTypes = {
   offerPrice: PropTypes.number,
   createdTime: PropTypes.string,
   onClick: PropTypes.func,
+  status: PropTypes.string,
 }
 
 export default EstimateCard

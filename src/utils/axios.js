@@ -61,6 +61,7 @@ export const apis = {
       confirmedDate,
       offerPrice,
     }),
+  fetchMyList: () => instance.get(`api/estimate/mylist`),
 }
 
 export const requestAPIs = {
