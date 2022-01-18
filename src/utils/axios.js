@@ -64,6 +64,11 @@ export const apis = {
   fetchMyList: () => instance.get(`api/estimate/mylist`),
   getEstimate: id => instance.get(`api/estimate/list/detail/${id}`),
 
+  // 채팅
+  createChatroom: id => instance.post(`api/chatroom/${id}`),
+  getChatroomList: () => instance.get(`api/chatroom/translator`),
+  getChatContents: id => instance.get(`api/chatroom/chat/${id}`),
+  sendChat: (id, chat) => instance.post(`api/chatroom/chat/${id}`, { chat }),
 }
 
 export const clientAPIs = {
