@@ -37,7 +37,7 @@ const RequestList = () => {
   return (
     <div>
       <PageHeader title="내 견적 요청" />
-      <ToggleMenu />
+      <ToggleMenu menu={['견적대기', '진행중', '완료']} />
       {estimates.map(estimate => (
         <EstimateCard
           key={estimate.id}
