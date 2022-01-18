@@ -12,10 +12,13 @@ const All = () => {
   const { login } = indexStore()
 
   const setAuth = auth => {
+    console.log(auth)
     login.setAuth(auth)
+    console.log(login.auth)
   }
 
   const auth = login.auth
+  console.log(auth)
 
   const func = e => {
     setId(e.target.value)
@@ -58,7 +61,7 @@ const All = () => {
             shortBtn
             content="로그아웃"
             _onClick={() => {
-              setAuth(null)
+              setAuth('')
             }}
             color="#f5f5f5"
           />
@@ -91,21 +94,11 @@ const All = () => {
           bgColor="#333"
         />
       </DeveloperWrap>
-      {auth === 'translator' && (
-        <Now>
-          현재 로그인 상태 : <span>번역가</span>
-        </Now>
-      )}
-      {auth === 'client' && (
-        <Now>
-          현재 로그인 상태 : <span>유저</span>
-        </Now>
-      )}
-      {auth === null && (
-        <Now>
-          현재 로그인 상태 : <span>비로그인</span>
-        </Now>
-      )}
+
+      <Now>
+        현재 로그인 상태 :{' '}
+        <span>{login.auth === '' ? '비로그인' : login.auth}</span>
+      </Now>
 
       <br />
       <h2>공통</h2>
