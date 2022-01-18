@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { useLocation } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 import {
   Button,
   SubPageHeader,
@@ -14,6 +14,7 @@ const EstimateForm = () => {
   const {
     state: { estimate },
   } = useLocation()
+  const navigate = useNavigate()
 
   const [formData, setFormData] = useState({
     comment: '',
@@ -23,16 +24,15 @@ const EstimateForm = () => {
 
   const handleChange = e => {
     const { id, value } = e.target
-    console.log(id, value)
     setFormData({ ...formData, [id]: value })
   }
 
   const handleSubmit = async e => {
     e.preventDefault()
     // 필요
-    console.log(formData)
-    const { res } = await apis.sendEstimate(estimate.id, formData)
-    console.log(res)
+    await apis.sendEstimate(estimate.id, formData)
+
+    navigate('/translator/translation/list')
   }
 
   return (
@@ -60,8 +60,7 @@ const EstimateForm = () => {
       <h2>금액</h2>
       <TextInput id="offerPrice" onChange={handleChange} />
       <span>원</span>
-      {/* type submit 적용하기 */}
-      <Button longBtn content="견적 보내기" />
+      <Button type="submit" longBtn content="견적 보내기" />
     </form>
   )
 }

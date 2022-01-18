@@ -33,7 +33,7 @@ const TranslationList = () => {
       <PageHeader title="번역 리스트" useReloadButton />
       <p>나중에 필터 기능 들어갈 곳</p>
       <h2>곧 마감되는 요청!(마감임박 순 구현 필요)</h2>
-      {estimates.map(estimate => (
+      {estimates.slice(0, 2).map(estimate => (
         <EstimateCard
           key={estimate.id}
           userName={estimate.User.username}

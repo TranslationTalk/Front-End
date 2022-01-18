@@ -55,7 +55,12 @@ export const apis = {
 
   // translator
   estimatesList: () => instance.get(`api/estimate/list`),
-  sendEstimate: (id, obj) => instance.post(`api/estimate/list/${id}`, obj),
+  sendEstimate: (id, { comment, confirmedDate, offerPrice }) =>
+    instance.post(`api/estimate/list/detail/${id}`, {
+      comment,
+      confirmedDate,
+      offerPrice,
+    }),
 }
 
 export const requestAPIs = {
