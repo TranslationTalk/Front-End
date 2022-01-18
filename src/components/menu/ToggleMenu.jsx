@@ -8,25 +8,32 @@ ex) border-bottom: ${props => props.click ? '2px solid #C4C4C4' : '2px solid #FF
 */
 
 import React from 'react'
+import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
-const ToggleMenu = () => {
-  const [click, setClick] = React.useState(false)
+const ToggleMenu = ({ menu }) => {
+  const [click, setClick] = React.useState(0)
 
   return (
     <>
       <Wrap>
         <MenuWrap>
-          <Request onClick={() => setClick(false)} click={click}>
-            번역 견적
-          </Request>
-          <Review onClick={() => setClick(true)} click={click}>
-            번역가님 리뷰<TotalReviews>999</TotalReviews>
-          </Review>
+          {menu.map((item, index) => {
+            return (
+              <Menu key={index} onClick={() => setClick(index)}>
+                <div>{item}</div>
+                {click === index ? <UnderLineClick /> : <UnderLine />}
+              </Menu>
+            )
+          })}
         </MenuWrap>
       </Wrap>
     </>
   )
+}
+
+ToggleMenu.propTypes = {
+  menu: PropTypes.array.isRequired,
 }
 
 const Wrap = styled.div`
@@ -39,34 +46,25 @@ const MenuWrap = styled.div`
   text-align: center;
   align-items: center;
   cursor: pointer;
+  justify-content: space-around;
+  font-size: 20px;
+  margin: 20px;
 `
 
-const Request = styled.div`
-  width: 50%;
-  border-bottom: ${props =>
-    props.click ? '2px solid #C4C4C4' : '2px solid #FF0000'};
-  padding: 10px;
+const Menu = styled.div`
+  width: 100%;
+  margin-bottom: 20px;
+  padding-bottoom: 20px;
 `
 
-const Review = styled.div`
-  width: 50%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 10px;
-  border-bottom: ${props =>
-    props.click ? '2px solid #FF0000' : '2px solid #C4C4C4'};
-  position: relative;
+const UnderLineClick = styled.div`
+  border-bottom: 2px solid #ff0000;
+  padding-top: 15px;
 `
 
-const TotalReviews = styled.div`
-  background-color: #fcbbbb;
-  color: #111010;
-  border-radius: 100%;
-  padding: 4px 8px 1px;
-  position: absolute;
-  right: 10px;
+const UnderLine = styled.div`
+  border-bottom: 2px solid #c4c4c4;
+  padding-top: 15px;
 `
-// 햄버거
 
 export default ToggleMenu
