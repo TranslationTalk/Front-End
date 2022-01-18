@@ -18,6 +18,7 @@ const SelectInput = ({ id, defaultOption, onChange, value, options }) => (
 )
 
 const Select = styled.select`
+  width: 100%;
   padding: 0.5rem;
   border-radius: 0.5rem;
   border: 2px solid gray;

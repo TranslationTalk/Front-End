@@ -21,6 +21,7 @@ const TextInput = ({ type, id, name, placeholder, onChange }) => (
 )
 
 const Input = styled.input`
+  width: 100%;
   padding: 0.5rem;
   border-radius: 0.5rem;
   border: 2px solid gray;
