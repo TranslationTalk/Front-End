@@ -19,14 +19,11 @@ const EstimateCardMin = prop => {
     totalReivews,
     offerPrice,
     confirmedDate,
+    onClick,
   } = prop
 
-  // confirmedDate 폼 변경
-  // 2022-01-15T04:33:14.000Z -> YYYY-MM-DD
-  const confirmedDay = confirmedDate.match(/.+(?=T)/g)
-
   return (
-    <Card>
+    <Card onClick={onClick}>
       <img src={profileUrl} alt={name} />
       <div>
         <p>
@@ -42,7 +39,7 @@ const EstimateCardMin = prop => {
           <b>{offerPrice.toLocaleString('ko-KR')}</b>원
         </p>
         <p>
-          납기 가능 날짜: <b>{confirmedDay}</b>
+          납기 가능 날짜: <b>{confirmedDate}</b>
         </p>
       </div>
     </Card>
@@ -73,6 +70,7 @@ EstimateCardMin.propTypes = {
   totalReivews: PropTypes.number,
   offerPrice: PropTypes.number,
   confirmedDate: PropTypes.string,
+  onClick: PropTypes.func,
 }
 
 export default EstimateCardMin
