@@ -41,10 +41,7 @@ const Router = () => {
           path="/client/request/youtube"
           element={<ClientRequestForm isText={false} />}
         />
-        <Route
-          path="/client/estimate/list/:id"
-          element={<TranslatorDetail />}
-        />
+        <Route path="/client/estimate/detail" element={<TranslatorDetail />} />
         <Route path="/client/estimate/list" element={<ClientEstimateList />} />
         {/* translator */}
         <Route path="/translator/signup" element={<TranslatorSignupForm />} />
