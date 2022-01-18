@@ -14,15 +14,28 @@ const SubPageHeader = ({ title, useButton, buttonEvent }) => {
   return (
     <Container>
       <SvgWrap>
-        <ArrowbackIcon width="20" height="20" onClick={() => history.back()} />
+        <ArrowbackIcon onClick={() => history.back()} />
       </SvgWrap>
       <Title>{title}</Title>
-      {useButton && <Button content="작업 완료" _onClick={buttonEvent} />}
+      {useButton && (
+        <Button
+          content="작업 완료"
+          _onClick={buttonEvent}
+          margin="0"
+          width="fit-content"
+          height="fit-content"
+          padding="0.25rem 0.5rem"
+          color="blue"
+          bgColor="pink"
+          border="none"
+        />
+      )}
     </Container>
   )
 }
 
 const Container = styled.div`
+  width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;

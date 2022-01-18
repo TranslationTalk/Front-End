@@ -5,14 +5,15 @@ position fixed
 import React from 'react'
 import styled from 'styled-components'
 import { NavLink, useLocation } from 'react-router-dom'
-import { ReactComponent as ChatIcon } from '../../assets/icons/chat.svg'
+import { ReactComponent as ChatIcon } from '../../assets/icons/Chat.svg'
+import { ReactComponent as MyDocIcon } from '../../assets/icons/MyDoc.svg'
+import { ReactComponent as TranslationIcon } from '../../assets/icons/Translation.svg'
+import { ReactComponent as PersonIcon } from '../../assets/icons/Person.svg'
 
 // 스타일 많이 달라질 것으로 예상
 // icon 변경해야하고, active시 스타일 어떻게 할지 아직 모름
 const selectedAttr = {
-  width: '30',
-  height: '30',
-  fill: 'black',
+  fill: '#3D51FF',
 }
 
 const NavigationTranslator = () => {
@@ -20,37 +21,39 @@ const NavigationTranslator = () => {
 
   return (
     <NavContainer>
-      <LinkElement to="/list">
-        {location === '/list' ? (
-          <ChatIcon width="20" height="20" {...selectedAttr} />
+      <LinkElement to="/translator/list">
+        {location === '/translator/list' ? (
+          <MyDocIcon {...selectedAttr} />
         ) : (
-          <ChatIcon width="20" height="20" />
+          <MyDocIcon />
         )}
-        <NavName isHere={location === '/list'}>번역 리스트</NavName>
+        <NavName isHere={location === '/translator/list'}>번역 리스트</NavName>
       </LinkElement>
-      <LinkElement to="/work">
-        {location === '/work' ? (
-          <ChatIcon width="20" height="20" {...selectedAttr} />
+      <LinkElement to="/translator/translation/list">
+        {location === '/translator/translation/list' ? (
+          <TranslationIcon {...selectedAttr} />
         ) : (
-          <ChatIcon width="20" height="20" />
+          <TranslationIcon />
         )}
-        <NavName isHere={location === '/work'}>내 번역</NavName>
+        <NavName isHere={location === '/translator/translation/list'}>
+          내 번역
+        </NavName>
       </LinkElement>
-      <LinkElement to="/chat">
-        {location === '/chat' ? (
-          <ChatIcon width="20" height="20" {...selectedAttr} />
+      <LinkElement to="/chat/list">
+        {location === '/chat/list' ? (
+          <ChatIcon {...selectedAttr} />
         ) : (
-          <ChatIcon width="20" height="20" />
+          <ChatIcon />
         )}
-        <NavName isHere={location === '/chat'}>내 상담</NavName>
+        <NavName isHere={location === '/chat/list'}>내 상담</NavName>
       </LinkElement>
-      <LinkElement to="/mypage">
-        {location === '/mypage' ? (
-          <ChatIcon width="20" height="20" {...selectedAttr} />
+      <LinkElement to="/translator/mypage">
+        {location === '/translator/mypage' ? (
+          <PersonIcon {...selectedAttr} />
         ) : (
-          <ChatIcon width="20" height="20" />
+          <PersonIcon />
         )}
-        <NavName isHere={location === '/mypage'}>마이페이지</NavName>
+        <NavName isHere={location === '/translator/mypage'}>마이페이지</NavName>
       </LinkElement>
     </NavContainer>
   )
@@ -77,7 +80,7 @@ const LinkElement = styled(NavLink)`
 `
 
 const NavName = styled.span`
-  color: ${props => (props.isHere ? 'blue' : 'black')};
+  color: ${props => (props.isHere ? '#3D51FF' : 'black')};
   font-size: 1rem;
 `
 

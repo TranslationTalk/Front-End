@@ -16,6 +16,7 @@ const CheckBoxInput = ({ id, onChange, label }) => (
 const Container = styled.div``
 
 const Input = styled.input`
+  width: 100%;
   padding: 0.5rem;
   border-radius: 0.5rem;
   border: 2px solid gray;

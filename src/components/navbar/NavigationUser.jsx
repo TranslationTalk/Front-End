@@ -5,13 +5,11 @@ position fixed
 import React from 'react'
 import styled from 'styled-components'
 import { NavLink, useLocation } from 'react-router-dom'
-import { ReactComponent as ChatIcon } from '../../assets/icons/chat.svg'
+import { ReactComponent as TranslationIcon } from '../../assets/icons/Translation.svg'
+import { ReactComponent as MyDocIcon } from '../../assets/icons/MyDoc.svg'
+import { ReactComponent as ChatIcon } from '../../assets/icons/Chat.svg'
 
-// 스타일 많이 달라질 것으로 예상
-// icon 변경해야하고, active시 스타일 어떻게 할지 아직 모름
 const selectedAttr = {
-  width: '30',
-  height: '30',
   fill: 'black',
 }
 
@@ -20,29 +18,29 @@ const NavigationUser = () => {
 
   return (
     <NavContainer>
-      <LinkElement to="/">
-        {location === '/' ? (
-          <ChatIcon width="20" height="20" {...selectedAttr} />
+      <LinkElement to="/client/main">
+        {location === '/client/main' ? (
+          <TranslationIcon {...selectedAttr} />
         ) : (
-          <ChatIcon width="20" height="20" />
+          <TranslationIcon />
         )}
-        <NavName isHere={location === '/'}>번역 요청</NavName>
+        <NavName isHere={location === '/client/main'}>번역 요청</NavName>
       </LinkElement>
-      <LinkElement to="/list">
-        {location === '/list' ? (
-          <ChatIcon width="20" height="20" {...selectedAttr} />
+      <LinkElement to="/client/request/list">
+        {location === '/client/request/list' ? (
+          <MyDocIcon {...selectedAttr} />
         ) : (
-          <ChatIcon width="20" height="20" />
+          <MyDocIcon />
         )}
-        <NavName isHere={location === '/list'}>내 견적</NavName>
+        <NavName isHere={location === '/client/request/list'}>내 견적</NavName>
       </LinkElement>
-      <LinkElement to="/chat">
-        {location === '/chat' ? (
-          <ChatIcon width="20" height="20" {...selectedAttr} />
+      <LinkElement to="/chat/list">
+        {location === '/chat/list' ? (
+          <ChatIcon {...selectedAttr} />
         ) : (
-          <ChatIcon width="20" height="20" />
+          <ChatIcon />
         )}
-        <NavName isHere={location === '/chat'}>내 상담</NavName>
+        <NavName isHere={location === '/chat/list'}>내 상담</NavName>
       </LinkElement>
     </NavContainer>
   )

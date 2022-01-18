@@ -26,8 +26,7 @@ const ChatForm = ({ onSubmit }) => {
         onChange={onChange}
         value={chatContent}
       />
-      {/* type submit 적용하기 */}
-      <Button shortBtn content="보내기" />
+      <Button type="submit" shortBtn content="보내기" />
     </form>
   )
 }

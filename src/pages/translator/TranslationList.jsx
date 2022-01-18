@@ -1,6 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { EstimateCard, PageHeader } from '../../components'
+import {
+  EstimateCard,
+  NavigationTranslator,
+  PageHeader,
+  TopDownButton,
+} from '../../components'
 import { apis } from '../../utils/axios'
 
 const TranslationList = () => {
@@ -13,7 +18,7 @@ const TranslationList = () => {
     const fetchEstimateList = async () => {
       const {
         data: { data },
-      } = await apis.requestList() // sendEstimate이것으로 바꿔야 하나 지금 프로필을 만들 수 없어 임시로 client 요청하는 중
+      } = await apis.estimatesList() // sendEstimate이것으로 바꿔야 하나 지금 프로필을 만들 수 없어 임시로 client 요청하는 중
       console.log(data)
       setEstimates(data)
     }
@@ -33,10 +38,10 @@ const TranslationList = () => {
       <PageHeader title="번역 리스트" useReloadButton />
       <p>나중에 필터 기능 들어갈 곳</p>
       <h2>곧 마감되는 요청!(마감임박 순 구현 필요)</h2>
-      {estimates.map(estimate => (
+      {estimates.slice(0, 2).map(estimate => (
         <EstimateCard
           key={estimate.id}
-          userName={estimate.clientId.toString()} // userName DB에 없음..
+          userName={estimate.User.username}
           field={estimate.field}
           beforeLanguage={estimate.beforeLanguage}
           afterLanguage={estimate.afterLanguage}
@@ -50,7 +55,7 @@ const TranslationList = () => {
       {estimates.map(estimate => (
         <EstimateCard
           key={estimate.id}
-          userName={estimate.clientId.toString()} // userName DB에 없음..
+          userName={estimate.User.username}
           field={estimate.field}
           beforeLanguage={estimate.beforeLanguage}
           afterLanguage={estimate.afterLanguage}
@@ -60,6 +65,8 @@ const TranslationList = () => {
           onClick={() => handleClick(estimate)}
         />
       ))}
+      <TopDownButton />
+      <NavigationTranslator />
     </div>
   )
 }
