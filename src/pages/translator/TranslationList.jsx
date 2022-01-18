@@ -1,6 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { EstimateCard, PageHeader } from '../../components'
+import {
+  EstimateCard,
+  NavigationTranslator,
+  PageHeader,
+  TopDownButton,
+} from '../../components'
 import { apis } from '../../utils/axios'
 
 const TranslationList = () => {
@@ -60,6 +65,8 @@ const TranslationList = () => {
           onClick={() => handleClick(estimate)}
         />
       ))}
+      <TopDownButton />
+      <NavigationTranslator />
     </div>
   )
 }
