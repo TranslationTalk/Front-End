@@ -20,37 +20,39 @@ const NavigationTranslator = () => {
 
   return (
     <NavContainer>
-      <LinkElement to="/list">
-        {location === '/list' ? (
+      <LinkElement to="/translator/list">
+        {location === '/translator/list' ? (
           <ChatIcon width="20" height="20" {...selectedAttr} />
         ) : (
           <ChatIcon width="20" height="20" />
         )}
-        <NavName isHere={location === '/list'}>번역 리스트</NavName>
+        <NavName isHere={location === '/translator/list'}>번역 리스트</NavName>
       </LinkElement>
-      <LinkElement to="/work">
-        {location === '/work' ? (
+      <LinkElement to="/translator/translation/list">
+        {location === '/translator/translation/list' ? (
           <ChatIcon width="20" height="20" {...selectedAttr} />
         ) : (
           <ChatIcon width="20" height="20" />
         )}
-        <NavName isHere={location === '/work'}>내 번역</NavName>
+        <NavName isHere={location === '/translator/translation/list'}>
+          내 번역
+        </NavName>
       </LinkElement>
-      <LinkElement to="/chat">
-        {location === '/chat' ? (
+      <LinkElement to="/chat/list">
+        {location === '/chat/list' ? (
           <ChatIcon width="20" height="20" {...selectedAttr} />
         ) : (
           <ChatIcon width="20" height="20" />
         )}
-        <NavName isHere={location === '/chat'}>내 상담</NavName>
+        <NavName isHere={location === '/chat/list'}>내 상담</NavName>
       </LinkElement>
-      <LinkElement to="/mypage">
-        {location === '/mypage' ? (
+      <LinkElement to="/translator/mypage">
+        {location === '/translator/mypage' ? (
           <ChatIcon width="20" height="20" {...selectedAttr} />
         ) : (
           <ChatIcon width="20" height="20" />
         )}
-        <NavName isHere={location === '/mypage'}>마이페이지</NavName>
+        <NavName isHere={location === '/translator/mypage'}>마이페이지</NavName>
       </LinkElement>
     </NavContainer>
   )

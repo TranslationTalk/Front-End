@@ -20,29 +20,29 @@ const NavigationUser = () => {
 
   return (
     <NavContainer>
-      <LinkElement to="/">
-        {location === '/' ? (
+      <LinkElement to="/client/main">
+        {location === '/client/main' ? (
           <ChatIcon width="20" height="20" {...selectedAttr} />
         ) : (
           <ChatIcon width="20" height="20" />
         )}
-        <NavName isHere={location === '/'}>번역 요청</NavName>
+        <NavName isHere={location === '/client/main'}>번역 요청</NavName>
       </LinkElement>
-      <LinkElement to="/list">
-        {location === '/list' ? (
+      <LinkElement to="/client/request/list">
+        {location === '/client/request/list' ? (
           <ChatIcon width="20" height="20" {...selectedAttr} />
         ) : (
           <ChatIcon width="20" height="20" />
         )}
-        <NavName isHere={location === '/list'}>내 견적</NavName>
+        <NavName isHere={location === '/client/request/list'}>내 견적</NavName>
       </LinkElement>
-      <LinkElement to="/chat">
-        {location === '/chat' ? (
+      <LinkElement to="/chat/list">
+        {location === '/chat/list' ? (
           <ChatIcon width="20" height="20" {...selectedAttr} />
         ) : (
           <ChatIcon width="20" height="20" />
         )}
-        <NavName isHere={location === '/chat'}>내 상담</NavName>
+        <NavName isHere={location === '/chat/list'}>내 상담</NavName>
       </LinkElement>
     </NavContainer>
   )
