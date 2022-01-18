@@ -5,6 +5,7 @@ import {
   NavigationTranslator,
   PageHeader,
   ToggleMenu,
+  TopDownButton,
 } from '../../components'
 import { apis } from '../../utils/axios'
 
@@ -50,6 +51,7 @@ const MyTranslationList = () => {
         />
       ))}
       <NavigationTranslator />
+      <TopDownButton />
     </div>
   )
 }

@@ -62,6 +62,7 @@ export const apis = {
       offerPrice,
     }),
   fetchMyList: () => instance.get(`api/estimate/mylist`),
+  getEstimate: id => instance.get(`api/estimate/list/detail/${id}`),
 }
 
 export const requestAPIs = {
