@@ -66,8 +66,8 @@ export const apis = {
 
 }
 
-export const requestAPIs = {
-  // 견적 요청
+export const clientAPIs = {
+  // 견적 요청 form
   estimateRequest: (
     field,
     deadline,
@@ -92,4 +92,15 @@ export const requestAPIs = {
       isText,
       needs,
     }),
+
+  // 견적 요청
+  requestList: () => instance.get(`api/request/list`),
+
+  // 견적요청 -> 받은 견적
+  requestEstimateList: requestId =>
+    instance.get(`api/request/list/${requestId}`),
+
+  // 견적요청 -> 받은 견적 -> 번역가 상세페이지
+  requestEstimate: (requestId, estimateId) =>
+    instance.get(`/api/request/list/${requestId}/${estimateId}`),
 }

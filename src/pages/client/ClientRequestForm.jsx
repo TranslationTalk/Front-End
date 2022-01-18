@@ -13,7 +13,7 @@ import {
 import SelectInput from '../../components/input/SelectInput'
 import propTypes from 'prop-types'
 import { fields, language } from '../../constant/selectOptions'
-import { requestAPIs } from '../../utils/axios'
+import { clientAPIs } from '../../utils/axios'
 import { useNavigate } from 'react-router-dom'
 
 const ClientRequestForm = props => {
@@ -36,9 +36,6 @@ const ClientRequestForm = props => {
     setRequestForm({ ...requestForm, [name]: value })
   }
 
-  const test = () => {
-    console.log(requestForm)
-  }
   const submit = () => {
     // 제출 후 RequestList페이지로 이동
     const {
@@ -53,7 +50,7 @@ const ClientRequestForm = props => {
       isText,
       needs,
     } = requestForm
-    requestAPIs
+    clientAPIs
       .estimateRequest(
         field,
         deadline,
@@ -99,26 +96,26 @@ const ClientRequestForm = props => {
         />
         &gt;
         <SelectInput
-          defaultOption="번역 후"
-          options={language}
           name="afterLanguage"
           value={requestForm.afterLanguage}
+          defaultOption="번역 후"
+          options={language}
           onChange={onChange}
         />
         <br />
         <TextInput
           name="email"
+          value={requestForm.email}
           placeholder="이메일"
           type="email"
-          value={requestForm.email}
           onChange={onChange}
         />
         <br />
         <TextInput
           name="phoneNumber"
+          value={requestForm.phoneNumber}
           placeholder="전화번호"
           type="tel"
-          value={requestForm.phoneNumber}
           onChange={onChange}
         />
         <br />
@@ -143,7 +140,6 @@ const ClientRequestForm = props => {
           placeholder="세부 요청 사항"
           onChange={onChange}
         />
-        <Button content="test" _onClick={test} />
         <Button content="제출하기" _onClick={submit} />
       </form>
     </div>
