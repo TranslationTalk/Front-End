@@ -1,18 +1,30 @@
+import { useObserver } from 'mobx-react'
 import React from 'react'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 import { Button } from './components/index'
 import { apis } from './utils/axios'
+import indexStore from './mobx/indexStore'
 
 const All = () => {
   const [id, setId] = React.useState('')
-  const [auth, setAuth] = React.useState(null)
+
+  const { login } = indexStore()
+
+  const setAuth = auth => {
+    console.log(auth)
+    login.setAuth(auth)
+    console.log(login.auth)
+  }
+
+  const auth = login.auth
+  console.log(auth)
 
   const func = e => {
     setId(e.target.value)
   }
 
-  return (
+  return useObserver(() => (
     <Test>
       <Input onChange={func} placeholder="아이디를 입력해주세요." />
       <DeveloperWrap>
@@ -49,7 +61,7 @@ const All = () => {
             shortBtn
             content="로그아웃"
             _onClick={() => {
-              setAuth(null)
+              setAuth('')
             }}
             color="#f5f5f5"
           />
@@ -82,21 +94,11 @@ const All = () => {
           bgColor="#333"
         />
       </DeveloperWrap>
-      {auth === 'translator' && (
-        <Now>
-          현재 로그인 상태 : <span>번역가</span>
-        </Now>
-      )}
-      {auth === 'client' && (
-        <Now>
-          현재 로그인 상태 : <span>유저</span>
-        </Now>
-      )}
-      {auth === null && (
-        <Now>
-          현재 로그인 상태 : <span>비로그인</span>
-        </Now>
-      )}
+
+      <Now>
+        현재 로그인 상태 :{' '}
+        <span>{login.auth === '' ? '비로그인' : login.auth}</span>
+      </Now>
 
       <br />
       <h2>공통</h2>
@@ -120,7 +122,7 @@ const All = () => {
       <Link to="/translator/translation/list">내번역</Link>
       <Link to="/translator/estimate/:id">견적서 디테일</Link>
     </Test>
-  )
+  ))
 }
 const Test = styled.div`
   & h2 {
