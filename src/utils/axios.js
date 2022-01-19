@@ -109,4 +109,14 @@ export const clientAPIs = {
   // 견적요청 -> 받은 견적 -> 번역가 상세페이지
   requestEstimate: (requestId, estimateId) =>
     instance.get(`/api/request/list/${requestId}/${estimateId}`),
+
+  //채팅방 생성
+  addChatroom: estimateId => {
+    return instance.post(`api/chatroom/${estimateId}`)
+  },
+
+  //번역가 확정하기
+  TranslatorConfirmed: (requestId, estimateId) => {
+    return instance.post(`api/request/list/${requestId}/${estimateId}`)
+  },
 }

@@ -36,7 +36,7 @@ const EstimateCardMin = prop => {
           리뷰 <b>{totalReivews}</b>건
         </p>
         <p>
-          <b>{offerPrice.toLocaleString('ko-KR')}</b>원
+          <b>{Intl.NumberFormat('ko-KR').format(offerPrice)}</b>
         </p>
         <p>
           납기 가능 날짜: <b>{confirmedDate}</b>
