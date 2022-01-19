@@ -1,8 +1,8 @@
 /*
   상태 메시지
-  text: 메시지
-  icon: 아이콘 특수문자 ex) !, ?
-  color: 메시지의 색
+  text: 메시지 // string
+  icon: "info" or "alarm" // string
+  color: 메시지의 색 // string
 */
 import React from 'react'
 import PropTypes from 'prop-types'

@@ -19,6 +19,7 @@ const GlobalStyles = createGlobalStyle`
     }
 
     :root {
+        /* common-color */
         --main-color: #3D51FF;
         --white: #3D51FF;
         --light-gray: #F4F4F4;
@@ -26,8 +27,8 @@ const GlobalStyles = createGlobalStyle`
         --light-blue: #EDF2FF;
         --bark-blue: #363842;
         --orange-red: #FF5F5F;
-
-      
+        
+        /* common-font-size */
         --fs-12: 14px;
         --fs-14: 16px;
         --fs-16: 18px;
@@ -50,7 +51,7 @@ const GlobalStyles = createGlobalStyle`
         }
     }
 
-
+    /* Noto-Sans-KR 웹폰트 */
     @font-face { 
         font-family: 'Noto Sans KR';
         font-style: normal;
@@ -99,7 +100,6 @@ const GlobalStyles = createGlobalStyle`
         url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Black.woff) format('woff'),
         url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Black.otf) format('opentype');
     };
-    
 `
 
 export default GlobalStyles
