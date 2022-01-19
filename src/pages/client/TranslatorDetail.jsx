@@ -4,16 +4,18 @@
   번역가 상세페이지
 */
 import React, { useEffect, useState } from 'react'
-import { useLocation } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
+import { clientAPIs } from '../../utils/axios'
 import {
+  Button,
   EstimateCardMin,
   EstimateDetail,
   PageHeader,
   ToggleMenu,
 } from '../../components'
-import { clientAPIs } from '../../utils/axios'
 
 const TranslatorDetail = () => {
+  const navigate = useNavigate()
   const location = useLocation()
   const [estimate, setEstimate] = useState([])
 
@@ -30,6 +32,20 @@ const TranslatorDetail = () => {
     }
     fetchEstimateList()
   }, [])
+
+  // 채팅방 생성
+  // 상담하기 Btn
+  const consultBtn = () => {
+    if (estimate.roomId === 0) {
+      clientAPIs
+        .addChatroom(location.state.estimateId)
+        .then(() => alert(`roomId ${location.state.estimateId}번 생성`))
+        .catch(e => alert(`${e}`))
+      navigate(`/chat/${estimate.roomId}`)
+    } else {
+      navigate(`/chat/${estimate.roomId}`)
+    }
+  }
 
   return (
     <div>
@@ -48,6 +64,7 @@ const TranslatorDetail = () => {
         comment={estimate.comment ?? 'test'}
         confirmedDate={estimate.confirmedDate}
       />
+      <Button content="상담하기" _onClick={consultBtn} />
     </div>
   )
 }
