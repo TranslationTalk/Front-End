@@ -33,8 +33,8 @@ const TranslatorDetail = () => {
     fetchEstimateList()
   }, [])
 
-  // 채팅방 생성
   // 상담하기 Btn
+  // 채팅방 생성 -> navigate로 바로 채팅방이동
   const consultBtn = () => {
     if (estimate.roomId === 0) {
       clientAPIs
@@ -44,6 +44,31 @@ const TranslatorDetail = () => {
       navigate(`/chat/${estimate.roomId}`)
     } else {
       navigate(`/chat/${estimate.roomId}`)
+    }
+  }
+
+  // 확정하기 Btn
+  // status  ready => done 변경
+  const confirmed = () => {
+    if (estimate.status === 'ready') {
+      clientAPIs
+        .TranslatorConfirmed(
+          location.state.requestId,
+          location.state.estimateId,
+        )
+        .then(() => alert(`확정 완료`))
+        .catch(e => alert(`${e}`))
+    }
+  }
+
+  // 확정 버튼 show여부
+  const confirmedBtn = () => {
+    if (estimate.roomId === 0) {
+      return null
+    } else if (estimate.status === 'ready') {
+      return <Button content="확정하기" _onClick={confirmed} />
+    } else {
+      return <p>확정 완료</p>
     }
   }
 
@@ -64,6 +89,8 @@ const TranslatorDetail = () => {
         comment={estimate.comment ?? 'test'}
         confirmedDate={estimate.confirmedDate}
       />
+      {confirmedBtn()}
+
       <Button content="상담하기" _onClick={consultBtn} />
     </div>
   )

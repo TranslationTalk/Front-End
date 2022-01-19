@@ -107,4 +107,9 @@ export const clientAPIs = {
   addChatroom: estimateId => {
     return instance.post(`api/chatroom/${estimateId}`)
   },
+
+  //번역가 확정하기
+  TranslatorConfirmed: (requestId, estimateId) => {
+    return instance.post(`api/request/list/${requestId}/${estimateId}`)
+  },
 }
