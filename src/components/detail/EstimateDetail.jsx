@@ -97,6 +97,9 @@ const Comment = styled.div`
     font-weight: bold;
     margin-bottom: 10px;
   }
+  & > p {
+    overflow-wrap: break-word;
+  }
   & > p > button {
     border: none;
     background-color: transparent;
