@@ -6,7 +6,7 @@ import React from 'react'
 import styled from 'styled-components'
 import { NavLink, useLocation } from 'react-router-dom'
 import { ReactComponent as ChatIcon } from '../../assets/icons/Chat.svg'
-import { ReactComponent as MyDocIcon } from '../../assets/icons/MyDoc.svg'
+import { ReactComponent as MyListIcon } from '../../assets/icons/List.svg'
 import { ReactComponent as TranslationIcon } from '../../assets/icons/Translation.svg'
 import { ReactComponent as PersonIcon } from '../../assets/icons/Person.svg'
 
@@ -23,9 +23,9 @@ const NavigationTranslator = () => {
     <NavContainer>
       <LinkElement to="/translator/list">
         {location === '/translator/list' ? (
-          <MyDocIcon {...selectedAttr} />
+          <MyListIcon {...selectedAttr} />
         ) : (
-          <MyDocIcon />
+          <MyListIcon />
         )}
         <NavName isHere={location === '/translator/list'}>번역 리스트</NavName>
       </LinkElement>
