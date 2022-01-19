@@ -10,13 +10,14 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
-const TextInput = ({ type, id, name, placeholder, onChange }) => (
+const TextInput = ({ type, id, name, placeholder, onChange, value }) => (
   <Input
     type={type}
     id={id}
     name={name}
     placeholder={placeholder}
     onChange={onChange}
+    value={value}
   />
 )
 
@@ -33,6 +34,7 @@ TextInput.propTypes = {
   name: PropTypes.string,
   placeholder: PropTypes.string,
   onChange: PropTypes.func.isRequired,
+  value: PropTypes.string,
 }
 
 export default TextInput

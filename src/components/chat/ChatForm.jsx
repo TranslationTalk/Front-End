@@ -10,21 +10,17 @@
   type을 추가하여 submit으로 설정할 수 있도록 추가해야 합니다
  */
 
-import React, { useState } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
 import { Button, TextInput } from '..'
 
-const ChatForm = ({ onSubmit }) => {
-  const [chatContent, setChatContent] = useState('')
-
-  const onChange = e => setChatContent(e.target.value)
-
+const ChatForm = ({ onSubmit, onChange, value }) => {
   return (
     <form onSubmit={onSubmit}>
       <TextInput
         placeholder="채팅 내용을 입력하세요."
         onChange={onChange}
-        value={chatContent}
+        value={value}
       />
       <Button type="submit" shortBtn content="보내기" />
     </form>
@@ -33,6 +29,8 @@ const ChatForm = ({ onSubmit }) => {
 
 ChatForm.propTypes = {
   onSubmit: PropTypes.func.isRequired,
+  onChange: PropTypes.func,
+  value: PropTypes.string,
 }
 
 export default ChatForm
