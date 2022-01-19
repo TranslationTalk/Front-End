@@ -38,10 +38,10 @@ const ClientEstimateList = () => {
   return (
     <>
       <PageHeader title="받은견적" />
-      <PriceCard label="견적 최저가" displayPrice="1000000" />
+      <PriceCard label="견적 최저가" displayPrice={1000000} />
       {estimate.map(translator => (
         <EstimateCardMin
-          key={translator.id}
+          key={translator.estimateId}
           name={translator.name}
           profileUrl={translator.profileUrl}
           totalTrans={translator.totalTrans}
@@ -49,7 +49,7 @@ const ClientEstimateList = () => {
           offerPrice={translator.offerPrice}
           confirmedDate={translator.confirmedDate}
           onClick={() =>
-            cardClick(location.state.requestId, translator.translatorId)
+            cardClick(location.state.requestId, translator.estimateId)
           }
         />
       ))}
