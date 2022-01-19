@@ -14,8 +14,15 @@ const ChatBalloon = prop => {
   const { name, profileUrl, chat, date, isSelf } = prop
 
   // 문자를 보낸 시간과 분
-  const hours = new Date(date).getHours()
-  const min = new Date(date).getMinutes()
+  const kDate = date?.replace(/000Z$/g, '0900')
+  const hours =
+    new Date(kDate).getHours() < 10
+      ? `0${new Date(kDate).getHours()}`
+      : new Date(kDate).getHours()
+  const min =
+    new Date(kDate).getMinutes() < 10
+      ? `0${new Date(kDate).getMinutes()}`
+      : new Date(kDate).getMinutes()
 
   return (
     <Chat isSelf={isSelf}>
@@ -77,18 +84,17 @@ const Chat = styled.div`
     min-width: 150px;
     word-break: break-all;
     ${prop => (prop.isSelf ? rightTriangle : leftTriangle)}
-    }
-    & .chat {
-      display: inline-black;
-      margin-top: 5px;
-      padding: 10px;
-      background: #f9f871;
-      border-radius: 10px;
-    }
-    & .name {
-      margin:0 5px;
-      ${prop => (prop.isSelf ? 'text-align: right' : 'text-align: left')}
-    }
+  }
+  & .chat {
+    display: inline-black;
+    margin-top: 5px;
+    padding: 10px;
+    background: #f9f871;
+    border-radius: 10px;
+  }
+  & .name {
+    margin: 0 5px;
+    ${prop => (prop.isSelf ? 'text-align: right' : 'text-align: left')}
   }
   & .time {
     margin-top: auto;
@@ -99,7 +105,8 @@ ChatBalloon.propTypes = {
   name: PropTypes.string,
   profileUrl: PropTypes.string,
   chat: PropTypes.string,
-  time: PropTypes.string,
+  date: PropTypes.string,
+  isSelf: PropTypes.bool,
 }
 
 export default ChatBalloon
