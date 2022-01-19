@@ -1,17 +1,33 @@
 /*
   상태 메시지
-  text: 메시지
-  icon: 아이콘 특수문자 ex) !, ?
-  color: 메시지의 색
+  text: 메시지 // string
+  icon: "info" or "alarm" // string
+  color: 메시지의 색 // string
 */
 import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
+import infoImg from '../../assets/images/info.svg'
+import alarmerrorImg from '../../assets/images/alarmerror.svg'
 
 const StatusMessage = ({ text, color, icon }) => {
+  let iconImg = infoImg
+  switch (icon) {
+    case 'info':
+      iconImg = infoImg
+      break
+    case 'alarm':
+      iconImg = alarmerrorImg
+      break
+    default:
+      console.log(
+        icon + 'StatusMessage 컴포넌트 icon props를 잘못 입력하셨습니다.',
+      )
+  }
+
   return (
-    <StatusMsg color={color}>
-      <i>{icon}</i>
+    <StatusMsg color={color} icon={iconImg}>
+      <i />
       <span>{text}</span>
     </StatusMsg>
   )
@@ -19,24 +35,28 @@ const StatusMessage = ({ text, color, icon }) => {
 
 const StatusMsg = styled.div`
   color: ${props => props.color};
+  font-size: var(--fs-12);
   & i {
-    display: inline-block;
-    width: 20px;
-    border-radius: 50%;
-    padding: 2px 7px;
-    margin-right: 5px;
-    background: ${props => props.color};
     color: #fff;
+    display: inline-block;
+    width: var(--fs-18);
+    height: var(--fs-18);
+    border-radius: 50%;
+    margin-right: 4px;
+    margin-bottom: -5px;
+    background: url(${props => props.icon});
+    background-size: cover;
     text-align: center;
     font-weight: bold;
   }
 `
-StatusMsg.propTypes = {}
 
 StatusMessage.propTypes = {
   text: PropTypes.string,
   color: PropTypes.string,
   icon: PropTypes.string,
+  info: PropTypes.bool,
+  alarm: PropTypes.bool,
 }
 
 export default StatusMessage
