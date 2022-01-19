@@ -63,6 +63,7 @@ export const apis = {
     }),
   fetchMyList: () => instance.get(`api/estimate/mylist`),
   getEstimate: id => instance.get(`api/estimate/list/detail/${id}`),
+  finishEstimate: id => instance.post(`api/request/status/${id}`),
 
   // 채팅
   createChatroom: id => instance.post(`api/chatroom/${id}`),

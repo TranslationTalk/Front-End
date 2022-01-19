@@ -9,6 +9,8 @@ import {
 } from '../../components'
 import { apis } from '../../utils/axios'
 
+const menu = ['보낸 견적', '진행중', '진행 완료']
+
 const MyTranslationList = () => {
   const navigate = useNavigate()
   const [estimates, setEstimates] = useState([])
@@ -19,6 +21,7 @@ const MyTranslationList = () => {
         data: { data },
       } = await apis.fetchMyList()
       setEstimates(data)
+      console.log(data)
     }
     fetchEstimates()
   }, [])
@@ -34,9 +37,8 @@ const MyTranslationList = () => {
   return (
     <div>
       <PageHeader title="내 번역" />
-      {/* toggle menu 목록 바뀌어야 함 */}
-      <ToggleMenu />
-      {/* status (진행 중 , 완료 이런 것 뜰 수 있도록 수정해야함) */}
+      {/* toggle menu 목록 onClick으로 내려주어야 함 */}
+      <ToggleMenu menu={menu} />
       {estimates.map(estimate => (
         <EstimateCard
           key={estimate.id}

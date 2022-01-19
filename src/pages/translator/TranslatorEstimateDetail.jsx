@@ -16,12 +16,25 @@ const TranslatorEstimateDetail = () => {
         data: { data },
       } = await apis.getEstimate(estimate.id)
       setEstimateDetail(data)
+      console.log(data)
     }
     fetchEstimate()
   }, [])
 
-  const handleClick = () => {
+  const gotoChatroom = () => {
     // chat 경로 바뀜 translator/chat/
+    navigate(`/chat/${estimateDetail.roomId}`, {
+      state: { roomId: estimateDetail.roomId },
+    })
+  }
+
+  const finishWork = async () => {
+    console.log('작업 완료')
+    const data = await apis.finishEstimate(estimate.id)
+    console.log(data)
+    // 일단 작업 완료 후 채팅방으로 이동하는 것으로 함
+    // 작업 완료 처리되었습니다. 팝업 (alert)
+    alert('작업 완료 처리가 되었습니다.')
     navigate(`/chat/${estimateDetail.roomId}`, {
       state: { roomId: estimateDetail.roomId },
     })
@@ -42,11 +55,25 @@ const TranslatorEstimateDetail = () => {
         fileUrl={estimate.fileUrl}
       />
       {estimate.youtubeUrl && <VideoCard youtubeUrl={estimate.youtubeUrl} />}
+      <h2>내 코멘트</h2>
+      <p>{estimateDetail?.comment}</p>
       <h2>목표 일정</h2>
       <p>{estimateDetail?.confirmedDate}</p>
       <h2>금액</h2>
       <p>{estimateDetail?.offerPrice}</p>
-      <Button longBtn content="상담하기" _onClick={handleClick} />
+      {estimateDetail?.roomId === 0 ? (
+        // cursor pointer 안되도록
+        <Button longBtn content="상담하기" bgColor="gray" />
+      ) : (
+        <>
+          <Button longBtn content="상담하기" _onClick={gotoChatroom} />
+        </>
+      )}
+      {estimateDetail?.status === 'processing' ? (
+        <Button longBtn content="작업완료" _onClick={finishWork} />
+      ) : (
+        <Button longBtn content="작업완료" bgColor="gray" />
+      )}
     </div>
   )
 }
