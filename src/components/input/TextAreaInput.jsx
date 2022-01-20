@@ -12,9 +12,18 @@ const TextAreaInput = ({ id, name, placeholder, onChange }) => (
 
 const TextArea = styled.textarea`
   width: 100%;
-  padding: 0.5rem;
-  border-radius: 0.5rem;
-  border: 2px solid gray;
+  height: 136px;
+  padding: 11px 12px;
+  border-radius: 4px;
+  border: 1px solid var(--gray-c4);
+  font-size: var(--fs-14);
+  &::placeholder {
+    color: var(--gray-c4);
+  }
+  &:focus {
+    outline: none !important;
+    border: 1px solid var(--main-color);
+  }
 `
 
 TextAreaInput.propTypes = {

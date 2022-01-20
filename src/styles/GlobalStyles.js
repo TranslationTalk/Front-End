@@ -21,11 +21,13 @@ const GlobalStyles = createGlobalStyle`
     :root {
         /* common-color */
         --main-color: #3D51FF;
-        --white: #3D51FF;
+        --white: #FFFFFF;
         --light-gray: #F4F4F4;
+        --gray-c4: #C4C4C4;
+        --gray-bc: #BCBCBC;
         --gray: #464646;
         --light-blue: #EDF2FF;
-        --bark-blue: #363842;
+        --dark-blue: #363842;
         --orange-red: #FF5F5F;
         
         /* common-font-size */
