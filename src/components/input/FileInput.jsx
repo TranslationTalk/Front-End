@@ -1,12 +1,16 @@
 /*
 common input component:
 file를 받는 input
+label: 파일 선택 버튼에 들어갈 내용
+name: onChange에 사용될 name
+onChange: onChange이벤트
+useUploadName: 파일 선택 버튼 옆에 선택된 파일명 보여줄지 말지
 */
 import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
-const FileInput = ({ name, onChange }) => {
+const FileInput = ({ label, name, onChange, useUploadName }) => {
   // 실제로 받은 file을 어떻게 상위 컴포넌트에 전달할지 나중에 사용하면서 수정 필요
   const [fileName, setFileName] = useState('선택된 파일 없음')
 
@@ -14,17 +18,18 @@ const FileInput = ({ name, onChange }) => {
 
   return (
     <InputContainer>
-      <Label htmlFor="input-file">파일 올리기(텍스트)</Label>
-      <UploadName
-        onChange={onChange}
-        value={fileName}
-        placeholder="선택된 파일 없음"
-      />
+      <Label htmlFor="input-file">{label}</Label>
+      {useUploadName && (
+        <UploadName
+          onChange={onChange}
+          value={fileName}
+          placeholder="선택된 파일 없음"
+        />
+      )}
       <Input
         id="input-file"
         type="file"
         name={name}
-        accept=".txt"
         onChange={handleFileChange}
       />
     </InputContainer>
@@ -69,8 +74,10 @@ const Input = styled.input`
 `
 
 FileInput.propTypes = {
+  label: PropTypes.string,
   name: PropTypes.string,
   onChange: PropTypes.func.isRequired,
+  useUploadName: PropTypes.bool,
 }
 
 export default FileInput

@@ -28,21 +28,25 @@ export const apis = {
 
   // 번역가 마이페이지
   getTranslatorMypage: () => instance.get('api/translator/mypage'), // 마이페이지 정보 요청
-  postTranslatorMypage: (
+  postTranslatorMypage: ({
     name,
     career,
     profileFile,
     language,
+    email,
+    phoneNum,
     introduce,
     taxPossible,
     cashPossible,
     isBusiness,
-  ) =>
+  }) =>
     instance.post('api/translator/mypage', {
       name,
       career,
       profileFile,
       language,
+      email,
+      phoneNum,
       introduce,
       taxPossible,
       cashPossible,
