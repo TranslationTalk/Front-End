@@ -27,7 +27,7 @@ const PageHeader = ({ title, useReloadButton, reloadEvent }) => {
 
 const Container = styled.div`
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
   align-items: center;
   height: 56px;
   padding: 16px;
