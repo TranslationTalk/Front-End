@@ -34,8 +34,10 @@ const StatusMessage = ({ text, color, icon }) => {
 }
 
 const StatusMsg = styled.div`
+  display: flex;
   color: ${props => props.color};
   font-size: var(--fs-12);
+  line-height: var(--fs-18);
   & i {
     color: #fff;
     display: inline-block;

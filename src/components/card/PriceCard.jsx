@@ -13,24 +13,29 @@ const PriceCard = ({ displayPrice, label }) => {
     <Card>
       <span>{label}</span>
       <p>
-        {displayPrice.toLocaleString('ko-KR')} <span>원</span>
+        <span>{displayPrice.toLocaleString('ko-KR')}</span> <span>원</span>
       </p>
     </Card>
   )
 }
 
 const Card = styled.div`
-  margin: 10px;
-  background: #ddd;
-  padding: 20px;
+  margin: 0 20px;
+  background: #e2ecfc;
+  padding: 10px;
   border-radius: 5px;
+  font-weight: 500;
   & p {
-    margin-top: 50px;
+    margin-top: 33px;
     text-align: right;
-    font-weight: bold;
-    font-size: 30px;
-    & span {
-      font-size: 18px;
+    font-size: var(--fs-18);
+    & span:first-child {
+      font-size: var(--fs-24);
+      font-weight: bold;
+    }
+    & span:last-child {
+      font-size: var(--fs-20);
+      font-weight: 500;
     }
   }
 `
