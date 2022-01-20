@@ -53,6 +53,7 @@ export const apis = {
       isBusiness,
     }), // 첫 로그인시 정보 작성
   modifyTranslatorMypage: () => instance.post('api/translator/mypage/modify'), // 마이페이지 정보 수정
+  getReviews: id => instance.get(`api/review/${id}`),
 
   // 번역 요청
   requestList: () => instance.get(`api/request/list`),
