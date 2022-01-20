@@ -8,13 +8,14 @@ import React from 'react'
 import propTypes from 'prop-types'
 import styled from 'styled-components'
 import { ReactComponent as ReloadIcon } from '../../assets/icons/ReloadIcon.svg'
+import Logo from '../../assets/images/Logo.png'
 import { HamburgerMenu } from '../index'
 
 const PageHeader = ({ title, useReloadButton, reloadEvent }) => {
   return (
     <Container>
       <HamburgerMenu />
-      <Title>{title}</Title>
+      {title ? <Title>{title}</Title> : <LogoImg src={Logo} alt="logo" />}
       {useReloadButton && (
         <SvgWrap>
           <ReloadIcon width="25" height="25" onClick={reloadEvent} />
@@ -28,14 +29,23 @@ const Container = styled.div`
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  height: 50px;
-  padding: 0 15px;
-  background-color: violet;
+  height: 56px;
+  padding: 16px;
+  background-color: #fff;
   position: relative;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.3);
 `
 
 const Title = styled.h2`
-  font-size: 1.3rem;
+  font-size: var(--fs-20);
+  font-weight: bold;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+`
+
+const LogoImg = styled.img`
   position: absolute;
   top: 50%;
   left: 50%;
@@ -47,7 +57,7 @@ const SvgWrap = styled.div`
 `
 
 PageHeader.propTypes = {
-  title: propTypes.string.isRequired,
+  title: propTypes.string,
   useReloadButton: propTypes.bool,
   reloadEvent: propTypes.func,
 }

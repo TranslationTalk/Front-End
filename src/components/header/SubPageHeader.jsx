@@ -10,23 +10,29 @@ import { Button } from '../index'
 import styled from 'styled-components'
 import { ReactComponent as ArrowbackIcon } from '../../assets/icons/ArrowbackIcon.svg'
 
-const SubPageHeader = ({ title, useButton, buttonEvent }) => {
+const SubPageHeader = ({ title, leftTitle, useButton, buttonEvent }) => {
   return (
     <Container>
       <SvgWrap>
         <ArrowbackIcon onClick={() => history.back()} />
       </SvgWrap>
+      {leftTitle && (
+        <LeftTitle>
+          {leftTitle} <span>{leftTitle && '번역가'}님</span>
+        </LeftTitle>
+      )}
       <Title>{title}</Title>
+      {/* border radius 추가 필요 */}
       {useButton && (
         <Button
           content="작업 완료"
           _onClick={buttonEvent}
           margin="0"
           width="fit-content"
-          height="fit-content"
-          padding="0.25rem 0.5rem"
-          color="blue"
-          bgColor="pink"
+          height="30px"
+          padding="5px 10px"
+          color="#fff"
+          bgColor="#FF5F5F"
           border="none"
         />
       )}
@@ -39,14 +45,30 @@ const Container = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  height: 70px;
-  background-color: violet;
-  padding: 0 15px;
+  height: 56px;
+  padding: 16px;
+  background-color: #fff;
   position: relative;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+`
+
+const LeftTitle = styled.h2`
+  font-size: var(--fs-20);
+  font-weight: bold;
+  position: absolute;
+  top: 50%;
+  left: 50px;
+  transform: translateY(-50%);
+  line-height: 56px;
+  & span {
+    font-size: var(--fs-14);
+    font-weight: normal;
+  }
 `
 
 const Title = styled.h2`
-  font-size: 1.3rem;
+  font-size: var(--fs-20);
+  font-weight: bold;
   position: absolute;
   top: 50%;
   left: 50%;
@@ -58,9 +80,10 @@ const SvgWrap = styled.div`
 `
 
 SubPageHeader.propTypes = {
-  title: propTypes.string.isRequired,
+  title: propTypes.string,
   useButton: propTypes.bool,
   buttonEvent: propTypes.func,
+  leftTitle: propTypes.string,
 }
 
 export default SubPageHeader

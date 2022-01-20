@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useLocation } from 'react-router-dom'
-import { ChatBalloon, ChatForm } from '../../components'
+import { ChatBalloon, ChatForm, SubPageHeader } from '../../components'
 import { apis } from '../../utils/axios'
 import DefaultProfile from '../../assets/images/grayStar.png'
 import io from 'socket.io-client'
@@ -65,6 +65,7 @@ const Chat = () => {
 
   return (
     <div>
+      <SubPageHeader leftTitle={chatContents[0]?.User?.username} useButton />
       {chatContents.map(chatContent => (
         <ChatBalloon
           key={chatContent.id}
