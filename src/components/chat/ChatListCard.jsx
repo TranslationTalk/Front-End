@@ -10,9 +10,9 @@ import styled from 'styled-components'
 // default image이어야 함
 import hamburger from '../../assets/images/hamburger.png'
 
-const ChatListCard = ({ name, profileUrl, isRead }) => {
+const ChatListCard = ({ name, profileUrl, isRead, onClick }) => {
   return (
-    <Container>
+    <Container onClick={onClick}>
       <LeftWrap>
         <img src={profileUrl ? profileUrl : hamburger} alt="profile" />
       </LeftWrap>
@@ -63,9 +63,10 @@ const Dot = styled.div`
 `
 
 ChatListCard.propTypes = {
-  name: PropTypes.string.isRequired,
+  name: PropTypes.string,
   profileUrl: PropTypes.string,
   isRead: PropTypes.bool.isRequired,
+  onClick: PropTypes.func,
 }
 
 export default ChatListCard
