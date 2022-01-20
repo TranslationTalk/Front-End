@@ -63,9 +63,11 @@ const ClientRequestForm = props => {
         isText,
         needs,
       )
-      .then(() => alert(`요청 완료`))
+      .then(() => {
+        alert(`요청 완료`)
+        navigate('/client/request/list')
+      })
       .catch(e => alert(`${e} already exist id '${requestForm}`))
-    navigate('/client/request/list')
   }
 
   return (

@@ -18,6 +18,7 @@ const TranslatorDetail = () => {
   const navigate = useNavigate()
   const location = useLocation()
   const [estimate, setEstimate] = useState([])
+  const [status, setsStatus] = useState('')
 
   //비동기처리
   useEffect(() => {
@@ -29,6 +30,7 @@ const TranslatorDetail = () => {
         location.state.estimateId,
       )
       setEstimate(data)
+      setsStatus(data.status)
     }
     fetchEstimateList()
   }, [])
@@ -39,11 +41,18 @@ const TranslatorDetail = () => {
     if (estimate.roomId === 0) {
       clientAPIs
         .addChatroom(location.state.estimateId)
-        .then(() => alert(`roomId ${location.state.estimateId}번 생성`))
+        .then(data => {
+          console.log(data)
+          alert(`roomId ${data.data.id}번 생성`)
+          navigate(`/chat/${data.data.id}`, {
+            state: { roomId: data.data.id },
+          })
+        })
         .catch(e => alert(`${e}`))
-      navigate(`/chat/${estimate.roomId}`)
     } else {
-      navigate(`/chat/${estimate.roomId}`)
+      navigate(`/chat/${estimate.roomId}`, {
+        state: { roomId: estimate.roomId },
+      })
     }
   }
 
@@ -56,19 +65,28 @@ const TranslatorDetail = () => {
           location.state.requestId,
           location.state.estimateId,
         )
-        .then(() => alert(`확정 완료`))
+        .then(() => {
+          alert(`확정 완료`)
+          setsStatus('processing')
+        })
         .catch(e => alert(`${e}`))
     }
   }
 
   // 확정 버튼 show여부
-  const confirmedBtn = () => {
+  const confirmedBtn = status => {
     if (estimate.roomId === 0) {
       return null
-    } else if (estimate.status === 'ready') {
-      return <Button content="확정하기" _onClick={confirmed} />
-    } else {
-      return <p>확정 완료</p>
+    }
+    switch (status) {
+      case 'ready':
+        return <Button content="확정하기" _onClick={confirmed} />
+      case 'processing':
+        return <p>확정 완료</p>
+      case 'done':
+        return <p>거래 완료</p>
+      default:
+        return <p>요청기간이 3일 지났습니다.</p>
     }
   }
 
@@ -89,7 +107,7 @@ const TranslatorDetail = () => {
         comment={estimate.comment ?? 'test'}
         confirmedDate={estimate.confirmedDate}
       />
-      {confirmedBtn()}
+      {confirmedBtn(status)}
 
       <Button content="상담하기" _onClick={consultBtn} />
     </div>
