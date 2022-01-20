@@ -5,12 +5,12 @@ position fixed
 import React from 'react'
 import styled from 'styled-components'
 import { NavLink, useLocation } from 'react-router-dom'
-import { ReactComponent as TranslationIcon } from '../../assets/icons/Translation.svg'
+import { ReactComponent as TranslationIcon } from '../../assets/icons/TranslationUser.svg'
 import { ReactComponent as MyDocIcon } from '../../assets/icons/MyDoc.svg'
 import { ReactComponent as ChatIcon } from '../../assets/icons/Chat.svg'
 
 const selectedAttr = {
-  fill: 'black',
+  fill: '#3D51FF',
 }
 
 const NavigationUser = () => {
@@ -48,13 +48,18 @@ const NavigationUser = () => {
 
 const NavContainer = styled.div`
   width: 100%;
-  height: 5.6rem;
+  height: 72px;
   display: flex;
   justify-content: center;
   align-items: center;
   position: fixed;
+  max-width: 640px;
+  min-width: 360px;
   bottom: 0;
-  left: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #fff;
+  border-top: 1px solid rgba(0, 0, 0, 0.3);
 `
 
 const LinkElement = styled(NavLink)`
@@ -62,13 +67,13 @@ const LinkElement = styled(NavLink)`
   display: flex;
   flex-direction: column;
   align-items: center;
-  color: white;
-  font-size: 1.8rem;
+  color: #fff;
 `
 
 const NavName = styled.span`
-  color: ${props => (props.isHere ? 'blue' : 'black')};
-  font-size: 1rem;
+  margin-top: 2px;
+  color: ${props => (props.isHere ? '#3D51FF' : '#000')};
+  font-size: var(--fs-12);
 `
 
 export default NavigationUser
