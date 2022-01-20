@@ -13,40 +13,42 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
-import { StatusMessage } from '../index'
+import { StatusMessage, Tag } from '../index'
 
 // 현재시간
 const currentTime = new Date()
-const date = currentTime.getDate()
-const hour = currentTime.getHours()
-const min = currentTime.getMinutes()
+const currentDate = currentTime.getDate()
+const currentHour = currentTime.getHours()
+const currentMin = currentTime.getMinutes()
 
 const EstimateCard = prop => {
   const {
-    userName,
     field,
-    status,
     beforeLanguage,
     afterLanguage,
     isText,
-    deadline,
-    offerPrice,
-    createdTime,
+    deadline, //희망날짜
+    createdTime, //생성날짜
     onClick,
   } = prop
 
-  // 마감날짜
-  const createdDate = createdTime?.match(/.+(?=T)/g)
+  // list의 생성 날짜
   const createdDay = new Date(createdTime).getDate()
   const createdHour = new Date(createdTime).getHours()
   const createdMin = new Date(createdTime).getMinutes()
 
-  // 남은 시간
-  let countDay = createdDay + 3 - date
-  let countHour = createdHour - hour
-  let countMin = createdMin - min
+  // 생성날짜-3일
+  let countDay = createdDay + 3 - currentDate
+  let countHour = createdHour - currentHour
+  let countMin = createdMin - currentMin
 
-  // 메시지
+  // 희망 시간
+  const desiredYear = new Date(deadline).getFullYear()
+  const desiredHours = new Date(deadline).getHours()
+  const desiredMinutes = new Date(deadline).getMinutes()
+  console.log(desiredYear, desiredHours, desiredMinutes)
+
+  // 마감시간 메시지
   let timeMessage
   if (countMin < 0) {
     countHour--
@@ -59,44 +61,125 @@ const EstimateCard = prop => {
   if (countDay < 0) {
     timeMessage = '견적 기간이 끝났습니다.'
   } else {
-    timeMessage = `남은 시간 ${countDay}일 ${countHour}시간 ${countMin}분`
+    timeMessage = ` ${countDay}일 ${countHour}시간 ${countMin}분 후 마감`
   }
 
   return (
     <Card onClick={onClick}>
-      <p>{userName} 님의 요청</p>
-      <p>{field}</p>
-      <p>
-        {beforeLanguage} &#62; {afterLanguage}
-      </p>
-      <p>{isText}</p>
-      <p>{deadline}</p>
-      {status && <StatusMessage text={status} color="red" icon="!" />}
-      {createdTime && <p>{`${createdDate} (${countHour}시${countMin}분)`}</p>}
-      {offerPrice && <p>{offerPrice.toLocaleString('ko-KR')} 원</p>}
-      {createdTime && <StatusMessage text={timeMessage} color="red" icon="!" />}
+      {/* 첫째줄 field, tag*/}
+      <div>
+        <h3>{field}</h3>
+        <Tag text="영상 번역 의뢰" color="#fff" bgColor="#3D51FF" />
+        {isText}
+      </div>
+
+      {/* 둘째줄 language, icon*/}
+      <div>
+        <div>
+          <span>{beforeLanguage}</span>
+          <svg
+            width="20"
+            height="20"
+            viewBox="0 0 20 20"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M13.3416 9.16675H3.33325V10.8334H13.3416V13.3334L16.6666 10.0001L13.3416 6.66675V9.16675Z"
+              fill="#3D51FF"
+            />
+          </svg>
+          <span>{afterLanguage}</span>
+        </div>
+        <svg
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M8.58984 16.59L13.1698 12L8.58984 7.41L9.99984 6L15.9998 12L9.99984 18L8.58984 16.59Z"
+            fill="black"
+          />
+        </svg>
+      </div>
+
+      {/* 셋째줄 희망날짜, 마감시간*/}
+      <div>
+        <span>
+          희망날짜 {desiredYear}.{desiredHours}.{desiredMinutes}
+        </span>
+        <span>
+          {createdTime && (
+            <StatusMessage text={timeMessage} color="red" icon="alarm" />
+          )}
+        </span>
+      </div>
     </Card>
   )
 }
 
-const Card = styled.div`
-  margin: 10px;
-  background: #ddd;
-  padding: 20px;
-  border-radius: 5px;
+const Card = styled.li`
+  margin: 8px 20px;
+  background: #fff;
+  padding: 0 8px;
+  border-radius: 4px;
+  border: 2px solid #fff;
+  transition: all 0.5s;
+  cursor: pointer;
+  & h3 {
+    font-weight: bold;
+    font-size: var(--fs-18);
+  }
+  & svg {
+    margin: 0 4px;
+  }
+  & > div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 38px;
+  }
+
+  & > div:first-child p {
+    font-size: var(--fs-12);
+  }
+  & > div:nth-child(2) {
+    border-top: 1px dashed var(--gray-c4);
+    border-bottom: 1px dashed var(--gray-c4);
+    font-size: var(--fs-14);
+    line-height: 20px;
+    & > div {
+      display: flex;
+    }
+    & > svg {
+      transform: translateX(-5px);
+      transition: all 0.5s;
+    }
+  }
+  & > div:last-child span {
+    font-size: var(--fs-12);
+    &:first-child {
+      font-weight: lighter;
+    }
+  }
+  &:hover {
+    border: 2px solid rgba(61, 81, 255, 0.6);
+    & > div:nth-child(2) > svg {
+      transform: translateX(0px);
+    }
+  }
 `
 
 EstimateCard.propTypes = {
-  userName: PropTypes.string,
   field: PropTypes.string,
   beforeLanguage: PropTypes.string,
   afterLanguage: PropTypes.string,
   isText: PropTypes.bool,
   deadline: PropTypes.string,
-  offerPrice: PropTypes.number,
   createdTime: PropTypes.string,
   onClick: PropTypes.func,
-  status: PropTypes.string,
 }
 
 export default EstimateCard
