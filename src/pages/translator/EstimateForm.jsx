@@ -49,14 +49,14 @@ const EstimateForm = () => {
         isText={estimate.isText}
         fileUrl={estimate.fileUrl}
       />
-      <VideoCard youtubeUrl="https://www.youtube.com/watch?v=DbXVJIrn9W0&t=72" />
+      {estimate.youtubeUrl && <VideoCard youtubeUrl={estimate.youtubeUrl} />}
       <TextAreaInput
         id="comment"
         placeholder="번역가님의 한마디를 해주세요."
         onChange={handleChange}
       />
       <h2>목표일정</h2>
-      <TextInput id="confirmedDate" onChange={handleChange} />
+      <TextInput id="confirmedDate" onChange={handleChange} type="date" />
       <h2>금액</h2>
       <TextInput id="offerPrice" onChange={handleChange} />
       <span>원</span>
