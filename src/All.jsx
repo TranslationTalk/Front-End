@@ -29,9 +29,8 @@ const All = () => {
       <Input onChange={func} placeholder="아이디를 입력해주세요." />
       <DeveloperWrap>
         <Button
-          shortBtn
           content="유저 회원가입"
-          _onClick={() => {
+          onClick={() => {
             const auth = 'client'
             console.log(id, auth)
             apis
@@ -39,37 +38,32 @@ const All = () => {
               .then(() => alert(`개발자 유저로 회원가입 성공 id는 '${id}'`))
               .catch(e => alert(`${e} already exist id '${id}'`))
           }}
-          color="#f5f5f5"
           bgColor="#333"
         />
 
         <Button
-          shortBtn
           content="번역가 회원가입"
-          _onClick={() => {
+          onClick={() => {
             const auth = 'translator'
             apis
               .developerSignup(id, auth)
               .then(() => alert(`개발자 번역가로 회원가입 성공 id는 '${id}'`))
               .catch(e => alert(`${e} already exist id '${id}'`))
           }}
-          color="#f5f5f5"
           bgColor="#333"
         />
         {(auth && (
           <Button
-            shortBtn
             content="로그아웃"
-            _onClick={() => {
+            onClick={() => {
               sessionStorage.clear()
             }}
             color="#f5f5f5"
           />
         )) || (
           <Button
-            shortBtn
             content="개발자 로그인"
-            _onClick={async () => {
+            onClick={async () => {
               console.log(id)
               const res = await apis.developerLogin(id)
               console.log(res)
@@ -82,9 +76,8 @@ const All = () => {
         )}
 
         <Button
-          shortBtn
           content="Test API"
-          _onClick={() => {
+          onClick={() => {
             apis
               .requestList()
               .then(res => console.log(res))
@@ -150,7 +143,7 @@ const Input = styled.input`
   height: 60px;
   margin: 50px auto 10px;
 
-  &:: placeholder {
+  &::placeholder {
     padding-left: 20px;
     font-size: 20px;
     color: cornflowerblue;

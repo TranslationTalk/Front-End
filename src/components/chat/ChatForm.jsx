@@ -28,16 +28,7 @@ const ChatForm = ({ onSubmit, onChange, value }) => {
         />
       </InputWrap>
       <ButtonWrap>
-        <Button
-          type="submit"
-          height="36px"
-          content="보내기"
-          padding="0"
-          margin="0"
-          border="1px solid #3D51FF"
-          bgColor="#fff"
-          color="#3D51FF"
-        />
+        <Button content="보내기" bgColor="#fff" color="#3D51FF" />
       </ButtonWrap>
     </Form>
   )

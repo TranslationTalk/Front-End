@@ -24,10 +24,8 @@ function Login() {
         <LoginWrap>
           <ButtonWrap>
             <Button
-              longBtn
               content="카카오톡으로 로그인"
-              _onClick={() => apis.login()}
-              margin="10px"
+              onClick={() => apis.login()}
               bgColor="#F9E000"
             />
           </ButtonWrap>
@@ -41,7 +39,7 @@ function Login() {
           <ButtonWrap>
             <Button
               content="링크페이지"
-              _onClick={() => {
+              onClick={() => {
                 location.href = '/test'
               }}
             />

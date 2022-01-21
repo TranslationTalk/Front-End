@@ -33,6 +33,7 @@ const Btn = styled.button`
   border-radius: 4px;
   font-size: var(--fs-18);
   width: 100%;
+  cursor: pointer;
 `
 Button.prototype = {
   onClick: PropTypes.string,

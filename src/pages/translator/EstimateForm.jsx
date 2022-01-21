@@ -60,7 +60,7 @@ const EstimateForm = () => {
       <h2>금액</h2>
       <TextInput id="offerPrice" onChange={handleChange} />
       <span>원</span>
-      <Button type="submit" longBtn content="견적 보내기" />
+      <Button content="견적 보내기" />
     </form>
   )
 }

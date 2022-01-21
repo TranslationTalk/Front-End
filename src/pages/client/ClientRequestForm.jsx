@@ -142,7 +142,7 @@ const ClientRequestForm = props => {
           placeholder="세부 요청 사항"
           onChange={onChange}
         />
-        <Button content="제출하기" _onClick={submit} />
+        <Button content="제출하기" onClick={submit} />
       </form>
     </div>
   )

@@ -13,7 +13,7 @@ const BottomIndicator = ({ offerPrice }) => {
   return (
     <Container>
       <span>{offerPrice.toLocaleString()}원</span>
-      <Button shortBtn content="상담하기" />
+      <Button content="상담하기" />
     </Container>
   )
 }

@@ -80,7 +80,7 @@ const TranslatorDetail = () => {
     }
     switch (status) {
       case 'ready':
-        return <Button content="확정하기" _onClick={confirmed} />
+        return <Button content="확정하기" onClick={confirmed} />
       case 'processing':
         return <p>확정 완료</p>
       case 'done':
@@ -112,7 +112,7 @@ const TranslatorDetail = () => {
       />
       {confirmedBtn(status)}
 
-      <Button content="상담하기" _onClick={consultBtn} />
+      <Button content="상담하기" onClick={consultBtn} />
     </div>
   )
 }
