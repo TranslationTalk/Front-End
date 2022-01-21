@@ -34,15 +34,15 @@ const TranslatorMyPage = () => {
     <>
       <PageHeader title="마이페이지" />
       <TranslatorInfo
-        name={translatorInfo.name}
-        profileUrl={translatorInfo.profileUrl}
-        totalTrans={translatorInfo.totalTrans}
-        totalReviews={translatorInfo.totalReviews}
-        avgReviews={translatorInfo.avgReviews}
-        taxPossible={translatorInfo.taxPossible}
-        cashPossible={translatorInfo.cashPossible}
-        isBusiness={translatorInfo.isBusiness}
-        introduce={translatorInfo.introduce}
+        name={translatorInfo?.name}
+        profileUrl={translatorInfo?.profileUrl}
+        totalTrans={translatorInfo?.totalTrans}
+        totalReviews={translatorInfo?.totalReviews}
+        avgReviews={translatorInfo?.avgReviews}
+        taxPossible={translatorInfo?.taxPossible}
+        cashPossible={translatorInfo?.cashPossible}
+        isBusiness={translatorInfo?.isBusiness}
+        introduce={translatorInfo?.introduce}
       />
       {reviews.map((review, index) => (
         <ReviewCard

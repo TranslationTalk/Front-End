@@ -32,7 +32,7 @@ const ChatList = () => {
 
   return (
     <>
-      <PageHeader />
+      <PageHeader title="채팅" />
       {chatList.map(chatroom => (
         <ChatListCard
           key={chatroom.id}
