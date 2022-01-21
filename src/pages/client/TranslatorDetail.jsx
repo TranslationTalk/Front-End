@@ -8,10 +8,10 @@ import { useLocation, useNavigate } from 'react-router-dom'
 import { clientAPIs } from '../../utils/axios'
 import {
   Button,
-  EstimateCardMin,
   EstimateDetail,
   PageHeader,
   ToggleMenu,
+  TranslatorInfo,
 } from '../../components'
 
 const TranslatorDetail = () => {
@@ -93,13 +93,16 @@ const TranslatorDetail = () => {
   return (
     <div>
       <PageHeader title="" />
-      <EstimateCardMin
+      <TranslatorInfo
         name={estimate.name}
         profileUrl={estimate.profileUrl}
         totalTrans={estimate.totalTrans}
         totalReivews={estimate.totalReviews}
-        offerPrice={estimate.offerPrice}
-        confirmedDate={estimate.confirmedDate}
+        avgReviews={estimate.avgReviews}
+        taxPossible={estimate.taxPossible}
+        cashPossible={estimate.cashPossible}
+        isBusiness={estimate.isBusiness}
+        introduce={estimate.introduce}
       />
       <ToggleMenu menu={['번역 견적', '번역가님 리뷰']} />
       <EstimateDetail
