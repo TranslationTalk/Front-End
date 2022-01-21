@@ -25,17 +25,7 @@ const SubPageHeader = ({ title, leftTitle, useButton, buttonEvent, auth }) => {
       <Title>{title}</Title>
       {/* border radius 추가 필요 */}
       {useButton && (
-        <Button
-          content="작업 완료"
-          _onClick={buttonEvent}
-          margin="0"
-          width="fit-content"
-          height="30px"
-          padding="5px 10px"
-          color="#fff"
-          bgColor="#FF5F5F"
-          border="none"
-        />
+        <Button content="작업 완료" onClick={buttonEvent} bgColor="#FF5F5F" />
       )}
     </Container>
   )

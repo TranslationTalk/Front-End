@@ -64,16 +64,16 @@ const TranslatorEstimateDetail = () => {
       <p>{estimateDetail?.offerPrice}</p>
       {estimateDetail?.roomId === 0 ? (
         // cursor pointer 안되도록
-        <Button longBtn content="상담하기" bgColor="gray" />
+        <Button content="상담하기" bgColor="gray" />
       ) : (
         <>
-          <Button longBtn content="상담하기" _onClick={gotoChatroom} />
+          <Button content="상담하기" onClick={gotoChatroom} />
         </>
       )}
       {estimateDetail?.status === 'processing' ? (
-        <Button longBtn content="작업완료" _onClick={finishWork} />
+        <Button content="작업완료" onClick={finishWork} />
       ) : (
-        <Button longBtn content="작업완료" bgColor="gray" />
+        <Button content="작업완료" bgColor="gray" />
       )}
     </div>
   )
