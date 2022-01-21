@@ -9,7 +9,7 @@ import styled from 'styled-components'
 const CheckBoxInput = ({ id, onChange, label }) => (
   <Container>
     <Input type="checkbox" id={id} onChange={onChange} value={label} />
-    <label htmlFor={label}>{label}</label>
+    <label htmlFor={id}>{label}</label>
   </Container>
 )
 

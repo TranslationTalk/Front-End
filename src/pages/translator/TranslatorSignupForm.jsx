@@ -46,7 +46,7 @@ const TranslatorSignupForm = () => {
     const { id, name, value, checked } = e.target
     setFormData({
       ...formData,
-      [name === '' ? id : name]: name === '' ? checked : value,
+      [id]: name === '' ? checked : value,
     })
   }
 
