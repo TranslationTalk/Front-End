@@ -6,6 +6,7 @@ import {
   PageHeader,
 } from '../../components/index'
 import { useNavigate } from 'react-router-dom'
+import styled from 'styled-components'
 
 const ChatList = () => {
   const [chatList, setChatList] = useState([])
@@ -31,8 +32,8 @@ const ChatList = () => {
   }
 
   return (
-    <>
-      <PageHeader title="채팅" />
+    <Wrap>
+      <PageHeader title={auth === 'translator' ? '내 상담' : '채팅'} />
       {chatList.map(chatroom => (
         <ChatListCard
           key={chatroom.id}
@@ -43,11 +44,18 @@ const ChatList = () => {
               : !chatroom.isReadTranslator
           }
           onClick={() => handleClick(chatroom.id)}
+          auth={auth}
         />
       ))}
       <NavigationTranslator />
-    </>
+    </Wrap>
   )
 }
+
+const Wrap = styled.div`
+  & > div:first-child {
+    margin-bottom: 16px;
+  }
+`
 
 export default ChatList
