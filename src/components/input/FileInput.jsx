@@ -1,12 +1,25 @@
 /*
 common input component:
 file를 받는 input
+label: 파일 선택 버튼에 들어갈 내용
+name: onChange에 사용될 name
+onChange: onChange이벤트
+useUploadName: 파일 선택 버튼 옆에 선택된 파일명 보여줄지 말지
 */
 import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
-const FileInput = ({ name, onChange }) => {
+const FileInput = ({
+  label,
+  name,
+  onChange,
+  useUploadName,
+  fontSize,
+  width,
+  height,
+  padding,
+}) => {
   // 실제로 받은 file을 어떻게 상위 컴포넌트에 전달할지 나중에 사용하면서 수정 필요
   const [fileName, setFileName] = useState('선택된 파일 없음')
 
@@ -14,17 +27,27 @@ const FileInput = ({ name, onChange }) => {
 
   return (
     <InputContainer>
-      <Label htmlFor="input-file">파일 올리기(텍스트)</Label>
-      <UploadName
-        onChange={onChange}
-        value={fileName}
-        placeholder="선택된 파일 없음"
-      />
+      <Label
+        htmlFor="input-file"
+        useUploadName={useUploadName}
+        fontSize={fontSize}
+        width={width}
+        height={height}
+        padding={padding}
+      >
+        {label}
+      </Label>
+      {useUploadName && (
+        <UploadName
+          onChange={onChange}
+          value={fileName}
+          placeholder="선택된 파일 없음"
+        />
+      )}
       <Input
         id="input-file"
         type="file"
         name={name}
-        accept=".txt"
         onChange={handleFileChange}
       />
     </InputContainer>
@@ -37,13 +60,15 @@ const InputContainer = styled.div`
 `
 
 const Label = styled.label`
-  width: 50%;
+  width: ${props => (props.useUploadName ? '50%' : '100%')};
   background-color: var(--main-color);
-  padding: 11px 12px;
-  border-top-left-radius: 4px;
-  border-bottom-left-radius: 4px;
+  padding: ${props => (props.padding ? props.padding : '11px 12px')};
+  ${props =>
+    props.useUploadName
+      ? 'border-top-left-radius: 4px; border-bottom-left-radius: 4px;'
+      : 'border-radius: 8px;'}
   text-align: center;
-  font-size: var(--fs-14);
+  font-size: ${props => (props.fontSize ? props.fontSize : '14px')};
   color: var(--white);
 `
 
@@ -69,8 +94,14 @@ const Input = styled.input`
 `
 
 FileInput.propTypes = {
+  label: PropTypes.string,
   name: PropTypes.string,
   onChange: PropTypes.func.isRequired,
+  useUploadName: PropTypes.bool,
+  fontSize: PropTypes.string,
+  width: PropTypes.string,
+  height: PropTypes.string,
+  padding: PropTypes.string,
 }
 
 export default FileInput

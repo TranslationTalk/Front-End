@@ -13,19 +13,61 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { Button, TextInput } from '..'
+import styled from 'styled-components'
 
 const ChatForm = ({ onSubmit, onChange, value }) => {
   return (
-    <form onSubmit={onSubmit}>
-      <TextInput
-        placeholder="채팅 내용을 입력하세요."
-        onChange={onChange}
-        value={value}
-      />
-      <Button type="submit" shortBtn content="보내기" />
-    </form>
+    <Form onSubmit={onSubmit}>
+      <InputWrap>
+        <TextInput
+          placeholder="메시지를 입력하세요."
+          onChange={onChange}
+          value={value}
+          fontSize="12"
+          padding="10px 12px"
+        />
+      </InputWrap>
+      <ButtonWrap>
+        <Button
+          type="submit"
+          height="36px"
+          content="보내기"
+          padding="0"
+          margin="0"
+          border="1px solid #3D51FF"
+          bgColor="#fff"
+          color="#3D51FF"
+        />
+      </ButtonWrap>
+    </Form>
   )
 }
+
+const Form = styled.form`
+  width: 100%;
+  height: 54px;
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  max-width: 640px;
+  min-width: 360px;
+  transform: translateX(-50%);
+  background-color: #fff;
+  border-top: 1px solid rgba(0, 0, 0, 0.3);
+  padding: 9px 16px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`
+
+const InputWrap = styled.div`
+  width: 70%;
+  margin: 6px;
+`
+
+const ButtonWrap = styled.div`
+  width: fit-content;
+`
 
 ChatForm.propTypes = {
   onSubmit: PropTypes.func.isRequired,

@@ -17,26 +17,18 @@ const HamburgerMenu = () => {
 
   return (
     <>
-      <BurgerWrap>
-        <HamburgerTap onClick={() => setClick(true)} click={click}>
-          <img src={Hamburger} alt="hamburger" />
-        </HamburgerTap>
+      <HamburgerTap onClick={() => setClick(true)} click={click}>
+        <img src={Hamburger} alt="hamburger" />
+      </HamburgerTap>
 
-        <ModalArea click={click} tabIndex="-1"></ModalArea>
-        <ModalInner click={click} tabIndex="0">
-          12345asdfjkasdkfsakdfgkafg
-          <CloseModal onClick={() => setClick(false)}> XXX</CloseModal>
-        </ModalInner>
-      </BurgerWrap>
+      <ModalArea click={click} tabIndex="-1"></ModalArea>
+      <ModalInner click={click} tabIndex="0">
+        Contents입니다.
+        <CloseButton onClick={() => setClick(false)}>X</CloseButton>
+      </ModalInner>
     </>
   )
 }
-
-const BurgerWrap = styled.div`
-  position: absolute;
-  top: 10px;
-  left: 10px;
-`
 
 const HamburgerTap = styled.div`
   display: ${props => (props.click ? 'none' : 'block')};
@@ -46,11 +38,9 @@ const HamburgerTap = styled.div`
 const ModalArea = styled.div`
   box-sizing: border-box;
   visibility: ${props => (props.click ? 'visible' : 'hidden')};
-  position: fixed;
+  position: absolute;
   top: 0;
   left: 0;
-  bottom: 0;
-  right: 0;
   transition: 0.5s;
   background-color: ${props => (props.click ? 'rgba(0, 0, 0, 0.5)' : '')};
   z-index: 99;
@@ -58,20 +48,24 @@ const ModalArea = styled.div`
 
 const ModalInner = styled.div`
   width: 250px;
+  height: 100vh;
   position: absolute;
   top: 0;
+  left: 0;
   box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.5);
   background-color: #fff;
-  left: -270px;
   transition: 0.5s;
   visibility: ${props => (props.click ? 'visible' : 'hidden')};
   transform: ${props =>
-    props.click ? 'translateX(260px)' : 'translateX(1px)'};
+    props.click ? 'translateX(270px)' : 'translateX(0px)'};
   z-index: 100;
 `
 
-const CloseModal = styled.div`
+const CloseButton = styled.button`
   cursor: pointer;
+  position: absolute;
+  right: 0;
+  top: 0;
 `
 
 export default HamburgerMenu

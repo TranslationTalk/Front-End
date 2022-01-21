@@ -7,65 +7,79 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
+import { ReactComponent as ReadDot } from '../../assets/icons/ReadDot.svg'
+import { ReactComponent as NotReadDot } from '../../assets/icons/NotReadDot.svg'
 // default image이어야 함
-import hamburger from '../../assets/images/hamburger.png'
+import defaultThumb from '../../assets/images/ListThumb.png'
 
-const ChatListCard = ({ name, profileUrl, isRead }) => {
+const ChatListCard = ({ name, profileUrl, isRead, onClick }) => {
   return (
-    <Container>
+    <Container onClick={onClick}>
       <LeftWrap>
-        <img src={profileUrl ? profileUrl : hamburger} alt="profile" />
+        <img src={profileUrl ? profileUrl : defaultThumb} alt="profile" />
       </LeftWrap>
       <RightWrap>
-        <span>{name}님</span>
+        <span>
+          <span>{name}</span>님
+        </span>
+        <p>2022.01.22</p>
       </RightWrap>
-      {/* 동그라미 icon으로 변경 필요 */}
-      {isRead && <Dot></Dot>}
+      <Dot>{isRead ? <ReadDot /> : <NotReadDot />}</Dot>
     </Container>
   )
 }
 
 const Container = styled.div`
   display: flex;
-  background-color: springgreen;
+  background-color: #fff;
   position: relative;
+  width: 100%;
+  height: 52px;
+  margin-bottom: 12px;
 `
 
 const LeftWrap = styled.div`
-  padding: 10px;
-  background-color: snow;
   & img {
-    width: 70px;
-    height: 70px;
-    border-radius: 10px;
+    margin-right: 10px;
   }
 `
 
 const RightWrap = styled.div`
+  width: 100%;
+  height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: 10px;
-  & span {
-    font-size: 18px;
-    margin: 5px 0;
+  padding: 4px 10px 11px 10px;
+  border-bottom: 1px solid var(--gray-bc);
+  color: var(--gray-bc);
+  & > span {
+    font-size: var(--fs-14);
+  }
+
+  & > span > span {
+    font-size: var(--fs-16);
+    font-weight: 500;
+    margin-right: 4px;
+    color: #000;
+  }
+  & > p {
+    margin-top: 4px;
   }
 `
 
 const Dot = styled.div`
   position: absolute;
-  bottom: 20px;
-  right: 20px;
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  background-color: blue;
+  top: 50%;
+  right: 8px;
+  transform: translateY(-50%);
 `
 
 ChatListCard.propTypes = {
-  name: PropTypes.string.isRequired,
+  name: PropTypes.string,
   profileUrl: PropTypes.string,
   isRead: PropTypes.bool.isRequired,
+  onClick: PropTypes.func,
 }
 
 export default ChatListCard

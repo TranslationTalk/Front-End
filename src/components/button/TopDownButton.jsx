@@ -53,7 +53,7 @@ const TopDownButton = () => {
 
 const TopDownButtonWrap = styled.div`
   position: fixed;
-  bottom: 20px;
+  bottom: 90px;
   right: 20px;
 `
 

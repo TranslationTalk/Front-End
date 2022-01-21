@@ -31,7 +31,7 @@ const EstimateDetail = ({ offerPrice, comment, confirmedDate }) => {
               {commentShort ? (
                 <p>
                   {`${comment.slice(0, 150)}...`}
-                  <button onClick={toggleComment}>더 보기</button>
+                  <button onClick={toggleComment}>자세히 보기</button>
                 </p>
               ) : (
                 <p>
@@ -45,15 +45,16 @@ const EstimateDetail = ({ offerPrice, comment, confirmedDate }) => {
           )}
         </Comment>
         <Deadline>
-          <span>희망 마감 날짜</span>
-          <p>{confirmedDate}</p>
+          <span>
+            희망 마감 날짜 {confirmedDate?.split('-').join('.') ?? '0000-00-00'}
+          </span>
         </Deadline>
       </Wrap>
       <Notification>
         <StatusMessage
-          text="번역톡은 번역 및 결제를 책임지지 않습니다."
-          color="blue"
-          icon="!"
+          text="번역톡은 판매중개자로서 거래에 관련된 책임과 의무를 지지 않습니다."
+          color="#383838"
+          icon="info"
         />
       </Notification>
     </Container>
@@ -61,71 +62,64 @@ const EstimateDetail = ({ offerPrice, comment, confirmedDate }) => {
 }
 
 const Container = styled.div`
-  background-color: wheat;
-  width: 90%;
+  background-color: var(--white);
+  width: 100%;
   margin: auto;
 `
 
 const Wrap = styled.div`
-  padding: 1rem;
-  padding-bottom: 0;
+  padding: 0 20px 27px 20px;
 `
 
 const Price = styled.div`
   display: flex;
   flex-direction: column;
-  margin-bottom: 20px;
+  margin-bottom: 25px;
   & span {
-    font-size: 1rem;
+    font-size: var(--fs-18);
     font-weight: bold;
-    color: blue;
-    margin-bottom: 10px;
+    color: var(--main-color);
+    margin-bottom: 14px;
   }
   & p {
-    font-size: 2rem;
+    font-size: var(--fs-28);
     font-weight: bold;
-    color: blue;
   }
 `
 
 const Comment = styled.div`
   display: flex;
   flex-direction: column;
-  margin-bottom: 20px;
+  margin-bottom: 17px;
   & span {
-    font-size: 1rem;
+    font-size: var(--fs-16);
     font-weight: bold;
-    margin-bottom: 10px;
+    margin-bottom: 11px;
   }
   & > p {
+    font-size: var(--fs-14);
+    color: var(--dark-blue);
     overflow-wrap: break-word;
   }
   & > p > button {
     border: none;
     background-color: transparent;
-    font-size: 0.8rem;
-    text-decoration: underline;
+    font-size: var(--fs-12);
+    color: var(--gray-c4);
   }
 `
 
 const Deadline = styled.div`
   display: flex;
   flex-direction: column;
-  margin-bottom: 20px;
   & span {
-    font-size: 1rem;
-    font-weight: bold;
-    margin-bottom: 10px;
-  }
-  & p {
-    font-size: 1rem;
-    font-weight: bold;
-    color: red;
+    font-size: var(--fs-16);
+    color: var(--orange-red);
   }
 `
 
 const Notification = styled.div`
-  background-color: gray;
+  background-color: var(--light-gray);
   padding: 2rem;
 `
 

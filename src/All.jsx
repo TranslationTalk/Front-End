@@ -61,7 +61,7 @@ const All = () => {
             shortBtn
             content="로그아웃"
             _onClick={() => {
-              setAuth('')
+              sessionStorage.clear()
             }}
             color="#f5f5f5"
           />

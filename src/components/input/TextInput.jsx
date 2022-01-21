@@ -10,7 +10,16 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
-const TextInput = ({ type, id, name, placeholder, onChange, value }) => (
+const TextInput = ({
+  type,
+  id,
+  name,
+  placeholder,
+  onChange,
+  value,
+  fontSize,
+  padding,
+}) => (
   <Input
     type={type}
     id={id}
@@ -18,15 +27,17 @@ const TextInput = ({ type, id, name, placeholder, onChange, value }) => (
     placeholder={placeholder}
     onChange={onChange}
     value={value}
+    fontSize={fontSize}
+    padding={padding}
   />
 )
 
 const Input = styled.input`
   width: 100%;
-  padding: 11px 12px;
+  padding: ${props => (props.padding ? props.padding : '11px 12px')};
   border-radius: 4px;
   border: 1px solid var(--gray-c4);
-  font-size: var(--fs-14);
+  font-size: ${props => (props.fontSize ? props.fontSize : '14')}px;
   &::placeholder {
     color: var(--gray-c4);
   }
@@ -46,6 +57,8 @@ TextInput.propTypes = {
   placeholder: PropTypes.string,
   onChange: PropTypes.func.isRequired,
   value: PropTypes.string,
+  fontSize: PropTypes.string,
+  padding: PropTypes.string,
 }
 
 export default TextInput
