@@ -8,106 +8,37 @@ background-color는 bgColor로, color는 color로 props내려주시면 됩니다
 
 import styled from 'styled-components'
 import React from 'react'
+import { PropTypes } from 'mobx-react'
 
 const Button = prop => {
-  const {
-    content,
-    _onClick,
-    height,
-    width,
-    margin,
-    padding,
-    color,
-    bgColor,
-    border,
-    longBtn,
-    shortBtn,
-    type,
-  } = prop
-
-  const styles = {
-    width: width,
-    height: height,
-    margin: margin,
-    padding: padding,
-    color: color,
-    bgColor: bgColor,
-    border: border,
-  }
-
-  if (longBtn) {
-    return (
-      <>
-        <LongButton {...styles} onClick={_onClick}>
-          {content}
-        </LongButton>
-      </>
-    )
-  }
-
-  if (shortBtn) {
-    return (
-      <>
-        <ShortButton {...styles} onClick={_onClick}>
-          {content}
-        </ShortButton>
-      </>
-    )
-  }
+  const { onClick, content, color, bgColor } = prop
 
   return (
-    <>
-      <CustomButton {...styles} onClick={_onClick} type={type}>
-        {content}
-      </CustomButton>
-    </>
+    <Btn
+      onClick={onClick}
+      color={color ?? '#fff'}
+      bgColor={bgColor ?? '#3D51FF'}
+    >
+      {content}
+    </Btn>
   )
 }
 
-Button.defaultProps = {
-  bgColor: `#3D51FF`,
-  color: `#000`,
-  width: '100px',
-  height: '20px',
-  type: 'button',
-  margin: 'auto',
+const Btn = styled.button`
+  color: ${prop => prop.color};
+  background-color: ${prop => prop.bgColor};
+  padding: 10px 0;
+  font-weight: bold;
+  border: none;
+  border-radius: 4px;
+  font-size: var(--fs-18);
+  width: 100%;
+`
+Button.prototype = {
+  onClick: PropTypes.string,
+  text: PropTypes.string,
+  color: PropTypes.string,
+  bgColor: PropTypes.string,
 }
-
-const CustomButton = styled.button`
-  ${props => (props.width ? `width: ${props.width};` : '')}
-  ${props => (props.height ? `height: ${props.height};` : '')}
-  ${props => (props.bgColor ? `background-color: ${props.bgColor};` : '')}
-  ${props => (props.color ? `color: ${props.color};` : '')}
-  ${props => (props.margin ? `margin: ${props.margin};` : '')}
-  ${props => (props.padding ? `padding: ${props.padding};` : '')}
-  ${props => (props.border ? `border: ${props.border};` : '')}
-  box-sizing: border-box;
-  border-radius: 5px;
-`
-
-const LongButton = styled.button`
-  width: 320px;
-  height: 44px;
-  margin: 10px;
-  font-size: 16px;
-  border-radius: 4px;
-  border: ${props => (props.border ? `${props.border}` : 'none')};
-  background-color: ${props => props.bgColor};
-  color: ${props => props.color};
-  cursor: pointer;
-`
-
-const ShortButton = styled.button`
-  width: 160px;
-  height: 44px;
-  margin: 10px;
-  font-size: 16px;
-  outline: none;
-  border-radius: 4px;
-  border: ${props => (props.border ? `${props.border}` : 'none')};
-  background-color: ${props => props.bgColor};
-  color: ${props => props.color};
-  cursor: pointer;
-`
 
 export default Button
