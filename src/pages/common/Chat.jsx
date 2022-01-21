@@ -74,6 +74,7 @@ const Chat = () => {
           date={chatContent.createdAt}
           chat={chatContent.chat}
           isSelf={chatContent?.User?.auth === auth} // 내 auth와 채팅의 auth가 같을 때 채팅 오른쪽에 배치
+          auth={auth}
         />
       ))}
       <ChatForm

@@ -10,7 +10,7 @@ import { Button } from '../index'
 import styled from 'styled-components'
 import { ReactComponent as ArrowbackIcon } from '../../assets/icons/ArrowbackIcon.svg'
 
-const SubPageHeader = ({ title, leftTitle, useButton, buttonEvent }) => {
+const SubPageHeader = ({ title, leftTitle, useButton, buttonEvent, auth }) => {
   return (
     <Container>
       <SvgWrap>
@@ -18,7 +18,8 @@ const SubPageHeader = ({ title, leftTitle, useButton, buttonEvent }) => {
       </SvgWrap>
       {leftTitle && (
         <LeftTitle>
-          {leftTitle} <span>{leftTitle && '번역가'}님</span>
+          {leftTitle}{' '}
+          <span>{leftTitle && auth === 'translator' ? '번역가' : ''}님</span>
         </LeftTitle>
       )}
       <Title>{title}</Title>
@@ -84,6 +85,7 @@ SubPageHeader.propTypes = {
   useButton: propTypes.bool,
   buttonEvent: propTypes.func,
   leftTitle: propTypes.string,
+  auth: propTypes.string,
 }
 
 export default SubPageHeader
