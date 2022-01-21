@@ -13,13 +13,22 @@ const CheckBoxInput = ({ id, onChange, label }) => (
   </Container>
 )
 
-const Container = styled.div``
+const Container = styled.div`
+  display: flex;
+  align-items: center;
+  width: 100%;
+  & label {
+    font-size: var(--fs-14);
+  }
+`
 
 const Input = styled.input`
-  width: 100%;
-  padding: 0.5rem;
-  border-radius: 0.5rem;
-  border: 2px solid gray;
+  display: inline-block;
+  width: var(--fs-16);
+  height: var(--fs-16);
+  border: 5px solid var(--gray-bc);
+  margin-right: 6px;
+  cursor: pointer;
 `
 
 CheckBoxInput.propTypes = {

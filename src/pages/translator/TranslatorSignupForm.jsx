@@ -10,8 +10,9 @@ import {
   FileInput,
 } from '../../components/index'
 import { apis } from '../../utils/axios'
-import grayStar from '../../assets/images/grayStar.png'
+import defaultProfile from '../../assets/images/TranslatorProfile.png'
 import { language } from '../../constant/selectOptions'
+import styled from 'styled-components'
 
 const initialState = {
   name: '',
@@ -51,11 +52,19 @@ const TranslatorSignupForm = () => {
 
   return (
     <>
-      <SubPageHeader title="번역가 회원가입" />
-      <h2>번역가 정보 입력</h2>
-      <img src={grayStar} alt="profileImg" />
-      <FileInput onChange={handleChange} label="프로필 선택" />
-      <form onSubmit={handleSubmit}>
+      <SubPageHeader title="번역가 정보입력" />
+      <ProfileWrap>
+        <img src={defaultProfile} alt="profileImg" />
+        <div>
+          <FileInput
+            onChange={handleChange}
+            label="프로필 선택"
+            fontSize="12px"
+            padding="8px 10px"
+          />
+        </div>
+      </ProfileWrap>
+      <Form onSubmit={handleSubmit}>
         <TextInput name="name" placeholder="이름" onChange={handleChange} />
         <TextInput name="career" placeholder="경력" onChange={handleChange} />
         <SelectInput
@@ -84,26 +93,65 @@ const TranslatorSignupForm = () => {
           placeholder="자기소개"
           onChange={handleChange}
         />
-        <StatusMessage text="번역톡은 번역 및 결제를 책임지지 않습니다." />
-        <CheckBoxInput
-          id="taxPossible"
-          label="세금명세서 가능 여부"
-          onChange={handleChange}
-        />
-        <CheckBoxInput
-          id="cashPossible"
-          label="현금영수증 가능 여부"
-          onChange={handleChange}
-        />
-        <CheckBoxInput
-          id="isBusiness"
-          label="사업자 여부"
-          onChange={handleChange}
-        />
+        <div>
+          <StatusMessage
+            text="번역톡은 번역 및 결제를 책임지지 않습니다."
+            color="#FF5F5F"
+          />
+          <CheckBoxInput
+            id="taxPossible"
+            label="세금명세서 가능 여부"
+            onChange={handleChange}
+          />
+          <CheckBoxInput
+            id="cashPossible"
+            label="현금영수증 가능 여부"
+            onChange={handleChange}
+          />
+          <CheckBoxInput
+            id="isBusiness"
+            label="사업자 여부"
+            onChange={handleChange}
+          />
+        </div>
         <Button type="submit" content="제출하기" />
-      </form>
+      </Form>
     </>
   )
 }
+
+const ProfileWrap = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+  margin-bottom: 21px;
+  padding: 24px;
+  padding-bottom: 16px;
+  & > img {
+    margin-bottom: 15px;
+  }
+  & > div {
+    width: 78px;
+    height: 25px;
+  }
+`
+
+const Form = styled.form`
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 0 20px;
+  & > div {
+    margin-top: 8px;
+    & > div {
+      margin-bottom: 4px;
+    }
+    & > div:first-child {
+      margin-bottom: 12px;
+    }
+  }
+`
 
 export default TranslatorSignupForm
