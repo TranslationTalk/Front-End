@@ -114,6 +114,8 @@ const TranslatorSignupForm = () => {
             label="프로필 선택"
             fontSize="12px"
             padding="8px 10px"
+            id="profileFile"
+            name="profileFile"
           />
         </div>
       </ProfileWrap>

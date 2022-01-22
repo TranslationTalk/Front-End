@@ -11,6 +11,7 @@ import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
 const FileInput = ({
+  id,
   label,
   name,
   onChange,
@@ -28,7 +29,7 @@ const FileInput = ({
   return (
     <InputContainer>
       <Label
-        htmlFor="profileFile"
+        htmlFor={id}
         useUploadName={useUploadName}
         fontSize={fontSize}
         width={width}
@@ -44,7 +45,7 @@ const FileInput = ({
           placeholder="선택된 파일 없음"
         />
       )}
-      <Input id="profileFile" type="file" name={name} onChange={onChange} />
+      <Input id={id} type="file" name={name} onChange={onChange} />
     </InputContainer>
   )
 }
@@ -89,6 +90,7 @@ const Input = styled.input`
 `
 
 FileInput.propTypes = {
+  id: PropTypes.string,
   label: PropTypes.string,
   name: PropTypes.string,
   onChange: PropTypes.func.isRequired,
