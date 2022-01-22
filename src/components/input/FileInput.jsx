@@ -28,7 +28,7 @@ const FileInput = ({
   return (
     <InputContainer>
       <Label
-        htmlFor="input-file"
+        htmlFor="profileFile"
         useUploadName={useUploadName}
         fontSize={fontSize}
         width={width}
@@ -39,17 +39,12 @@ const FileInput = ({
       </Label>
       {useUploadName && (
         <UploadName
-          onChange={onChange}
+          onChange={handleFileChange}
           value={fileName}
           placeholder="선택된 파일 없음"
         />
       )}
-      <Input
-        id="input-file"
-        type="file"
-        name={name}
-        onChange={handleFileChange}
-      />
+      <Input id="profileFile" type="file" name={name} onChange={onChange} />
     </InputContainer>
   )
 }

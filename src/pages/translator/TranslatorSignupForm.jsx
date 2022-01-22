@@ -30,6 +30,14 @@ const initialState = {
 
 const TranslatorSignupForm = () => {
   const [formData, setFormData] = useState(initialState)
+  //파일 미리볼 url을 저장해줄 state
+  const [fileImage, setFileImage] = useState('')
+
+  // 파일 삭제
+  // const deleteFileImage = () => {
+  //   URL.revokeObjectURL(fileImage);
+  //    setFileImage("");
+  //    };
 
   const handleSubmit = async e => {
     e.preventDefault()
@@ -43,18 +51,36 @@ const TranslatorSignupForm = () => {
   }
 
   const handleChange = e => {
-    const { id, name, value, checked } = e.target
+    const { id, name, value, checked, files } = e.target
+    console.log(id, name, value)
     setFormData({
       ...formData,
-      [id]: name === '' ? checked : value,
+      [id]:
+        name === 'taxPossible' ||
+        name === 'cashPossible' ||
+        name === 'isBusiness'
+          ? checked
+          : value,
     })
+
+    if (id === 'input-file') {
+      console.log(id, value.slice(12))
+      console.log(files)
+      setFileImage(URL.createObjectURL(files[0]))
+      console.log(fileImage)
+    }
   }
 
   return (
     <>
       <SubPageHeader title="번역가 정보입력" />
       <ProfileWrap>
-        <img src={defaultProfile} alt="profileImg" />
+        <img
+          src={fileImage ? fileImage : defaultProfile}
+          alt="profileImg"
+          width="64px"
+          height="64px"
+        />
         <div>
           <FileInput
             onChange={handleChange}
@@ -68,7 +94,7 @@ const TranslatorSignupForm = () => {
         <TextInput name="name" placeholder="이름" onChange={handleChange} />
         <TextInput name="career" placeholder="경력" onChange={handleChange} />
         <SelectInput
-          id="select1"
+          id="language"
           name="language"
           onChange={handleChange}
           defaultOption="가능언어"
@@ -131,6 +157,10 @@ const ProfileWrap = styled.div`
   padding-bottom: 16px;
   & > img {
     margin-bottom: 15px;
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    object-fit: cover;
   }
   & > div {
     width: 78px;
