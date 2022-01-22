@@ -5,22 +5,24 @@
 state 이용 / 번역 견적 area 클릭시 click 변수의 값을 false로, 리뷰 area 클릭시 true로, 
 click 변수값을 styled-components에 props로 전달, border-bottom 속성에 이용하였습니다.
 ex) border-bottom: ${props => props.click ? '2px solid #C4C4C4' : '2px solid #FF0000'};
+
+click과 setClick을 useState를 이용하셔서 click과 setClick을 props로 전달해주세요
+const [clickNumber, setClickNumber] = useState(0)
+const handleToggleMenu = number => setClickNumber(number)
 */
 
 import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
-const ToggleMenu = ({ menu }) => {
-  const [click, setClick] = React.useState(0)
-
+const ToggleMenu = ({ menu, click, onClick }) => {
   return (
     <>
       <Wrap>
         <MenuWrap>
           {menu.map((item, index) => {
             return (
-              <Menu key={index} onClick={() => setClick(index)}>
+              <Menu key={index} onClick={() => onClick(index)}>
                 <div>{item}</div>
                 {click === index ? <UnderLineClick /> : <UnderLine />}
               </Menu>
@@ -30,10 +32,6 @@ const ToggleMenu = ({ menu }) => {
       </Wrap>
     </>
   )
-}
-
-ToggleMenu.propTypes = {
-  menu: PropTypes.array.isRequired,
 }
 
 const Wrap = styled.div`
@@ -54,7 +52,7 @@ const MenuWrap = styled.div`
 const Menu = styled.div`
   width: 100%;
   margin-bottom: 20px;
-  padding-bottoom: 20px;
+  padding-bottom: 20px;
 `
 
 const UnderLineClick = styled.div`
@@ -66,5 +64,11 @@ const UnderLine = styled.div`
   border-bottom: 2px solid #c4c4c4;
   padding-top: 15px;
 `
+
+ToggleMenu.propTypes = {
+  menu: PropTypes.array.isRequired,
+  click: PropTypes.number,
+  onClick: PropTypes.func,
+}
 
 export default ToggleMenu

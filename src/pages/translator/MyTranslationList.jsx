@@ -14,6 +14,7 @@ const menu = ['보낸 견적', '진행중', '진행 완료']
 const MyTranslationList = () => {
   const navigate = useNavigate()
   const [estimates, setEstimates] = useState([])
+  const [clickNumber, setClickNumber] = useState(0)
 
   useEffect(() => {
     const fetchEstimates = async () => {
@@ -34,11 +35,13 @@ const MyTranslationList = () => {
     })
   }
 
+  const handleToggleMenu = number => setClickNumber(number)
+
   return (
     <div>
       <PageHeader title="내 번역" />
       {/* toggle menu 목록 onClick으로 내려주어야 함 */}
-      <ToggleMenu menu={menu} />
+      <ToggleMenu menu={menu} click={clickNumber} onClick={handleToggleMenu} />
       {estimates.map(estimate => (
         <EstimateCard
           key={estimate.id}

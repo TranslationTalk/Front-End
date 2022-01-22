@@ -19,6 +19,7 @@ const TranslatorDetail = () => {
   const location = useLocation()
   const [estimate, setEstimate] = useState([])
   const [status, setsStatus] = useState('')
+  const [clickNumber, setClickNumber] = useState(0)
 
   //비동기처리
   useEffect(() => {
@@ -90,6 +91,9 @@ const TranslatorDetail = () => {
     }
   }
 
+  // 토글 메뉴 선택된 넘버 set
+  const handleToggleMenu = number => setClickNumber(number)
+
   return (
     <div>
       <PageHeader title="" />
@@ -104,7 +108,11 @@ const TranslatorDetail = () => {
         isBusiness={estimate.isBusiness}
         introduce={estimate.introduce}
       />
-      <ToggleMenu menu={['번역 견적', '번역가님 리뷰']} />
+      <ToggleMenu
+        menu={['번역 견적', '번역가님 리뷰']}
+        click={clickNumber}
+        onClick={handleToggleMenu}
+      />
       <EstimateDetail
         offerPrice={estimate.offerPrice ?? 0}
         comment={estimate.comment ?? 'test'}
