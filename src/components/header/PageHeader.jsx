@@ -7,14 +7,18 @@ reloadEvent: reload 클릭 시 발생할 이벤트(fetch) 함수
 import React from 'react'
 import propTypes from 'prop-types'
 import styled from 'styled-components'
+import { useLocation } from 'react-router-dom'
 import { ReactComponent as ReloadIcon } from '../../assets/icons/ReloadIcon.svg'
 import Logo from '../../assets/images/Logo.png'
 import { HamburgerMenu } from '../index'
 
 const PageHeader = ({ title, useReloadButton, reloadEvent }) => {
+  // login page일 때 hamburger 메뉴 제거
+  const location = useLocation().pathname
+
   return (
-    <Container>
-      <HamburgerMenu />
+    <Container shouldWrap={location !== '/'}>
+      {location === '/' || <HamburgerMenu />}
       {title ? <Title>{title}</Title> : <LogoImg src={Logo} alt="logo" />}
       {useReloadButton && (
         <SvgWrap>
@@ -29,11 +33,22 @@ const Container = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  width: 100%;
   height: 56px;
   padding: 16px;
   background-color: #fff;
-  position: relative;
+  position: fixed;
+  top: 0;
+  left: ${props => (props.shouldWrap ? '50%' : '0')};
+  ${props => (props.shouldWrap ? 'transform: translateX(-50%);' : null)}
   border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+  z-index: 5;
+  ${props => (props.shouldWrap ? 'max-width: 640px;' : null)}
+  min-width: 360px;
+
+  @media (min-width: 640px) {
+    height: ${props => (props.shouldWrap ? '56px' : '80px')};
+  }
 `
 
 const Title = styled.h2`
