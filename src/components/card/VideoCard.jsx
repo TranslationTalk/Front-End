@@ -12,7 +12,7 @@ const VideoCard = ({ youtubeUrl }) => {
       <iframe
         width="560"
         height="315"
-        src={youtubeUrl.replace('watch?v=', 'embed/')}
+        src={youtubeUrl.split('&')[0].replace('watch?v=', 'embed/')}
       ></iframe>
     </Card>
   )
