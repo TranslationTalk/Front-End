@@ -46,13 +46,10 @@ const MenuWrap = styled.div`
   cursor: pointer;
   justify-content: space-around;
   font-size: 20px;
-  margin: 20px;
 `
 
 const Menu = styled.div`
   width: 100%;
-  margin-bottom: 20px;
-  padding-bottom: 20px;
 `
 
 const UnderLineClick = styled.div`
