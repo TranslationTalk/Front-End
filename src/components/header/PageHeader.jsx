@@ -13,7 +13,6 @@ import Logo from '../../assets/images/Logo.png'
 import { HamburgerMenu } from '../index'
 
 const PageHeader = ({ title, useReloadButton, reloadEvent }) => {
-  // login page일 때 hamburger 메뉴 제거
   const location = useLocation().pathname
 
   return (

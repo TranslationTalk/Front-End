@@ -8,11 +8,14 @@ import React from 'react'
 import propTypes from 'prop-types'
 import { Button } from '../index'
 import styled from 'styled-components'
+import { useLocation } from 'react-router-dom'
 import { ReactComponent as ArrowbackIcon } from '../../assets/icons/ArrowbackIcon.svg'
 
 const SubPageHeader = ({ title, leftTitle, useButton, buttonEvent, auth }) => {
+  const location = useLocation().pathname
+
   return (
-    <Container>
+    <Container shouldWrap={location !== '/'}>
       <SvgWrap>
         <ArrowbackIcon onClick={() => history.back()} />
       </SvgWrap>
@@ -42,13 +45,13 @@ const Container = styled.div`
   height: 56px;
   position: fixed;
   top: 0;
-  left: 50%;
-  transform: translateX(-50%);
+  left: ${props => (props.shouldWrap ? '50%' : '0')};
+  ${props => (props.shouldWrap ? 'transform: translateX(-50%);' : null)}
+  ${props => (props.shouldWrap ? 'max-width: 640px;' : null)}
   min-width: 360px;
   z-index: 5;
   padding: 16px;
   background-color: #fff;
-  position: relative;
   border-bottom: 1px solid rgba(0, 0, 0, 0.3);
   & > button {
     font-size: var(--fs-12);
