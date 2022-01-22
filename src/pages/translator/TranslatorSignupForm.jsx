@@ -152,6 +152,14 @@ const Form = styled.form`
       margin-bottom: 12px;
     }
   }
+  & > button {
+    width: fit-content;
+    height: fit-content;
+    font-size: var(--fs-18);
+    font-weight: bold;
+    padding: 11px 33px;
+    margin: auto;
+  }
 `
 
 export default TranslatorSignupForm

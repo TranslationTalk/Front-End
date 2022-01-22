@@ -19,7 +19,9 @@ const SubPageHeader = ({ title, leftTitle, useButton, buttonEvent, auth }) => {
       {leftTitle && (
         <LeftTitle>
           {leftTitle}{' '}
-          <span>{leftTitle && auth === 'translator' ? '번역가' : ''}님</span>
+          <span>
+            {leftTitle && auth === 'translator' ? '번역가' : '유저'}님
+          </span>
         </LeftTitle>
       )}
       <Title>{title}</Title>
@@ -41,6 +43,14 @@ const Container = styled.div`
   background-color: #fff;
   position: relative;
   border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+  & > button {
+    font-size: var(--fs-12);
+    font-weight: normal;
+    width: fit-content;
+    height: fit-content;
+    padding: 5px 10px;
+    border-radius: 15px;
+  }
 `
 
 const LeftTitle = styled.h2`
