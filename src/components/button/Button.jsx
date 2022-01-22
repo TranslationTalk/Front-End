@@ -11,13 +11,16 @@ import React from 'react'
 import { PropTypes } from 'mobx-react'
 
 const Button = prop => {
-  const { onClick, content, color, bgColor } = prop
+  const { onClick, content, color, bgColor, border, type } = prop
 
   return (
     <Btn
+      className={border ? 'hover' : null}
       onClick={onClick}
       color={color ?? '#fff'}
       bgColor={bgColor ?? '#3D51FF'}
+      border={border}
+      type={type}
     >
       {content}
     </Btn>
@@ -25,21 +28,29 @@ const Button = prop => {
 }
 
 const Btn = styled.button`
-  color: ${prop => prop.color};
-  background-color: ${prop => prop.bgColor};
+  color: ${prop => (prop.border ? '#3D51FF' : prop.color)};
+  background-color: ${prop => (prop.border ? '#fff' : prop.bgColor)};
   padding: 10px 0;
   font-weight: bold;
-  border: none;
+  border: 1px solid ${prop => prop.bgColor};
   border-radius: 4px;
   font-size: var(--fs-18);
   width: 100%;
+  box-sizing: border-box;
   cursor: pointer;
+  transition: all 0.5s;
+  &.hover:hover {
+    background-color: ${prop => (prop.border ? '#3D51FF' : prop.color)};
+    color: ${prop => (prop.border ? '#fff' : prop.bgColor)};
+  }
 `
 Button.prototype = {
   onClick: PropTypes.string,
   text: PropTypes.string,
   color: PropTypes.string,
   bgColor: PropTypes.string,
+  border: PropTypes.bool,
+  type: PropTypes.string,
 }
 
 export default Button

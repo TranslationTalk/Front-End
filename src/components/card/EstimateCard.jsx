@@ -69,7 +69,11 @@ const EstimateCard = prop => {
       {/* 첫째줄 field, tag*/}
       <div>
         <h3>{field}</h3>
-        <Tag text="영상 번역 의뢰" color="#fff" bgColor="#3D51FF" />
+        <Tag
+          text={isText ? '텍스트 번역 의뢰' : '영상 번역 의뢰'}
+          color="#fff"
+          bgColor="#3D51FF"
+        />
         {isText}
       </div>
 
@@ -77,13 +81,7 @@ const EstimateCard = prop => {
       <div>
         <div>
           <span>{beforeLanguage}</span>
-          <svg
-            width="20"
-            height="20"
-            viewBox="0 0 20 20"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
             <path
               d="M13.3416 9.16675H3.33325V10.8334H13.3416V13.3334L16.6666 10.0001L13.3416 6.66675V9.16675Z"
               fill="#3D51FF"
@@ -91,13 +89,7 @@ const EstimateCard = prop => {
           </svg>
           <span>{afterLanguage}</span>
         </div>
-        <svg
-          width="24"
-          height="24"
-          viewBox="0 0 24 24"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
           <path
             d="M8.58984 16.59L13.1698 12L8.58984 7.41L9.99984 6L15.9998 12L9.99984 18L8.58984 16.59Z"
             fill="black"
