@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
-import profileImg from '../../assets/images/blueStar.png'
+import profileImg from '../../assets/images/TranslatorThumb.png'
 import { Tag } from '../index'
 
 const TranslatorInfo = ({
@@ -16,52 +16,90 @@ const TranslatorInfo = ({
   introduce,
 }) => {
   return (
-    <>
-      <Profile>
-        <Img
-          src={profileImg ?? profileUrl}
-          alt="프로필이미지"
-          width="90px"
-          height="90px"
-        />
+    <Profile>
+      <div>
+        <img src={profileImg ?? profileUrl} alt={name + '프로필이미지'} />
         <TransLatorInfo>
-          <Name>{name} 번역가님</Name>
-          <Total>
-            <p>
-              번역 {totalTrans}건 리뷰 {totalReviews}건
-            </p>
-            <img src={profileImg} alt="별점이미지" width="16px" height="16px" />
-            <span>{avgReviews}</span>
-          </Total>
-          {taxPossible && <Tag text="세금명세서 가능" bgColor="#FCBBBB" />}
-          {cashPossible && <Tag text="현금영수증 가능" bgColor="#FCBBBB" />}
-          {isBusiness && <Tag text="사업자 확인" bgColor="#FCBBBB" />}
+          <p>
+            <b>{name}</b> <span>번역간님</span>
+          </p>
+          <p>
+            <span>번역 {totalTrans ?? 0}건</span>
+            <span>리뷰 {totalReviews ?? 0}건</span>
+            <span>
+              {totalReviews ? (
+                <>
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+                    <path
+                      d="M12 17.27L18.18 21L16.54 13.97L22 9.24L14.81 8.63L12 2L9.19 8.63L2 9.24L7.46 13.97L5.82 21L12 17.27Z"
+                      fill="#FF5F5F"
+                    />
+                  </svg>
+                  <b>{avgReviews}</b>
+                </>
+              ) : null}
+            </span>
+          </p>
+          <div>
+            {taxPossible && (
+              <Tag text="세금명세서 가능" bgColor="#3D51FF" color="#fff" />
+            )}
+            {cashPossible && (
+              <Tag text="현금영수증 가능" bgColor="#3D51FF" color="#fff" />
+            )}
+            {isBusiness && (
+              <Tag text="사업자 확인" bgColor="#3D51FF" color="#fff" />
+            )}
+          </div>
         </TransLatorInfo>
-      </Profile>
-      <Introduce>{introduce}</Introduce>
-    </>
+      </div>
+      <p>{introduce}</p>
+    </Profile>
   )
 }
 
 const Profile = styled.div`
-  display: flex;
-`
-
-const Img = styled.img`
-  width: ${props => (props.width ? props.width : ``)};
-  height: ${props => (props.height ? props.height : ``)};
-  background-color: #999;
+  margin: 20px;
+  & > div {
+    display: flex;
+    margin-bottom: 17px;
+  }
+  & img {
+    margin-right: 21px;
+    height: 100%;
+  }
+  & b {
+    font-weight: bold;
+  }
 `
 
 const TransLatorInfo = styled.div`
-  padding: 10px;
+  margin-top: 9px;
+  & > p {
+    font-size: var(--fs-14);
+    line-height: 1.4;
+    &:first-child > span {
+      opacity: 0.4;
+    }
+    & > span {
+      margin-right: 8px;
+    }
+    & > b {
+      font-size: var(--fs-18);
+    }
+    & svg {
+      margin-bottom: -2px;
+      margin-right: 2px;
+    }
+  }
+  & > div {
+    margin-top: 10px;
+    & > div {
+      font-size: var(--fs-12);
+      margin-top: 2px;
+    }
+  }
 `
-
-const Name = styled.div``
-
-const Total = styled.div``
-
-const Introduce = styled.div``
 
 TranslatorInfo.propTypes = {
   name: PropTypes.string,
