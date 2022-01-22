@@ -16,6 +16,7 @@ import { clientAPIs } from '../../utils/axios'
 const RequestList = () => {
   const navigate = useNavigate()
   const [estimates, setEstimates] = useState([])
+  const [clickNumber, setClickNumber] = useState(0)
 
   // 비동기 처리
   useEffect(() => {
@@ -34,10 +35,17 @@ const RequestList = () => {
     navigate('/client/estimate/list', { state: { requestId: num } })
   }
 
+  // 토글 메뉴 선택된 넘버 set
+  const handleToggleMenu = number => setClickNumber(number)
+
   return (
     <div>
       <PageHeader title="내 견적 요청" />
-      <ToggleMenu menu={['견적대기', '진행중', '완료']} />
+      <ToggleMenu
+        menu={['견적대기', '진행중', '완료']}
+        click={clickNumber}
+        onClick={handleToggleMenu}
+      />
       {estimates.map(estimate => (
         <EstimateCard
           key={estimate.id}

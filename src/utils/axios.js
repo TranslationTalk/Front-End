@@ -72,7 +72,8 @@ export const apis = {
 
   // 채팅
   createChatroom: id => instance.post(`api/chatroom/${id}`),
-  getChatroomList: () => instance.get(`api/chatroom/translator`),
+  getChatroomListTranslator: () => instance.get(`api/chatroom/translator`),
+  getChatroomListClient: () => instance.get(`api/chatroom/client`),
   getChatContents: id => instance.get(`api/chatroom/chat/${id}`),
   sendChat: (id, chat) => instance.post(`api/chatroom/chat/${id}`, { chat }),
 }

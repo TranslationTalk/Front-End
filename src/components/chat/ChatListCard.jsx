@@ -12,7 +12,7 @@ import { ReactComponent as NotReadDot } from '../../assets/icons/NotReadDot.svg'
 // default image이어야 함
 import defaultThumb from '../../assets/images/ListThumb.png'
 
-const ChatListCard = ({ name, profileUrl, isRead, onClick }) => {
+const ChatListCard = ({ name, profileUrl, isRead, onClick, auth }) => {
   return (
     <Container onClick={onClick}>
       <LeftWrap>
@@ -20,8 +20,10 @@ const ChatListCard = ({ name, profileUrl, isRead, onClick }) => {
       </LeftWrap>
       <RightWrap>
         <span>
-          <span>{name}</span>님
+          <span>{name}</span>
+          {auth === 'translator' ? '유저' : '번역가'}님
         </span>
+        {/* 가져올 데이터가 없음 */}
         <p>2022.01.22</p>
       </RightWrap>
       <Dot>{isRead ? <ReadDot /> : <NotReadDot />}</Dot>
@@ -36,6 +38,7 @@ const Container = styled.div`
   width: 100%;
   height: 52px;
   margin-bottom: 12px;
+  padding: 0 20px;
 `
 
 const LeftWrap = styled.div`
@@ -69,10 +72,12 @@ const RightWrap = styled.div`
 `
 
 const Dot = styled.div`
+  width: 8px;
+  height: 8px;
   position: absolute;
-  top: 50%;
+  top: 0;
   right: 8px;
-  transform: translateY(-50%);
+  transform: translateY(100%);
 `
 
 ChatListCard.propTypes = {
@@ -80,6 +85,7 @@ ChatListCard.propTypes = {
   profileUrl: PropTypes.string,
   isRead: PropTypes.bool.isRequired,
   onClick: PropTypes.func,
+  auth: PropTypes.string,
 }
 
 export default ChatListCard

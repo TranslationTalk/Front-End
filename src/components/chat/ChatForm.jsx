@@ -27,9 +27,7 @@ const ChatForm = ({ onSubmit, onChange, value }) => {
           padding="10px 12px"
         />
       </InputWrap>
-      <ButtonWrap>
-        <Button content="보내기" bgColor="#fff" color="#3D51FF" />
-      </ButtonWrap>
+      <Button content="보내기" bgColor="#fff" color="#3D51FF" />
     </Form>
   )
 }
@@ -49,15 +47,19 @@ const Form = styled.form`
   display: flex;
   justify-content: center;
   align-items: center;
+  & > button {
+    font-size: var(--fs-14);
+    font-weight: normal;
+    border: 1px solid var(--main-color);
+    width: fit-content;
+    height: fit-content;
+    padding: 5px 15px;
+  }
 `
 
 const InputWrap = styled.div`
   width: 70%;
   margin: 6px;
-`
-
-const ButtonWrap = styled.div`
-  width: fit-content;
 `
 
 ChatForm.propTypes = {

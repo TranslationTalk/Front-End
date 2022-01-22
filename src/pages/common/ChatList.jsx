@@ -3,9 +3,11 @@ import { apis } from '../../utils/axios'
 import {
   ChatListCard,
   NavigationTranslator,
+  NavigationUser,
   PageHeader,
 } from '../../components/index'
 import { useNavigate } from 'react-router-dom'
+import styled from 'styled-components'
 
 const ChatList = () => {
   const [chatList, setChatList] = useState([])
@@ -13,10 +15,14 @@ const ChatList = () => {
   const navigate = useNavigate()
 
   useEffect(() => {
-    setAuth(sessionStorage.getItem('auth'))
+    const auth = sessionStorage.getItem('auth')
+    setAuth(auth)
 
     const fetchChatroomList = async () => {
-      const { data } = await apis.getChatroomList()
+      const { data } =
+        auth === 'translator'
+          ? await apis.getChatroomListTranslator()
+          : await apis.getChatroomListClient()
       console.log(data)
       setChatList(data)
     }
@@ -24,15 +30,21 @@ const ChatList = () => {
     fetchChatroomList()
   }, [])
 
-  const handleClick = id => {
-    navigate(`/chat/${id}`, {
-      state: { roomId: id },
+  const handleClick = chatroom => {
+    navigate(`/chat/${chatroom.id}`, {
+      state: {
+        roomId: chatroom.id,
+        anothername:
+          auth === 'translator'
+            ? chatroom.Request.User.username
+            : chatroom.translatorName,
+      },
     })
   }
 
   return (
-    <>
-      <PageHeader title="채팅" />
+    <Wrap>
+      <PageHeader title={auth === 'translator' ? '내 상담' : '채팅'} />
       {chatList.map(chatroom => (
         <ChatListCard
           key={chatroom.id}
@@ -42,12 +54,19 @@ const ChatList = () => {
               ? !chatroom.isReadClient
               : !chatroom.isReadTranslator
           }
-          onClick={() => handleClick(chatroom.id)}
+          onClick={() => handleClick(chatroom)}
+          auth={auth}
         />
       ))}
-      <NavigationTranslator />
-    </>
+      {auth === 'translator' ? <NavigationTranslator /> : <NavigationUser />}
+    </Wrap>
   )
 }
+
+const Wrap = styled.div`
+  & > div:first-child {
+    margin-bottom: 16px;
+  }
+`
 
 export default ChatList
