@@ -135,6 +135,8 @@ const ChatWrap = styled.div`
   flex-direction: column;
   padding: 24px 16px 0 16px;
   gap: 8px;
+  padding-top: 80px;
+  background-color: var(--light-gray);
 `
 
 export default Chat
