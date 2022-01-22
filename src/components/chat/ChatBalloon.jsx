@@ -9,6 +9,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
+import basicProfile from '../../assets/images/TranslatorProfile.png'
 
 const ChatBalloon = prop => {
   const { name, profileUrl, chat, date, isSelf } = prop
@@ -28,15 +29,15 @@ const ChatBalloon = prop => {
     <Chat isSelf={isSelf}>
       {isSelf ? null : (
         <div className="profile">
-          <img src={profileUrl} alt={name} />
+          <img src={profileUrl ?? basicProfile} alt={name} />
         </div>
       )}
       <div className="massage">
-        {isSelf ? null : <p className="name">{name}</p>}
-
         <p className="chat">{chat}</p>
       </div>
-      <span className="time">{`${hours}:${min}`}</span>
+      <Time>{`${hours > 12 ? '오후' : '오전'} ${
+        hours > 12 ? hours - 12 : hours
+      }:${min}`}</Time>
     </Chat>
   )
 }
@@ -46,8 +47,8 @@ const rightTriangle = `&:after {
   position: absolute;
   right: -10px;
   top: 10px;
-  border-top: 10px solid #f9f871;
-  border-left: 10px solid #f9f871;
+  border-top: 10px solid #fff;
+  border-left: 10px solid #fff;
   border-right: 10px solid transparent;
   border-bottom: 10px solid transparent;
   content: '';
@@ -55,23 +56,24 @@ const rightTriangle = `&:after {
 const leftTriangle = `&:before {
   position: absolute;
   left: -10px;
-  top: 30px;
-  border-top: 10px solid #f9f871;
+  top: 10px;
+  border-top: 10px solid #fff;
   border-left: 10px solid transparent;
-  border-right: 10px solid #f9f871;
+  border-right: 10px solid #fff;
   border-bottom: 10px solid transparent;
   content: '';`
 
 const Chat = styled.div`
   display: flex;
-  margin: 10px 0;
+  align-items: flex-end;
+  padding: 10px 20px 10px 10px;
   flex-direction: ${prop => (prop.isSelf ? 'row-reverse' : 'row')};
   & .profile {
     display: flex;
     flex-direction: column;
     & img {
-      width: 50px;
-      height: 50px;
+      width: var(--fs-32);
+      height: var(--fs-32);
       margin: 0 10px;
       border-radius: 50%;
       object-fit: cover;
@@ -79,28 +81,24 @@ const Chat = styled.div`
   }
   & .massage {
     position: relative;
-    margin: 0 10px;
-    width: 50%;
-    min-width: 150px;
+    margin: 0 5px;
     word-break: break-all;
     ${prop => (prop.isSelf ? rightTriangle : leftTriangle)}
+    font-size: var(--fs-14);
   }
   & .chat {
-    display: inline-black;
     margin-top: 5px;
     padding: 10px;
-    background: #f9f871;
+    background: #fff;
     border-radius: 10px;
   }
-  & .name {
-    margin: 0 5px;
-    ${prop => (prop.isSelf ? 'text-align: right' : 'text-align: left')}
-  }
-  & .time {
-    margin-top: auto;
-  }
 `
-
+const Time = styled.span`
+  margin-top: auto;
+  font-weight: 400;
+  font-size: var(--fs-12);
+  color: var(--dark-gray);
+`
 ChatBalloon.propTypes = {
   name: PropTypes.string,
   profileUrl: PropTypes.string,
