@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import styled from 'styled-components'
 import {
+  Button,
   EstimateCard,
   NavigationTranslator,
   PageHeader,
+  Tag,
   TopDownButton,
 } from '../../components'
 import { apis } from '../../utils/axios'
@@ -34,41 +37,84 @@ const TranslationList = () => {
   }
 
   return (
-    <div>
+    <>
       <PageHeader title="번역 리스트" useReloadButton />
-      <p>나중에 필터 기능 들어갈 곳</p>
-      <h2>곧 마감되는 요청!(마감임박 순 구현 필요)</h2>
-      {estimates.slice(0, 2).map(estimate => (
-        <EstimateCard
-          key={estimate.id}
-          userName={estimate.User.username}
-          field={estimate.field}
-          beforeLanguage={estimate.beforeLanguage}
-          afterLanguage={estimate.afterLanguage}
-          isText={estimate.isText}
-          deadline={estimate.deadline}
-          createdTime={estimate.createdAt}
-          onClick={() => handleClick(estimate)}
-        />
-      ))}
-      <h2>번역의뢰 리스트</h2>
-      {estimates.map(estimate => (
-        <EstimateCard
-          key={estimate.id}
-          userName={estimate.User.username}
-          field={estimate.field}
-          beforeLanguage={estimate.beforeLanguage}
-          afterLanguage={estimate.afterLanguage}
-          isText={estimate.isText}
-          deadline={estimate.deadline}
-          createdTime={estimate.createdAt}
-          onClick={() => handleClick(estimate)}
-        />
-      ))}
-      <TopDownButton />
-      <NavigationTranslator />
-    </div>
+      <Wrap>
+        <FilterContainer>
+          <Button content="언어선택" bgColor="#fff" color="#000" />
+          <Tag text="영어" bgColor="#fff" color="#000" />
+          <Tag text="한국어" bgColor="#fff" color="#000" />
+        </FilterContainer>
+        {/* 곧 마감되는 요청 없음??? */}
+        {/* {estimates.slice(0, 2).map(estimate => (
+          <EstimateCard
+            key={estimate.id}
+            userName={estimate.User.username}
+            field={estimate.field}
+            beforeLanguage={estimate.beforeLanguage}
+            afterLanguage={estimate.afterLanguage}
+            isText={estimate.isText}
+            deadline={estimate.deadline}
+            createdTime={estimate.createdAt}
+            onClick={() => handleClick(estimate)}
+          />
+        ))} */}
+        {/* <h2>번역의뢰 리스트</h2> */}
+        {estimates.map(estimate => (
+          <EstimateCard
+            key={estimate.id}
+            userName={estimate.User.username}
+            field={estimate.field}
+            beforeLanguage={estimate.beforeLanguage}
+            afterLanguage={estimate.afterLanguage}
+            isText={estimate.isText}
+            deadline={estimate.deadline}
+            createdTime={estimate.createdAt}
+            onClick={() => handleClick(estimate)}
+          />
+        ))}
+        <TopDownButton />
+        <NavigationTranslator />
+      </Wrap>
+    </>
   )
 }
+
+const Wrap = styled.div`
+  padding-top: 56px;
+  background-color: var(--light-gray);
+`
+
+const FilterContainer = styled.div`
+  background-color: var(--white);
+  width: 100%;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  border: 1px solid rgba(0, 0, 0, 0.3);
+  border-top: none;
+  padding: 7px 20px;
+  margin-bottom: 16px;
+  button {
+    font-size: var(--fs-14);
+    font-weight: normal;
+    width: fit-content;
+    height: fit-content;
+    border-radius: 15px;
+    border: 1px solid rgba(0, 0, 0, 0.3);
+    padding: 2px 8px;
+    margin-right: 4px;
+    transition: all 1s linear;
+  }
+  button:hover {
+    background-color: var(--gray-c4);
+  }
+  & > div {
+    padding: 6px 8px;
+    font-size: var(--fs-14);
+    border: 1px solid rgba(0, 0, 0, 0.3);
+    pointer-events: none;
+  }
+`
 
 export default TranslationList
