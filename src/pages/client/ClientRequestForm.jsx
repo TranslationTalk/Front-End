@@ -125,6 +125,8 @@ const ClientRequestForm = props => {
             value={requestForm.requestFile}
             useUploadName
             onChange={onChange}
+            id="input"
+            accept="text"
           />
         ) : (
           <TextInput
@@ -140,7 +142,7 @@ const ClientRequestForm = props => {
           placeholder="세부 요청 사항"
           onChange={onChange}
         />
-        <Button content="요청하기" onClick={submit} type="submit" />
+        <Button content="요청하기" onClick={submit} type="button" />
       </Form>
     </div>
   )
