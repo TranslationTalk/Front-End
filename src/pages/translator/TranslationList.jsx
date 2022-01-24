@@ -96,21 +96,6 @@ const TranslationList = () => {
             <Tag key={language} text={language} bgColor="#fff" color="#000" />
           ))}
         </FilterContainer>
-        {/* 곧 마감되는 요청 없음??? */}
-        {/* {estimates.slice(0, 2).map(estimate => (
-          <EstimateCard
-            key={estimate.id}
-            userName={estimate.User.username}
-            field={estimate.field}
-            beforeLanguage={estimate.beforeLanguage}
-            afterLanguage={estimate.afterLanguage}
-            isText={estimate.isText}
-            deadline={estimate.deadline}
-            createdTime={estimate.createdAt}
-            onClick={() => handleClick(estimate)}
-          />
-        ))} */}
-        {/* <h2>번역의뢰 리스트</h2> */}
         {filterdEstimates.map(estimate => (
           <EstimateCard
             key={estimate.id}
@@ -163,7 +148,7 @@ const TranslationList = () => {
 const Wrap = styled.div`
   height: 100%;
   background-color: var(--light-gray);
-  padding: 56px 0 24px 0;
+  padding: 56px 0 78px 0;
   position: relative;
   min-height: 100vh;
 `

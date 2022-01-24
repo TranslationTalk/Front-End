@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import {
   TextInput,
   SelectInput,
@@ -13,7 +13,6 @@ import { apis } from '../../utils/axios'
 import defaultProfile from '../../assets/images/TranslatorProfile.png'
 import { language } from '../../constant/selectOptions'
 import styled from 'styled-components'
-import { useEffect } from 'react/cjs/react.development'
 
 const initialState = {
   name: '',
@@ -196,7 +195,7 @@ const ProfileWrap = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin-top: 20px;
+  margin-top: 72px;
   margin-bottom: 21px;
   padding: 24px;
   padding-bottom: 16px;
@@ -218,6 +217,7 @@ const Form = styled.form`
   flex-direction: column;
   gap: 8px;
   padding: 0 20px;
+  padding-bottom: 20px;
   & > button {
     width: fit-content;
     height: fit-content;
