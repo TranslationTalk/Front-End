@@ -16,6 +16,8 @@ import ChatListCard from './chat/ChatListCard'
 import InitialChat from './chat/InitialChat'
 // Detail
 import EstimateDetail from './detail/EstimateDetail'
+// Footer
+import Footer from './Footer/Footer'
 // Header
 import PageHeader from './header/PageHeader'
 import SubPageHeader from './header/SubPageHeader'
@@ -72,4 +74,5 @@ export {
   InitialChat,
   EstimateDetail,
   BottomIndicator,
+  Footer,
 }

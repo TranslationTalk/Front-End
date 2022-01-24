@@ -15,6 +15,7 @@ import propTypes from 'prop-types'
 import { fields, language } from '../../constant/selectOptions'
 import { clientAPIs } from '../../utils/axios'
 import { useNavigate } from 'react-router-dom'
+import styled from 'styled-components'
 
 const ClientRequestForm = props => {
   const navigate = useNavigate()
@@ -73,7 +74,8 @@ const ClientRequestForm = props => {
   return (
     <div>
       <SubPageHeader title="번역 요청 Form" />
-      <form>
+      <Form>
+        <p>번역 요청 의뢰서</p>
         <SelectInput
           name="field"
           value={requestForm.field}
@@ -81,30 +83,28 @@ const ClientRequestForm = props => {
           options={fields}
           onChange={onChange}
         />
-        <br />
         <TextInput
           name="deadline"
           value={requestForm.deadline}
           type="date"
           onChange={onChange}
         />
-        <br />
-        <SelectInput
-          name="beforeLanguage"
-          value={requestForm.beforeLanguage}
-          defaultOption="번역 전"
-          options={language}
-          onChange={onChange}
-        />
-        &gt;
-        <SelectInput
-          name="afterLanguage"
-          value={requestForm.afterLanguage}
-          defaultOption="번역 후"
-          options={language}
-          onChange={onChange}
-        />
-        <br />
+        <div>
+          <SelectInput
+            name="beforeLanguage"
+            value={requestForm.beforeLanguage}
+            defaultOption="번역 전"
+            options={language}
+            onChange={onChange}
+          />
+          <SelectInput
+            name="afterLanguage"
+            value={requestForm.afterLanguage}
+            defaultOption="번역 후"
+            options={language}
+            onChange={onChange}
+          />
+        </div>
         <TextInput
           name="email"
           value={requestForm.email}
@@ -112,7 +112,6 @@ const ClientRequestForm = props => {
           type="email"
           onChange={onChange}
         />
-        <br />
         <TextInput
           name="phoneNumber"
           value={requestForm.phoneNumber}
@@ -120,11 +119,11 @@ const ClientRequestForm = props => {
           type="tel"
           onChange={onChange}
         />
-        <br />
         {props.isText ? (
           <FileInput
-            name="requestFile"
+            label="파일 올리기(.txt)"
             value={requestForm.requestFile}
+            useUploadName
             onChange={onChange}
           />
         ) : (
@@ -135,18 +134,45 @@ const ClientRequestForm = props => {
             onChange={onChange}
           />
         )}
-        <br />
         <TextAreaInput
           name="needs"
           value={requestForm.needs}
           placeholder="세부 요청 사항"
           onChange={onChange}
         />
-        <Button content="제출하기" onClick={submit} />
-      </form>
+        <Button content="요청하기" onClick={submit} type="submit" />
+      </Form>
     </div>
   )
 }
+
+const Form = styled.form`
+  margin: 90px 20px 0;
+  p {
+    margin-bottom: 27px;
+    font-size: var(--fs-18);
+    font-weight: 500;
+  }
+  > select,
+  > input,
+  > textarea,
+  > div {
+    margin: 4px 0;
+  }
+
+  > button {
+    display: block;
+    width: 150px;
+    margin: auto;
+    margin-top: 20px;
+  }
+  > div {
+    display: flex;
+    select:first-child {
+      margin-right: 8px;
+    }
+  }
+`
 
 ClientRequestForm.propTypes = {
   isText: propTypes.bool,
