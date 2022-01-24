@@ -25,8 +25,8 @@ const ChatListCard = ({ name, profileUrl, isRead, onClick, auth }) => {
         </span>
         {/* 가져올 데이터가 없음 */}
         <p>2022.01.22</p>
+        <Dot>{isRead ? <ReadDot /> : <NotReadDot />}</Dot>
       </RightWrap>
-      <Dot>{isRead ? <ReadDot /> : <NotReadDot />}</Dot>
     </Container>
   )
 }
@@ -56,6 +56,7 @@ const RightWrap = styled.div`
   padding: 4px 10px 11px 10px;
   border-bottom: 1px solid var(--gray-bc);
   color: var(--gray-bc);
+  position: relative;
   & > span {
     font-size: var(--fs-14);
   }

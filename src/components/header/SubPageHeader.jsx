@@ -11,7 +11,14 @@ import styled from 'styled-components'
 import { useLocation } from 'react-router-dom'
 import { ReactComponent as ArrowbackIcon } from '../../assets/icons/ArrowbackIcon.svg'
 
-const SubPageHeader = ({ title, leftTitle, useButton, buttonEvent, auth }) => {
+const SubPageHeader = ({
+  title,
+  leftTitle,
+  useButton,
+  buttonEvent,
+  call,
+  buttonLabel,
+}) => {
   const location = useLocation().pathname
 
   return (
@@ -21,16 +28,14 @@ const SubPageHeader = ({ title, leftTitle, useButton, buttonEvent, auth }) => {
       </SvgWrap>
       {leftTitle && (
         <LeftTitle>
-          {leftTitle}{' '}
-          <span>
-            {leftTitle && auth === 'translator' ? '번역가' : '유저'}님
-          </span>
+          {leftTitle}
+          <span>{call}님</span>
         </LeftTitle>
       )}
       <Title>{title}</Title>
       {/* border radius 추가 필요 */}
       {useButton && (
-        <Button content="작업 완료" onClick={buttonEvent} bgColor="#FF5F5F" />
+        <Button content={buttonLabel} onClick={buttonEvent} bgColor="#FF5F5F" />
       )}
     </Container>
   )
@@ -74,6 +79,7 @@ const LeftTitle = styled.h2`
   & span {
     font-size: var(--fs-14);
     font-weight: normal;
+    margin-left: 4px;
   }
 `
 
@@ -95,7 +101,8 @@ SubPageHeader.propTypes = {
   useButton: propTypes.bool,
   buttonEvent: propTypes.func,
   leftTitle: propTypes.string,
-  auth: propTypes.string,
+  call: propTypes.string,
+  buttonLabel: propTypes.string,
 }
 
 export default SubPageHeader
