@@ -13,6 +13,7 @@ import ChatBalloon from './chat/ChatBalloon'
 import ChatDate from './chat/ChatDate'
 import ChatForm from './chat/ChatForm'
 import ChatListCard from './chat/ChatListCard'
+import InitialChat from './chat/InitialChat'
 // Detail
 import EstimateDetail from './detail/EstimateDetail'
 // Footer
@@ -70,6 +71,7 @@ export {
   ChatDate,
   ChatForm,
   ChatListCard,
+  InitialChat,
   EstimateDetail,
   BottomIndicator,
   Footer,
