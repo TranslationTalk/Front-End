@@ -11,13 +11,10 @@ import styled from 'styled-components'
 
 const ChatList = () => {
   const [chatList, setChatList] = useState([])
-  const [auth, setAuth] = useState('')
+  const auth = sessionStorage.getItem('auth')
   const navigate = useNavigate()
 
   useEffect(() => {
-    const auth = sessionStorage.getItem('auth')
-    setAuth(auth)
-
     const fetchChatroomList = async () => {
       const { data } =
         auth === 'translator'
@@ -35,35 +32,43 @@ const ChatList = () => {
       state: {
         roomId: chatroom.id,
         anothername:
-          auth === 'translator'
-            ? chatroom.Request.User.username
-            : chatroom.translatorName,
+          auth === 'client'
+            ? chatroom.translatorName
+            : chatroom.Estimate.Request.User.username,
+        createdTime: chatroom.createdAt,
       },
     })
   }
 
   return (
-    <Wrap>
+    <>
       <PageHeader title={auth === 'translator' ? '내 상담' : '채팅'} />
-      {chatList.map(chatroom => (
-        <ChatListCard
-          key={chatroom.id}
-          name={chatroom.Request.User.username}
-          isRead={
-            auth === 'client'
-              ? !chatroom.isReadClient
-              : !chatroom.isReadTranslator
-          }
-          onClick={() => handleClick(chatroom)}
-          auth={auth}
-        />
-      ))}
+      <Wrap>
+        {chatList.map(chatroom => (
+          <ChatListCard
+            key={chatroom.id}
+            name={
+              auth === 'client'
+                ? chatroom.translatorName
+                : chatroom.Estimate.Request.User.username
+            }
+            isRead={
+              auth === 'client'
+                ? !chatroom.isReadClient
+                : !chatroom.isReadTranslator
+            }
+            onClick={() => handleClick(chatroom)}
+            auth={auth}
+          />
+        ))}
+      </Wrap>
       {auth === 'translator' ? <NavigationTranslator /> : <NavigationUser />}
-    </Wrap>
+    </>
   )
 }
 
 const Wrap = styled.div`
+  padding: 72px 0 24px 0;
   & > div:first-child {
     margin-bottom: 16px;
   }
