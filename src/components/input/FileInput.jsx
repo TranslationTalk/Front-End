@@ -20,6 +20,7 @@ const FileInput = ({
   width,
   height,
   padding,
+  accept,
 }) => {
   // 실제로 받은 file을 어떻게 상위 컴포넌트에 전달할지 나중에 사용하면서 수정 필요
   const [fileName, setFileName] = useState('선택된 파일 없음')
@@ -45,7 +46,13 @@ const FileInput = ({
           placeholder="선택된 파일 없음"
         />
       )}
-      <Input id={id} type="file" name={name} onChange={onChange} />
+      <Input
+        id={id}
+        type="file"
+        name={name}
+        onChange={onChange}
+        accept={accept === 'text' ? '.txt' : `${accept}/*`}
+      />
     </InputContainer>
   )
 }
@@ -99,6 +106,7 @@ FileInput.propTypes = {
   width: PropTypes.string,
   height: PropTypes.string,
   padding: PropTypes.string,
+  accept: PropTypes.string,
 }
 
 export default FileInput

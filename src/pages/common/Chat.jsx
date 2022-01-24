@@ -175,7 +175,7 @@ const ChatWrap = styled.div`
   padding-top: 80px;
   gap: 8px;
   background-color: var(--light-gray);
-  overflow-y: auto;
+  padding-bottom: 54px;
 `
 
 export default Chat

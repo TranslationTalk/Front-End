@@ -116,6 +116,7 @@ const TranslatorSignupForm = () => {
             padding="8px 10px"
             id="profileFile"
             name="profileFile"
+            accept="image"
           />
         </div>
       </ProfileWrap>
