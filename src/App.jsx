@@ -16,6 +16,6 @@ const Wrap = styled.div`
   min-width: 360px;
   max-width: 640px;
   margin: auto;
-  margin-bottom: 100px;
+  margin-bottom: 72px;
 `
 export default App

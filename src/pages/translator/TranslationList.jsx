@@ -163,9 +163,9 @@ const TranslationList = () => {
 const Wrap = styled.div`
   height: 100%;
   background-color: var(--light-gray);
-  padding: 56px 0;
+  padding: 56px 0 16px 0;
   position: relative;
-  // App.jsx에서 height를 100vh로 두어야 할 것 같다.
+  min-height: 100vh;
 `
 
 const FilterContainer = styled.div`
@@ -175,8 +175,7 @@ const FilterContainer = styled.div`
   align-items: center;
   flex-wrap: wrap;
   gap: 4px;
-  border: 1px solid rgba(0, 0, 0, 0.3);
-  border-top: none;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.3);
   padding: 7px 20px;
   margin-bottom: 16px;
   button {

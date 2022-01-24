@@ -96,8 +96,9 @@ const MyTranslationList = () => {
 
 const Wrap = styled.div`
   height: 100%;
+  min-height: 100vh;
   background-color: var(--light-gray);
-  padding-top: 116px;
+  padding: 116px 0 16px 0;
 `
 
 const ToggleWrap = styled.div`
