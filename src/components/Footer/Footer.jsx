@@ -17,11 +17,13 @@ const Footer = () => {
 }
 
 const Div = styled.div`
+  position: relative;
   text-align: center;
   padding: 58px 0;
   background-color: var(--dark-blue);
   line-height: 1.6;
   font-size: var(--fs-14);
+  z-index: 1;
   & img {
     margin-bottom: 22px;
   }

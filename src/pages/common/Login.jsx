@@ -2,90 +2,371 @@ import React from 'react'
 import styled from 'styled-components'
 import { Button, PageHeader } from '../../components/index'
 import { apis } from '../../utils/axios'
-import loginBg from '../../assets/images/loginBg.png'
-import loginBottom from '../../assets/images/loginBottom.png'
-import loginTopLogo from '../../assets/images/loginTopLogo.png'
-import loginLogo from '../../assets/images/loginLogo.png'
+import { Footer } from '../../components/index'
+import loginBg from '../../assets/images/loginBg.jpg'
+import loginBgBig from '../../assets/images/loginBgBig.jpg'
+import loginLogo from '../../assets/images/loginLogo.svg'
+import arrowRightWhite from '../../assets/icons/arrowRightWhite.svg'
+import arrowRight from '../../assets/images/arrow_right.svg'
+import MainSection2 from '../../assets/images/MainSection2.png'
+import MainSection3 from '../../assets/images/MainSection3.png'
+import MainVisionSection from '../../assets/images/MainVisionSection.jpg'
 
 function Login() {
   return (
-    <>
-      <MainWrap>
-        <PageHeader />
-        <ImgWrap>
-          <Img
-            src={loginTopLogo}
-            alt="번역이 필요 할땐"
-            style={{ marginBottom: '20px' }}
-          />
-          <Img src={loginLogo} alt="번역톡" />
-          <Img src={loginBottom} alt="세상의 모든 번역" />
-        </ImgWrap>
-        <LoginWrap>
-          <ButtonWrap>
+    <LoginPage>
+      <Test>
+        {/* 배포전 삭제 */}
+        <Button
+          content="링크페이지"
+          onClick={() => {
+            location.href = '/test'
+          }}
+        />
+      </Test>
+      <PageHeader />
+
+      {/* 로그인 section */}
+      <LoginSection>
+        <div>
+          <h2>
+            <p>번역이 필요할 땐</p>
+            <img src={loginLogo} alt="번역톡" />
+            <p>실시간 번역 견적 플랫폼</p>
+          </h2>
+          <div>
             <Button
               content="카카오톡으로 로그인"
               onClick={() => apis.login()}
               bgColor="#F9E000"
+              color="#000"
             />
-          </ButtonWrap>
-          <ButtonWrap>
-            <TranslatorLogin onClick={() => apis.translatorLogin()}>
-              번역가로 로그인하기 {`>`}
-            </TranslatorLogin>
-          </ButtonWrap>
-        </LoginWrap>
-        <DeveloperWrap>
-          <ButtonWrap>
-            <Button
-              content="링크페이지"
-              onClick={() => {
-                location.href = '/test'
-              }}
-            />
-          </ButtonWrap>
-        </DeveloperWrap>
-      </MainWrap>
-    </>
+            <a onClick={() => apis.translatorLogin()}>
+              번역가로 로그인하기
+              <i />
+            </a>
+          </div>
+        </div>
+      </LoginSection>
+
+      <TextSection1>
+        <h2>원하는 번역가를 선택할 수 있어요</h2>
+        <p>합리적인 가격과, 평점, 리뷰를 보고 직접 번역가를 선택하세요</p>
+      </TextSection1>
+
+      <TextSection2>
+        <h2>
+          번역을 의뢰하고 <br /> 견적을 비교해 보고
+        </h2>
+        <img src={MainSection2} alt="번역을 의뢰하고 견적을 비교해 보고" />
+      </TextSection2>
+
+      <TextSection3>
+        <div>
+          {window.innerWidth > 630 ? (
+            <h2>
+              나에게 맞는
+              <br />
+              번역 전문가를
+              <br />
+              직접 선택해 보세요
+            </h2>
+          ) : (
+            <h2>
+              나에게 맞는
+              <br />
+              전문가를 선택해 보세요
+            </h2>
+          )}
+          <img src={MainSection3} alt="나에게 맞는 전문가를 선택해 보세요" />
+        </div>
+      </TextSection3>
+
+      <VisionSection>
+        <h2>번역톡은 여러분과 함께 성장합니다.</h2>
+        <p>
+          <span>5000명 이상의 고객이 이용하는</span>
+          <span> 성장 플랫폼 번역톡</span>
+          <span> 지금 바로 이용해 보세요!</span>
+        </p>
+      </VisionSection>
+      <Footer />
+    </LoginPage>
   )
 }
 
-const MainWrap = styled.div`
-  max-width: 360px;
-  height: 748px;
-  margin: auto;
-  background-image: url(${loginBg});
-  background-size: cover;
-  background-repeat: no-repeat;
-  position: relative;
-`
-const ImgWrap = styled.div`
-  margin: 68px auto 0;
-`
-const Img = styled.img`
-  display: block;
-  margin: 10px auto;
-`
-
-const LoginWrap = styled.div`
-  position: relative;
-  top: 205px;
-`
-
-const TranslatorLogin = styled.span`
-  cursor: pointer;
-  color: #fff;
-`
-
-const ButtonWrap = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`
-
-const DeveloperWrap = styled.div`
+// 배포전 삭제
+const Test = styled.div`
   position: fixed;
-  right: 0px;
+  top: 10px;
+  right: 10px;
+  z-index: 10;
+`
+
+// 스크롤 애니메이션
+const LoginPage = styled.div`
+  @keyframes show {
+    from {
+      opacity: 0;
+      transform: translateY(50px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  @keyframes disappear {
+    from {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    to {
+      opacity: 0;
+      transform: translateY(50px);
+    }
+  }
+`
+
+// 로그인 섹션
+const LoginSection = styled.section`
+  height: 100vh;
+  background-image: url(${loginBg});
+  background-position: center;
+  background-size: cover;
+  text-align: center;
+  box-sizing: border-box;
+  > div {
+    position: relative;
+    display: inline-block;
+    height: 100vh;
+    padding-top: 132px;
+    padding-bottom: 132px;
+    p:first-child {
+      font-size: 36px;
+      margin-bottom: 13px;
+      line-height: 1.4;
+    }
+    img {
+      width: 179px;
+    }
+    p:nth-child(3) {
+      margin-top: 20px;
+      color: var(--main-color);
+      font-size: 20px;
+      font-weight: 800;
+    }
+    /* 카카오 로그인, 번역가로 로그인 */
+    div {
+      position: absolute;
+      bottom: 100px;
+      left: 50%;
+      width: 100%;
+      transform: translateX(-50%);
+      button {
+        display: block;
+        bottom: 10px;
+        max-width: 320px;
+        margin: 11px auto;
+      }
+      a {
+        padding-top: 15px;
+        color: #fff;
+        line-height: 1.2;
+        font-size: var(--fs-18);
+        cursor: pointer;
+        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.4);
+      }
+      i {
+        display: inline-block;
+        width: 16px;
+        height: 16px;
+        background-image: url(${arrowRightWhite});
+        content: '';
+        transition: all 0.5s;
+      }
+      &:hover i {
+        transform: translateX(5px);
+      }
+    }
+    @media screen and (min-width: 630px) {
+      display: inline-block;
+      right: 20%;
+      p:first-child {
+        font-weight: 300;
+        font-size: 49px;
+      }
+      img {
+        width: 323px;
+      }
+      p:nth-child(3) {
+        font-size: 30px;
+      }
+      div {
+        bottom: 100px;
+        button {
+          margin: 14px auto;
+        }
+        a {
+          font-size: 24px;
+          color: #000;
+          text-shadow: none;
+        }
+        i {
+          margin-bottom: -2px;
+          width: 24px;
+          height: 24px;
+          background-image: url(${arrowRight});
+        }
+      }
+    }
+  }
+  @media screen and (min-width: 630px) {
+    margin-top: 80px;
+    background-image: url(${loginBgBig});
+    height: 748px;
+    > div {
+      height: 748px;
+      padding-top: 241px;
+    }
+  }
+`
+
+// TextSection1
+const TextSection1 = styled.section`
+  text-align: center;
+  h2 {
+    width: 250px;
+    margin: 50px auto 14px;
+    color: var(--main-color);
+    line-height: 1.4;
+    font-weight: 700;
+    font-size: 36px;
+  }
+  p {
+    margin: 0 auto 50px;
+    width: 260px;
+    line-height: 1.36;
+    font-size: 20px;
+  }
+  @media screen and (min-width: 630px) {
+    h2,
+    p {
+      width: 100%;
+    }
+  }
+`
+
+// section2
+const TextSection2 = styled.section`
+  height: 509px;
+  text-align: center;
+  background-color: var(--light-gray);
+  padding: 56px;
+  h2 {
+    padding-bottom: 32px;
+    font-weight: bold;
+    font-size: 28px;
+    line-height: 1.6;
+  }
+  img {
+    width: 320px;
+    transition: all 0.5s;
+  }
+  @media screen and (min-width: 768px) {
+    display: flex;
+    height: 592px;
+    padding: 100px 0;
+    justify-content: center;
+    flex-direction: row-reverse;
+    h2 {
+      margin-top: auto;
+      padding-bottom: 20px;
+      color: var(--main-color);
+      font-size: 45px;
+      text-align: left;
+      white-space: nowrap;
+      &::before {
+        display: block;
+        content: '전문가에게';
+      }
+    }
+    img {
+      margin-right: 20px;
+      width: 412px;
+    }
+  }
+`
+
+// section3
+const TextSection3 = styled.section`
+  height: 509px;
+  background-color: var(--main-color);
+  text-align: center;
+  h2 {
+    padding: 56px 0 32px;
+    color: #fff;
+    line-height: 1.6;
+    font-size: 28px;
+    font-weight: 700;
+    white-space: nowrap;
+  }
+  img {
+    width: 208px;
+    transition: all 0.5s;
+  }
+  @media screen and (min-width: 768px) {
+    height: 592px;
+    padding: 119px 0 0;
+    padding-top: 119px;
+    div {
+      display: flex;
+      justify-content: center;
+      h2 {
+        margin: 140px 63px 0 0;
+        font-size: 45px;
+        text-align: right;
+      }
+      img {
+        width: 359px;
+      }
+    }
+  }
+`
+
+// visionSection
+const VisionSection = styled.section`
+  position: relative;
+  text-align: center;
+  padding: 56px 0;
+  color: #fff;
+  background-image: url(${MainVisionSection});
+  background-repeat: no-repeat;
+  background-size: 100%;
+  background-position: 50% 20%;
+  z-index: 1;
+  h2 {
+    margin: 0 auto 18px;
+    font-weight: bold;
+    width: 245px;
+    font-size: 32px;
+    line-height: 1.4;
+  }
+  p {
+    margin: auto;
+    font-size: 18px;
+    line-height: 1.4;
+  }
+  span {
+    display: block;
+  }
+  @media screen and (min-width: 630px) {
+    h2 {
+      width: 100%;
+    }
+    span {
+      display: inline;
+    }
+  }
 `
 
 export default Login
