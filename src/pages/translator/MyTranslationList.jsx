@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import styled from 'styled-components'
 import {
   EstimateCard,
   NavigationTranslator,
@@ -63,10 +64,15 @@ const MyTranslationList = () => {
   }, [clickNumber])
 
   return (
-    <div>
+    <Wrap>
       <PageHeader title="내 번역" />
-      {/* toggle menu 목록 onClick으로 내려주어야 함 */}
-      <ToggleMenu menu={menu} click={clickNumber} onClick={handleToggleMenu} />
+      <ToggleWrap>
+        <ToggleMenu
+          menu={menu}
+          click={clickNumber}
+          onClick={handleToggleMenu}
+        />
+      </ToggleWrap>
       {estimates
         .filter(el => el.status === clickedStatus)
         .map(estimate => (
@@ -84,8 +90,31 @@ const MyTranslationList = () => {
         ))}
       <NavigationTranslator />
       <TopDownButton />
-    </div>
+    </Wrap>
   )
 }
+
+const Wrap = styled.div`
+  height: 100%;
+  background-color: var(--light-gray);
+  padding-top: 116px;
+`
+
+const ToggleWrap = styled.div`
+  width: 100%;
+  min-width: 360px;
+  max-width: 640px;
+  position: fixed;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  margin-top: 56px;
+  background-color: var(--white);
+  z-index: 5;
+  & > div {
+    padding-top: 13px;
+    margin: 0;
+  }
+`
 
 export default MyTranslationList
