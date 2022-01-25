@@ -14,7 +14,7 @@ const GlobalStyles = createGlobalStyle`
     ol, ul, li {
         list-style: none;
     }
-    body, button{  
+    body * {  
         font-family: 'Noto Sans KR', sans-serif;
     }
 
