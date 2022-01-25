@@ -6,6 +6,7 @@ import React, { useState } from 'react'
 import {
   Button,
   FileInput,
+  StatusMessage,
   SubPageHeader,
   TextAreaInput,
   TextInput,
@@ -51,6 +52,7 @@ const ClientRequestForm = props => {
       isText,
       needs,
     } = requestForm
+
     clientAPIs
       .estimateRequest(
         field,
@@ -70,12 +72,13 @@ const ClientRequestForm = props => {
       })
       .catch(e => alert(`${e} already exist id '${requestForm}`))
   }
-
   return (
     <div>
       <SubPageHeader title="번역 요청 Form" />
       <Form>
         <p>번역 요청 의뢰서</p>
+
+        {/* 분류 */}
         <SelectInput
           name="field"
           value={requestForm.field}
@@ -83,12 +86,26 @@ const ClientRequestForm = props => {
           options={fields}
           onChange={onChange}
         />
+        <StatusMessage
+          text="분류를 선택해 주세요"
+          icon="info"
+          color="#FF5F5F"
+        />
+
+        {/* 요청날짜 */}
         <TextInput
           name="deadline"
           value={requestForm.deadline}
           type="date"
           onChange={onChange}
         />
+        <StatusMessage
+          text="요청 날짜를 선택해 주세요"
+          icon="info"
+          color="#FF5F5F"
+        />
+
+        {/* 번역 언어 */}
         <div>
           <SelectInput
             name="beforeLanguage"
@@ -105,6 +122,13 @@ const ClientRequestForm = props => {
             onChange={onChange}
           />
         </div>
+        <StatusMessage
+          text="번역 언어를 선택해 주세요"
+          icon="info"
+          color="#FF5F5F"
+        />
+
+        {/* 이메일 입력 */}
         <TextInput
           name="email"
           value={requestForm.email}
@@ -112,6 +136,18 @@ const ClientRequestForm = props => {
           type="email"
           onChange={onChange}
         />
+        <StatusMessage
+          text="이메일을 입력해 주세요"
+          icon="info"
+          color="#FF5F5F"
+        />
+        <StatusMessage
+          text="이메일 형식이 틀렸습니다."
+          icon="info"
+          color="#FF5F5F"
+        />
+
+        {/* 전화번호 입력 */}
         <TextInput
           name="phoneNumber"
           value={requestForm.phoneNumber}
@@ -119,14 +155,20 @@ const ClientRequestForm = props => {
           type="tel"
           onChange={onChange}
         />
+        <StatusMessage
+          text="전화번호를 입력해 주세요"
+          icon="info"
+          color="#FF5F5F"
+        />
+
+        {/* 번역할 파일, url */}
         {props.isText ? (
           <FileInput
             label="파일 올리기(.txt)"
             value={requestForm.requestFile}
             useUploadName
             onChange={onChange}
-            id="input"
-            accept="text"
+            id="youtube"
           />
         ) : (
           <TextInput
@@ -136,6 +178,8 @@ const ClientRequestForm = props => {
             onChange={onChange}
           />
         )}
+
+        {/* 세부사항 요청 */}
         <TextAreaInput
           name="needs"
           value={requestForm.needs}
@@ -149,7 +193,7 @@ const ClientRequestForm = props => {
 }
 
 const Form = styled.form`
-  margin: 90px 20px 0;
+  margin: 90px 20px 20px;
   p {
     margin-bottom: 27px;
     font-size: var(--fs-18);
@@ -179,4 +223,5 @@ const Form = styled.form`
 ClientRequestForm.propTypes = {
   isText: propTypes.bool,
 }
+
 export default ClientRequestForm
