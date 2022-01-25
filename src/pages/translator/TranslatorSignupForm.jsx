@@ -13,10 +13,10 @@ import { apis } from '../../utils/axios'
 import defaultProfile from '../../assets/images/TranslatorProfile.png'
 import { language } from '../../constant/selectOptions'
 import styled from 'styled-components'
+import { ReactComponent as AddIcon } from '../../assets/icons/Add.svg'
 
 const initialState = {
   name: '',
-  career: '',
   profileFile:
     'https://tistory1.daumcdn.net/tistory/user/264290/profile/profileImg?v=1635480821401',
   language: '',
@@ -77,23 +77,30 @@ const TranslatorSignupForm = () => {
     setSelectInputs(prev => [...prev, prev.length.toString()])
   }
 
-  const removeSelectInput = () => {
+  const removeSelectInput = index => {
     if (selectInputs.length === 1) return // 기본 한 개는 가지고 있어야 하므로
 
     // 가능 언어 추가했다가 아직 선택 안했을 경우에도 삭제가 되어야 하므로
     // languages object 길이 early return 보다 먼저 해준다.
-    setSelectInputs(selectInputs.slice(0, selectInputs.length - 1))
+
+    setSelectInputs(
+      selectInputs.filter((el, idx) => idx !== index).map((el, index) => index),
+    )
 
     if (Object.keys(languages).length === 1) return
 
     // 그냥 바로 수정 하면 당연히 안될 듯 그래서 복제함
     const tempLanguages = { ...languages }
-    delete tempLanguages[Object.keys(tempLanguages).length - 1]
-    setLanguages(tempLanguages)
+    delete tempLanguages[index]
+    const entries = Object.entries(tempLanguages).map(([, lang], index) => [
+      index.toString(),
+      lang,
+    ])
+    setLanguages(Object.fromEntries(entries))
   }
 
   useEffect(() => {
-    const language = Object.values(languages).join(',')
+    const language = Object.values(languages).join(', ')
     setFormData({ ...formData, language })
   }, [languages])
 
@@ -121,30 +128,6 @@ const TranslatorSignupForm = () => {
       </ProfileWrap>
       <Form onSubmit={handleSubmit}>
         <TextInput name="name" placeholder="이름" onChange={handleChange} />
-        <TextInput name="career" placeholder="경력" onChange={handleChange} />
-        {selectInputs.map((select, index) => (
-          <SelectInput
-            key={select}
-            id="language"
-            name={select.toString()}
-            value={languages[index]}
-            onChange={handleSelectChange}
-            defaultOption="가능언어"
-            options={language}
-          />
-        ))}
-        <ButtonWrap>
-          <Button
-            type="button"
-            content="가능언어 추가"
-            onClick={addSelectInput}
-          />
-          <Button
-            type="button"
-            content="가능언어 삭제"
-            onClick={removeSelectInput}
-          />
-        </ButtonWrap>
         <TextInput
           name="email"
           type="email"
@@ -157,6 +140,36 @@ const TranslatorSignupForm = () => {
           placeholder="전화번호"
           onChange={handleChange}
         />
+        {selectInputs.map((select, index) => (
+          <SelectContainer key={select}>
+            <SelectInput
+              id="language"
+              name={select.toString()}
+              value={languages[index]}
+              onChange={handleSelectChange}
+              defaultOption="가능언어"
+              options={language}
+            />
+            {index ? (
+              <Button
+                type="button"
+                content="삭제"
+                onClick={() => removeSelectInput(index)}
+                border
+              />
+            ) : null}
+          </SelectContainer>
+        ))}
+        <ButtonWrap>
+          <Button
+            type="button"
+            content="가능언어 추가"
+            onClick={addSelectInput}
+            bgColor="#fff"
+            color="#3D51FF"
+          />
+          <AddIcon />
+        </ButtonWrap>
         <TextAreaInput
           name="introduce"
           placeholder="자기소개"
@@ -228,17 +241,28 @@ const Form = styled.form`
   }
 `
 
+const SelectContainer = styled.div`
+  display: flex;
+  gap: 8px;
+  button {
+    max-width: 63px;
+    font-size: var(--fs-14);
+    font-weight: normal;
+  }
+`
+
 const ButtonWrap = styled.div`
   margin-top: 0;
+  position: relative;
   & > button {
     font-size: var(--fs-14);
     font-weight: normal;
-    width: 50%;
-    padding: 7px 12px;
-    background-color: var(--white);
-    color: var(--gray-c4);
-    border: 1px solid var(--gray-c4);
-    margin: 0;
+  }
+  svg {
+    position: absolute;
+    top: 12px;
+    right: 35%;
+    pointer-events: none;
   }
 `
 
