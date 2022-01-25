@@ -5,13 +5,16 @@
 */
 import React, { useEffect, useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
+import styled from 'styled-components'
 import {
   EstimateCardMin,
   NavigationUser,
-  PageHeader,
   PriceCard,
+  StatusMessage,
+  SubPageHeader,
 } from '../../components'
 import { clientAPIs } from '../../utils/axios'
+import { timeMessage } from '../../utils/timeCalculation'
 
 const ClientEstimateList = () => {
   const navigate = useNavigate()
@@ -35,10 +38,29 @@ const ClientEstimateList = () => {
     navigate('/client/estimate/detail', { state: { requestId, estimateId } })
   }
 
+  // 최저가 구하기
+  const lowestPrice = () => {
+    const price = estimate.map(el => el.offerPrice)
+    return Math.min(...price)
+  }
+
   return (
-    <>
-      <PageHeader title="받은견적" />
-      <PriceCard label="견적 최저가" displayPrice={1000000} />
+    <ClientEstimateListPage>
+      <SubPageHeader title="받은견적" />
+      {estimate.length === 0 ? (
+        <p>받은 견적이 없습니다.</p>
+      ) : (
+        <section>
+          <h2>받은 견적</h2>
+          <StatusMessage
+            text={timeMessage(location.state.createdTime)}
+            color={'#FF5F5F'}
+            icon="alarm"
+          />
+          <PriceCard label="견적 최저가" displayPrice={lowestPrice()} />
+          <span>견적 리스트</span>
+        </section>
+      )}
       {estimate.map(translator => (
         <EstimateCardMin
           key={translator.estimateId}
@@ -54,8 +76,32 @@ const ClientEstimateList = () => {
         />
       ))}
       <NavigationUser />
-    </>
+    </ClientEstimateListPage>
   )
 }
+
+const ClientEstimateListPage = styled.div`
+  min-height: 100vh;
+  padding: 56px 0 72px;
+  section {
+    > h2 {
+      height: 44px;
+      margin: 0 20px;
+      line-height: 44px;
+      font-size: var(--fs-18);
+      font-weight: bold;
+    }
+    > div:nth-child(2) {
+      justify-content: end;
+      margin: 12px 25px 5px;
+    }
+    > span {
+      display: block;
+      font-size: var(--fs-14);
+      font-weight: 500;
+      margin: 37px 20px 10px;
+    }
+  }
+`
 
 export default ClientEstimateList

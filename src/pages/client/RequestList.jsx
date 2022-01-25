@@ -34,8 +34,10 @@ const RequestList = () => {
 
   // card클릭 시 받은 견적 list로 이동
   // 요청id state로 넘김
-  const cardClick = num => {
-    navigate('/client/estimate/list', { state: { requestId: num } })
+  const cardClick = estimate => {
+    navigate('/client/estimate/list', {
+      state: { requestId: estimate.id, createdTime: estimate.createdAt },
+    })
   }
 
   // 토글 메뉴 선택된 넘버 set
@@ -77,7 +79,7 @@ const RequestList = () => {
               isText={estimate.isText}
               deadline={estimate.deadline}
               createdTime={estimate.createdAt}
-              onClick={() => cardClick(estimate.id)}
+              onClick={() => cardClick(estimate)}
             />
           ))}
       </ul>
