@@ -56,28 +56,20 @@ function Login() {
 
       <TextSection2>
         <h2>
-          번역을 의뢰하고 <br /> 견적을 비교해 보고
+          <span>전문가에게</span>
+          <span>번역을 의뢰하고</span>
+          <span>견적을 비교해 보고</span>
         </h2>
         <img src={MainSection2} alt="번역을 의뢰하고 견적을 비교해 보고" />
       </TextSection2>
 
       <TextSection3>
         <div>
-          {window.innerWidth > 630 ? (
-            <h2>
-              나에게 맞는
-              <br />
-              번역 전문가를
-              <br />
-              직접 선택해 보세요
-            </h2>
-          ) : (
-            <h2>
-              나에게 맞는
-              <br />
-              전문가를 선택해 보세요
-            </h2>
-          )}
+          <h2>
+            <span>나에게 맞는</span>
+            <span>번역 전문가를</span>
+            <span>직접 선택해 보세요</span>
+          </h2>
           <img src={MainSection3} alt="나에게 맞는 전문가를 선택해 보세요" />
         </div>
       </TextSection3>
@@ -258,12 +250,13 @@ const TextSection1 = styled.section`
 
 // section2
 const TextSection2 = styled.section`
-  height: 509px;
   text-align: center;
   background-color: var(--light-gray);
-  padding: 56px;
+  padding: 56px 20px;
   h2 {
     padding-bottom: 32px;
+    max-width: 300px;
+    margin: auto;
     font-weight: bold;
     font-size: 28px;
     line-height: 1.6;
@@ -272,23 +265,23 @@ const TextSection2 = styled.section`
     width: 320px;
     transition: all 0.5s;
   }
+  span {
+    display: inline-block;
+  }
   @media screen and (min-width: 768px) {
     display: flex;
-    height: 592px;
     padding: 100px 0;
     justify-content: center;
     flex-direction: row-reverse;
     h2 {
-      margin-top: auto;
+      margin: auto 0 0;
       padding-bottom: 20px;
-      color: var(--main-color);
       font-size: 45px;
       text-align: left;
       white-space: nowrap;
-      &::before {
-        display: block;
-        content: '전문가에게';
-      }
+    }
+    span {
+      display: block;
     }
     img {
       margin-right: 20px;
@@ -313,6 +306,9 @@ const TextSection3 = styled.section`
   img {
     width: 208px;
     transition: all 0.5s;
+  }
+  span {
+    display: block;
   }
   @media screen and (min-width: 768px) {
     height: 592px;
@@ -341,8 +337,8 @@ const VisionSection = styled.section`
   color: #fff;
   background-image: url(${MainVisionSection});
   background-repeat: no-repeat;
-  background-size: 100%;
-  background-position: 50% 20%;
+  background-size: cover;
+  background-position: 35% 20%;
   z-index: 1;
   h2 {
     margin: 0 auto 18px;
