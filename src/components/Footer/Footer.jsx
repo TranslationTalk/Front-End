@@ -22,13 +22,14 @@ const Div = styled.div`
   padding: 58px 0;
   background-color: var(--dark-blue);
   line-height: 1.6;
-  font-size: var(--fs-14);
+  font-size: 14px;
+  letter-spacing: -0.015em;
   z-index: 1;
   & img {
     margin-bottom: 22px;
   }
   & p {
-    width: 369px;
+    width: 359px;
     margin: auto;
     color: #fff;
     font-weight: 400;

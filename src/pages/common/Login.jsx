@@ -60,7 +60,10 @@ function Login() {
           <span>번역을 의뢰하고</span>
           <span>견적을 비교해 보고</span>
         </h2>
-        <img src={MainSection2} alt="번역을 의뢰하고 견적을 비교해 보고" />
+        <img
+          src={MainSection2}
+          alt="전문가에게 번역을 의뢰하고 견적을 비교해 보고"
+        />
       </TextSection2>
 
       <TextSection3>
@@ -75,9 +78,12 @@ function Login() {
       </TextSection3>
 
       <VisionSection>
-        <h2>번역톡은 여러분과 함께 성장합니다.</h2>
+        <h2>
+          <span>번역톡은 여러분과</span>
+          <span> 함께 성장합니다</span>
+        </h2>
         <p>
-          <span>5000명 이상의 고객이 이용하는</span>
+          <span>수 많은 고객이 이용하는</span>
           <span> 성장 플랫폼 번역톡</span>
           <span> 지금 바로 이용해 보세요!</span>
         </p>
@@ -125,6 +131,7 @@ const LoginSection = styled.section`
   background-image: url(${loginBg});
   background-position: center;
   background-size: cover;
+  background-repeat: no-repeat;
   text-align: center;
   box-sizing: border-box;
   > div {
@@ -180,7 +187,7 @@ const LoginSection = styled.section`
         transform: translateX(5px);
       }
     }
-    @media screen and (min-width: 630px) {
+    @media screen and (min-width: 640px) {
       display: inline-block;
       right: 20%;
       p:first-child {
@@ -212,7 +219,7 @@ const LoginSection = styled.section`
       }
     }
   }
-  @media screen and (min-width: 630px) {
+  @media screen and (min-width: 640px) {
     margin-top: 80px;
     background-image: url(${loginBgBig});
     height: 748px;
@@ -240,7 +247,7 @@ const TextSection1 = styled.section`
     line-height: 1.36;
     font-size: 20px;
   }
-  @media screen and (min-width: 630px) {
+  @media screen and (min-width: 640px) {
     h2,
     p {
       width: 100%;
@@ -355,7 +362,7 @@ const VisionSection = styled.section`
   span {
     display: block;
   }
-  @media screen and (min-width: 630px) {
+  @media screen and (min-width: 640px) {
     h2 {
       width: 100%;
     }
