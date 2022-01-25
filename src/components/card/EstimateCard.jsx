@@ -14,12 +14,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { StatusMessage, Tag } from '../index'
-
-// 현재시간
-const currentTime = new Date()
-const currentDate = currentTime.getDate()
-const currentHour = currentTime.getHours()
-const currentMin = currentTime.getMinutes()
+import { timeMessage } from '../../utils/timeCalculation'
 
 const EstimateCard = prop => {
   const {
@@ -31,38 +26,6 @@ const EstimateCard = prop => {
     createdTime, //생성날짜
     onClick,
   } = prop
-
-  // list의 생성 날짜
-  const createdDay = new Date(createdTime).getDate()
-  const createdHour = new Date(createdTime).getHours()
-  const createdMin = new Date(createdTime).getMinutes()
-
-  // 생성날짜-3일
-  let countDay = createdDay + 3 - currentDate
-  let countHour = createdHour - currentHour
-  let countMin = createdMin - currentMin
-
-  // 희망 시간
-  const desiredYear = new Date(deadline).getFullYear()
-  const desiredHours = new Date(deadline).getHours()
-  const desiredMinutes = new Date(deadline).getMinutes()
-  console.log(desiredYear, desiredHours, desiredMinutes)
-
-  // 마감시간 메시지
-  let timeMessage
-  if (countMin < 0) {
-    countHour--
-    countMin += 60
-  }
-  if (countHour < 0) {
-    countDay--
-    countHour += 24
-  }
-  if (countDay < 0) {
-    timeMessage = '견적 기간이 끝났습니다.'
-  } else {
-    timeMessage = ` ${countDay}일 ${countHour}시간 ${countMin}분 후 마감`
-  }
 
   return (
     <Card onClick={onClick}>
@@ -99,12 +62,14 @@ const EstimateCard = prop => {
 
       {/* 셋째줄 희망날짜, 마감시간*/}
       <div>
-        <span>
-          희망날짜 {desiredYear}.{desiredHours}.{desiredMinutes}
-        </span>
+        <span>희망날짜 {deadline.replace(/-/g, '.')}</span>
         <span>
           {createdTime && (
-            <StatusMessage text={timeMessage} color="red" icon="alarm" />
+            <StatusMessage
+              text={timeMessage(createdTime)}
+              color="red"
+              icon="alarm"
+            />
           )}
         </span>
       </div>

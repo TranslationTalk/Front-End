@@ -56,36 +56,34 @@ function Login() {
 
       <TextSection2>
         <h2>
-          번역을 의뢰하고 <br /> 견적을 비교해 보고
+          <span>전문가에게</span>
+          <span>번역을 의뢰하고</span>
+          <span>견적을 비교해 보고</span>
         </h2>
-        <img src={MainSection2} alt="번역을 의뢰하고 견적을 비교해 보고" />
+        <img
+          src={MainSection2}
+          alt="전문가에게 번역을 의뢰하고 견적을 비교해 보고"
+        />
       </TextSection2>
 
       <TextSection3>
         <div>
-          {window.innerWidth > 630 ? (
-            <h2>
-              나에게 맞는
-              <br />
-              번역 전문가를
-              <br />
-              직접 선택해 보세요
-            </h2>
-          ) : (
-            <h2>
-              나에게 맞는
-              <br />
-              전문가를 선택해 보세요
-            </h2>
-          )}
+          <h2>
+            <span>나에게 맞는</span>
+            <span>번역 전문가를</span>
+            <span>직접 선택해 보세요</span>
+          </h2>
           <img src={MainSection3} alt="나에게 맞는 전문가를 선택해 보세요" />
         </div>
       </TextSection3>
 
       <VisionSection>
-        <h2>번역톡은 여러분과 함께 성장합니다.</h2>
+        <h2>
+          <span>번역톡은 여러분과</span>
+          <span> 함께 성장합니다</span>
+        </h2>
         <p>
-          <span>5000명 이상의 고객이 이용하는</span>
+          <span>수 많은 고객이 이용하는</span>
           <span> 성장 플랫폼 번역톡</span>
           <span> 지금 바로 이용해 보세요!</span>
         </p>
@@ -133,6 +131,7 @@ const LoginSection = styled.section`
   background-image: url(${loginBg});
   background-position: center;
   background-size: cover;
+  background-repeat: no-repeat;
   text-align: center;
   box-sizing: border-box;
   > div {
@@ -188,7 +187,7 @@ const LoginSection = styled.section`
         transform: translateX(5px);
       }
     }
-    @media screen and (min-width: 630px) {
+    @media screen and (min-width: 640px) {
       display: inline-block;
       right: 20%;
       p:first-child {
@@ -220,7 +219,7 @@ const LoginSection = styled.section`
       }
     }
   }
-  @media screen and (min-width: 630px) {
+  @media screen and (min-width: 640px) {
     margin-top: 80px;
     background-image: url(${loginBgBig});
     height: 748px;
@@ -248,7 +247,7 @@ const TextSection1 = styled.section`
     line-height: 1.36;
     font-size: 20px;
   }
-  @media screen and (min-width: 630px) {
+  @media screen and (min-width: 640px) {
     h2,
     p {
       width: 100%;
@@ -258,12 +257,13 @@ const TextSection1 = styled.section`
 
 // section2
 const TextSection2 = styled.section`
-  height: 509px;
   text-align: center;
   background-color: var(--light-gray);
-  padding: 56px;
+  padding: 56px 20px;
   h2 {
     padding-bottom: 32px;
+    max-width: 300px;
+    margin: auto;
     font-weight: bold;
     font-size: 28px;
     line-height: 1.6;
@@ -272,23 +272,23 @@ const TextSection2 = styled.section`
     width: 320px;
     transition: all 0.5s;
   }
+  span {
+    display: inline-block;
+  }
   @media screen and (min-width: 768px) {
     display: flex;
-    height: 592px;
     padding: 100px 0;
     justify-content: center;
     flex-direction: row-reverse;
     h2 {
-      margin-top: auto;
+      margin: auto 0 0;
       padding-bottom: 20px;
-      color: var(--main-color);
       font-size: 45px;
       text-align: left;
       white-space: nowrap;
-      &::before {
-        display: block;
-        content: '전문가에게';
-      }
+    }
+    span {
+      display: block;
     }
     img {
       margin-right: 20px;
@@ -313,6 +313,9 @@ const TextSection3 = styled.section`
   img {
     width: 208px;
     transition: all 0.5s;
+  }
+  span {
+    display: block;
   }
   @media screen and (min-width: 768px) {
     height: 592px;
@@ -341,8 +344,8 @@ const VisionSection = styled.section`
   color: #fff;
   background-image: url(${MainVisionSection});
   background-repeat: no-repeat;
-  background-size: 100%;
-  background-position: 50% 20%;
+  background-size: cover;
+  background-position: 35% 20%;
   z-index: 1;
   h2 {
     margin: 0 auto 18px;
@@ -359,7 +362,7 @@ const VisionSection = styled.section`
   span {
     display: block;
   }
-  @media screen and (min-width: 630px) {
+  @media screen and (min-width: 640px) {
     h2 {
       width: 100%;
     }

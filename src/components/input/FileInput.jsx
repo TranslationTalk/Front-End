@@ -41,7 +41,7 @@ const FileInput = ({
       </Label>
       {useUploadName && (
         <UploadName
-          onChange={handleFileChange}
+          onChange={onChange}
           value={fileName}
           placeholder="선택된 파일 없음"
         />
@@ -50,7 +50,7 @@ const FileInput = ({
         id={id}
         type="file"
         name={name}
-        onChange={onChange}
+        onChange={handleFileChange}
         accept={accept === 'text' ? '.txt' : `${accept}/*`}
       />
     </InputContainer>
@@ -73,6 +73,7 @@ const Label = styled.label`
   text-align: center;
   font-size: ${props => (props.fontSize ? props.fontSize : '14px')};
   color: var(--white);
+  cursor: pointer;
 `
 
 const UploadName = styled.input`
