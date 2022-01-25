@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
 import {
-  Button,
+  // Button,
   CheckBoxInput,
   EstimateCard,
   NavigationTranslator,
@@ -14,6 +14,8 @@ import { apis } from '../../utils/axios'
 import { language as languages } from '../../constant/selectOptions'
 import { ReactComponent as CloseBtn } from '../../assets/icons/Close.svg'
 import { ReactComponent as CheckedIcon } from '../../assets/icons/Check.svg'
+import { ReactComponent as ArrowDown } from '../../assets/icons/ArrowDown.svg'
+import { ReactComponent as ArrowUp } from '../../assets/icons/ArrowUpBlue.svg'
 
 const TranslationList = () => {
   const [estimates, setEstimates] = useState([])
@@ -21,22 +23,35 @@ const TranslationList = () => {
   const navigate = useNavigate()
   const [showModal, setShowModal] = useState(false)
   const [capableLanguages, setCapableLanguages] = useState([])
+  const [height, setHeight] = useState(0)
 
   // mobx에서 mobx에 있는 함수를 사용해서 비동기 처리해야함
   // 그 함수로 useEffect 안에도 넣고, PageHeader의 reloadEvent에도 넣어야 한다.
   useEffect(() => {
-    const fetchEstimateList = async () => {
+    const fetchEstimatesAndFiltering = async () => {
       const {
         data: { data },
       } = await apis.estimatesList() // sendEstimate이것으로 바꿔야 하나 지금 프로필을 만들 수 없어 임시로 client 요청하는 중
-      console.log(data)
+
       setEstimates(data)
-      setFilteredEstimates(data)
+
+      // 내 정보에서 가능 언어 가져옴
+      const {
+        data: { data: myInfo },
+      } = await apis.getTranslatorMypage()
+
+      // 가능언어를 필터 초기 세팅으로 두고, 화면에도 필터링된 결과를 보여줌
+      const languagesArr = myInfo.language.split(', ')
+      setCapableLanguages(languagesArr)
+      setFilteredEstimates(
+        data.filter(
+          el =>
+            languagesArr.includes(el.beforeLanguage) ||
+            languagesArr.includes(el.afterLanguage),
+        ),
+      )
     }
-    fetchEstimateList()
-    // 필터 초기화
-    setCapableLanguages([]) // 지금은 아예 초기화지만, 데이터(가능 언어) 받아와서 넣어주어야 한다.
-    setFilteredEstimates([])
+    fetchEstimatesAndFiltering()
   }, [])
 
   const handleClick = estimate => {
@@ -57,7 +72,7 @@ const TranslationList = () => {
   }
 
   const openModal = () => {
-    setShowModal(true)
+    setShowModal(prev => !prev)
   }
 
   const closeModal = () => {
@@ -81,21 +96,29 @@ const TranslationList = () => {
     )
   }, [capableLanguages])
 
+  const callbackRef = element => {
+    if (element) {
+      setHeight(element.getBoundingClientRect().height)
+    }
+  }
+
+  // useEffect(()=>{
+  //   filterRef.current.
+  // },[height])
+
   return (
     <>
       <PageHeader title="번역 리스트" useReloadButton />
-      <Wrap>
-        <FilterContainer>
-          <Button
-            content="언어선택"
-            bgColor="#fff"
-            color="#000"
-            onClick={openModal}
-          />
-          {capableLanguages.map(language => (
-            <Tag key={language} text={language} bgColor="#fff" color="#000" />
-          ))}
-        </FilterContainer>
+      <FilterContainer clicked={showModal} ref={callbackRef}>
+        <button onClick={openModal}>
+          <span>언어 선택</span>
+          {showModal ? <ArrowUp /> : <ArrowDown />}
+        </button>
+        {capableLanguages.map(language => (
+          <Tag key={language} text={language} bgColor="#fff" color="#000" />
+        ))}
+      </FilterContainer>
+      <Wrap paddingTop={height}>
         {filterdEstimates.map(estimate => (
           <EstimateCard
             key={estimate.id}
@@ -112,46 +135,35 @@ const TranslationList = () => {
         <TopDownButton />
         <NavigationTranslator />
       </Wrap>
-      {showModal && (
-        <Modal>
-          <ModalContent>
-            <Title>
-              <h3>언어 선택</h3>
-              <CloseBtn onClick={closeModal} />
-            </Title>
-            <Content>
-              {languages.map(language => (
-                <CheckBoxWrap
-                  key={language}
-                  checked={capableLanguages.includes(language)}
-                >
-                  <CheckBoxInput
-                    name="capableLanguages"
-                    id={language}
-                    onChange={handleChangeLanguages}
-                    label={language}
-                    checked={capableLanguages.includes(language)}
-                  />
-                  <span>
-                    {capableLanguages.includes(language) && <CheckedIcon />}
-                  </span>
-                </CheckBoxWrap>
-              ))}
-            </Content>
-          </ModalContent>
-        </Modal>
-      )}
+      <ModalBackground showModal={showModal} />
+      <Modal showModal={showModal}>
+        <Title>
+          <h3>언어 선택</h3>
+          <CloseBtn onClick={closeModal} />
+        </Title>
+        <Content>
+          {languages.map(language => (
+            <CheckBoxWrap
+              key={language}
+              checked={capableLanguages.includes(language)}
+            >
+              <CheckBoxInput
+                name="capableLanguages"
+                id={language}
+                onChange={handleChangeLanguages}
+                label={language}
+                checked={capableLanguages.includes(language)}
+              />
+              <span>
+                {capableLanguages.includes(language) && <CheckedIcon />}
+              </span>
+            </CheckBoxWrap>
+          ))}
+        </Content>
+      </Modal>
     </>
   )
 }
-
-const Wrap = styled.div`
-  height: 100%;
-  background-color: var(--light-gray);
-  padding: 56px 0 78px 0;
-  position: relative;
-  min-height: 100vh;
-`
 
 const FilterContainer = styled.div`
   background-color: var(--white);
@@ -162,20 +174,34 @@ const FilterContainer = styled.div`
   gap: 4px;
   border-bottom: 1px solid rgba(0, 0, 0, 0.3);
   padding: 7px 20px;
-  margin-bottom: 16px;
+  position: fixed;
+  top: 56px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 5;
+  min-width: 360px;
+  max-width: 640px;
   button {
+    background-color: var(--white);
     font-size: var(--fs-14);
     font-weight: normal;
+    color: ${props => (props.clicked ? '#3D51FF' : '#000')};
     width: fit-content;
     height: fit-content;
     border-radius: 15px;
-    border: 1px solid rgba(0, 0, 0, 0.3);
-    padding: 2px 8px;
+    padding: 3px 6px;
+    border: 1px solid
+      ${props => (props.clicked ? '#3D51FF' : 'rgba(0, 0, 0, 0.3)')};
     margin-right: 4px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     transition: all 0.3s linear;
+    cursor: pointer;
   }
   button:hover {
-    background-color: var(--gray-c4);
+    color: var(--main-color);
+    border: 1px solid var(--main-color);
   }
   & > div {
     padding: 6px 8px;
@@ -185,30 +211,44 @@ const FilterContainer = styled.div`
   }
 `
 
-const Modal = styled.div`
-  position: fixed;
+const Wrap = styled.div`
+  height: 100%;
+  background-color: var(--light-gray);
+  padding: ${props => props.paddingTop + 56}px 0 78px 0;
+  position: relative;
+  min-height: 100vh;
+`
+
+const ModalBackground = styled.div`
+  position: absolute;
   top: 0;
   left: 50%;
   transform: translateX(-50%);
-  background-color: rgba(0, 0, 0, 0.2);
-  width: 100%;
-  height: 100%;
   min-width: 360px;
   max-width: 640px;
-  z-index: 5;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.3);
+  opacity: ${props => (props.showModal ? '1' : '0')};
+  transition: opacity 0.3s ease-in;
+  pointer-events: ${props => (props.showModal ? 'unset' : 'none')};
 `
 
-const ModalContent = styled.div`
+const Modal = styled.div`
+  position: fixed;
+  top: 103px;
+  left: 50%;
+  transform: translateX(-50%);
+  min-width: 360px;
+  max-width: 640px;
   background-color: var(--white);
   width: 100%;
-  height: 300px;
-  position: absolute;
-  bottom: 0;
-  left: 0;
   padding: 0 20px;
-  border-top-left-radius: 22px;
-  border-top-right-radius: 22px;
-  box-shadow: 0px -4px 10px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 4px 2px -2px rgba(0, 0, 0, 0.3);
+  overflow-y: hidden;
+  z-index: 1;
+  max-height: ${props => (props.showModal ? '400px' : '0')};
+  transition: max-height 0.3s ease-in;
 `
 
 const Title = styled.div`
@@ -238,8 +278,8 @@ const CheckBoxWrap = styled.div`
   position: relative;
   div {
     padding: 8px 12px;
-    border: ${props => (props.checked ? '1px solid #3D51FF' : 'none')};
-    border-radius: 12px;
+    background-color: ${props => (props.checked ? '#EDF2FF' : 'none')};
+    color: ${props => (props.checked ? '#3D51FF' : '#000')};
     margin-bottom: 4px;
     & > input {
       display: none;
