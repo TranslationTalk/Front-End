@@ -7,55 +7,82 @@ date: 리뷰 작성날짜 '2022-01-15T04:33:14.000Z' //string
 */
 import React from 'react'
 import PropTypes from 'prop-types'
-import grayStar from '../../assets/icons/star_score_gray.png'
-import blueStar from '../../assets/icons/star_score_blue.png'
+import star from '../../assets/images/grade.svg'
+import profile from '../../assets/images/TranslatorProfile.png'
 import styled from 'styled-components'
 
 const ReviewCard = ({ userName, score, comment, date }) => {
   return (
     <Card score={score}>
-      <p>{userName}</p>
-      <p>
-        <span className="star">
-          <div className="grayStar"></div>
-          <div className="blueStar"></div>
-        </span>
-        <span className="score">{score} 점</span>
-        <span className="date">{date.match(/.+(?=T)/g)}</span>
-      </p>
+      <div>
+        <img src={profile} alt={userName} />
+        <div>
+          <h4>{userName}</h4>
+          <p>
+            <span className="score">
+              {score}
+              {/* 점수가 한자리수 이면 '.0' 추가*/}
+              {score.length == 1 || '.0'}
+            </span>
+            <span className="date">
+              {/* 2022-10-10 -> 22.10.10 */}
+              {date.replace(/-/g, '.').slice(2, date.length)}
+            </span>
+          </p>
+        </div>
+      </div>
       <p>{comment}</p>
     </Card>
   )
 }
 
 const Card = styled.div`
-  margin: 10px;
-  background: #ddd;
-  padding: 20px;
-  border-radius: 5px;
-  & span {
-    line-height: 20px;
+  margin: 0 20px;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--gray-c4);
+  h4 {
+    margin-left: 2px;
+    font-size: var(--fs-16);
   }
-  & .score {
-    margin-left: 110px;
+  img {
+    width: 32px;
+    height: 32px;
+    margin-right: 10px;
   }
-  & .date {
-    margin-left: 30px;
+  > div {
+    display: flex;
   }
-  & .blueStar,
-  & .grayStar {
-    position: absolute;
-    height: 20px;
-    background-repeat: none;
-    background-size: cover;
-  }
-  & .blueStar {
-    background-image: url(${blueStar});
-    width: calc(100px / 5 * ${props => props.score});
-  }
-  & .grayStar {
-    background-image: url(${grayStar});
-    width: 100px;
+  p {
+    font-size: var(--fs-12);
+    line-height: 1.4;
+    span {
+      line-height: 20px;
+    }
+    .score {
+      font-weight: 500;
+      &::before {
+        display: inline-block;
+        width: 16px;
+        height: 16px;
+        margin-right: 2px;
+        margin-bottom: -1px;
+        background-image: url(${star});
+        background-size: cover;
+        content: '';
+      }
+    }
+    .date {
+      color: var(--gray-c4);
+      font-weight: 400;
+      &::before {
+        display: inline-block;
+        margin: 0 5px;
+        width: 1px;
+        height: 10px;
+        background-color: #464646;
+        content: '';
+      }
+    }
   }
 `
 
