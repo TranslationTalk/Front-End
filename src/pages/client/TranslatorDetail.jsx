@@ -44,11 +44,11 @@ const TranslatorDetail = () => {
     const reviewList = async () => {
       const {
         data: { data },
-      } = await clientAPIs.requestReview(location.state.requestId)
+      } = await clientAPIs.requestReview(estimate.translatorId)
       setReview(data)
     }
     reviewList()
-  }, [])
+  }, [estimate])
 
   // 상담하기 Btn
   // 채팅방 생성 -> navigate로 바로 채팅방이동
@@ -57,7 +57,6 @@ const TranslatorDetail = () => {
       clientAPIs
         .addChatroom(location.state.estimateId)
         .then(data => {
-          console.log(data)
           alert(`roomId ${data.data.id}번 생성`)
           navigate(`/chat/${data.data.id}`, {
             state: { roomId: data.data.id },
@@ -139,7 +138,7 @@ const TranslatorDetail = () => {
             <EstimateDetail
               offerPrice={estimate.offerPrice ?? 0}
               comment={estimate.comment ?? 'test'}
-              confirmedDate={estimate.confirmedDate}
+              confirmedDate={estimate.confirmedDate ?? '0000-00-00'}
             />
 
             <Button content="상담하기" onClick={consultBtn} />
@@ -148,8 +147,9 @@ const TranslatorDetail = () => {
           </>
         ) : (
           //번역가 리뷰
+
           <>
-            {review.map(el => (
+            {review?.map(el => (
               <ReviewCard
                 key={el.id}
                 userName={el.clientId}
@@ -164,7 +164,7 @@ const TranslatorDetail = () => {
               border
               onClick={() => {
                 navigate(`/client/review`, {
-                  state: { requestId: location.state.requestId },
+                  state: { translatorId: estimate.translatorId },
                 })
               }}
             />

@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { useLocation } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
 import {
   Button,
@@ -8,22 +8,25 @@ import {
   SubPageHeader,
   TextAreaInput,
 } from '../../components'
+import { clientAPIs } from '../../utils/axios'
 
 const ReviewForm = () => {
+  const navigate = useNavigate()
   const [score, setScore] = useState(0)
-  const [review, setReview] = useState()
+  const [comment, setComment] = useState('')
   const location = useLocation()
 
-  const onChange = e => {
-    if (e) {
-      const { value, name } = e.target
-      setReview({ ...review, [name]: value })
-    } else {
-      setReview({ ...review, score: score })
-    }
+  // 비동기처리: 번역가 리뷰 등록
+  const postReview = async () => {
+    await clientAPIs.writeReview(location.state.translatorId, {
+      comment,
+      score,
+    })
+    navigate(-1)
   }
-  console.log(location.state.requestId)
-  setScore
+  // setComment
+  const onChange = e => setComment(e.target.value)
+
   return (
     <ReviewFormPage>
       <SubPageHeader title="리뷰쓰기" />
@@ -49,7 +52,7 @@ const ReviewForm = () => {
           bgColor="#C4C4C4"
           onClick={() => history.back()}
         />
-        <Button content="등록하기" />
+        <Button content="등록하기" onClick={postReview} />
       </div>
     </ReviewFormPage>
   )

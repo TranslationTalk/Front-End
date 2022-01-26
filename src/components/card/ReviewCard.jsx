@@ -90,7 +90,7 @@ ReviewCard.propTypes = {
   score: PropTypes.number,
   comment: PropTypes.string,
   date: PropTypes.string,
-  userName: PropTypes.string,
+  userName: PropTypes.number,
 }
 
 export default ReviewCard
