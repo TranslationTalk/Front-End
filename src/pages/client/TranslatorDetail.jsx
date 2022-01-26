@@ -37,10 +37,11 @@ const TranslatorDetail = () => {
       setsStatus(data.status)
     }
     fetchEstimateList()
-  }, [])
+  }, [estimate])
 
   //비동기처리: 번역가 리뷰
   useEffect(() => {
+    if (!estimate.translatorId) return
     const reviewList = async () => {
       const {
         data: { data },
