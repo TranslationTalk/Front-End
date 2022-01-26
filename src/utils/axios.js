@@ -132,7 +132,7 @@ export const clientAPIs = {
   },
 
   //리뷰 작성
-  writeReview: (requestId, score, comment) => {
-    return instance.post(`api/review/${requestId}`, { score, comment })
+  writeReview: (requestId, review) => {
+    return instance.post(`api/review/${requestId}`, review)
   },
 }
