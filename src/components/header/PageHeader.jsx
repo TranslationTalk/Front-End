@@ -9,10 +9,17 @@ import propTypes from 'prop-types'
 import styled from 'styled-components'
 import { useLocation } from 'react-router-dom'
 import { ReactComponent as ReloadIcon } from '../../assets/icons/ReloadIcon.svg'
+import { ReactComponent as SettingIcon } from '../../assets/icons/Settings.svg'
 import Logo from '../../assets/images/Logo.png'
 import { HamburgerMenu } from '../index'
 
-const PageHeader = ({ title, useReloadButton, reloadEvent }) => {
+const PageHeader = ({
+  title,
+  useReloadButton,
+  reloadEvent,
+  useSettingButton,
+  settingEvent,
+}) => {
   const location = useLocation().pathname
 
   return (
@@ -21,7 +28,12 @@ const PageHeader = ({ title, useReloadButton, reloadEvent }) => {
       {title ? <Title>{title}</Title> : <LogoImg src={Logo} alt="logo" />}
       {useReloadButton && (
         <SvgWrap>
-          <ReloadIcon width="25" height="25" onClick={reloadEvent} />
+          <ReloadIcon onClick={reloadEvent} />
+        </SvgWrap>
+      )}
+      {useSettingButton && (
+        <SvgWrap>
+          <SettingIcon onClick={settingEvent} />
         </SvgWrap>
       )}
     </Container>
@@ -74,6 +86,8 @@ PageHeader.propTypes = {
   title: propTypes.string,
   useReloadButton: propTypes.bool,
   reloadEvent: propTypes.func,
+  useSettingButton: propTypes.bool,
+  settingEvent: propTypes.func,
 }
 
 export default PageHeader

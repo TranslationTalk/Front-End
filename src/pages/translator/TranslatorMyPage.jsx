@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+import styled from 'styled-components'
 import {
   PageHeader,
   TranslatorInfo,
   ReviewCard,
   NavigationTranslator,
+  Tag,
 } from '../../components/index'
 import { apis } from '../../utils/axios'
 
@@ -12,7 +15,7 @@ const TranslatorMyPage = () => {
   const [reviews, setReviews] = useState([
     { name: '', score: 4.5, comment: 'nice', date: '2022-01-24' },
   ])
-  console.log(translatorInfo)
+  const navigate = useNavigate()
 
   useEffect(() => {
     const fetchMyInformation = async () => {
@@ -30,32 +33,63 @@ const TranslatorMyPage = () => {
     fetchMyInformation()
   }, [])
 
+  const gotoSetting = () => {
+    navigate(`/chat/setting`)
+  }
+
   return (
     <>
-      <PageHeader title="마이페이지" />
-      <TranslatorInfo
-        name={translatorInfo?.name}
-        profileUrl={translatorInfo?.profileUrl}
-        totalTrans={translatorInfo?.totalTrans}
-        totalReviews={translatorInfo?.totalReviews}
-        avgReviews={translatorInfo?.avgReviews}
-        taxPossible={translatorInfo?.taxPossible}
-        cashPossible={translatorInfo?.cashPossible}
-        isBusiness={translatorInfo?.isBusiness}
-        introduce={translatorInfo?.introduce}
+      <PageHeader
+        title="마이페이지"
+        useSettingButton
+        settingEvent={gotoSetting}
       />
-      {reviews.map((review, index) => (
-        <ReviewCard
-          key={index}
-          userName={review.name}
-          score={review.score}
-          comment={review.comment}
-          date={review.date}
+      <Wrap>
+        <TranslatorInfo
+          name={translatorInfo?.name}
+          profileUrl={translatorInfo?.profileUrl}
+          totalTrans={translatorInfo?.totalTrans}
+          totalReviews={translatorInfo?.totalReviews}
+          avgReviews={translatorInfo?.avgReviews}
+          taxPossible={translatorInfo?.taxPossible}
+          cashPossible={translatorInfo?.cashPossible}
+          isBusiness={translatorInfo?.isBusiness}
+          introduce={translatorInfo?.introduce}
         />
-      ))}
+        <MidTitle>
+          <h2>내가 받은 리뷰</h2>
+          <Tag text="999" bgColor="#FF5F5F" color="#FFFFFF" />
+        </MidTitle>
+        {reviews.map((review, index) => (
+          <ReviewCard
+            key={index}
+            userName={review.name}
+            score={review.score}
+            comment={review.comment}
+            date={review.date}
+          />
+        ))}
+      </Wrap>
       <NavigationTranslator />
     </>
   )
 }
+
+const Wrap = styled.div`
+  padding: 76px 20px 0 20px;
+`
+
+const MidTitle = styled.div`
+  margin: 30px 0 16px;
+  padding-bottom: 9px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid var(--gray-c4);
+  h2 {
+    font-size: var(--fs-16);
+    margin-right: 8px;
+  }
+`
 
 export default TranslatorMyPage
