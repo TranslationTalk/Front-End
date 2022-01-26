@@ -46,7 +46,7 @@ const EstimateDetail = ({ offerPrice, comment, confirmedDate }) => {
         </Comment>
         <Deadline>
           <span>
-            희망 마감 날짜 {confirmedDate?.split('-').join('.') ?? '0000-00-00'}
+            희망 마감 날짜 {confirmedDate?.replace(/-/g, '.') ?? '0000-00-00'}
           </span>
         </Deadline>
       </Wrap>
@@ -120,7 +120,7 @@ const Deadline = styled.div`
 
 const Notification = styled.div`
   background-color: var(--light-gray);
-  padding: 2rem;
+  padding: 12px;
 `
 
 EstimateDetail.propTypes = {
