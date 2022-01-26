@@ -14,10 +14,13 @@ import defaultProfile from '../../assets/images/TranslatorProfile.png'
 import { language } from '../../constant/selectOptions'
 import styled from 'styled-components'
 import { ReactComponent as AddIcon } from '../../assets/icons/Add.svg'
+import { useNavigate } from 'react-router-dom'
 
 const initialState = {
   name: '',
-  profileFile: 'aaaa',
+  career: '경력',
+  profileFile:
+    'https://tistory1.daumcdn.net/tistory/user/264290/profile/profileImg?v=1635480821401',
   language: '',
   email: '',
   phoneNum: '',
@@ -36,6 +39,7 @@ const TranslatorMyPageSetting = () => {
   const [fileImage, setFileImage] = useState('')
   const [selectInputs, setSelectInputs] = useState([0])
   const [languages, setLanguages] = useState({})
+  const navigate = useNavigate()
 
   useEffect(() => {
     const fetchMyInformation = async () => {
@@ -85,6 +89,8 @@ const TranslatorMyPageSetting = () => {
     } = await apis.modifyTranslatorMypage(formData)
     console.log(data)
     setFormData(initialState)
+
+    navigate('/translator/mypage')
   }
 
   const handleChange = e => {

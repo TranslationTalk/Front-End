@@ -17,6 +17,7 @@ import { ReactComponent as AddIcon } from '../../assets/icons/Add.svg'
 
 const initialState = {
   name: '',
+  career: '번역 회사 근무',
   profileFile:
     'https://tistory1.daumcdn.net/tistory/user/264290/profile/profileImg?v=1635480821401',
   language: '',
@@ -34,12 +35,6 @@ const TranslatorSignupForm = () => {
   const [fileImage, setFileImage] = useState('')
   const [selectInputs, setSelectInputs] = useState([0])
   const [languages, setLanguages] = useState({})
-
-  // 파일 삭제
-  // const deleteFileImage = () => {
-  //   URL.revokeObjectURL(fileImage);
-  //    setFileImage("");
-  //    };
 
   const handleSubmit = async e => {
     e.preventDefault()
