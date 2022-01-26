@@ -9,19 +9,22 @@ import { clientAPIs } from '../../utils/axios'
 import {
   Button,
   EstimateDetail,
-  PageHeader,
+  ReviewCard,
+  SubPageHeader,
   ToggleMenu,
   TranslatorInfo,
 } from '../../components'
+import styled from 'styled-components'
 
 const TranslatorDetail = () => {
   const navigate = useNavigate()
   const location = useLocation()
   const [estimate, setEstimate] = useState([])
   const [status, setsStatus] = useState('')
+  const [review, setReview] = useState()
   const [clickNumber, setClickNumber] = useState(0)
 
-  //비동기처리
+  //비동기처리: 번역 견적
   useEffect(() => {
     const fetchEstimateList = async () => {
       const {
@@ -34,7 +37,19 @@ const TranslatorDetail = () => {
       setsStatus(data.status)
     }
     fetchEstimateList()
-  }, [])
+  }, [estimate])
+
+  //비동기처리: 번역가 리뷰
+  useEffect(() => {
+    if (!estimate.translatorId) return
+    const reviewList = async () => {
+      const {
+        data: { data },
+      } = await clientAPIs.requestReview(estimate.translatorId)
+      setReview(data)
+    }
+    reviewList()
+  }, [estimate])
 
   // 상담하기 Btn
   // 채팅방 생성 -> navigate로 바로 채팅방이동
@@ -43,7 +58,6 @@ const TranslatorDetail = () => {
       clientAPIs
         .addChatroom(location.state.estimateId)
         .then(data => {
-          console.log(data)
           alert(`roomId ${data.data.id}번 생성`)
           navigate(`/chat/${data.data.id}`, {
             state: { roomId: data.data.id },
@@ -83,9 +97,9 @@ const TranslatorDetail = () => {
       case 'ready':
         return <Button content="확정하기" onClick={confirmed} />
       case 'processing':
-        return <p>확정 완료</p>
+        return <Button content="확정 완료" bgColor="#C4C4C4" />
       case 'done':
-        return <p>거래 완료</p>
+        return <Button content="거래 완료" bgColor="#C4C4C4" />
       default:
         return <p>요청기간이 3일 지났습니다.</p>
     }
@@ -95,34 +109,89 @@ const TranslatorDetail = () => {
   const handleToggleMenu = number => setClickNumber(number)
 
   return (
-    <div>
-      <PageHeader title="" />
-      <TranslatorInfo
-        name={estimate.name}
-        profileUrl={estimate.profileUrl}
-        totalTrans={estimate.totalTrans}
-        totalReivews={estimate.totalReviews}
-        avgReviews={estimate.avgReviews}
-        taxPossible={estimate.taxPossible}
-        cashPossible={estimate.cashPossible}
-        isBusiness={estimate.isBusiness}
-        introduce={estimate.introduce}
-      />
-      <ToggleMenu
-        menu={['번역 견적', '번역가님 리뷰']}
-        click={clickNumber}
-        onClick={handleToggleMenu}
-      />
-      <EstimateDetail
-        offerPrice={estimate.offerPrice ?? 0}
-        comment={estimate.comment ?? 'test'}
-        confirmedDate={estimate.confirmedDate}
-      />
-      {confirmedBtn(status)}
+    <TranslatorDetailPage>
+      <SubPageHeader title="번역가 소개" />
+      <Info>
+        <TranslatorInfo
+          name={estimate.name}
+          profileUrl={estimate.profileUrl}
+          totalTrans={estimate.totalTrans}
+          totalReivews={estimate.totalReviews}
+          avgReviews={estimate.avgReviews}
+          taxPossible={estimate.taxPossible}
+          cashPossible={estimate.cashPossible}
+          isBusiness={estimate.isBusiness}
+          introduce={estimate.introduce}
+        />
+      </Info>
+      <nav>
+        <ToggleMenu
+          menu={['번역 견적', '번역가님 리뷰']}
+          click={clickNumber}
+          onClick={handleToggleMenu}
+        />
+      </nav>
 
-      <Button content="상담하기" onClick={consultBtn} />
-    </div>
+      <section>
+        {clickNumber == 0 ? (
+          //번역 견적
+          <>
+            <EstimateDetail
+              offerPrice={estimate.offerPrice ?? 0}
+              comment={estimate.comment ?? 'test'}
+              confirmedDate={estimate.confirmedDate ?? '0000-00-00'}
+            />
+
+            <Button content="상담하기" onClick={consultBtn} />
+            {/* 확정하기->확정완료->거래완료 */}
+            {confirmedBtn(status)}
+          </>
+        ) : (
+          //번역가 리뷰
+
+          <>
+            {review?.map(el => (
+              <ReviewCard
+                key={el.id}
+                userName={el.clientId}
+                score={el.score}
+                comment={el.comment}
+                date={el.reviewDate}
+              />
+            ))}
+
+            <Button
+              content="리뷰쓰기"
+              border
+              onClick={() => {
+                navigate(`/client/review`, {
+                  state: { translatorId: estimate.translatorId },
+                })
+              }}
+            />
+          </>
+        )}
+      </section>
+    </TranslatorDetailPage>
   )
 }
+
+const TranslatorDetailPage = styled.div`
+  margin-top: 76px;
+  nav {
+    margin: 30px 20px 0;
+  }
+  > section {
+    padding: 20px 0;
+    button {
+      margin: 20px auto;
+      width: calc(100% - 40px);
+      display: block;
+    }
+  }
+`
+const Info = styled.div`
+  margin: 0 20px;
+`
 
 export default TranslatorDetail

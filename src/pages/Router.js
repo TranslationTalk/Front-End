@@ -10,6 +10,7 @@ import ClientHome from './client/ClientHome'
 import ClientRequestForm from './client/ClientRequestForm'
 import RequestList from './client/RequestList'
 import TranslatorDetail from './client/TranslatorDetail'
+import ReviewForm from './client/ReviewForm'
 // translator
 import EstimateForm from './translator/EstimateForm'
 import MyTranslationList from './translator/MyTranslationList'
@@ -43,6 +44,7 @@ const Router = () => {
         />
         <Route path="/client/estimate/detail" element={<TranslatorDetail />} />
         <Route path="/client/estimate/list" element={<ClientEstimateList />} />
+        <Route path="/client/review" element={<ReviewForm />} />
         {/* translator */}
         <Route path="/translator/signup" element={<TranslatorSignupForm />} />
         <Route path="/translator/list" element={<TranslationList />} />

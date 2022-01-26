@@ -2,15 +2,19 @@
  번역 의뢰를 맞길 youtube 
  youtubeUrl: 보여줄 youtube의 url
 */
-import React from 'react'
+import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
 const VideoCard = ({ youtubeUrl }) => {
+  const [videoWidth, setVideoWidth] = useState(window.innerWidth)
+  window.onresize = () => {
+    setVideoWidth(window.innerWidth)
+  }
   return (
     <Card>
       <iframe
-        width="560"
+        width={videoWidth}
         height="315"
         src={youtubeUrl.split('&')[0].replace('watch?v=', 'embed/')}
       ></iframe>
@@ -19,10 +23,10 @@ const VideoCard = ({ youtubeUrl }) => {
 }
 
 const Card = styled.div`
-  width: 560px;
+  position: relative;
   margin: auto;
-  & firame {
-    width: 50%;
+  iframe {
+    max-width: 640px;
   }
 `
 

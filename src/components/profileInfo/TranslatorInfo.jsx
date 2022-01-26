@@ -59,7 +59,6 @@ const TranslatorInfo = ({
 }
 
 const Profile = styled.div`
-  margin: 20px;
   & > div {
     display: flex;
     margin-bottom: 17px;
