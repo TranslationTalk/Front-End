@@ -30,6 +30,8 @@ const ChatList = () => {
   const handleClick = chatroom => {
     navigate(`/chat/${chatroom.id}`, {
       state: {
+        estimateId: chatroom.estimateId,
+        requestId: chatroom.requestId,
         roomId: chatroom.id,
         anothername:
           auth === 'client'

@@ -32,6 +32,7 @@ const TranslatorEstimateDetail = () => {
     // chat 경로 바뀜 translator/chat/
     navigate(`/chat/${estimateDetail.roomId}`, {
       state: {
+        estimateId: estimate.id,
         roomId: estimateDetail.roomId,
         anothername: estimateDetail.username,
         createdTime: estimateDetail.roomCreateAt,
