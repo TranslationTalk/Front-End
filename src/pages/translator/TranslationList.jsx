@@ -6,6 +6,7 @@ import {
   CheckBoxInput,
   EstimateCard,
   NavigationTranslator,
+  NoList,
   PageHeader,
   Tag,
   TopDownButton,
@@ -102,10 +103,6 @@ const TranslationList = () => {
     }
   }
 
-  // useEffect(()=>{
-  //   filterRef.current.
-  // },[height])
-
   return (
     <>
       <PageHeader title="번역 리스트" useReloadButton />
@@ -119,23 +116,27 @@ const TranslationList = () => {
         ))}
       </FilterContainer>
       <Wrap paddingTop={height}>
-        {filterdEstimates.map(estimate => (
-          <EstimateCard
-            key={estimate.id}
-            userName={estimate.User.username}
-            field={estimate.field}
-            beforeLanguage={estimate.beforeLanguage}
-            afterLanguage={estimate.afterLanguage}
-            isText={estimate.isText}
-            deadline={estimate.deadline}
-            createdTime={estimate.createdAt}
-            onClick={() => handleClick(estimate)}
-          />
-        ))}
+        {filterdEstimates.length === 0 ? (
+          <NoList listName="번역 의뢰" />
+        ) : (
+          filterdEstimates.map(estimate => (
+            <EstimateCard
+              key={estimate.id}
+              userName={estimate.User.username}
+              field={estimate.field}
+              beforeLanguage={estimate.beforeLanguage}
+              afterLanguage={estimate.afterLanguage}
+              isText={estimate.isText}
+              deadline={estimate.deadline}
+              createdTime={estimate.createdAt}
+              onClick={() => handleClick(estimate)}
+            />
+          ))
+        )}
         <TopDownButton />
         <NavigationTranslator />
+        <ModalBackground showModal={showModal} />
       </Wrap>
-      <ModalBackground showModal={showModal} />
       <Modal showModal={showModal}>
         <Title>
           <h3>언어 선택</h3>
@@ -243,12 +244,13 @@ const Modal = styled.div`
   max-width: 640px;
   background-color: var(--white);
   width: 100%;
-  padding: 0 20px;
+  padding: 0 20px 50px;
   box-shadow: 0 4px 2px -2px rgba(0, 0, 0, 0.3);
-  overflow-y: hidden;
   z-index: 1;
+  height: ${props => (props.showModal ? '60%' : '0')};
+  opacity: ${props => (props.showModal ? '1' : '0')};
   max-height: ${props => (props.showModal ? '400px' : '0')};
-  transition: max-height 0.3s ease-in;
+  transition: all 0.5s ease-in;
 `
 
 const Title = styled.div`

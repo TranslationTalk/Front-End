@@ -14,7 +14,7 @@ import styled from 'styled-components'
 
 const Chat = () => {
   const {
-    state: { roomId, anothername, createdTime }, // isText와 offerPrice도 넘어와야 함
+    state: { estimateId, requestId, roomId, anothername, createdTime }, // isText와 offerPrice도 넘어와야 함
   } = useLocation()
   const [chatContents, setChatContents] = useState([]) // 모든 채팅 내용
   const [chatSections, setChatSections] = useState([]) // 날짜별로 묶은 채팅
@@ -85,7 +85,7 @@ const Chat = () => {
 
   const handleFinishWork = async () => {
     try {
-      await apis.finishEstimate(roomId)
+      await apis.finishEstimate(estimateId)
     } catch (error) {
       console.error(error)
       // 이미 확정하셨습니다. 알림창
@@ -93,7 +93,7 @@ const Chat = () => {
   }
 
   const handleConfirmTranslator = async () => {
-    await clientAPIs.TranslatorConfirmed(roomId)
+    await clientAPIs.TranslatorConfirmed(requestId, estimateId)
   }
 
   const makeSectionByDate = chatList => {

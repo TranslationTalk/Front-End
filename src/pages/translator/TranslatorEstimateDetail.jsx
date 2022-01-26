@@ -32,6 +32,7 @@ const TranslatorEstimateDetail = () => {
     // chat 경로 바뀜 translator/chat/
     navigate(`/chat/${estimateDetail.roomId}`, {
       state: {
+        estimateId: estimate.id,
         roomId: estimateDetail.roomId,
         anothername: estimateDetail.username,
         createdTime: estimateDetail.roomCreateAt,
@@ -101,10 +102,14 @@ const TranslatorEstimateDetail = () => {
             ) : (
               <>
                 <Button content="작업완료" bgColor="gray" />
-                <StatusMessage
-                  text="요청자가 번역가를 확정하면 활성화됩니다."
-                  icon="info"
-                />
+                {estimateDetail?.status === 'done' ? (
+                  <StatusMessage text="이미 완료된 거래입니다." icon="info" />
+                ) : (
+                  <StatusMessage
+                    text="요청자가 번역가를 확정하면 활성화됩니다."
+                    icon="info"
+                  />
+                )}
               </>
             )}
           </>

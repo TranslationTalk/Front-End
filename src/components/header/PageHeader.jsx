@@ -9,19 +9,31 @@ import propTypes from 'prop-types'
 import styled from 'styled-components'
 import { useLocation } from 'react-router-dom'
 import { ReactComponent as ReloadIcon } from '../../assets/icons/ReloadIcon.svg'
-import Logo from '../../assets/images/Logo.png'
+import { ReactComponent as SettingIcon } from '../../assets/icons/Settings.svg'
+import { ReactComponent as Logo } from '../../assets/icons/Logo.svg'
 import { HamburgerMenu } from '../index'
 
-const PageHeader = ({ title, useReloadButton, reloadEvent }) => {
+const PageHeader = ({
+  title,
+  useReloadButton,
+  reloadEvent,
+  useSettingButton,
+  settingEvent,
+}) => {
   const location = useLocation().pathname
 
   return (
     <Container shouldWrap={location !== '/'}>
       {location === '/' || <HamburgerMenu />}
-      {title ? <Title>{title}</Title> : <LogoImg src={Logo} alt="logo" />}
+      {title ? <Title>{title}</Title> : <Logo />}
       {useReloadButton && (
         <SvgWrap>
-          <ReloadIcon width="25" height="25" onClick={reloadEvent} />
+          <ReloadIcon onClick={reloadEvent} />
+        </SvgWrap>
+      )}
+      {useSettingButton && (
+        <SvgWrap>
+          <SettingIcon onClick={settingEvent} />
         </SvgWrap>
       )}
     </Container>
@@ -45,6 +57,13 @@ const Container = styled.div`
   ${props => (props.shouldWrap ? 'max-width: 640px;' : null)}
   min-width: 360px;
 
+  & > svg {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
   @media (min-width: 640px) {
     height: ${props => (props.shouldWrap ? '56px' : '80px')};
   }
@@ -59,13 +78,6 @@ const Title = styled.h2`
   transform: translate(-50%, -50%);
 `
 
-const LogoImg = styled.img`
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-`
-
 const SvgWrap = styled.div`
   cursor: pointer;
 `
@@ -74,6 +86,8 @@ PageHeader.propTypes = {
   title: propTypes.string,
   useReloadButton: propTypes.bool,
   reloadEvent: propTypes.func,
+  useSettingButton: propTypes.bool,
+  settingEvent: propTypes.func,
 }
 
 export default PageHeader

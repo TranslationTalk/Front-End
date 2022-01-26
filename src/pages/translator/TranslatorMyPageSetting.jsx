@@ -14,10 +14,11 @@ import defaultProfile from '../../assets/images/TranslatorProfile.png'
 import { language } from '../../constant/selectOptions'
 import styled from 'styled-components'
 import { ReactComponent as AddIcon } from '../../assets/icons/Add.svg'
+import { useNavigate } from 'react-router-dom'
 
 const initialState = {
   name: '',
-  career: '번역 회사 근무',
+  career: '경력',
   profileFile:
     'https://tistory1.daumcdn.net/tistory/user/264290/profile/profileImg?v=1635480821401',
   language: '',
@@ -29,12 +30,55 @@ const initialState = {
   isBusiness: false,
 }
 
-const TranslatorSignupForm = () => {
+// translatorSignupForm 이랑 거의 같아서
+// template 화 시키면 좋을 것 같다.
+
+const TranslatorMyPageSetting = () => {
   const [formData, setFormData] = useState(initialState)
   //파일 미리볼 url을 저장해줄 state
   const [fileImage, setFileImage] = useState('')
   const [selectInputs, setSelectInputs] = useState([0])
   const [languages, setLanguages] = useState({})
+  const navigate = useNavigate()
+
+  useEffect(() => {
+    const fetchMyInformation = async () => {
+      const {
+        data: { data: infoData },
+      } = await apis.getTranslatorMypage()
+      const {
+        name,
+        language,
+        introduce,
+        cashPossible,
+        isBusiness,
+        taxPossible,
+      } = infoData
+
+      // 원래 갖고 있던 데이터를 form에 넣어줌
+      setFormData(prev => ({
+        ...prev,
+        name,
+        language,
+        introduce,
+        cashPossible,
+        isBusiness,
+        taxPossible,
+      }))
+
+      // 가능언어 원래 가지고 있던 데이터로 설정
+      const languages = language.split(', ')
+      const initialSelectInputs = new Array(languages.length)
+        .fill(0)
+        .map((el, index) => index.toString())
+      setSelectInputs(initialSelectInputs)
+      const initialLanguages = Object.fromEntries(
+        languages.map((el, index) => [index.toString(), el]),
+      )
+      setLanguages(initialLanguages)
+    }
+    fetchMyInformation()
+  }, [])
 
   const handleSubmit = async e => {
     e.preventDefault()
@@ -42,14 +86,16 @@ const TranslatorSignupForm = () => {
 
     const {
       data: { data },
-    } = await apis.postTranslatorMypage(formData)
+    } = await apis.modifyTranslatorMypage(formData)
     console.log(data)
     setFormData(initialState)
+
+    navigate('/translator/mypage')
   }
 
   const handleChange = e => {
     const { id, name, value, checked, files } = e.target
-    console.log(id, name, value)
+    console.log(id, name, value, checked, files)
     setFormData({
       ...formData,
       [id === '' ? name : id]: name === '' ? checked : value,
@@ -73,10 +119,7 @@ const TranslatorSignupForm = () => {
   }
 
   const removeSelectInput = index => {
-    if (selectInputs.length === 1) return // 기본 한 개는 가지고 있어야 하므로
-
-    // 가능 언어 추가했다가 아직 선택 안했을 경우에도 삭제가 되어야 하므로
-    // languages object 길이 early return 보다 먼저 해준다.
+    if (selectInputs.length === 1) return
 
     setSelectInputs(
       selectInputs.filter((el, idx) => idx !== index).map((el, index) => index),
@@ -84,7 +127,6 @@ const TranslatorSignupForm = () => {
 
     if (Object.keys(languages).length === 1) return
 
-    // 그냥 바로 수정 하면 당연히 안될 듯 그래서 복제함
     const tempLanguages = { ...languages }
     delete tempLanguages[index]
     const entries = Object.entries(tempLanguages).map(([, lang], index) => [
@@ -101,7 +143,14 @@ const TranslatorSignupForm = () => {
 
   return (
     <>
-      <SubPageHeader title="번역가 정보입력" />
+      <HeaderWrap>
+        <SubPageHeader
+          title="계정 설정"
+          useButton
+          buttonLabel="저장"
+          buttonEvent={handleSubmit}
+        />
+      </HeaderWrap>
       <ProfileWrap>
         <img
           src={fileImage ? fileImage : defaultProfile}
@@ -122,7 +171,10 @@ const TranslatorSignupForm = () => {
         </div>
       </ProfileWrap>
       <Form onSubmit={handleSubmit}>
-        <TextInput name="name" placeholder="이름" onChange={handleChange} />
+        <Name>
+          <span>이름</span>
+          <span>{formData.name ?? ''}</span>
+        </Name>
         <TextInput
           name="email"
           type="email"
@@ -169,6 +221,7 @@ const TranslatorSignupForm = () => {
           name="introduce"
           placeholder="자기소개"
           onChange={handleChange}
+          value={formData.introduce}
         />
         <CheckboxWrap>
           <StatusMessage
@@ -180,23 +233,35 @@ const TranslatorSignupForm = () => {
             id="taxPossible"
             label="세금명세서 가능 여부"
             onChange={handleChange}
+            checked={formData.taxPossible}
           />
           <CheckBoxInput
             id="cashPossible"
             label="현금영수증 가능 여부"
             onChange={handleChange}
+            checked={formData.cashPossible}
           />
           <CheckBoxInput
             id="isBusiness"
             label="사업자 여부"
             onChange={handleChange}
+            checked={formData.isBusiness}
           />
         </CheckboxWrap>
-        <Button type="submit" content="제출하기" />
+        <Button type="submit" content="저장하기" />
       </Form>
     </>
   )
 }
+
+const HeaderWrap = styled.div`
+  & > div button {
+    background-color: var(--white);
+    color: var(--main-color);
+    border: none;
+    font-size: var(--fs-16);
+  }
+`
 
 const ProfileWrap = styled.div`
   display: flex;
@@ -236,6 +301,14 @@ const Form = styled.form`
   }
 `
 
+const Name = styled.div`
+  padding: 11px 12px;
+  font-size: var(--fs-14);
+  span:first-child {
+    margin-right: 70px;
+  }
+`
+
 const SelectContainer = styled.div`
   display: flex;
   gap: 8px;
@@ -248,15 +321,15 @@ const SelectContainer = styled.div`
 
 const ButtonWrap = styled.div`
   margin-top: 0;
-  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   & > button {
     font-size: var(--fs-14);
     font-weight: normal;
+    width: fit-content;
   }
   svg {
-    position: absolute;
-    top: 12px;
-    right: 35%;
     pointer-events: none;
   }
 `
@@ -271,4 +344,4 @@ const CheckboxWrap = styled.div`
   }
 `
 
-export default TranslatorSignupForm
+export default TranslatorMyPageSetting

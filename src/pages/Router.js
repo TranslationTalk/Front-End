@@ -4,6 +4,7 @@ import { Route, Routes } from 'react-router-dom'
 import Login from './common/Login'
 import Chat from './common/Chat'
 import ChatList from './common/ChatList'
+import NotFound from './common/NotFound'
 // client
 import ClientEstimateList from './client/ClientEstimateList'
 import ClientHome from './client/ClientHome'
@@ -20,6 +21,7 @@ import TranslatorMyPage from './translator/TranslatorMyPage'
 import TranslatorSignupForm from './translator/TranslatorSignupForm'
 //all
 import All from '../All'
+import TranslatorMyPageSetting from './translator/TranslatorMyPageSetting'
 
 const Router = () => {
   return (
@@ -51,6 +53,10 @@ const Router = () => {
         <Route path="/translator/estimate/form" element={<EstimateForm />} />
         <Route path="/translator/mypage" element={<TranslatorMyPage />} />
         <Route
+          path="/translator/mypage/setting"
+          element={<TranslatorMyPageSetting />}
+        />
+        <Route
           path="/translator/translation/list"
           element={<MyTranslationList />}
         />
@@ -58,6 +64,7 @@ const Router = () => {
           path="/translator/estimate/:id"
           element={<TranslatorEstimateDetail />}
         />
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </div>
   )

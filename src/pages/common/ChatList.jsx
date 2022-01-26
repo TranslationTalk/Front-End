@@ -4,6 +4,7 @@ import {
   ChatListCard,
   NavigationTranslator,
   NavigationUser,
+  NoList,
   PageHeader,
 } from '../../components/index'
 import { useNavigate } from 'react-router-dom'
@@ -30,6 +31,8 @@ const ChatList = () => {
   const handleClick = chatroom => {
     navigate(`/chat/${chatroom.id}`, {
       state: {
+        estimateId: chatroom.estimateId,
+        requestId: chatroom.requestId,
         roomId: chatroom.id,
         anothername:
           auth === 'client'
@@ -44,23 +47,27 @@ const ChatList = () => {
     <>
       <PageHeader title={auth === 'translator' ? '내 상담' : '채팅'} />
       <Wrap>
-        {chatList.map(chatroom => (
-          <ChatListCard
-            key={chatroom.id}
-            name={
-              auth === 'client'
-                ? chatroom.translatorName
-                : chatroom.Estimate.Request.User.username
-            }
-            isRead={
-              auth === 'client'
-                ? !chatroom.isReadClient
-                : !chatroom.isReadTranslator
-            }
-            onClick={() => handleClick(chatroom)}
-            auth={auth}
-          />
-        ))}
+        {chatList.length === 0 ? (
+          <NoList listName="진행 중인 상담(이)" />
+        ) : (
+          chatList.map(chatroom => (
+            <ChatListCard
+              key={chatroom.id}
+              name={
+                auth === 'client'
+                  ? chatroom.translatorName
+                  : chatroom.Estimate.Request.User.username
+              }
+              isRead={
+                auth === 'client'
+                  ? !chatroom.isReadClient
+                  : !chatroom.isReadTranslator
+              }
+              onClick={() => handleClick(chatroom)}
+              auth={auth}
+            />
+          ))
+        )}
       </Wrap>
       {auth === 'translator' ? <NavigationTranslator /> : <NavigationUser />}
     </>

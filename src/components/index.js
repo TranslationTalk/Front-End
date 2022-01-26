@@ -38,6 +38,8 @@ import StatusMessage from './message/StatusMessage'
 // Navbar
 import NavigationUser from './navbar/NavigationUser'
 import NavigationTranslator from './navbar/NavigationTranslator'
+// Notice
+import NoList from './notice/NoList'
 // TrasnlatorInfo
 import TranslatorInfo from './profileInfo/TranslatorInfo'
 // Tag
@@ -75,4 +77,5 @@ export {
   EstimateDetail,
   BottomIndicator,
   Footer,
+  NoList,
 }

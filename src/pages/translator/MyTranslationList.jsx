@@ -4,6 +4,7 @@ import styled from 'styled-components'
 import {
   EstimateCard,
   NavigationTranslator,
+  NoList,
   PageHeader,
   ToggleMenu,
   TopDownButton,
@@ -73,21 +74,31 @@ const MyTranslationList = () => {
           onClick={handleToggleMenu}
         />
       </ToggleWrap>
-      {estimates
-        .filter(el => el.status === clickedStatus)
-        .map(estimate => (
-          <EstimateCard
-            key={estimate.id}
-            userName={estimate.User.username}
-            field={estimate.field}
-            beforeLanguage={estimate.beforeLanguage}
-            afterLanguage={estimate.afterLanguage}
-            isText={estimate.isText}
-            deadline={estimate.deadline}
-            onClick={() => handleClick(estimate)}
-            status={estimate.status}
-          />
-        ))}
+      {estimates.length === 0 ? (
+        clickNumber === 0 ? (
+          <NoList listName="보낸 견적 리스트" />
+        ) : clickNumber === 1 ? (
+          <NoList listName="진행 중인 번역 의뢰" />
+        ) : (
+          <NoList listName="진행 완료된 의뢰" />
+        )
+      ) : (
+        estimates
+          .filter(el => el.status === clickedStatus)
+          .map(estimate => (
+            <EstimateCard
+              key={estimate.id}
+              userName={estimate.User.username}
+              field={estimate.field}
+              beforeLanguage={estimate.beforeLanguage}
+              afterLanguage={estimate.afterLanguage}
+              isText={estimate.isText}
+              deadline={estimate.deadline}
+              onClick={() => handleClick(estimate)}
+              status={estimate.status}
+            />
+          ))
+      )}
       <NavigationTranslator />
       <TopDownButton />
     </Wrap>

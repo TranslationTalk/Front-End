@@ -67,23 +67,29 @@ const EstimateForm = () => {
           <InputWrap>
             <h3>목표일정</h3>
             <div>
-              {/* date 아이콘 오른쪽으로 옮기면 바로 될텐데.. */}
+              {/* date 아이콘 오른쪽으로 옮기면 바로 될텐데..
               <label htmlFor="confirmedDate">
                 <DateIcon />
-              </label>
+              </label> */}
               <TextInput
                 id="confirmedDate"
                 onChange={handleChange}
                 type="date"
               />
+              <label htmlFor="confirmedDate">
+                <DateIcon />
+              </label>
             </div>
           </InputWrap>
           <Line />
           <InputWrap>
             <h3>견적금액</h3>
             <div>
-              <span>￦</span>
-              <TextInput id="offerPrice" onChange={handleChange} />
+              <TextInput
+                id="offerPrice"
+                onChange={handleChange}
+                placeholder="￦0"
+              />
               <span>원</span>
             </div>
           </InputWrap>
@@ -144,24 +150,38 @@ const InputWrap = styled.div`
     font-size: var(--fs-14);
   }
   input {
-    width: 100px;
+    width: fit-content;
+    max-width: 150px;
+    min-width: 50px;
     border: none;
     padding: 0;
     position: relative;
     font-size: var(--fs-14);
     margin-left: 5px;
+    text-align: right;
   }
   input:focus {
     outline: none;
     border: none;
   }
   input[type='date']::-webkit-clear-button,
-  input[type='date']::-webkit-inner-spin-button,
-  input[type='date']::-webkit-calendar-picker-indicator {
+  input[type='date']::-webkit-inner-spin-button {
     display: none;
+  }
+  input[type='date']::-webkit-calendar-picker-indicator {
+    margin-left: 5px;
+    opacity: 0;
   }
   & > div {
     display: flex;
+    align-items: center;
+    position: relative;
+    label {
+      position: absolute;
+      right: 5px;
+      top: 6px;
+      pointer-events: none;
+    }
   }
 `
 

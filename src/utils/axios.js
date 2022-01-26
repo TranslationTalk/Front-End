@@ -52,7 +52,30 @@ export const apis = {
       cashPossible,
       isBusiness,
     }), // 첫 로그인시 정보 작성
-  modifyTranslatorMypage: () => instance.post('api/translator/mypage/modify'), // 마이페이지 정보 수정
+  modifyTranslatorMypage: ({
+    name,
+    career,
+    profileFile,
+    language,
+    email,
+    phoneNum,
+    introduce,
+    taxPossible,
+    cashPossible,
+    isBusiness,
+  }) =>
+    instance.post('api/translator/mypage/update', {
+      name,
+      career,
+      profileFile,
+      language,
+      email,
+      phoneNum,
+      introduce,
+      taxPossible,
+      cashPossible,
+      isBusiness,
+    }), // 마이페이지 정보 수정
   getReviews: id => instance.get(`api/review/${id}`),
 
   // 번역 요청
