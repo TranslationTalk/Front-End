@@ -34,7 +34,7 @@ const TranslatorMyPage = () => {
   }, [])
 
   const gotoSetting = () => {
-    navigate(`/chat/setting`)
+    navigate(`/translator/mypage/setting`)
   }
 
   return (

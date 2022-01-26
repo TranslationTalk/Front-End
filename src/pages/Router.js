@@ -19,6 +19,7 @@ import TranslatorMyPage from './translator/TranslatorMyPage'
 import TranslatorSignupForm from './translator/TranslatorSignupForm'
 //all
 import All from '../All'
+import TranslatorMyPageSetting from './translator/TranslatorMyPageSetting'
 
 const Router = () => {
   return (
@@ -48,6 +49,10 @@ const Router = () => {
         <Route path="/translator/list" element={<TranslationList />} />
         <Route path="/translator/estimate/form" element={<EstimateForm />} />
         <Route path="/translator/mypage" element={<TranslatorMyPage />} />
+        <Route
+          path="/translator/mypage/setting"
+          element={<TranslatorMyPageSetting />}
+        />
         <Route
           path="/translator/translation/list"
           element={<MyTranslationList />}
