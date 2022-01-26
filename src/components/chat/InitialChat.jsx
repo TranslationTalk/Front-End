@@ -55,8 +55,8 @@ const Notice = styled.div`
 `
 
 const Chat = styled.div`
-  width: 50%;
-  max-width: 300px;
+  width: 80%;
+  max-width: 230px;
   display: flex;
   flex-direction: column;
   background-color: var(--white);

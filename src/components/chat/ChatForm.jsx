@@ -48,17 +48,16 @@ const Form = styled.form`
   justify-content: center;
   align-items: center;
   & > button {
-    font-size: var(--fs-14);
+    max-width: 70px;
+    height: fit-content;
+    font-size: var(--fs-12);
     font-weight: normal;
     border: 1px solid var(--main-color);
-    width: fit-content;
-    height: fit-content;
-    padding: 5px 15px;
   }
 `
 
 const InputWrap = styled.div`
-  width: 70%;
+  width: 100%;
   margin: 6px;
 `
 
