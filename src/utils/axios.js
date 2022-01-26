@@ -125,4 +125,14 @@ export const clientAPIs = {
   TranslatorConfirmed: (requestId, estimateId) => {
     return instance.post(`api/request/list/${requestId}/${estimateId}`)
   },
+
+  //리뷰 요청
+  requestReview: requestId => {
+    return instance.get(`api/review/${requestId}`)
+  },
+
+  //리뷰 작성
+  writeReview: (requestId, score, comment) => {
+    return instance.post(`api/review/${requestId}`, { score, comment })
+  },
 }
