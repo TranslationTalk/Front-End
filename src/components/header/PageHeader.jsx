@@ -10,7 +10,7 @@ import styled from 'styled-components'
 import { useLocation } from 'react-router-dom'
 import { ReactComponent as ReloadIcon } from '../../assets/icons/ReloadIcon.svg'
 import { ReactComponent as SettingIcon } from '../../assets/icons/Settings.svg'
-import { ReactComponent as Logo } from '../../assets/icons/LogoBlue.svg'
+import { ReactComponent as Logo } from '../../assets/icons/Logo.svg'
 import { HamburgerMenu } from '../index'
 
 const PageHeader = ({

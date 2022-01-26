@@ -7,14 +7,13 @@ import {
   ReviewCard,
   NavigationTranslator,
   Tag,
+  NoList,
 } from '../../components/index'
 import { apis } from '../../utils/axios'
 
 const TranslatorMyPage = () => {
   const [translatorInfo, setTranslatorInfo] = useState(null)
-  const [reviews, setReviews] = useState([
-    { name: '', score: 4.5, comment: 'nice', date: '2022-01-24' },
-  ])
+  const [reviews, setReviews] = useState([])
   const navigate = useNavigate()
 
   useEffect(() => {
@@ -60,15 +59,19 @@ const TranslatorMyPage = () => {
           <h2>내가 받은 리뷰</h2>
           <Tag text="999" bgColor="#FF5F5F" color="#FFFFFF" />
         </MidTitle>
-        {reviews.map((review, index) => (
-          <ReviewCard
-            key={index}
-            userName={review.name}
-            score={review.score}
-            comment={review.comment}
-            date={review.date}
-          />
-        ))}
+        {reviews.length === 0 ? (
+          <NoList listName="리뷰" />
+        ) : (
+          reviews.map((review, index) => (
+            <ReviewCard
+              key={index}
+              userName={review.name}
+              score={review.score}
+              comment={review.comment}
+              date={review.date}
+            />
+          ))
+        )}
       </Wrap>
       <NavigationTranslator />
     </>

@@ -6,6 +6,7 @@ import {
   CheckBoxInput,
   EstimateCard,
   NavigationTranslator,
+  NoList,
   PageHeader,
   Tag,
   TopDownButton,
@@ -102,10 +103,6 @@ const TranslationList = () => {
     }
   }
 
-  // useEffect(()=>{
-  //   filterRef.current.
-  // },[height])
-
   return (
     <>
       <PageHeader title="번역 리스트" useReloadButton />
@@ -119,19 +116,23 @@ const TranslationList = () => {
         ))}
       </FilterContainer>
       <Wrap paddingTop={height}>
-        {filterdEstimates.map(estimate => (
-          <EstimateCard
-            key={estimate.id}
-            userName={estimate.User.username}
-            field={estimate.field}
-            beforeLanguage={estimate.beforeLanguage}
-            afterLanguage={estimate.afterLanguage}
-            isText={estimate.isText}
-            deadline={estimate.deadline}
-            createdTime={estimate.createdAt}
-            onClick={() => handleClick(estimate)}
-          />
-        ))}
+        {filterdEstimates.length === 0 ? (
+          <NoList listName="번역 의뢰" />
+        ) : (
+          filterdEstimates.map(estimate => (
+            <EstimateCard
+              key={estimate.id}
+              userName={estimate.User.username}
+              field={estimate.field}
+              beforeLanguage={estimate.beforeLanguage}
+              afterLanguage={estimate.afterLanguage}
+              isText={estimate.isText}
+              deadline={estimate.deadline}
+              createdTime={estimate.createdAt}
+              onClick={() => handleClick(estimate)}
+            />
+          ))
+        )}
         <TopDownButton />
         <NavigationTranslator />
         <ModalBackground showModal={showModal} />
