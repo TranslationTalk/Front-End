@@ -17,7 +17,7 @@ import { ReactComponent as AddIcon } from '../../assets/icons/Add.svg'
 
 const initialState = {
   name: '',
-  profileFile: '',
+  profileFile: 'aaaa',
   language: '',
   email: '',
   phoneNum: '',
@@ -89,7 +89,7 @@ const TranslatorMyPageSetting = () => {
 
   const handleChange = e => {
     const { id, name, value, checked, files } = e.target
-    console.log(id, name, value)
+    console.log(id, name, value, checked, files)
     setFormData({
       ...formData,
       [id === '' ? name : id]: name === '' ? checked : value,
@@ -113,10 +113,7 @@ const TranslatorMyPageSetting = () => {
   }
 
   const removeSelectInput = index => {
-    if (selectInputs.length === 1) return // 기본 한 개는 가지고 있어야 하므로
-
-    // 가능 언어 추가했다가 아직 선택 안했을 경우에도 삭제가 되어야 하므로
-    // languages object 길이 early return 보다 먼저 해준다.
+    if (selectInputs.length === 1) return
 
     setSelectInputs(
       selectInputs.filter((el, idx) => idx !== index).map((el, index) => index),
@@ -124,7 +121,6 @@ const TranslatorMyPageSetting = () => {
 
     if (Object.keys(languages).length === 1) return
 
-    // 그냥 바로 수정 하면 당연히 안될 듯 그래서 복제함
     const tempLanguages = { ...languages }
     delete tempLanguages[index]
     const entries = Object.entries(tempLanguages).map(([, lang], index) => [
@@ -141,7 +137,14 @@ const TranslatorMyPageSetting = () => {
 
   return (
     <>
-      <SubPageHeader title="계정 설정" />
+      <HeaderWrap>
+        <SubPageHeader
+          title="계정 설정"
+          useButton
+          buttonLabel="저장"
+          buttonEvent={handleSubmit}
+        />
+      </HeaderWrap>
       <ProfileWrap>
         <img
           src={fileImage ? fileImage : defaultProfile}
@@ -245,6 +248,15 @@ const TranslatorMyPageSetting = () => {
   )
 }
 
+const HeaderWrap = styled.div`
+  & > div button {
+    background-color: var(--white);
+    color: var(--main-color);
+    border: none;
+    font-size: var(--fs-16);
+  }
+`
+
 const ProfileWrap = styled.div`
   display: flex;
   flex-direction: column;
@@ -303,15 +315,15 @@ const SelectContainer = styled.div`
 
 const ButtonWrap = styled.div`
   margin-top: 0;
-  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   & > button {
     font-size: var(--fs-14);
     font-weight: normal;
+    width: fit-content;
   }
   svg {
-    position: absolute;
-    top: 12px;
-    right: 35%;
     pointer-events: none;
   }
 `
