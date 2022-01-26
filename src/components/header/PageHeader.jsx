@@ -10,7 +10,7 @@ import styled from 'styled-components'
 import { useLocation } from 'react-router-dom'
 import { ReactComponent as ReloadIcon } from '../../assets/icons/ReloadIcon.svg'
 import { ReactComponent as SettingIcon } from '../../assets/icons/Settings.svg'
-import Logo from '../../assets/images/Logo.png'
+import { ReactComponent as Logo } from '../../assets/icons/LogoBlue.svg'
 import { HamburgerMenu } from '../index'
 
 const PageHeader = ({
@@ -25,7 +25,7 @@ const PageHeader = ({
   return (
     <Container shouldWrap={location !== '/'}>
       {location === '/' || <HamburgerMenu />}
-      {title ? <Title>{title}</Title> : <LogoImg src={Logo} alt="logo" />}
+      {title ? <Title>{title}</Title> : <Logo />}
       {useReloadButton && (
         <SvgWrap>
           <ReloadIcon onClick={reloadEvent} />
@@ -57,6 +57,13 @@ const Container = styled.div`
   ${props => (props.shouldWrap ? 'max-width: 640px;' : null)}
   min-width: 360px;
 
+  & > svg {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
   @media (min-width: 640px) {
     height: ${props => (props.shouldWrap ? '56px' : '80px')};
   }
@@ -65,13 +72,6 @@ const Container = styled.div`
 const Title = styled.h2`
   font-size: var(--fs-20);
   font-weight: bold;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-`
-
-const LogoImg = styled.img`
   position: absolute;
   top: 50%;
   left: 50%;

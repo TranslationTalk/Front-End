@@ -4,6 +4,7 @@ import { Route, Routes } from 'react-router-dom'
 import Login from './common/Login'
 import Chat from './common/Chat'
 import ChatList from './common/ChatList'
+import NotFound from './common/NotFound'
 // client
 import ClientEstimateList from './client/ClientEstimateList'
 import ClientHome from './client/ClientHome'
@@ -61,6 +62,7 @@ const Router = () => {
           path="/translator/estimate/:id"
           element={<TranslatorEstimateDetail />}
         />
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </div>
   )
