@@ -57,6 +57,10 @@ const Container = styled.div`
 
   & > svg {
     cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    &:hover {
+      transform: translateX(-5px);
+    }
   }
 
   & > button {

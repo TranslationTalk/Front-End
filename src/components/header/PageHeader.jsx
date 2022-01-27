@@ -74,6 +74,11 @@ const Title = styled.h2`
 
 const SvgWrap = styled.div`
   cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  transform: rotate(0);
+  &:hover {
+    transform: rotate(60deg);
+  }
 `
 
 PageHeader.propTypes = {
