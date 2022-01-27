@@ -278,6 +278,20 @@ const Content = styled.div`
   margin-top: 36px;
   height: 100%;
   overflow-y: auto;
+  padding-right: 10px;
+  &::-webkit-scrollbar {
+    width: 4px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    height: 10%;
+    background-color: rgba(61, 80, 255, 0.3);
+    border-radius: 10px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background-color: var(--white);
+  }
 `
 
 const CheckBoxWrap = styled.div`

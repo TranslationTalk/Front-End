@@ -18,6 +18,20 @@ const GlobalStyles = createGlobalStyle`
         font-family: 'Noto Sans KR', sans-serif;
     }
 
+    body::-webkit-scrollbar{
+    width: 6px;
+    }
+
+    body::-webkit-scrollbar-thumb{
+        height: 15%;
+        background-color: rgba(61, 80, 255, 0.3);
+        border-radius: 10px;  
+    }
+
+    body::-webkit-scrollbar-track{
+        background-color: var(--white);
+    }
+
     :root {
         /* common-color */
         --main-color: #3D51FF;
