@@ -26,16 +26,13 @@ const PageHeader = ({
     <Container shouldWrap={location !== '/'}>
       {location === '/' || <HamburgerMenu />}
       {title ? <Title>{title}</Title> : <Logo />}
-      {useReloadButton && (
-        <SvgWrap>
+      <SvgWrap>
+        {useReloadButton ? (
           <ReloadIcon onClick={reloadEvent} />
-        </SvgWrap>
-      )}
-      {useSettingButton && (
-        <SvgWrap>
+        ) : useSettingButton ? (
           <SettingIcon onClick={settingEvent} />
-        </SvgWrap>
-      )}
+        ) : null}
+      </SvgWrap>
     </Container>
   )
 }
@@ -57,6 +54,7 @@ const Container = styled.div`
   ${props => (props.shouldWrap ? 'max-width: 640px;' : null)}
   min-width: 360px;
 
+  // title이 없을 때 logo는 absolute로 처리
   & > svg {
     position: absolute;
     top: 50%;
@@ -72,10 +70,6 @@ const Container = styled.div`
 const Title = styled.h2`
   font-size: var(--fs-20);
   font-weight: bold;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
 `
 
 const SvgWrap = styled.div`

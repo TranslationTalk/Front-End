@@ -22,21 +22,17 @@ const SubPageHeader = ({
   const location = useLocation().pathname
 
   return (
-    <Container shouldWrap={location !== '/'}>
-      <SvgWrap>
-        <ArrowbackIcon onClick={() => history.back()} />
-      </SvgWrap>
-      {leftTitle && (
+    <Container shouldWrap={location !== '/'} useButton={useButton}>
+      <ArrowbackIcon onClick={() => history.back()} />
+      {leftTitle ? (
         <LeftTitle>
           {leftTitle}
           <span>{call}님</span>
         </LeftTitle>
+      ) : (
+        <Title>{title}</Title>
       )}
-      <Title>{title}</Title>
-      {/* border radius 추가 필요 */}
-      {useButton && (
-        <Button content={buttonLabel} onClick={buttonEvent} bgColor="#FF5F5F" />
-      )}
+      <Button content={buttonLabel} onClick={buttonEvent} bgColor="#FF5F5F" />
     </Container>
   )
 }
@@ -58,6 +54,11 @@ const Container = styled.div`
   padding: 16px;
   background-color: #fff;
   border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+
+  & > svg {
+    cursor: pointer;
+  }
+
   & > button {
     font-size: var(--fs-12);
     font-weight: normal;
@@ -65,6 +66,7 @@ const Container = styled.div`
     height: fit-content;
     padding: 5px 10px;
     border-radius: 15px;
+    visibility: ${props => (props.useButton ? 'visible' : 'hidden')};
   }
 `
 
@@ -86,14 +88,6 @@ const LeftTitle = styled.h2`
 const Title = styled.h2`
   font-size: var(--fs-20);
   font-weight: bold;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-`
-
-const SvgWrap = styled.div`
-  cursor: pointer;
 `
 
 SubPageHeader.propTypes = {
