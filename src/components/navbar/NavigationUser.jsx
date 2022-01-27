@@ -27,12 +27,20 @@ const NavigationUser = () => {
         <NavName isHere={location === '/client/main'}>번역 요청</NavName>
       </LinkElement>
       <LinkElement to="/client/request/list">
-        {location === '/client/request/list' ? (
+        {location === '/client/request/list' ||
+        location === '/client/estimate/list' ? (
           <MyDocIcon {...selectedAttr} />
         ) : (
           <MyDocIcon />
         )}
-        <NavName isHere={location === '/client/request/list'}>내 견적</NavName>
+        <NavName
+          isHere={
+            location === '/client/request/list' ||
+            location === '/client/estimate/list'
+          }
+        >
+          내 견적
+        </NavName>
       </LinkElement>
       <LinkElement to="/chat/list">
         {location === '/chat/list' ? (
