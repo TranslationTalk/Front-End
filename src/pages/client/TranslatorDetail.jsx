@@ -9,6 +9,7 @@ import { clientAPIs } from '../../utils/axios'
 import {
   Button,
   EstimateDetail,
+  NoList,
   ReviewCard,
   SubPageHeader,
   ToggleMenu,
@@ -150,15 +151,19 @@ const TranslatorDetail = () => {
           //번역가 리뷰
 
           <>
-            {review?.map(el => (
-              <ReviewCard
-                key={el.id}
-                userName={el.clientId}
-                score={el.score}
-                comment={el.comment}
-                date={el.reviewDate}
-              />
-            ))}
+            {review.length === 0 ? (
+              <NoList listName="리뷰" />
+            ) : (
+              review?.map(el => (
+                <ReviewCard
+                  key={el.id}
+                  userName={el.clientId}
+                  score={el.score}
+                  comment={el.comment}
+                  date={el.reviewDate}
+                />
+              ))
+            )}
 
             <Button
               content="리뷰쓰기"

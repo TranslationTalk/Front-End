@@ -9,11 +9,14 @@ import styled from 'styled-components'
 import {
   EstimateCard,
   NavigationUser,
+  NoList,
   PageHeader,
   ToggleMenu,
   TopDownButton,
 } from '../../components'
 import { clientAPIs } from '../../utils/axios'
+
+const menu = ['견적대기', '진행중', '완료']
 
 const RequestList = () => {
   const navigate = useNavigate()
@@ -61,27 +64,29 @@ const RequestList = () => {
   return (
     <RequestListPage>
       <PageHeader title="번역 의뢰 리스트" useReloadButton />
-      <ToggleMenu
-        menu={['견적대기', '진행중', '완료']}
-        click={clickNumber}
-        onClick={handleToggleMenu}
-      />
+      <ToggleMenu menu={menu} click={clickNumber} onClick={handleToggleMenu} />
       <ul>
-        {estimates
-          .filter(el => el.status === estimatesState)
-          .map(estimate => (
-            <EstimateCard
-              key={estimate.id}
-              userName={estimate.clientId.toString()}
-              field={estimate.field}
-              beforeLanguage={estimate.beforeLanguage}
-              afterLanguage={estimate.afterLanguage}
-              isText={estimate.isText}
-              deadline={estimate.deadline}
-              createdTime={estimate.createdAt}
-              onClick={() => cardClick(estimate)}
-            />
-          ))}
+        {estimates.filter(el => el.status === estimatesState).length === 0 ? (
+          <NoList listName={menu[clickNumber] + ' 리스트'} />
+        ) : (
+          estimates
+            .filter(el => el.status === estimatesState)
+            .map(estimate => {
+              return (
+                <EstimateCard
+                  key={estimate.id}
+                  userName={estimate.clientId.toString()}
+                  field={estimate.field}
+                  beforeLanguage={estimate.beforeLanguage}
+                  afterLanguage={estimate.afterLanguage}
+                  isText={estimate.isText}
+                  deadline={estimate.deadline}
+                  createdTime={estimate.createdAt}
+                  onClick={() => cardClick(estimate)}
+                />
+              )
+            })
+        )}
       </ul>
       <NavigationUser />
       <TopDownButton />
