@@ -76,9 +76,6 @@ const ChatList = () => {
 
 const Wrap = styled.div`
   padding: 72px 0;
-  & > div:first-child {
-    margin-bottom: 16px;
-  }
 `
 
 export default ChatList

@@ -31,22 +31,6 @@ const ChatListCard = ({ name, profileUrl, isRead, onClick, auth }) => {
   )
 }
 
-const Container = styled.div`
-  display: flex;
-  background-color: #fff;
-  position: relative;
-  width: 100%;
-  height: 52px;
-  margin-bottom: 12px;
-  padding: 0 20px;
-`
-
-const LeftWrap = styled.div`
-  & img {
-    margin-right: 10px;
-  }
-`
-
 const RightWrap = styled.div`
   width: 100%;
   height: 100%;
@@ -57,6 +41,8 @@ const RightWrap = styled.div`
   border-bottom: 1px solid var(--gray-bc);
   color: var(--gray-bc);
   position: relative;
+  transition: all 0.3s ease-in-out;
+  cursor: default;
   & > span {
     font-size: var(--fs-14);
   }
@@ -69,6 +55,26 @@ const RightWrap = styled.div`
   }
   & > p {
     margin-top: 4px;
+  }
+`
+
+const Container = styled.div`
+  display: flex;
+  align-items: center;
+  background-color: var(--white);
+  position: relative;
+  width: 100%;
+  padding: 10px 20px;
+  border: none;
+
+  &:hover ${RightWrap} {
+    border-bottom: 1px solid var(--main-color);
+  }
+`
+
+const LeftWrap = styled.div`
+  & img {
+    margin-right: 10px;
   }
 `
 
