@@ -3,6 +3,7 @@ import { useLocation, useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
 import {
   Button,
+  CommentBox,
   StatusMessage,
   SubPageHeader,
   SummaryCard,
@@ -65,18 +66,16 @@ const TranslatorEstimateDetail = () => {
             field={estimate.field}
             beforeLanguage={estimate.beforeLanguage}
             afterLanguage={estimate.afterLanguage}
-            needs={estimate.needs}
             deadline={estimate.deadline}
             isText={estimate.isText}
             fileUrl={estimate.fileUrl}
           />
+          <CommentBox comment={estimate.needs} />
           {estimate.youtubeUrl !== '' && (
             <VideoCard youtubeUrl={estimate.youtubeUrl} />
           )}
         </RequestInfo>
-        <CommentBox>
-          <p>{estimateDetail?.comment}</p>
-        </CommentBox>
+        <CommentBox comment={estimateDetail?.comment} />
         <Line />
         <SuggestWrap>
           <h3>목표일정</h3>
@@ -128,6 +127,9 @@ const Wrap = styled.div`
   & > button {
     margin-top: 20px;
   }
+  & > div:nth-child(3) {
+    margin-bottom: 20px;
+  }
 `
 
 const Line = styled.div`
@@ -146,15 +148,9 @@ const RequestInfo = styled.div`
     margin-bottom: 12px;
     background-color: #000;
   }
-`
-
-const CommentBox = styled.div`
-  background-color: var(--light-blue);
-  min-height: 100px;
-  border-radius: 4px;
-  margin: 24px 0;
-  padding: 8px 12px;
-  font-size: var(--fs-14);
+  & > div:nth-child(3) {
+    margin-bottom: 20px;
+  }
 `
 
 const SuggestWrap = styled.div`
