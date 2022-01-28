@@ -170,7 +170,7 @@ const TranslatorDetail = () => {
               border
               onClick={() => {
                 navigate(`/client/review`, {
-                  state: { translatorId: estimate.translatorId },
+                  state: { requestId: estimate.requestId },
                 })
               }}
             />

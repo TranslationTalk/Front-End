@@ -16,9 +16,11 @@ const ReviewForm = () => {
   const [comment, setComment] = useState('')
   const location = useLocation()
 
+  console.log(location.state.requestId)
+
   // 비동기처리: 번역가 리뷰 등록
   const postReview = async () => {
-    await clientAPIs.writeReview(location.state.translatorId, {
+    await clientAPIs.writeReview(location.state.requestId, {
       comment,
       score,
     })
