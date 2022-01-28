@@ -3,7 +3,7 @@ import React from 'react'
 import styled from 'styled-components'
 import ChatLogo from '../../assets/images/ChatLogo.png'
 
-const InitialChat = ({ auth, name, createdAt, isText, price }) => {
+const InitialChat = ({ auth, name, createdAt }) => {
   const kDate = createdAt?.replace(/000Z$/g, '0900')
   const hours =
     new Date(kDate).getHours() < 10
@@ -31,14 +31,16 @@ const InitialChat = ({ auth, name, createdAt, isText, price }) => {
       <Chat>
         <h3>번역톡 알림</h3>
         <p>{initialChat.chat}</p>
-        <div>
+        <span>이메일 및 전화번호를 제외한 개인정보 공유를 자제해주세요!</span>
+        {/* 추후 구현 예정 */}
+        {/* <div>
           <span>번역 서비스</span>
           <span className="text">{isText ? '텍스트 번역' : '영상 번역'}</span>
         </div>
         <div>
           <span>견적가</span>
           <span className="price">{price.toLocaleString()}원</span>
-        </div>
+        </div> */}
       </Chat>
       <Time>{`${hours > 12 ? '오후' : '오전'} ${
         hours > 12 ? hours - 12 : hours
@@ -77,6 +79,11 @@ const Chat = styled.div`
     font-size: var(--fs-14);
     color: var(--gray);
     border-bottom: 1px solid var(--gray-c4);
+  }
+  span {
+    font-size: var(--fs-12);
+    color: var(--gray);
+    word-break: keep-all;
   }
   div {
     display: flex;
