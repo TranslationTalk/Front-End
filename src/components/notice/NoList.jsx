@@ -1,7 +1,7 @@
 /**
  * list에 보여줄 것이 아무것도 없을 때 사용
  *
- * listName: 어떤 종류인지 ("리뷰", "의뢰", "견적"...)
+ * listName: 들어갈 문장
  */
 import React from 'react'
 import PropTypes from 'prop-types'
@@ -12,7 +12,7 @@ const NoList = ({ listName }) => {
   return (
     <Wrap>
       <LogoGray fill="#C4C4C4" />
-      <h3>아직 받은 {listName}가 없어요.</h3>
+      <h3>{listName}</h3>
     </Wrap>
   )
 }
