@@ -37,11 +37,10 @@ const RightWrap = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: 4px 10px 11px 10px;
+  padding: 8px 10px 11px 10px;
   border-bottom: 1px solid var(--gray-bc);
   color: var(--gray-bc);
   position: relative;
-  transition: all 0.3s ease-in-out;
   cursor: default;
   & > span {
     font-size: var(--fs-14);
@@ -65,14 +64,18 @@ const Container = styled.div`
   position: relative;
   width: 100%;
   padding: 10px 20px;
+  padding-bottom: 0;
+  margin-bottom: 12px;
   border: none;
+  transition: all 0.3s ease-in-out;
 
-  &:hover ${RightWrap} {
-    border-bottom: 1px solid var(--main-color);
+  &:hover {
+    background-color: rgba(196, 196, 196, 0.3);
   }
 `
 
 const LeftWrap = styled.div`
+  padding-bottom: 5px;
   & img {
     margin-right: 10px;
   }
