@@ -26,7 +26,7 @@ const ReviewCard = ({ userName, score, comment, date }) => {
             </span>
             <span className="date">
               {/* 2022-10-10 -> 22.10.10 */}
-              {date.replace(/-/g, '.').slice(2, date.length)}
+              {date?.replace(/-/g, '.').slice(2, date.length)}
             </span>
           </p>
         </div>
