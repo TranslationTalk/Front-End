@@ -16,7 +16,11 @@ import {
 } from '../../components'
 import { clientAPIs } from '../../utils/axios'
 
-const menu = ['견적대기', '진행중', '완료']
+const menu = [
+  '아직 견적대기중인 리스트가 없어요',
+  '아직 진행중인 리스트가 없어요',
+  '아직 완료된 리스트가 없어요',
+]
 
 const RequestList = () => {
   const navigate = useNavigate()
