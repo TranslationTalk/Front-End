@@ -6,15 +6,25 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
-const TextAreaInput = ({ id, name, placeholder, onChange, value }) => (
-  <TextArea
-    id={id}
-    name={name}
-    placeholder={placeholder}
-    onChange={onChange}
-    value={value}
-  />
-)
+const TextAreaInput = ({
+  id,
+  name,
+  placeholder,
+  onChange,
+  value,
+  maxLength,
+}) => {
+  return (
+    <TextArea
+      id={id}
+      name={name}
+      placeholder={placeholder}
+      onChange={onChange}
+      value={value}
+      maxLength={maxLength}
+    />
+  )
+}
 
 const TextArea = styled.textarea`
   width: 100%;
@@ -38,6 +48,7 @@ TextAreaInput.propTypes = {
   placeholder: PropTypes.string,
   onChange: PropTypes.func.isRequired,
   value: PropTypes.string,
+  maxLength: PropTypes.number,
 }
 
 export default TextAreaInput
