@@ -110,7 +110,7 @@ const ClientRequestForm = props => {
   //! 서버에 전송
   const submit = () => {
     // 파일 업로드
-    uploadFile(file, `file/${requestForm.fileUrl}`)
+    uploadFile(file, `file/${file.lastModified}_${file.name}`)
 
     // 제출 후 RequestList페이지로 이동
     const {

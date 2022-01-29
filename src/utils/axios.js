@@ -28,54 +28,9 @@ export const apis = {
 
   // 번역가 마이페이지
   getTranslatorMypage: () => instance.get('api/translator/mypage'), // 마이페이지 정보 요청
-  postTranslatorMypage: ({
-    name,
-    career,
-    profileFile,
-    language,
-    email,
-    phoneNum,
-    introduce,
-    taxPossible,
-    cashPossible,
-    isBusiness,
-  }) =>
-    instance.post('api/translator/mypage', {
-      name,
-      career,
-      profileFile,
-      language,
-      email,
-      phoneNum,
-      introduce,
-      taxPossible,
-      cashPossible,
-      isBusiness,
-    }), // 첫 로그인시 정보 작성
-  modifyTranslatorMypage: ({
-    name,
-    career,
-    profileFile,
-    language,
-    email,
-    phoneNum,
-    introduce,
-    taxPossible,
-    cashPossible,
-    isBusiness,
-  }) =>
-    instance.post('api/translator/mypage/update', {
-      name,
-      career,
-      profileFile,
-      language,
-      email,
-      phoneNum,
-      introduce,
-      taxPossible,
-      cashPossible,
-      isBusiness,
-    }), // 마이페이지 정보 수정
+  postTranslatorMypage: obj => instance.post('api/translator/mypage', obj), // 첫 로그인시 정보 작성
+  modifyTranslatorMypage: obj =>
+    instance.post('api/translator/mypage/update', obj), // 마이페이지 정보 수정
   getReviews: id => instance.get(`api/review/${id}`),
 
   // 번역 요청
@@ -111,7 +66,7 @@ export const clientAPIs = {
     email,
     phoneNumber,
     youtubeUrl,
-    requestFile,
+    fileUrl,
     isText,
     needs,
   ) =>
@@ -123,7 +78,7 @@ export const clientAPIs = {
       email,
       phoneNumber,
       youtubeUrl,
-      requestFile,
+      fileUrl,
       isText,
       needs,
     }),

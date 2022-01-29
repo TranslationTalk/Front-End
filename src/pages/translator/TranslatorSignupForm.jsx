@@ -15,11 +15,12 @@ import { language } from '../../constant/selectOptions'
 import styled from 'styled-components'
 import { ReactComponent as AddIcon } from '../../assets/icons/Add.svg'
 import { getDownloadUrl, uploadFile } from '../../utils/firebase'
+import { useNavigate } from 'react-router-dom'
 
 const initialState = {
   name: '',
   career: '번역 회사 근무',
-  profileFile:
+  profileUrl:
     'https://tistory1.daumcdn.net/tistory/user/264290/profile/profileImg?v=1635480821401',
   language: '',
   email: '',
@@ -32,12 +33,13 @@ const initialState = {
 
 const TranslatorSignupForm = () => {
   const [formData, setFormData] = useState(initialState)
-  //파일 미리볼 url을 저장해줄 state
   const [selectInputs, setSelectInputs] = useState([0])
   const [languages, setLanguages] = useState({})
   const [file, setFile] = useState(null) // input으로 받아온 file
   const [fileName, setFileName] = useState('') // 백엔드에 보내고, storage에 업로드할 파일 이름
   const [preview, setPreview] = useState('') // image preview 요소
+
+  const navigate = useNavigate()
 
   const handleSubmit = async e => {
     e.preventDefault()
@@ -51,6 +53,8 @@ const TranslatorSignupForm = () => {
     } = await apis.postTranslatorMypage(formData)
     console.log(data)
     setFormData(initialState)
+
+    navigate('/translator/list')
   }
 
   const handleChange = e => {
@@ -69,14 +73,14 @@ const TranslatorSignupForm = () => {
     setFileName(`${files[0].lastModified}_${files[0].name}`) // file name 지정
   }
 
-  // fileName 변경되었을 때 formData.profileFile에 fileName 넣기
+  // fileName 변경되었을 때 formData.profileUrl fileName 넣기
   useEffect(() => {
     if (fileName === '') return
     // url로 만들어서 백엔드에 전달
     const profileUrl = getDownloadUrl('profile', fileName)
     setFormData({
       ...formData,
-      profileFile: profileUrl,
+      profileUrl: profileUrl,
     })
   }, [fileName])
 
@@ -140,8 +144,8 @@ const TranslatorSignupForm = () => {
             label="프로필 선택"
             fontSize="12px"
             padding="8px 10px"
-            id="profileFile"
-            name="profileFile"
+            id="profileUrl"
+            name="profileUrl"
             accept="image"
           />
         </div>

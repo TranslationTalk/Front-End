@@ -18,10 +18,10 @@ const TranslatorInfo = ({
   return (
     <Profile>
       <div>
-        <img src={profileImg ?? profileUrl} alt={name + '프로필이미지'} />
+        <img src={profileUrl ?? profileImg} alt={name + '프로필이미지'} />
         <TransLatorInfo>
           <p>
-            <b>{name}</b> <span>번역간님</span>
+            <b>{name}</b> <span>번역가님</span>
           </p>
           <p>
             <span>번역 {totalTrans ?? 0}건</span>
@@ -65,7 +65,8 @@ const Profile = styled.div`
   }
   & img {
     margin-right: 21px;
-    height: 100%;
+    width: 93px;
+    height: 93px;
   }
   & b {
     font-weight: bold;
