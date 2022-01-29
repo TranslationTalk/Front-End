@@ -20,8 +20,8 @@ instance.interceptors.request.use(function (config) {
 
 export const apis = {
   // 카카오 로그인
-  login: () => instance.get('api/auth/kakao/client'), // 일반 유저 로그인
-  translatorLogin: () => instance.get('api/auth/kakao/translator'), // 번역가 로그인
+  login: code => instance.get(`api/auth/kakao/client/${code}`), // 일반 유저 로그인
+  translatorLogin: code => instance.get(`api/auth/kakao/translator/${code}`), // 번역가 로그인
   developerSignup: (id, auth) =>
     instance.post(`api/auth/dev/signup`, { id, auth }),
   developerLogin: id => instance.post(`api/auth/dev/login`, { id }),
