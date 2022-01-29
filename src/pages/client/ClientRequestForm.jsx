@@ -68,6 +68,9 @@ const ClientRequestForm = props => {
 
   //! 제출하기 버튼
   const onSubmit = e => {
+    //submit 이벤트 발생시 reload방지
+    e.preventDefault()
+
     let check = Object.assign({}, checkForm)
 
     // field
@@ -102,15 +105,14 @@ const ClientRequestForm = props => {
     if (!Object.entries(check).find(value => value[1] === false)) {
       submit()
     }
-
-    //submit 이벤트 발생시 reload방지
-    e.preventDefault()
   }
 
   //! 서버에 전송
   const submit = () => {
     // 파일 업로드
-    uploadFile(file, `file/${file.lastModified}_${file.name}`)
+    if (requestForm.isText) {
+      uploadFile(file, `file/${file.lastModified}_${file.name}`)
+    }
 
     // 제출 후 RequestList페이지로 이동
     const {
@@ -152,7 +154,6 @@ const ClientRequestForm = props => {
       <SubPageHeader title="번역 요청 Form" />
       <Form onSubmit={onSubmit}>
         <p>번역 요청 의뢰서</p>
-
         {/* 분류 */}
         <SelectInput
           name="field"
@@ -162,7 +163,6 @@ const ClientRequestForm = props => {
           onChange={onChange}
         />
         {formMessage(checkForm.field, '분류를 선택해 주세요')}
-
         {/* 요청날짜 */}
         <TextInput
           name="deadline"
@@ -171,7 +171,6 @@ const ClientRequestForm = props => {
           onChange={onChange}
         />
         {formMessage(checkForm.deadline, '요청 날짜를 선택해 주세요')}
-
         {/* 번역 언어 */}
         <div>
           <SelectInput
@@ -190,7 +189,6 @@ const ClientRequestForm = props => {
           />
         </div>
         {formMessage(checkForm.language, '번역 언어를 선택해 주세요')}
-
         {/* 이메일 입력 */}
         <TextInput
           name="email"
@@ -200,7 +198,6 @@ const ClientRequestForm = props => {
           onChange={onChange}
         />
         {formMessage(checkForm.email, '이메일을 입력해 주세요')}
-
         {/* 전화번호 입력 */}
         <TextInput
           name="phoneNumber"
@@ -210,7 +207,6 @@ const ClientRequestForm = props => {
           onChange={onChange}
         />
         {formMessage(checkForm.phoneNumber, '전화번호를 입력해 주세요')}
-
         {/* 번역할 파일, url */}
         {props.isText ? (
           <>
@@ -232,7 +228,6 @@ const ClientRequestForm = props => {
             onChange={onChange}
           />
         )}
-
         {/* 세부사항 요청 */}
         <TextAreaInput
           name="needs"
