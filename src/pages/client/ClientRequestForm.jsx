@@ -17,9 +17,13 @@ import { fields, language } from '../../constant/selectOptions'
 import { clientAPIs } from '../../utils/axios'
 import { useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
+import { uploadFile } from '../../utils/firebase'
+//파일 업로드
 
 const ClientRequestForm = props => {
   const navigate = useNavigate()
+  const [file, setfile] = useState()
+
   const [requestForm, setRequestForm] = useState({
     field: '',
     deadline: '',
@@ -33,12 +37,24 @@ const ClientRequestForm = props => {
     needs: '',
   })
 
-  const onChange = e => {
+  //
+  const onChange = async e => {
     const { value, name } = e.target
-    setRequestForm({ ...requestForm, [name]: value })
+    if (e.target.type === 'file') {
+      setfile(e.target.files[0])
+      setRequestForm({
+        ...requestForm,
+        requestFile: `${e.target.files[0].lastModified}_${e.target.files[0].name}`,
+      })
+    } else {
+      setRequestForm({ ...requestForm, [name]: value })
+    }
   }
 
   const submit = () => {
+    // 파일 업로드
+    uploadFile(file, `file/${requestForm.requestFile}`)
+
     // 제출 후 RequestList페이지로 이동
     const {
       field,
@@ -72,6 +88,7 @@ const ClientRequestForm = props => {
       })
       .catch(e => alert(`${e} already exist id '${requestForm}`))
   }
+
   return (
     <div>
       <SubPageHeader title="번역 요청 Form" />
@@ -164,11 +181,12 @@ const ClientRequestForm = props => {
         {/* 번역할 파일, url */}
         {props.isText ? (
           <FileInput
+            name="requestFile"
             label="파일 올리기(.txt)"
             value={requestForm.requestFile}
-            useUploadName
             onChange={onChange}
             id="youtube"
+            useUploadName
           />
         ) : (
           <TextInput

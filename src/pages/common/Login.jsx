@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import { Button, PageHeader } from '../../components/index'
 import { apis } from '../../utils/axios'
@@ -12,7 +12,24 @@ import MainSection2 from '../../assets/images/MainSection2.png'
 import MainSection3 from '../../assets/images/MainSection3.png'
 import MainVisionSection from '../../assets/images/MainVisionSection.jpg'
 
-function Login() {
+const Login = () => {
+  const useScroll = () => {
+    const [scrollY, setScrollY] = useState(0)
+
+    const listener = () => {
+      setScrollY(window.pageYOffset)
+    }
+
+    useEffect(() => {
+      window.addEventListener('scroll', listener)
+      return () => {
+        window.addEventListener('scroll', listener)
+      }
+    }, [])
+
+    return scrollY
+  }
+
   return (
     <LoginPage>
       <Test>
@@ -49,12 +66,12 @@ function Login() {
         </div>
       </LoginSection>
 
-      <TextSection1>
+      <TextSection1 useScroll={useScroll()}>
         <h2>원하는 번역가를 선택할 수 있어요</h2>
         <p>합리적인 가격과, 평점, 리뷰를 보고 직접 번역가를 선택하세요</p>
       </TextSection1>
 
-      <TextSection2>
+      <TextSection2 useScroll={useScroll()}>
         <h2>
           <span>전문가에게</span>
           <span>번역을 의뢰하고</span>
@@ -66,7 +83,7 @@ function Login() {
         />
       </TextSection2>
 
-      <TextSection3>
+      <TextSection3 useScroll={useScroll()}>
         <div>
           <h2>
             <span>나에게 맞는</span>
@@ -77,7 +94,7 @@ function Login() {
         </div>
       </TextSection3>
 
-      <VisionSection>
+      <VisionSection useScroll={useScroll()}>
         <h2>
           <span>번역톡은 여러분과</span>
           <span> 함께 성장합니다</span>
@@ -134,6 +151,9 @@ const LoginSection = styled.section`
   background-repeat: no-repeat;
   text-align: center;
   box-sizing: border-box;
+  h2 {
+    animation: show 2s;
+  }
   > div {
     position: relative;
     display: inline-block;
@@ -190,6 +210,9 @@ const LoginSection = styled.section`
     @media screen and (min-width: 640px) {
       display: inline-block;
       right: 20%;
+      h2 {
+        animation: none;
+      }
       p:first-child {
         font-weight: 300;
         font-size: 49px;
@@ -240,12 +263,17 @@ const TextSection1 = styled.section`
     line-height: 1.4;
     font-weight: 700;
     font-size: 36px;
+    opacity: ${({ useScroll }) => (useScroll > 200 ? 1 : 0)};
+    animation: ${({ useScroll }) => (useScroll > 200 ? 'show' : 'disappear')}
+      1.5s;
   }
   p {
     margin: 0 auto 50px;
     width: 260px;
     line-height: 1.36;
     font-size: 20px;
+    opacity: ${({ useScroll }) => (useScroll > 200 ? 1 : 0)};
+    animation: ${({ useScroll }) => (useScroll > 200 ? 'show' : 'disappear')} 2s;
   }
   @media screen and (min-width: 640px) {
     h2,
@@ -270,7 +298,8 @@ const TextSection2 = styled.section`
   }
   img {
     width: 320px;
-    transition: all 0.5s;
+    opacity: ${({ useScroll }) => (useScroll > 700 ? 1 : 0)};
+    animation: ${({ useScroll }) => (useScroll > 700 ? 'show' : 'disappear')} 2s;
   }
   span {
     display: inline-block;
@@ -312,7 +341,9 @@ const TextSection3 = styled.section`
   }
   img {
     width: 208px;
-    transition: all 0.5s;
+    opacity: ${({ useScroll }) => (useScroll > 1100 ? 1 : 0)};
+    animation: ${({ useScroll }) => (useScroll > 1100 ? 'show' : 'disappear')}
+      2s;
   }
   span {
     display: block;
@@ -353,11 +384,17 @@ const VisionSection = styled.section`
     width: 245px;
     font-size: 32px;
     line-height: 1.4;
+    opacity: ${({ useScroll }) => (useScroll > 1500 ? 1 : 0)};
+    animation: ${({ useScroll }) => (useScroll > 1500 ? 'show' : 'disappear')}
+      1.5s;
   }
   p {
     margin: auto;
     font-size: 18px;
     line-height: 1.4;
+    opacity: ${({ useScroll }) => (useScroll > 1600 ? 1 : 0)};
+    animation: ${({ useScroll }) => (useScroll > 1600 ? 'show' : 'disappear')}
+      2s;
   }
   span {
     display: block;

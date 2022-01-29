@@ -9,6 +9,7 @@ import styled from 'styled-components'
 import {
   EstimateCardMin,
   NavigationUser,
+  NoList,
   PriceCard,
   StatusMessage,
   SubPageHeader,
@@ -48,7 +49,7 @@ const ClientEstimateList = () => {
     <ClientEstimateListPage>
       <SubPageHeader title="받은견적" />
       {estimate.length === 0 ? (
-        <p>받은 견적이 없습니다.</p>
+        <NoList listName="받은 견적 리스트" />
       ) : (
         <section>
           <h2>받은 견적</h2>
