@@ -15,12 +15,12 @@ import { language } from '../../constant/selectOptions'
 import styled from 'styled-components'
 import { ReactComponent as AddIcon } from '../../assets/icons/Add.svg'
 import { useNavigate } from 'react-router-dom'
+import { getDownloadUrl, uploadFile } from '../../utils/firebase'
 
 const initialState = {
   name: '',
   career: '경력',
-  profileFile:
-    'https://tistory1.daumcdn.net/tistory/user/264290/profile/profileImg?v=1635480821401',
+  profileUrl: '',
   language: '',
   email: '',
   phoneNum: '',
@@ -35,10 +35,13 @@ const initialState = {
 
 const TranslatorMyPageSetting = () => {
   const [formData, setFormData] = useState(initialState)
-  //파일 미리볼 url을 저장해줄 state
-  const [fileImage, setFileImage] = useState('')
   const [selectInputs, setSelectInputs] = useState([0])
   const [languages, setLanguages] = useState({})
+
+  const [file, setFile] = useState(null) // input으로 받아온 file
+  const [fileName, setFileName] = useState('') // 백엔드에 보내고, storage에 업로드할 파일 이름
+  const [preview, setPreview] = useState('') // image preview 요소
+
   const navigate = useNavigate()
 
   useEffect(() => {
@@ -84,6 +87,9 @@ const TranslatorMyPageSetting = () => {
     e.preventDefault()
     console.log(formData)
 
+    // 파일 업로드
+    uploadFile(file, `profile/${fileName}`)
+
     const {
       data: { data },
     } = await apis.modifyTranslatorMypage(formData)
@@ -94,20 +100,44 @@ const TranslatorMyPageSetting = () => {
   }
 
   const handleChange = e => {
-    const { id, name, value, checked, files } = e.target
-    console.log(id, name, value, checked, files)
+    const { id, name, value, checked } = e.target
     setFormData({
       ...formData,
       [id === '' ? name : id]: name === '' ? checked : value,
     })
-
-    if (id === 'profileFile') {
-      console.log(id, value.slice(12))
-      console.log(files)
-      setFileImage(URL.createObjectURL(files[0]))
-      console.log(fileImage)
-    }
   }
+
+  // fileChange시
+  const handleFileChange = e => {
+    // 업로드 하지는 않고 미리보기만
+    const { files } = e.target
+    setFile(files[0])
+    setFileName(`${files[0].lastModified}_${files[0].name}`) // file name 지정
+  }
+
+  // fileName 변경되었을 때 formData.profileUrl fileName 넣기
+  useEffect(() => {
+    if (fileName === '') return
+    // url로 만들어서 백엔드에 전달
+    const profileUrl = getDownloadUrl('profile', fileName)
+    setFormData({
+      ...formData,
+      profileUrl: profileUrl,
+    })
+  }, [fileName])
+
+  // image preview
+  useEffect(() => {
+    setPreview(
+      <img
+        src={file ? URL.createObjectURL(file) : defaultProfile}
+        alt="profileImg"
+        width="64px"
+        height="64px"
+      />,
+    )
+    return () => {}
+  }, [file])
 
   const handleSelectChange = e => {
     const { name, value } = e.target
@@ -152,20 +182,15 @@ const TranslatorMyPageSetting = () => {
         />
       </HeaderWrap>
       <ProfileWrap>
-        <img
-          src={fileImage ? fileImage : defaultProfile}
-          alt="profileImg"
-          width="64px"
-          height="64px"
-        />
+        {preview}
         <div>
           <FileInput
-            onChange={handleChange}
+            onChange={handleFileChange}
             label="프로필 선택"
             fontSize="12px"
             padding="8px 10px"
-            id="profileFile"
-            name="profileFile"
+            id="profileUrl"
+            name="profileUrl"
             accept="image"
           />
         </div>

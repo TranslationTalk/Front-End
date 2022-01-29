@@ -57,7 +57,11 @@ const TranslatorMyPage = () => {
         />
         <MidTitle>
           <h2>내가 받은 리뷰</h2>
-          <Tag text="999" bgColor="#FF5F5F" color="#FFFFFF" />
+          <Tag
+            text={translatorInfo?.totalReviews.toString()}
+            bgColor="#FF5F5F"
+            color="#FFFFFF"
+          />
         </MidTitle>
         {reviews.length === 0 ? (
           <NoList listName="리뷰" />

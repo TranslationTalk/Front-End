@@ -3,6 +3,7 @@ import { useLocation, useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
 import {
   Button,
+  CommentBox,
   SubPageHeader,
   SummaryCard,
   TextAreaInput,
@@ -49,11 +50,11 @@ const EstimateForm = () => {
             field={estimate.field}
             beforeLanguage={estimate.beforeLanguage}
             afterLanguage={estimate.afterLanguage}
-            needs={estimate.needs}
             deadline={estimate.deadline}
             isText={estimate.isText}
             fileUrl={estimate.fileUrl}
           />
+          <CommentBox comment={estimate.needs} />
           {estimate.youtubeUrl !== '' && (
             <VideoCard youtubeUrl={estimate.youtubeUrl} />
           )}

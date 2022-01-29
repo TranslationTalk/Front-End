@@ -1,6 +1,6 @@
 // firebaseInstance.js
 import { initializeApp } from 'firebase/app'
-import { getDownloadURL, getStorage, ref, uploadBytes } from 'firebase/storage'
+import { getStorage, ref, uploadBytes } from 'firebase/storage'
 
 import 'firebase/storage'
 const firebaseConfig = {
@@ -26,10 +26,8 @@ export const uploadFile = (file, fileName) => {
   })
 }
 
-//다운로드
-export const downloadFile = fileName => {
-  const storageDonwnloadRef = ref(storage, fileName)
-  getDownloadURL(storageDonwnloadRef).then(url => {
-    return url
-  })
+// url 받기
+export const getDownloadUrl = (folder, fileName) => {
+  if (folder !== 'file' && folder !== 'profile') return 'wrong folder'
+  return `https://firebasestorage.googleapis.com/v0/b/translation-talk-efa1a.appspot.com/o/${folder}%2F${fileName}?alt=media`
 }

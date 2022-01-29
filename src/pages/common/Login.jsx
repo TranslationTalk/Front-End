@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import { Button, PageHeader } from '../../components/index'
-import { apis } from '../../utils/axios'
 import { Footer } from '../../components/index'
 import loginBg from '../../assets/images/loginBg.jpg'
 import loginBgBig from '../../assets/images/loginBgBig.jpg'
@@ -27,6 +26,7 @@ const Login = () => {
     }, [])
     return scrollY
   }
+
   return (
     <LoginPage>
       <Test>
@@ -49,13 +49,22 @@ const Login = () => {
             <p>실시간 번역 견적 플랫폼</p>
           </h2>
           <div>
-            <Button
-              content="카카오톡으로 로그인"
-              onClick={() => apis.login()}
-              bgColor="#F9E000"
-              color="#000"
-            />
-            <a onClick={() => apis.translatorLogin()}>
+            <a
+              href={
+                'https://kauth.kakao.com/oauth/authorize?client_id=a8f1c0a4e5f8a55746bfe8f2bd9d078b&redirect_uri=http://localhost:3000/oauth/callback/kakao/client&response_type=code'
+              }
+            >
+              <Button
+                content="카카오톡으로 로그인"
+                bgColor="#F9E000"
+                color="#000"
+              />
+            </a>
+            <a
+              href={
+                'https://kauth.kakao.com/oauth/authorize?client_id=a8f1c0a4e5f8a55746bfe8f2bd9d078b&redirect_uri=http://localhost:3000/oauth/callback/kakao/translator&response_type=code'
+              }
+            >
               번역가로 로그인하기
               <i />
             </a>

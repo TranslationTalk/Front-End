@@ -74,7 +74,7 @@ const MyTranslationList = () => {
           onClick={handleToggleMenu}
         />
       </ToggleWrap>
-      {estimates.length === 0 ? (
+      {estimates.filter(el => el.status === clickedStatus).length === 0 ? (
         clickNumber === 0 ? (
           <NoList listName="보낸 견적 리스트" />
         ) : clickNumber === 1 ? (

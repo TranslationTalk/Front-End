@@ -6,7 +6,7 @@ name: onChange에 사용될 name
 onChange: onChange이벤트
 useUploadName: 파일 선택 버튼 옆에 선택된 파일명 보여줄지 말지
 */
-import React, { useState } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
@@ -21,12 +21,8 @@ const FileInput = ({
   height,
   padding,
   accept,
+  value,
 }) => {
-  // 실제로 받은 file을 어떻게 상위 컴포넌트에 전달할지 나중에 사용하면서 수정 필요
-  const [fileName, setFileName] = useState('선택된 파일 없음')
-
-  const handleFileChange = e => setFileName(e.target.value.slice(12))
-
   return (
     <InputContainer>
       <Label
@@ -41,8 +37,8 @@ const FileInput = ({
       </Label>
       {useUploadName && (
         <UploadName
-          onChange={onChange}
-          value={fileName}
+          onChange={() => {}} //  value 사용할 시 onChange 안쓰면 오류
+          value={value.slice(12)} // 가져온 value로 앞에 fakepath 잘라서 명시
           placeholder="선택된 파일 없음"
         />
       )}
@@ -50,8 +46,8 @@ const FileInput = ({
         id={id}
         type="file"
         name={name}
-        onChange={handleFileChange}
-        accept={accept === 'text' ? '.txt' : `${accept}/*`}
+        onChange={onChange}
+        accept={accept === 'text' ? '*' : `${accept}/*`} // 이거 지정 안해줘도 됨 text 는 모두 받을 거임
       />
     </InputContainer>
   )
@@ -71,6 +67,7 @@ const Label = styled.label`
       ? 'border-top-left-radius: 4px; border-bottom-left-radius: 4px;'
       : 'border-radius: 8px;'}
   text-align: center;
+  padding: ${props => (props.useUploadName ? '16px 0' : '8px 0')};
   font-size: ${props => (props.fontSize ? props.fontSize : '14px')};
   color: var(--white);
   cursor: pointer;
@@ -108,6 +105,7 @@ FileInput.propTypes = {
   height: PropTypes.string,
   padding: PropTypes.string,
   accept: PropTypes.string,
+  value: PropTypes.string,
 }
 
 export default FileInput

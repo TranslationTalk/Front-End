@@ -22,6 +22,8 @@ import TranslatorSignupForm from './translator/TranslatorSignupForm'
 //all
 import All from '../All'
 import TranslatorMyPageSetting from './translator/TranslatorMyPageSetting'
+import KakaoForUserRedirectHandler from './common/KakaoForUserRedirectHandler'
+import KakaoForTranslatorRedirectHandler from './common/KakaoForTranslatorRedirectHandler'
 
 const Router = () => {
   return (
@@ -31,6 +33,14 @@ const Router = () => {
         <Route path="/test" element={<All />} />
         {/* common */}
         <Route path="/" element={<Login />} />
+        <Route
+          path="/oauth/callback/kakao/client"
+          element={<KakaoForUserRedirectHandler />}
+        />
+        <Route
+          path="/oauth/callback/kakao/translator"
+          element={<KakaoForTranslatorRedirectHandler />}
+        />
         <Route path="/chat/:roomid" element={<Chat />} />
         <Route path="/chat/list" element={<ChatList />} />
         {/* client */}

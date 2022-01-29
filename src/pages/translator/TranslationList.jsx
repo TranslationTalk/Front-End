@@ -26,32 +26,32 @@ const TranslationList = () => {
   const [capableLanguages, setCapableLanguages] = useState([])
   const [height, setHeight] = useState(0)
 
+  const fetchEstimatesAndFiltering = async () => {
+    const {
+      data: { data },
+    } = await apis.estimatesList() // sendEstimate이것으로 바꿔야 하나 지금 프로필을 만들 수 없어 임시로 client 요청하는 중
+
+    setEstimates(data)
+
+    // 내 정보에서 가능 언어 가져옴
+    const {
+      data: { data: myInfo },
+    } = await apis.getTranslatorMypage()
+
+    // 가능언어를 필터 초기 세팅으로 두고, 화면에도 필터링된 결과를 보여줌
+    const languagesArr = myInfo.language.split(', ')
+    setCapableLanguages(languagesArr)
+    setFilteredEstimates(
+      data.filter(
+        el =>
+          languagesArr.includes(el.beforeLanguage) ||
+          languagesArr.includes(el.afterLanguage),
+      ),
+    )
+  }
   // mobx에서 mobx에 있는 함수를 사용해서 비동기 처리해야함
   // 그 함수로 useEffect 안에도 넣고, PageHeader의 reloadEvent에도 넣어야 한다.
   useEffect(() => {
-    const fetchEstimatesAndFiltering = async () => {
-      const {
-        data: { data },
-      } = await apis.estimatesList() // sendEstimate이것으로 바꿔야 하나 지금 프로필을 만들 수 없어 임시로 client 요청하는 중
-
-      setEstimates(data)
-
-      // 내 정보에서 가능 언어 가져옴
-      const {
-        data: { data: myInfo },
-      } = await apis.getTranslatorMypage()
-
-      // 가능언어를 필터 초기 세팅으로 두고, 화면에도 필터링된 결과를 보여줌
-      const languagesArr = myInfo.language.split(', ')
-      setCapableLanguages(languagesArr)
-      setFilteredEstimates(
-        data.filter(
-          el =>
-            languagesArr.includes(el.beforeLanguage) ||
-            languagesArr.includes(el.afterLanguage),
-        ),
-      )
-    }
     fetchEstimatesAndFiltering()
   }, [])
 
@@ -105,7 +105,11 @@ const TranslationList = () => {
 
   return (
     <>
-      <PageHeader title="번역 리스트" useReloadButton />
+      <PageHeader
+        title="번역 리스트"
+        useReloadButton
+        reloadEvent={fetchEstimatesAndFiltering}
+      />
       <FilterContainer clicked={showModal} ref={callbackRef}>
         <button onClick={openModal}>
           <span>언어 선택</span>
@@ -274,6 +278,20 @@ const Content = styled.div`
   margin-top: 36px;
   height: 100%;
   overflow-y: auto;
+  padding-right: 10px;
+  &::-webkit-scrollbar {
+    width: 4px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    height: 10%;
+    background-color: rgba(61, 80, 255, 0.3);
+    border-radius: 10px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background-color: var(--white);
+  }
 `
 
 const CheckBoxWrap = styled.div`

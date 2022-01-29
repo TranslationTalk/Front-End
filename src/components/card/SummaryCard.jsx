@@ -25,7 +25,6 @@ const SummaryCard = prop => {
     isText,
     deadline,
     fileUrl,
-    needs,
   } = prop
 
   return (
@@ -45,10 +44,6 @@ const SummaryCard = prop => {
       <div>
         <span>번역 후 언어</span>
         <span>{afterLanguage}</span>
-      </div>
-      <div>
-        <span>번역 상세 요청</span>
-        <span>{needs}</span>
       </div>
       <div>
         <span>마감기한</span>
@@ -118,7 +113,6 @@ SummaryCard.propTypes = {
   isText: PropTypes.bool,
   deadline: PropTypes.string,
   fileUrl: PropTypes.string,
-  needs: PropTypes.string,
 }
 
 export default SummaryCard
