@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import { Button, PageHeader } from '../../components/index'
-import { apis } from '../../utils/axios'
 import { Footer } from '../../components/index'
 import loginBg from '../../assets/images/loginBg.jpg'
 import loginBgBig from '../../assets/images/loginBgBig.jpg'
@@ -28,28 +27,6 @@ const Login = () => {
     return scrollY
   }
 
-  useEffect(() => {
-    const login = async () => {
-      let params = new URL(document.location.toString()).searchParams
-      let code = params.get('code') // 인가코드 받는 부분
-
-      console.log(code)
-
-      if (!code) return
-
-      // user클릭 했을 때 user만 translator 일 때 translator만
-      // 로그인 로직
-      // 번역가 / 로그인 예외처리
-      const data = await apis.login(code)
-      console.log(data)
-
-      // const dataTrans = await apis.translatorLogin(code)
-      // console.log(dataTrans)
-    }
-
-    login()
-  }, [])
-
   return (
     <LoginPage>
       <Test>
@@ -74,7 +51,7 @@ const Login = () => {
           <div>
             <a
               href={
-                'https://kauth.kakao.com/oauth/authorize?client_id=a8f1c0a4e5f8a55746bfe8f2bd9d078b&redirect_uri=http://localhost:3000&response_type=code'
+                'https://kauth.kakao.com/oauth/authorize?client_id=a8f1c0a4e5f8a55746bfe8f2bd9d078b&redirect_uri=http://localhost:3000/oauth/callback/kakao/client&response_type=code'
               }
             >
               <Button
@@ -85,7 +62,7 @@ const Login = () => {
             </a>
             <a
               href={
-                'https://kauth.kakao.com/oauth/authorize?client_id=a8f1c0a4e5f8a55746bfe8f2bd9d078b&redirect_uri=http://localhost:3000&response_type=code'
+                'https://kauth.kakao.com/oauth/authorize?client_id=a8f1c0a4e5f8a55746bfe8f2bd9d078b&redirect_uri=http://localhost:3000/oauth/callback/kakao/translator&response_type=code'
               }
             >
               번역가로 로그인하기

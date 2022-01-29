@@ -13,15 +13,19 @@ const KakaoForUserRedirectHandler = () => {
       console.log(code)
 
       try {
-        const data = await apis.login(code)
+        const { data } = await apis.login(code)
         console.log(data)
 
         // sessionStorage에 auth랑 token 저장
+        sessionStorage.setItem('token', data.token)
+        sessionStorage.setItem('auth', data.auth)
 
         // 원하는 페이지로 이동
-        navigate(-1)
+        navigate('/client/main')
       } catch (error) {
         console.log(error)
+        navigate('/')
+        alert('로그인할 수 없습니다. 번역가로 로그인해주세요.')
       }
     }
 
