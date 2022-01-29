@@ -13,6 +13,7 @@ const TextAreaInput = ({
   onChange,
   value,
   maxLength,
+  minLength,
 }) => {
   return (
     <TextArea
@@ -22,6 +23,7 @@ const TextAreaInput = ({
       onChange={onChange}
       value={value}
       maxLength={maxLength}
+      minLength={minLength}
     />
   )
 }
@@ -49,6 +51,7 @@ TextAreaInput.propTypes = {
   onChange: PropTypes.func.isRequired,
   value: PropTypes.string,
   maxLength: PropTypes.number,
+  minLength: PropTypes.number,
 }
 
 export default TextAreaInput
