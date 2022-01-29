@@ -49,7 +49,7 @@ const ClientEstimateList = () => {
     <ClientEstimateListPage>
       <SubPageHeader title="받은견적" />
       {estimate.length === 0 ? (
-        <NoList listName="받은 견적 리스트" />
+        <NoList listName="아직 들어온 견적이 없어요" />
       ) : (
         <section>
           <h2>받은 견적</h2>

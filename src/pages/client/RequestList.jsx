@@ -16,11 +16,7 @@ import {
 } from '../../components'
 import { clientAPIs } from '../../utils/axios'
 
-const menu = [
-  '아직 견적대기중인 리스트가 없어요',
-  '아직 진행중인 리스트가 없어요',
-  '아직 완료된 리스트가 없어요',
-]
+const menu = ['견적대기', '진행중', '완료']
 
 const RequestList = () => {
   const navigate = useNavigate()
@@ -71,7 +67,9 @@ const RequestList = () => {
       <ToggleMenu menu={menu} click={clickNumber} onClick={handleToggleMenu} />
       <ul>
         {estimates.filter(el => el.status === estimatesState).length === 0 ? (
-          <NoList listName={menu[clickNumber] + ' 리스트'} />
+          <NoList
+            listName={'아직 "' + menu[clickNumber] + '" 리스트가 없어요'}
+          />
         ) : (
           estimates
             .filter(el => el.status === estimatesState)
