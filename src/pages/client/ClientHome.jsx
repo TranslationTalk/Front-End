@@ -27,8 +27,7 @@ const ClientHome = () => {
         </Link>
       </div>
       <h2>
-        <p>어디서나 쉽게,</p>
-        <p>번역의뢰 하는 방법</p>
+        <img src={ClientHomeImg} alt="어디서나 쉽게, 번역 의뢰 하는 방법" />
       </h2>
       <div>
         <Link to={'/client/request/text'}>
@@ -63,21 +62,8 @@ const Home = styled.div`
     margin-top: 57px;
     margin-bottom: 46px;
     text-align: center;
-    p:first-child::before {
-      display: block;
-      width: 224px;
-      height: 134px;
-      margin: 0 auto 24px;
-      background-image: url(${ClientHomeImg});
-      background-size: cover;
-      content: '';
-    }
-    p {
-      font-size: var(--fs-32);
-      line-height: 1.4;
-      :last-child {
-        font-weight: 600;
-      }
+    img {
+      width: 258px;
     }
   }
 
@@ -88,8 +74,8 @@ const Home = styled.div`
       display: block;
       width: 155px;
       height: 132px;
-      border: 1px solid var(--gray-c4);
-      border-radius: 4px;
+      border: 2px solid var(--gray-c4);
+      border-radius: 20px;
       text-align: center;
       font-size: 20px;
       font-weight: bold;
@@ -104,7 +90,7 @@ const Home = styled.div`
         content: '';
       }
       :hover {
-        border: 1px solid var(--main-color);
+        border: 2px solid var(--main-color);
       }
     }
   }

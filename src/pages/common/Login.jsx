@@ -13,23 +13,20 @@ import MainSection3 from '../../assets/images/MainSection3.png'
 import MainVisionSection from '../../assets/images/MainVisionSection.jpg'
 
 const Login = () => {
+  // 스크롤 위치
   const useScroll = () => {
     const [scrollY, setScrollY] = useState(0)
-
     const listener = () => {
       setScrollY(window.pageYOffset)
     }
-
     useEffect(() => {
       window.addEventListener('scroll', listener)
       return () => {
         window.addEventListener('scroll', listener)
       }
     }, [])
-
     return scrollY
   }
-
   return (
     <LoginPage>
       <Test>
@@ -279,6 +276,8 @@ const TextSection1 = styled.section`
     h2,
     p {
       width: 100%;
+      opacity: 1;
+      animation: none;
     }
   }
 `
@@ -322,6 +321,9 @@ const TextSection2 = styled.section`
     img {
       margin-right: 20px;
       width: 412px;
+      opacity: ${({ useScroll }) => (useScroll > 200 ? 1 : 0)};
+      animation: ${({ useScroll }) => (useScroll > 200 ? 'show' : 'disappear')}
+        2s;
     }
   }
 `
@@ -362,6 +364,10 @@ const TextSection3 = styled.section`
       }
       img {
         width: 359px;
+        opacity: ${({ useScroll }) => (useScroll > 700 ? 1 : 0)};
+        animation: ${({ useScroll }) =>
+            useScroll > 700 ? 'show' : 'disappear'}
+          2s;
       }
     }
   }
@@ -402,9 +408,17 @@ const VisionSection = styled.section`
   @media screen and (min-width: 640px) {
     h2 {
       width: 100%;
+      opacity: ${({ useScroll }) => (useScroll > 1000 ? 1 : 0)};
+      animation: ${({ useScroll }) => (useScroll > 1000 ? 'show' : 'disappear')}
+        1.5s;
     }
     span {
       display: inline;
+    }
+    p {
+      opacity: ${({ useScroll }) => (useScroll > 1000 ? 1 : 0)};
+      animation: ${({ useScroll }) => (useScroll > 1000 ? 'show' : 'disappear')}
+        2s;
     }
   }
 `

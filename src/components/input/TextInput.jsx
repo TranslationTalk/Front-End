@@ -19,19 +19,44 @@ const TextInput = ({
   value,
   fontSize,
   padding,
-}) => (
-  <Input
-    type={type}
-    id={id}
-    name={name}
-    placeholder={placeholder}
-    onChange={onChange}
-    value={value}
-    fontSize={fontSize}
-    padding={padding}
-  />
-)
+}) => {
+  // type = 'date'
+  // min Date 설정
+  // 오늘포함 이후 날짜 선택 가능
+  const dateMin = () => {
+    if (type === 'date') {
+      const current = new Date()
+      const currentYear = current.getFullYear()
+      const currentMonth = current.getMonth() + 1
+      const currentDate = current.getDate()
+      const date = `${currentYear}-${
+        currentMonth < 10 ? '0' + currentMonth : currentMonth
+      }-${currentDate}`
+      return date
+    }
+  }
 
+  // type='tel'
+  // 숫자만 입력 가능
+  if (type === 'tel') {
+    value = value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1')
+  }
+
+  return (
+    <Input
+      type={type}
+      id={id}
+      name={name}
+      placeholder={placeholder}
+      onChange={onChange}
+      value={value}
+      fontSize={fontSize}
+      padding={padding}
+      min={dateMin()}
+    />
+  )
+}
+console.log()
 const Input = styled.input`
   width: 100%;
   padding: ${props => (props.padding ? props.padding : '11px 12px')};

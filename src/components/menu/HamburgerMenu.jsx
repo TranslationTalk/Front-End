@@ -9,23 +9,53 @@ ex) transform: ${props => (props.click ? 'translateX(105%)' : 'translateX(0)')};
 */
 
 import React from 'react'
+import { Link, useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
 import Hamburger from '../../assets/images/hamburger.png'
+import ArrowLeftWhite from '../../assets/icons/ArrowLeftWhite.png'
+import CloseWhite from '../../assets/icons/CloseWhite.svg'
+import LogOutIcon from '../../assets/icons/LogOutIcon.svg'
 
 const HamburgerMenu = () => {
   const [click, setClick] = React.useState(false)
-
+  const navigate = useNavigate()
   return (
     <>
       <HamburgerTap onClick={() => setClick(true)} click={click}>
         <img src={Hamburger} alt="hamburger" />
       </HamburgerTap>
 
-      <ModalArea click={click} tabIndex="-1"></ModalArea>
-      <ModalInner click={click} tabIndex="0">
-        Contents입니다.
-        <CloseButton onClick={() => setClick(false)}>X</CloseButton>
-      </ModalInner>
+      <ModalArea click={click}>
+        <ModalInner click={click}>
+          <Top>
+            <div>
+              <i onClick={() => setClick(false)} />
+              <i onClick={() => setClick(false)} />
+            </div>
+            <p
+              onClick={() => {
+                sessionStorage.clear()
+                navigate('/')
+              }}
+            >
+              로그아웃
+            </p>
+          </Top>
+          <Buttom>
+            <ul>
+              <li>
+                <a href="https://cafe.naver.com/etranscafe">카페 이동하기</a>
+              </li>
+              <li>
+                <Link to={''}>약관</Link>
+              </li>
+              <li>
+                <Link to={''}>개인정보취급방침</Link>
+              </li>
+            </ul>
+          </Buttom>
+        </ModalInner>
+      </ModalArea>
     </>
   )
 }
@@ -38,16 +68,19 @@ const HamburgerTap = styled.div`
 const ModalArea = styled.div`
   box-sizing: border-box;
   visibility: ${props => (props.click ? 'visible' : 'hidden')};
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
+  width: 100%;
+  height: 100vh;
   transition: 0.5s;
+  overflow: hidden;
   background-color: ${props => (props.click ? 'rgba(0, 0, 0, 0.5)' : '')};
-  z-index: 99;
+  z-index: 11;
 `
 
 const ModalInner = styled.div`
-  width: 250px;
+  width: 247px;
   height: 100vh;
   position: absolute;
   top: 0;
@@ -57,15 +90,72 @@ const ModalInner = styled.div`
   transition: 0.5s;
   visibility: ${props => (props.click ? 'visible' : 'hidden')};
   transform: ${props =>
-    props.click ? 'translateX(270px)' : 'translateX(0px)'};
-  z-index: 100;
+    props.click ? 'translateX(0px)' : 'translateX(-247px)'};
+  z-index: 11;
 `
 
-const CloseButton = styled.button`
-  cursor: pointer;
-  position: absolute;
-  right: 0;
-  top: 0;
+const Top = styled.div`
+  width: 247px;
+  height: 143px;
+  background-color: var(--main-color);
+  div {
+    display: flex;
+    padding: 6px 5px;
+    justify-content: space-between;
+  }
+  i {
+    display: block;
+    width: 34px;
+    height: 34px;
+    padding: 5px;
+    margin: 5px;
+    background-size: 24px 24px;
+    background-position: 50%;
+    background-repeat: no-repeat;
+    content: '';
+    cursor: pointer;
+  }
+  i:first-child {
+    background-image: url(${ArrowLeftWhite});
+  }
+  i:last-child {
+    background-image: url(${CloseWhite});
+  }
+  p {
+    display: block;
+    margin: 10px auto 0;
+    width: 52px;
+    color: white;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    &::before {
+      display: block;
+      width: 34px;
+      height: 34px;
+      padding-bottom: 3px;
+      margin: auto;
+      background-image: url(${LogOutIcon});
+      background-size: 32px;
+      background-repeat: no-repeat;
+      content: '';
+    }
+  }
+`
+const Buttom = styled.div`
+  ul {
+    margin: 0px;
+  }
+  li a {
+    display: block;
+    font-size: 14px;
+    font-weight: 500;
+    padding: 14px 0 14px 20px;
+    transition: all 0.5s;
+    &:hover {
+      background-color: var(--light-blue);
+    }
+  }
 `
 
 export default HamburgerMenu

@@ -152,7 +152,7 @@ const TranslatorDetail = () => {
 
           <>
             {review.length === 0 ? (
-              <NoList listName="리뷰" />
+              <NoList listName="아직 리뷰가 없어요" />
             ) : (
               review?.map(el => (
                 <ReviewCard
