@@ -16,6 +16,7 @@ import ChatListCard from './chat/ChatListCard'
 import InitialChat from './chat/InitialChat'
 // Detail
 import EstimateDetail from './detail/EstimateDetail'
+import CommentBox from './detail/CommentBox'
 // Footer
 import Footer from './Footer/Footer'
 // Header
@@ -78,4 +79,5 @@ export {
   BottomIndicator,
   Footer,
   NoList,
+  CommentBox,
 }
