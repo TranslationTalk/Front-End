@@ -32,7 +32,7 @@ const KakaoForUserRedirectHandler = () => {
     loginUser()
   }, [])
 
-  return <div>유저 로그인 중입니다.</div>
+  return <div>유저 로그인 중입니다.(스피너)</div>
 }
 
 export default KakaoForUserRedirectHandler

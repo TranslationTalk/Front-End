@@ -6,7 +6,7 @@ const KakaoForTranslatorRedirectHandler = () => {
   const navigate = useNavigate()
 
   useEffect(() => {
-    const loginUser = async () => {
+    const loginTranslator = async () => {
       let params = new URL(document.location.toString()).searchParams
       let code = params.get('code') // 인가코드 받는 부분
 
@@ -42,10 +42,10 @@ const KakaoForTranslatorRedirectHandler = () => {
       }
     }
 
-    loginUser()
+    loginTranslator()
   }, [])
 
-  return <div>번역가 로그인 중입니다.</div>
+  return <div>번역가 로그인 중입니다.(스피너)</div>
 }
 
 export default KakaoForTranslatorRedirectHandler
