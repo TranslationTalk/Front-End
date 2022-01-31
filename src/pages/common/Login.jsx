@@ -11,6 +11,10 @@ import MainSection2 from '../../assets/images/MainSection2.png'
 import MainSection3 from '../../assets/images/MainSection3.png'
 import MainVisionSection from '../../assets/images/MainVisionSection.jpg'
 
+const kakaoClientId = process.env.KAKAO_CLIENT_ID
+const redirectUriClient = `http://localhost:3000/oauth/callback/kakao/client`
+const redirectUriTranslator = `http://localhost:3000/oauth/callback/kakao/translator`
+
 const Login = () => {
   // 스크롤 위치
   const useScroll = () => {
@@ -50,9 +54,7 @@ const Login = () => {
           </h2>
           <div>
             <a
-              href={
-                'https://kauth.kakao.com/oauth/authorize?client_id=a8f1c0a4e5f8a55746bfe8f2bd9d078b&redirect_uri=http://localhost:3000/oauth/callback/kakao/client&response_type=code'
-              }
+              href={`https://kauth.kakao.com/oauth/authorize?client_id=${kakaoClientId}&redirect_uri=${redirectUriClient}&response_type=code`}
             >
               <Button
                 content="카카오톡으로 로그인"
@@ -61,9 +63,7 @@ const Login = () => {
               />
             </a>
             <a
-              href={
-                'https://kauth.kakao.com/oauth/authorize?client_id=a8f1c0a4e5f8a55746bfe8f2bd9d078b&redirect_uri=http://localhost:3000/oauth/callback/kakao/translator&response_type=code'
-              }
+              href={`https://kauth.kakao.com/oauth/authorize?client_id=${kakaoClientId}&redirect_uri=${redirectUriTranslator}&response_type=code`}
             >
               번역가로 로그인하기
               <i />
