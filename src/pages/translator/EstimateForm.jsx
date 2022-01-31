@@ -54,24 +54,22 @@ const EstimateForm = () => {
             isText={estimate.isText}
             fileUrl={estimate.fileUrl}
           />
+          <SectionTitle>번역 상세 요청</SectionTitle>
           <CommentBox comment={estimate.needs} />
           {estimate.youtubeUrl !== '' && (
             <VideoCard youtubeUrl={estimate.youtubeUrl} />
           )}
         </RequestInfo>
         <Form onSubmit={handleSubmit}>
+          <SectionTitle>의뢰자에게 전하는 말</SectionTitle>
           <TextAreaInput
             id="comment"
             placeholder="번역가님의 한마디를 해주세요."
             onChange={handleChange}
           />
           <InputWrap>
-            <h3>목표일정</h3>
+            <SectionTitle>목표일정</SectionTitle>
             <div>
-              {/* date 아이콘 오른쪽으로 옮기면 바로 될텐데..
-              <label htmlFor="confirmedDate">
-                <DateIcon />
-              </label> */}
               <TextInput
                 id="confirmedDate"
                 onChange={handleChange}
@@ -84,12 +82,12 @@ const EstimateForm = () => {
           </InputWrap>
           <Line />
           <InputWrap>
-            <h3>견적금액</h3>
+            <SectionTitle>견적금액</SectionTitle>
             <div>
               <TextInput
                 id="offerPrice"
                 onChange={handleChange}
-                placeholder="￦0"
+                placeholder="￦0 "
               />
               <span>원</span>
             </div>
@@ -116,16 +114,23 @@ const Line = styled.div`
   background-color: #000;
 `
 
+const SectionTitle = styled.h3`
+  font-size: var(--fs-14);
+  font-weight: 500;
+  margin-bottom: 12px;
+`
+
 const RequestInfo = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: center;
-  div:last-child {
-    margin: 20px 0;
-  }
+  justify-content: center;
   ${Line} {
     margin-top: 19px;
     margin-bottom: 12px;
+  }
+  & > div:nth-child(4),
+  & > div:nth-child(5) {
+    margin-bottom: 20px;
   }
 `
 
@@ -135,10 +140,8 @@ const Form = styled.form`
   }
   ${Line} {
     margin-top: 5px;
+    margin-bottom: 20px;
     background-color: var(--gray-bc);
-  }
-  button {
-    margin-top: 20px;
   }
 `
 
@@ -146,9 +149,9 @@ const InputWrap = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
-  margin-top: 27px;
-  h3 {
-    font-size: var(--fs-14);
+  ${SectionTitle} {
+    font-weight: normal;
+    margin-bottom: 0;
   }
   input {
     width: fit-content;

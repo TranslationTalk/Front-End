@@ -70,19 +70,21 @@ const TranslatorEstimateDetail = () => {
             isText={estimate.isText}
             fileUrl={estimate.fileUrl}
           />
+          <SectionTitle>번역 상세 요청</SectionTitle>
           <CommentBox comment={estimate.needs} />
           {estimate.youtubeUrl !== '' && (
             <VideoCard youtubeUrl={estimate.youtubeUrl} />
           )}
         </RequestInfo>
+        <SectionTitle>의뢰자에게 전하는 말</SectionTitle>
         <CommentBox comment={estimateDetail?.comment} />
         <Line />
         <SuggestWrap>
-          <h3>목표일정</h3>
+          <SectionTitle>목표일정</SectionTitle>
           <span>{estimateDetail?.confirmedDate}</span>
         </SuggestWrap>
         <SuggestWrap>
-          <h3>견적금액</h3>
+          <SectionTitle>견적금액</SectionTitle>
           <span>{estimateDetail?.offerPrice.toLocaleString()}원</span>
         </SuggestWrap>
         {estimateDetail?.roomId === 0 ? (
@@ -136,19 +138,26 @@ const Line = styled.div`
   width: 100%;
   height: 1px;
   background-color: var(--gray-bc);
-  margin-bottom: 20px;
+  margin-top: 10px;
+`
+
+const SectionTitle = styled.h3`
+  font-size: var(--fs-14);
+  font-weight: 500;
+  margin-bottom: 12px;
 `
 
 const RequestInfo = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: center;
+  justify-content: center;
   ${Line} {
     margin-top: 19px;
     margin-bottom: 12px;
     background-color: #000;
   }
-  & > div:nth-child(3) {
+  & > div:nth-child(4),
+  & > div:nth-child(5) {
     margin-bottom: 20px;
   }
 `
@@ -163,6 +172,9 @@ const SuggestWrap = styled.div`
   }
   span {
     font-weight: 500;
+  }
+  ${SectionTitle} {
+    font-weight: normal;
   }
 `
 
