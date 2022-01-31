@@ -109,7 +109,7 @@ const Wrap = styled.div`
   height: 100%;
   min-height: 100vh;
   background-color: var(--light-gray);
-  padding: 116px 0 78px 0;
+  padding: 130px 0 78px 0;
 `
 
 const ToggleWrap = styled.div`

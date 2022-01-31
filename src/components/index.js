@@ -34,6 +34,7 @@ import TextInput from './input/TextInput'
 // Menu
 import HamburgerMenu from './menu/HamburgerMenu'
 import ToggleMenu from './menu/ToggleMenu'
+import FilterMenu from './menu/FilterMenu'
 // StatusMessage
 import StatusMessage from './message/StatusMessage'
 // Navbar
@@ -80,4 +81,5 @@ export {
   Footer,
   NoList,
   CommentBox,
+  FilterMenu,
 }
