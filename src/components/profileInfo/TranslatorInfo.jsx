@@ -42,14 +42,12 @@ const TranslatorInfo = ({
           </p>
           <div>
             {taxPossible && (
-              <Tag text="세금명세서 가능" bgColor="#3D51FF" color="#fff" />
+              <Tag text="세금명세서" bgColor="#3D51FF" color="#fff" />
             )}
             {cashPossible && (
-              <Tag text="현금영수증 가능" bgColor="#3D51FF" color="#fff" />
+              <Tag text="현금영수증" bgColor="#3D51FF" color="#fff" />
             )}
-            {isBusiness && (
-              <Tag text="사업자 확인" bgColor="#3D51FF" color="#fff" />
-            )}
+            {isBusiness && <Tag text="사업자" bgColor="#3D51FF" color="#fff" />}
           </div>
         </TransLatorInfo>
       </div>
