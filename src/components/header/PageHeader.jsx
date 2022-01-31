@@ -21,11 +21,18 @@ const PageHeader = ({
   settingEvent,
 }) => {
   const location = useLocation().pathname
+  const isAtHome = location !== '/'
 
   return (
-    <Container shouldWrap={location !== '/'}>
+    <Container isAtHome={isAtHome}>
       {location === '/' || <HamburgerMenu />}
-      {title ? <Title>{title}</Title> : <Logo />}
+      {title ? (
+        <Title>{title}</Title>
+      ) : (
+        <LogoWrap isAtHome={isAtHome}>
+          <Logo />
+        </LogoWrap>
+      )}
       <SvgWrap>
         {useReloadButton ? (
           <ReloadIcon onClick={reloadEvent} />
@@ -47,29 +54,38 @@ const Container = styled.div`
   background-color: #fff;
   position: fixed;
   top: 0;
-  left: ${props => (props.shouldWrap ? '50%' : '0')};
-  ${props => (props.shouldWrap ? 'transform: translateX(-50%);' : null)}
+  left: ${props => (props.isAtHome ? '50%' : '0')};
+  ${props => (props.isAtHome ? 'transform: translateX(-50%);' : null)}
   border-bottom: 1px solid rgba(0, 0, 0, 0.3);
   z-index: 5;
-  ${props => (props.shouldWrap ? 'max-width: 640px;' : null)}
+  ${props => (props.isAtHome ? 'max-width: 640px;' : null)}
   min-width: 360px;
 
-  // title이 없을 때 logo는 absolute로 처리
-  & > svg {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-  }
-
   @media (min-width: 640px) {
-    height: ${props => (props.shouldWrap ? '56px' : '80px')};
+    height: ${props => (props.isAtHome ? '56px' : '80px')};
   }
 `
 
 const Title = styled.h2`
   font-size: var(--fs-20);
   font-weight: bold;
+`
+
+// img src에 logo를 넣어도 width/height가 바뀌지 않아 div로 감싸서 처리
+const LogoWrap = styled.div`
+  // title이 없을 때 logo는 absolute로 처리
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  @media (min-width: 640px) {
+    // media query 이지만 home에서의 logo만 media query 적용 (다른 경우에는 height가 커지지 않으므로)
+    svg {
+      width: ${props => (props.isAtHome ? '96px' : '120px')};
+      height: ${props => (props.isAtHome ? '30px' : '38px')};
+    }
+  }
 `
 
 const SvgWrap = styled.div`
