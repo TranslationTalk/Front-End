@@ -25,6 +25,8 @@ const TranslatorDetail = () => {
   const [review, setReview] = useState()
   const [clickNumber, setClickNumber] = useState(0)
 
+  console.log(estimate)
+
   //비동기처리: 번역 견적
   useEffect(() => {
     const fetchEstimateList = async () => {
@@ -38,7 +40,7 @@ const TranslatorDetail = () => {
       setsStatus(data.status)
     }
     fetchEstimateList()
-  }, [estimate])
+  }, [status])
 
   //비동기처리: 번역가 리뷰
   useEffect(() => {
@@ -59,15 +61,28 @@ const TranslatorDetail = () => {
       clientAPIs
         .addChatroom(location.state.estimateId)
         .then(data => {
+          console.log(data.data)
           alert(`roomId ${data.data.id}번 생성`)
           navigate(`/chat/${data.data.id}`, {
-            state: { roomId: data.data.id },
+            state: {
+              roomId: data.data.id,
+              estimateId: location.state.estimateId,
+              requestId: location.state.requestId,
+              anothername: estimate.name,
+              createdTime: data.data.createdAt,
+            },
           })
         })
         .catch(e => alert(`${e}`))
     } else {
       navigate(`/chat/${estimate.roomId}`, {
-        state: { roomId: estimate.roomId },
+        state: {
+          roomId: estimate.roomId,
+          estimateId: location.state.estimateId,
+          requestId: location.state.requestId,
+          anothername: estimate.name,
+          createdTime: estimate.roomCreateAt,
+        },
       })
     }
   }
