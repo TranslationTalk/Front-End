@@ -183,7 +183,7 @@ const FilterContainer = styled.div`
   top: 56px;
   left: 50%;
   transform: translateX(-50%);
-  z-index: 5;
+  z-index: 1;
   min-width: 360px;
   max-width: 640px;
   button {
