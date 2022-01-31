@@ -48,7 +48,7 @@ const ChatList = () => {
       <PageHeader title={auth === 'translator' ? '내 상담' : '채팅'} />
       <Wrap>
         {chatList.length === 0 ? (
-          <NoList listName="진행 중인 상담(이)" />
+          <NoList listName='아직 "진행 중인 상담"이 없어요' />
         ) : (
           chatList.map(chatroom => (
             <ChatListCard

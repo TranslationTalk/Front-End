@@ -75,13 +75,15 @@ const MyTranslationList = () => {
         />
       </ToggleWrap>
       {estimates.filter(el => el.status === clickedStatus).length === 0 ? (
-        clickNumber === 0 ? (
-          <NoList listName="보낸 견적 리스트" />
-        ) : clickNumber === 1 ? (
-          <NoList listName="진행 중인 번역 의뢰" />
-        ) : (
-          <NoList listName="진행 완료된 의뢰" />
-        )
+        <NoList
+          listName={`아직 "${menu[clickNumber]}${
+            clickNumber === 1
+              ? '인 번역"'
+              : clickNumber === 2
+              ? '된 번역"'
+              : '"'
+          }이 없어요`}
+        />
       ) : (
         estimates
           .filter(el => el.status === clickedStatus)

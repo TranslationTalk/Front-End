@@ -64,7 +64,7 @@ const TranslatorMyPage = () => {
           />
         </MidTitle>
         {reviews.length === 0 ? (
-          <NoList listName="리뷰" />
+          <NoList listName="아직 받은 리뷰가 없어요" />
         ) : (
           reviews.map((review, index) => (
             <ReviewCard

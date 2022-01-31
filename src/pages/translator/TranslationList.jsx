@@ -109,7 +109,7 @@ const TranslationList = () => {
       />
       <Wrap>
         {filterdEstimates.length === 0 ? (
-          <NoList listName="번역 의뢰" />
+          <NoList listName='아직 받은 "번역 의뢰"가 없어요' />
         ) : (
           filterdEstimates.map(estimate => (
             <EstimateCard
