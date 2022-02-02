@@ -11,7 +11,7 @@ import MainSection2 from '../../assets/images/MainSection2.png'
 import MainSection3 from '../../assets/images/MainSection3.png'
 import MainVisionSection from '../../assets/images/MainVisionSection.jpg'
 
-const kakaoClientId = process.env.KAKAO_CLIENT_ID
+const kakaoClientId = process.env.REACT_APP_KAKAO_CLIENT_ID
 const redirectUriClient = `http://localhost:3000/oauth/callback/kakao/client`
 const redirectUriTranslator = `http://localhost:3000/oauth/callback/kakao/translator`
 
