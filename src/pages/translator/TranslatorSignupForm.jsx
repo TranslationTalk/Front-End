@@ -19,7 +19,6 @@ import { useNavigate } from 'react-router-dom'
 
 const initialState = {
   name: '',
-  career: '번역 회사 근무',
   profileUrl:
     'https://tistory1.daumcdn.net/tistory/user/264290/profile/profileImg?v=1635480821401',
   language: '',
@@ -38,23 +37,54 @@ const TranslatorSignupForm = () => {
   const [file, setFile] = useState(null) // input으로 받아온 file
   const [fileName, setFileName] = useState('') // 백엔드에 보내고, storage에 업로드할 파일 이름
   const [preview, setPreview] = useState('') // image preview 요소
+  const [checkForm, setCheckForm] = useState({
+    name: true,
+    email: true,
+    phoneNum: true,
+    language: true,
+    introduce: true,
+  })
+
+  console.log(formData)
 
   const navigate = useNavigate()
 
   const handleSubmit = async e => {
     e.preventDefault()
-    console.log(formData)
+    let check = Object.assign({}, checkForm)
 
-    // 파일 업로드
-    uploadFile(file, `profile/${fileName}`)
+    formData.name === '' ? (check.name = false) : (check.name = true)
+    formData.email === '' ? (check.email = false) : (check.email = true)
+    formData.phoneNum === ''
+      ? (check.phoneNum = false)
+      : (check.phoneNum = true)
+    formData.language === '' || formData.language === '가능언어'
+      ? (check.language = false)
+      : (check.language = true)
+    formData.introduce.length < 10
+      ? (check.introduce = false)
+      : (check.introduce = true)
 
-    const {
-      data: { data },
-    } = await apis.postTranslatorMypage(formData)
-    console.log(data)
-    setFormData(initialState)
+    setCheckForm(check)
+    if (!Object.entries(check).find(value => value[1] === false)) {
+      // 파일 업로드
+      uploadFile(file, `profile/${fileName}`)
 
-    navigate('/translator/list')
+      const {
+        data: { data },
+      } = await apis.postTranslatorMypage(formData)
+      console.log(data)
+      setFormData(initialState)
+
+      navigate('/translator/list')
+    }
+  }
+
+  //! form 입력 하지 않았을 시 메시지
+  const formMessage = (type, message) => {
+    return type ? null : (
+      <StatusMessage text={message} icon="info" color="#FF5F5F" />
+    )
   }
 
   const handleChange = e => {
@@ -152,18 +182,21 @@ const TranslatorSignupForm = () => {
       </ProfileWrap>
       <Form onSubmit={handleSubmit}>
         <TextInput name="name" placeholder="이름" onChange={handleChange} />
+        {formMessage(checkForm.name, '이름을 입력해주세요')}
         <TextInput
           name="email"
           type="email"
           placeholder="이메일"
           onChange={handleChange}
         />
+        {formMessage(checkForm.email, '이메일을 입력해주세요')}
         <TextInput
           name="phoneNum"
           type="phone"
           placeholder="전화번호"
           onChange={handleChange}
         />
+        {formMessage(checkForm.phoneNum, '전화번호를 입력해주세요')}
         {selectInputs.map((select, index) => (
           <SelectContainer key={select}>
             <SelectInput
@@ -184,6 +217,7 @@ const TranslatorSignupForm = () => {
             ) : null}
           </SelectContainer>
         ))}
+        {formMessage(checkForm.language, '1개 이상의 언어를 선택해 주세요')}
         <ButtonWrap>
           <Button
             type="button"
@@ -199,6 +233,7 @@ const TranslatorSignupForm = () => {
           placeholder="자기소개"
           onChange={handleChange}
         />
+        {formMessage(checkForm.introduce, '10글자 이상 적어주세요')}
         <CheckboxWrap>
           <StatusMessage
             icon="info"
