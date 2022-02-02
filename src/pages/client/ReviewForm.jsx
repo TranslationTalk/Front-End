@@ -15,16 +15,36 @@ const ReviewForm = () => {
   const [score, setScore] = useState(0)
   const [comment, setComment] = useState('')
   const location = useLocation()
+  const [checkForm, setCheckForm] = useState({
+    score: true,
+    textLength: true,
+  })
 
-  console.log(location.state.requestId)
+  //! form 입력 하지 않았을 시 메시지
+  const formMessage = (type, message) => {
+    return type ? null : (
+      <StatusMessage text={message} icon="info" color="#FF5F5F" />
+    )
+  }
 
-  // 비동기처리: 번역가 리뷰 등록
-  const postReview = async () => {
-    await clientAPIs.writeReview(location.state.requestId, {
-      comment,
-      score,
-    })
-    navigate(-1)
+  //! 비동기처리: 번역가 리뷰 등록
+  const postReview = async e => {
+    e.preventDefault()
+    let check = Object.assign({}, checkForm)
+    // 별점
+    score == 0 ? (check.score = false) : (check.score = true)
+    // 최소 10글자 이상 뎃글 입력
+    comment.length < 10 ? (check.textLength = false) : (check.textLength = true)
+    setCheckForm(check)
+
+    // 필수요소 입력 완료시 서버에 전송
+    if (!Object.entries(check).find(value => value[1] === false)) {
+      await clientAPIs.writeReview(location.state.requestId, {
+        comment,
+        score,
+      })
+      navigate(-1)
+    }
   }
   // setComment
   const onChange = e => setComment(e.target.value)
@@ -42,12 +62,8 @@ const ReviewForm = () => {
         onChange={onChange}
         placeholder="최소 10글자 이상 입력해주세요."
       />
-      <StatusMessage
-        text="최소 10글자 이상 입력해주세요."
-        color="#FF5F5F"
-        icon="info"
-      />
-      <StatusMessage text="별점을 선택해 주세요" color="#FF5F5F" icon="info" />
+      {formMessage(checkForm.score, '별점을 선택해 주세요')}
+      {formMessage(checkForm.textLength, '최소 10글자 이상 입력해주세요.')}
       <div>
         <Button
           content="취소하기"
