@@ -6,6 +6,7 @@ import {
   NavigationTranslator,
   NoList,
   PageHeader,
+  Spinner,
   ToggleMenu,
   TopDownButton,
 } from '../../components'
@@ -18,13 +19,19 @@ const MyTranslationList = () => {
   const [estimates, setEstimates] = useState([])
   const [clickedStatus, setClickedStatus] = useState('ready')
   const [clickNumber, setClickNumber] = useState(-1)
+  const [loading, setLoading] = useState(false)
 
   useEffect(() => {
+    setLoading(true)
+
     const fetchEstimates = async () => {
       const {
         data: { data },
       } = await apis.fetchMyList()
       setEstimates(data)
+
+      setLoading(false)
+
       console.log(data)
     }
     fetchEstimates()
@@ -103,6 +110,7 @@ const MyTranslationList = () => {
       )}
       <NavigationTranslator />
       <TopDownButton />
+      {loading && <Spinner loadingTitle="내 번역 가져오는 중" />}
     </Wrap>
   )
 }

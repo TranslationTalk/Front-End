@@ -42,6 +42,8 @@ import NavigationUser from './navbar/NavigationUser'
 import NavigationTranslator from './navbar/NavigationTranslator'
 // Notice
 import NoList from './notice/NoList'
+// spinner
+import Spinner from './spinner/Spinner'
 // TrasnlatorInfo
 import TranslatorInfo from './profileInfo/TranslatorInfo'
 // Tag
@@ -82,4 +84,5 @@ export {
   NoList,
   CommentBox,
   FilterMenu,
+  Spinner,
 }

@@ -8,6 +8,7 @@ import {
   NavigationTranslator,
   Tag,
   NoList,
+  Spinner,
 } from '../../components/index'
 import { apis } from '../../utils/axios'
 
@@ -15,18 +16,20 @@ const TranslatorMyPage = () => {
   const [translatorInfo, setTranslatorInfo] = useState(null)
   const [reviews, setReviews] = useState([])
   const navigate = useNavigate()
+  const [loading, setLoading] = useState(false)
 
   useEffect(() => {
+    setLoading(true)
     const fetchMyInformation = async () => {
       const {
         data: { data: infoData },
       } = await apis.getTranslatorMypage()
       setTranslatorInfo(infoData)
+      setLoading(false)
 
       const {
         data: { data: reviewData },
       } = await apis.getReviews(infoData.translatorId)
-      console.log(reviewData)
       setReviews([...reviews, ...reviewData])
     }
     fetchMyInformation()
@@ -78,6 +81,7 @@ const TranslatorMyPage = () => {
         )}
       </Wrap>
       <NavigationTranslator />
+      {loading && <Spinner loadingTitle="내 정보 가져오는 중" />}
     </>
   )
 }

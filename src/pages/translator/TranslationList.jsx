@@ -2,13 +2,13 @@ import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
 import {
-  // Button,
   CheckBoxInput,
   EstimateCard,
   FilterMenu,
   NavigationTranslator,
   NoList,
   PageHeader,
+  Spinner,
   TopDownButton,
 } from '../../components'
 import { apis } from '../../utils/axios'
@@ -23,11 +23,12 @@ const TranslationList = () => {
   const navigate = useNavigate()
   const [showModal, setShowModal] = useState(false)
   const [capableLanguages, setCapableLanguages] = useState([])
+  const [loading, setLoading] = useState(false)
 
   const fetchEstimatesAndFiltering = async () => {
     const {
       data: { data },
-    } = await apis.estimatesList() // sendEstimate이것으로 바꿔야 하나 지금 프로필을 만들 수 없어 임시로 client 요청하는 중
+    } = await apis.estimatesList()
 
     setEstimates(data)
 
@@ -46,10 +47,14 @@ const TranslationList = () => {
           languagesArr.includes(el.afterLanguage),
       ),
     )
+
+    // 데이터 가져온 상태이므로 loading 상태 false 전환
+    setLoading(false)
   }
   // mobx에서 mobx에 있는 함수를 사용해서 비동기 처리해야함
   // 그 함수로 useEffect 안에도 넣고, PageHeader의 reloadEvent에도 넣어야 한다.
   useEffect(() => {
+    setLoading(true) // 아직 데이터 가져오지 않은 상태
     fetchEstimatesAndFiltering()
   }, [])
 
@@ -109,7 +114,11 @@ const TranslationList = () => {
       />
       <Wrap>
         {filterdEstimates.length === 0 ? (
-          <NoList listName='아직 받은 "번역 의뢰"가 없어요' />
+          loading ? (
+            <Spinner loadingTitle="번역 의뢰 가져오는 중" />
+          ) : (
+            <NoList listName='아직 받은 "번역 의뢰"가 없어요' />
+          )
         ) : (
           filterdEstimates.map(estimate => (
             <EstimateCard

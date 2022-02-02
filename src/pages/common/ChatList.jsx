@@ -6,6 +6,7 @@ import {
   NavigationUser,
   NoList,
   PageHeader,
+  Spinner,
 } from '../../components/index'
 import { useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
@@ -14,15 +15,18 @@ const ChatList = () => {
   const [chatList, setChatList] = useState([])
   const auth = sessionStorage.getItem('auth')
   const navigate = useNavigate()
+  const [loading, setLoading] = useState(false)
 
   useEffect(() => {
+    setLoading(true)
     const fetchChatroomList = async () => {
       const { data } =
         auth === 'translator'
           ? await apis.getChatroomListTranslator()
           : await apis.getChatroomListClient()
-      console.log(data)
       setChatList(data)
+
+      setLoading(false)
     }
 
     fetchChatroomList()
@@ -70,6 +74,7 @@ const ChatList = () => {
         )}
       </Wrap>
       {auth === 'translator' ? <NavigationTranslator /> : <NavigationUser />}
+      {loading && <Spinner loadingTitle="내 상담 가져오는 중" />}
     </>
   )
 }

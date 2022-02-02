@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { Spinner } from '../../components'
 import { apis } from '../../utils/axios'
 
 const KakaoForUserRedirectHandler = () => {
@@ -9,8 +10,6 @@ const KakaoForUserRedirectHandler = () => {
     const loginUser = async () => {
       let params = new URL(document.location.toString()).searchParams
       let code = params.get('code') // 인가코드 받는 부분
-
-      console.log(code)
 
       try {
         const { data } = await apis.login(code)
@@ -32,7 +31,7 @@ const KakaoForUserRedirectHandler = () => {
     loginUser()
   }, [])
 
-  return <div>유저 로그인 중입니다.(스피너)</div>
+  return <Spinner loadingTitle="카카오로 로그인 중" />
 }
 
 export default KakaoForUserRedirectHandler

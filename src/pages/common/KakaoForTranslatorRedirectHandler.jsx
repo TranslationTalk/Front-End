@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { Spinner } from '../../components'
 import { apis } from '../../utils/axios'
 
 const KakaoForTranslatorRedirectHandler = () => {
@@ -45,7 +46,7 @@ const KakaoForTranslatorRedirectHandler = () => {
     loginTranslator()
   }, [])
 
-  return <div>번역가 로그인 중입니다.(스피너)</div>
+  return <Spinner loadingTitle="번역가로 로그인 중" />
 }
 
 export default KakaoForTranslatorRedirectHandler
