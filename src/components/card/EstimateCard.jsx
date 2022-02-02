@@ -28,7 +28,7 @@ const EstimateCard = prop => {
   } = prop
 
   return (
-    <Card onClick={onClick}>
+    <Card onClick={onClick} createdTime={createdTime}>
       {/* 첫째줄 field, tag*/}
       <div>
         <h3>{field}</h3>
@@ -62,16 +62,21 @@ const EstimateCard = prop => {
 
       {/* 셋째줄 희망날짜, 마감시간*/}
       <div>
-        <span>희망날짜 {deadline.replace(/-/g, '.')}</span>
         <span>
-          {createdTime && (
-            <StatusMessage
-              text={timeMessage(createdTime)}
-              color="red"
-              icon="alarm"
-            />
-          )}
+          <span>희망날짜</span>
+          <span>{deadline.replace(/-/g, '.')}</span>
         </span>
+        {createdTime ? (
+          <span>
+            {createdTime && (
+              <StatusMessage
+                text={timeMessage(createdTime)}
+                color="red"
+                icon="alarm"
+              />
+            )}
+          </span>
+        ) : null}
       </div>
     </Card>
   )
@@ -115,7 +120,11 @@ const Card = styled.li`
       transition: all 0.5s;
     }
   }
-  & > div:last-child span {
+  & > div:last-child > span {
+    width: ${prop => (prop.createdTime ? 'auto' : '100%')};
+    color: ${prop => prop.createdTime ?? 'var(--orange-red)'};
+    display: flex;
+    justify-content: space-between;
     font-size: var(--fs-12);
     &:first-child {
       font-weight: lighter;
