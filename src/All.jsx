@@ -1,32 +1,20 @@
-import { useObserver } from 'mobx-react'
-import React from 'react'
+import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 import { Button } from './components/index'
 import { apis } from './utils/axios'
-import indexStore from './mobx/indexStore'
 
 const All = () => {
-  const [id, setId] = React.useState('')
-
-  const { login } = indexStore()
-
-  const setAuth = auth => {
-    console.log(auth)
-    login.setAuth(auth)
-    console.log(login.auth)
-  }
-
-  const auth = login.auth
-  console.log(auth)
+  const [id, setId] = useState('')
+  const [auth, setAuth] = useState('')
 
   const func = e => {
     setId(e.target.value)
   }
 
-  return useObserver(() => (
+  return (
     <Test>
-      <Input onChange={func} placeholder="아이디를 입력해주세요." />
+      <Input onChange={func} value={id} placeholder="아이디를 입력해주세요." />
       <DeveloperWrap>
         <Button
           content="유저 회원가입"
@@ -57,6 +45,8 @@ const All = () => {
             content="로그아웃"
             onClick={() => {
               sessionStorage.clear()
+              setAuth('')
+              setId('')
             }}
             color="#f5f5f5"
           />
@@ -64,9 +54,7 @@ const All = () => {
           <Button
             content="개발자 로그인"
             onClick={async () => {
-              console.log(id)
               const res = await apis.developerLogin(id)
-              console.log(res)
               sessionStorage.setItem('token', res.data.token)
               sessionStorage.setItem('auth', res.data.auth)
               setAuth(res.data.auth)
@@ -74,23 +62,11 @@ const All = () => {
             color="#f5f5f5"
           />
         )}
-
-        <Button
-          content="Test API"
-          onClick={() => {
-            apis
-              .requestList()
-              .then(res => console.log(res))
-              .catch(e => console.log(e))
-          }}
-          color="#f5f5f5"
-          bgColor="#333"
-        />
       </DeveloperWrap>
 
       <Now>
-        현재 로그인 상태 :{' '}
-        <span>{login.auth === '' ? '비로그인' : login.auth}</span>
+        현재 로그인 상태:
+        <span>{auth === '' ? '비로그인' : auth}</span>
       </Now>
 
       <br />
@@ -115,7 +91,7 @@ const All = () => {
       <Link to="/translator/translation/list">내번역</Link>
       <Link to="/translator/estimate/:id">견적서 디테일</Link>
     </Test>
-  ))
+  )
 }
 const Test = styled.div`
   & h2 {

@@ -8,7 +8,7 @@ background-color는 bgColor로, color는 color로 props내려주시면 됩니다
 
 import styled from 'styled-components'
 import React from 'react'
-import { PropTypes } from 'mobx-react'
+import PropTypes from 'prop-types'
 
 const Button = prop => {
   const { onClick, content, color, bgColor, border, type } = prop
