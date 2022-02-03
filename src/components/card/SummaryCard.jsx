@@ -63,7 +63,6 @@ const SummaryCard = prop => {
 }
 
 const Card = styled.div`
-  margin: 10px;
   background: var(--white);
   width: 100%;
   & a {

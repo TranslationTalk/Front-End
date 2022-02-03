@@ -6,6 +6,7 @@ import {
   NavigationTranslator,
   NoList,
   PageHeader,
+  Spinner,
   ToggleMenu,
   TopDownButton,
 } from '../../components'
@@ -18,13 +19,19 @@ const MyTranslationList = () => {
   const [estimates, setEstimates] = useState([])
   const [clickedStatus, setClickedStatus] = useState('ready')
   const [clickNumber, setClickNumber] = useState(-1)
+  const [loading, setLoading] = useState(false)
 
   useEffect(() => {
+    setLoading(true)
+
     const fetchEstimates = async () => {
       const {
         data: { data },
       } = await apis.fetchMyList()
       setEstimates(data)
+
+      setLoading(false)
+
       console.log(data)
     }
     fetchEstimates()
@@ -75,13 +82,15 @@ const MyTranslationList = () => {
         />
       </ToggleWrap>
       {estimates.filter(el => el.status === clickedStatus).length === 0 ? (
-        clickNumber === 0 ? (
-          <NoList listName="보낸 견적 리스트" />
-        ) : clickNumber === 1 ? (
-          <NoList listName="진행 중인 번역 의뢰" />
-        ) : (
-          <NoList listName="진행 완료된 의뢰" />
-        )
+        <NoList
+          listName={`아직 "${menu[clickNumber]}${
+            clickNumber === 1
+              ? '인 번역"'
+              : clickNumber === 2
+              ? '된 번역"'
+              : '"'
+          }이 없어요`}
+        />
       ) : (
         estimates
           .filter(el => el.status === clickedStatus)
@@ -101,6 +110,7 @@ const MyTranslationList = () => {
       )}
       <NavigationTranslator />
       <TopDownButton />
+      {loading && <Spinner loadingTitle="내 번역 가져오는 중" />}
     </Wrap>
   )
 }
@@ -109,7 +119,7 @@ const Wrap = styled.div`
   height: 100%;
   min-height: 100vh;
   background-color: var(--light-gray);
-  padding: 116px 0 78px 0;
+  padding: 130px 0 78px 0;
 `
 
 const ToggleWrap = styled.div`

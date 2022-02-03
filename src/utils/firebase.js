@@ -1,6 +1,6 @@
 // firebaseInstance.js
 import { initializeApp } from 'firebase/app'
-import { getStorage, ref, uploadBytes } from 'firebase/storage'
+import { deleteObject, getStorage, ref, uploadBytes } from 'firebase/storage'
 
 import 'firebase/storage'
 const firebaseConfig = {
@@ -18,7 +18,7 @@ export const storage = getStorage(
   'gs://translation-talk-efa1a.appspot.com',
 )
 
-//업로드
+// file 업로드
 export const uploadFile = (file, fileName) => {
   const storageRef = ref(storage, fileName)
   uploadBytes(storageRef, file).then(() => {
@@ -30,4 +30,21 @@ export const uploadFile = (file, fileName) => {
 export const getDownloadUrl = (folder, fileName) => {
   if (folder !== 'file' && folder !== 'profile') return 'wrong folder'
   return `https://firebasestorage.googleapis.com/v0/b/translation-talk-efa1a.appspot.com/o/${folder}%2F${fileName}?alt=media`
+}
+
+// file 삭제
+export const deleteFile = (folder, fileUrl) => {
+  if (folder !== 'file' && folder !== 'profile') return 'wrong folder'
+  // Url에서 fileName만 가져옴
+  const fileName = fileUrl.match(/(?<=%2F)(.*?)(?=\?)/g)
+
+  const storageRef = ref(storage, `${folder}/${fileName}`)
+
+  deleteObject(storageRef)
+    .then(() => {
+      console.log(`${fileName} deleted successfully`)
+    })
+    .catch(error => {
+      console.log(error)
+    })
 }

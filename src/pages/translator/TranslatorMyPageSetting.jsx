@@ -15,7 +15,7 @@ import { language } from '../../constant/selectOptions'
 import styled from 'styled-components'
 import { ReactComponent as AddIcon } from '../../assets/icons/Add.svg'
 import { useNavigate } from 'react-router-dom'
-import { getDownloadUrl, uploadFile } from '../../utils/firebase'
+import { deleteFile, getDownloadUrl, uploadFile } from '../../utils/firebase'
 
 const initialState = {
   name: '',
@@ -41,6 +41,7 @@ const TranslatorMyPageSetting = () => {
   const [file, setFile] = useState(null) // input으로 받아온 file
   const [fileName, setFileName] = useState('') // 백엔드에 보내고, storage에 업로드할 파일 이름
   const [preview, setPreview] = useState('') // image preview 요소
+  const [prevFileUrl, setPrevFileUrl] = useState('') // 전에 사용하던 이미지 fileUrl
 
   const navigate = useNavigate()
 
@@ -56,6 +57,7 @@ const TranslatorMyPageSetting = () => {
         cashPossible,
         isBusiness,
         taxPossible,
+        profileUrl,
       } = infoData
 
       // 원래 갖고 있던 데이터를 form에 넣어줌
@@ -67,6 +69,7 @@ const TranslatorMyPageSetting = () => {
         cashPossible,
         isBusiness,
         taxPossible,
+        profileUrl,
       }))
 
       // 가능언어 원래 가지고 있던 데이터로 설정
@@ -85,10 +88,11 @@ const TranslatorMyPageSetting = () => {
 
   const handleSubmit = async e => {
     e.preventDefault()
-    console.log(formData)
 
     // 파일 업로드
     uploadFile(file, `profile/${fileName}`)
+    // 기존 프로필 이미지 삭제
+    deleteFile('profile', prevFileUrl)
 
     const {
       data: { data },
@@ -130,14 +134,27 @@ const TranslatorMyPageSetting = () => {
   useEffect(() => {
     setPreview(
       <img
-        src={file ? URL.createObjectURL(file) : defaultProfile}
+        src={
+          file
+            ? URL.createObjectURL(file)
+            : formData.profileUrl // 원래 가지고 있던 이미지 설정
+            ? formData.profileUrl
+            : defaultProfile
+        }
         alt="profileImg"
         width="64px"
         height="64px"
       />,
     )
+
+    // 이미지가 바뀔 때마다 이전 이미지가 바뀌면 안되니까 최초 url만 설정
+    if (!file) {
+      // 원래 가지고 있던 이미지 state로 저장
+      setPrevFileUrl(formData.profileUrl)
+    }
+
     return () => {}
-  }, [file])
+  }, [file, formData.profileUrl])
 
   const handleSelectChange = e => {
     const { name, value } = e.target

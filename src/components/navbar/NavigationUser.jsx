@@ -68,7 +68,7 @@ const NavContainer = styled.div`
   transform: translateX(-50%);
   background-color: #fff;
   border-top: 1px solid rgba(0, 0, 0, 0.3);
-  z-index: 5;
+  z-index: 1;
 `
 
 const LinkElement = styled(NavLink)`

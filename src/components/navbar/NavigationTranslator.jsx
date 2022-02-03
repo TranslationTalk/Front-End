@@ -10,8 +10,6 @@ import { ReactComponent as MyListIcon } from '../../assets/icons/List.svg'
 import { ReactComponent as TranslationIcon } from '../../assets/icons/Translation.svg'
 import { ReactComponent as PersonIcon } from '../../assets/icons/Person.svg'
 
-// 스타일 많이 달라질 것으로 예상
-// icon 변경해야하고, active시 스타일 어떻게 할지 아직 모름
 const selectedAttr = {
   fill: '#3D51FF',
 }
@@ -73,7 +71,7 @@ const NavContainer = styled.div`
   transform: translateX(-50%);
   background-color: #fff;
   border-top: 1px solid rgba(0, 0, 0, 0.3);
-  z-index: 5; // z-index 수정 -> header와 같게 함
+  z-index: 1;
 `
 
 const LinkElement = styled(NavLink)`

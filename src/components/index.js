@@ -34,6 +34,7 @@ import TextInput from './input/TextInput'
 // Menu
 import HamburgerMenu from './menu/HamburgerMenu'
 import ToggleMenu from './menu/ToggleMenu'
+import FilterMenu from './menu/FilterMenu'
 // StatusMessage
 import StatusMessage from './message/StatusMessage'
 // Navbar
@@ -41,6 +42,8 @@ import NavigationUser from './navbar/NavigationUser'
 import NavigationTranslator from './navbar/NavigationTranslator'
 // Notice
 import NoList from './notice/NoList'
+// spinner
+import Spinner from './spinner/Spinner'
 // TrasnlatorInfo
 import TranslatorInfo from './profileInfo/TranslatorInfo'
 // Tag
@@ -80,4 +83,6 @@ export {
   Footer,
   NoList,
   CommentBox,
+  FilterMenu,
+  Spinner,
 }
