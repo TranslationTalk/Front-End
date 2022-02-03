@@ -3,28 +3,16 @@
 export const timeMessage = createdTime => {
   // 현재시간
   const currentTime = new Date()
-  const currentDate = currentTime.getDate()
-  const currentHour = currentTime.getHours()
-  const currentMin = currentTime.getMinutes()
-
-  // list의 생성 날짜
-  const createdDay = new Date(createdTime).getDate()
-  const createdHour = new Date(createdTime).getHours()
-  const createdMin = new Date(createdTime).getMinutes()
+  const secound = 1000
+  const min = secound * 60
+  const hour = min * 60
+  const day = hour * 24
+  const count = Date.parse(createdTime) + 3 * day - Date.parse(currentTime)
 
   // 생성날짜-3일
-  let countDay = createdDay + 3 - currentDate
-  let countHour = createdHour - currentHour
-  let countMin = createdMin - currentMin
-
-  if (countMin < 0) {
-    countHour--
-    countMin += 60
-  }
-  if (countHour < 0) {
-    countDay--
-    countHour += 24
-  }
+  const countDay = Math.floor(count / day)
+  const countHour = Math.floor((count % hour) / min)
+  const countMin = Math.floor((count % min) / secound)
 
   // 메시지
   if (countDay < 0) {
