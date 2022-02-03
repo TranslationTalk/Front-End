@@ -7,8 +7,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
-import infoImg from '../../assets/images/info.svg'
-import alarmerrorImg from '../../assets/images/alarmerror.svg'
+import infoImg from '../../assets/icons/Info.svg'
+import alarmerrorImg from '../../assets/icons/AlarmError.svg'
 
 const StatusMessage = ({ text, color, icon }) => {
   let iconImg = infoImg

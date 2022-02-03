@@ -11,7 +11,7 @@ ex) transform: ${props => (props.click ? 'translateX(105%)' : 'translateX(0)')};
 import React from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
-import Hamburger from '../../assets/images/hamburger.png'
+import Hamburger from '../../assets/icons/HamburgerIcon.svg'
 import ArrowLeftWhite from '../../assets/icons/ArrowLeftWhite.png'
 import CloseWhite from '../../assets/icons/CloseWhite.svg'
 import LogOutIcon from '../../assets/icons/LogOutIcon.svg'
@@ -61,7 +61,6 @@ const HamburgerMenu = () => {
 }
 
 const HamburgerTap = styled.div`
-  display: ${props => (props.click ? 'none' : 'block')};
   cursor: pointer;
 `
 

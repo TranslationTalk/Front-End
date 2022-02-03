@@ -5,10 +5,10 @@ position fixed
 import React from 'react'
 import styled from 'styled-components'
 import { NavLink, useLocation } from 'react-router-dom'
-import { ReactComponent as ChatIcon } from '../../assets/icons/Chat.svg'
-import { ReactComponent as MyListIcon } from '../../assets/icons/List.svg'
-import { ReactComponent as TranslationIcon } from '../../assets/icons/Translation.svg'
-import { ReactComponent as PersonIcon } from '../../assets/icons/Person.svg'
+import { ReactComponent as ChatIcon } from '../../assets/icons/navbar/Chat.svg'
+import { ReactComponent as MyListIcon } from '../../assets/icons/navbar/List.svg'
+import { ReactComponent as TranslationIcon } from '../../assets/icons/navbar/Translation.svg'
+import { ReactComponent as PersonIcon } from '../../assets/icons/navbar/Person.svg'
 
 const selectedAttr = {
   fill: '#3D51FF',

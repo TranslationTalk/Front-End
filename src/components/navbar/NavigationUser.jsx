@@ -5,9 +5,9 @@ position fixed
 import React from 'react'
 import styled from 'styled-components'
 import { NavLink, useLocation } from 'react-router-dom'
-import { ReactComponent as TranslationIcon } from '../../assets/icons/TranslationUser.svg'
-import { ReactComponent as MyDocIcon } from '../../assets/icons/MyDoc.svg'
-import { ReactComponent as ChatIcon } from '../../assets/icons/Chat.svg'
+import { ReactComponent as TranslationIcon } from '../../assets/icons/navbar/TranslationUser.svg'
+import { ReactComponent as MyDocIcon } from '../../assets/icons/navbar/MyDoc.svg'
+import { ReactComponent as ChatIcon } from '../../assets/icons/navbar/Chat.svg'
 
 const selectedAttr = {
   fill: '#3D51FF',

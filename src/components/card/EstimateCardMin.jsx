@@ -10,9 +10,9 @@ confirmedDate : 완료가능한 날짜
 import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
-import basicProfil from '../../assets/images/thumbnail_middle.png'
-import star from '../../assets/images/grade.svg'
-import arrowRight from '../../assets/images/arrow_right.svg'
+import basicProfil from '../../assets/images/ListThumb.png'
+import star from '../../assets/icons/Grade.svg'
+import arrowRight from '../../assets/icons/ArrowRight.svg'
 
 const EstimateCardMin = prop => {
   const {

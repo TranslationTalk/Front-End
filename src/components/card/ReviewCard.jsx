@@ -7,7 +7,7 @@ date: 리뷰 작성날짜 '2022-01-15T04:33:14.000Z' //string
 */
 import React from 'react'
 import PropTypes from 'prop-types'
-import star from '../../assets/images/grade.svg'
+import star from '../../assets/icons/Grade.svg'
 import profile from '../../assets/images/TranslatorProfile.png'
 import styled from 'styled-components'
 

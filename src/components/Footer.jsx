@@ -1,11 +1,11 @@
 import React from 'react'
 import styled from 'styled-components'
-import Logo from '../../assets/images/logoWhite.svg'
+import Logo from '../../assets/icons/LogoWhite.svg'
 
 const Footer = () => {
   return (
     <Div>
-      <img src={Logo} alt="dfs" />
+      <img src={Logo} alt="번역톡" />
       <p>
         번역 견적은 해당 사이트를 통해서 신청이 가능하며, 통신판매중개자로서
         거래당사자가 아닙니다. 거래에 관한 의무와 책임을 지지 않습니다. 서비스
@@ -27,6 +27,7 @@ const Div = styled.div`
   z-index: 1;
   & img {
     margin-bottom: 22px;
+    color: #fff;
   }
   & p {
     width: 359px;

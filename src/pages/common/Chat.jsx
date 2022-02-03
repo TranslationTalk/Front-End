@@ -8,7 +8,7 @@ import {
   SubPageHeader,
 } from '../../components'
 import { apis, clientAPIs } from '../../utils/axios'
-import DefaultProfile from '../../assets/images/thumbnail_middle.png'
+import DefaultProfile from '../../assets/images/ListThumb.png'
 import io from 'socket.io-client'
 import styled from 'styled-components'
 

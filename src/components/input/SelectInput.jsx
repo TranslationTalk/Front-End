@@ -5,7 +5,7 @@ option을 선택하는 select input
 import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
-import ArrowDown from '../../assets/images/PolygonDown.png'
+import ArrowDown from '../../assets/icons/PolygonDown.png'
 
 const SelectInput = ({ id, name, defaultOption, onChange, value, options }) => (
   <Select
