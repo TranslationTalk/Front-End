@@ -18,7 +18,7 @@ import InitialChat from './chat/InitialChat'
 import EstimateDetail from './detail/EstimateDetail'
 import CommentBox from './detail/CommentBox'
 // Footer
-import Footer from './Footer/Footer'
+import Footer from './footer/Footer'
 // Header
 import PageHeader from './header/PageHeader'
 import SubPageHeader from './header/SubPageHeader'
@@ -48,6 +48,8 @@ import Spinner from './spinner/Spinner'
 import TranslatorInfo from './profileInfo/TranslatorInfo'
 // Tag
 import Tag from './tag/Tag'
+// Modal
+import AlertModal from './modal/AlertModal'
 
 export {
   Button,
@@ -85,4 +87,5 @@ export {
   CommentBox,
   FilterMenu,
   Spinner,
+  AlertModal,
 }
