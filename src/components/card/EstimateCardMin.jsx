@@ -11,8 +11,8 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import basicProfil from '../../assets/images/ListThumb.png'
-import star from '../../assets/icons/Grade.svg'
-import arrowRight from '../../assets/icons/ArrowRight.svg'
+import { ReactComponent as Star } from '../../assets/icons/Star.svg'
+import arrow from '../../assets/icons/Arrow.svg'
 
 const EstimateCardMin = prop => {
   const {
@@ -41,7 +41,7 @@ const EstimateCardMin = prop => {
             <span>
               {totalReivews ? (
                 <>
-                  <i />
+                  <Star fill="#FF5F5F" width="16px" height="16px" />
                   {avgReviews}
                 </>
               ) : null}
@@ -99,14 +99,8 @@ const Card = styled.li`
     font-size: var(--fs-12);
     & span {
       margin-right: 5px;
-      & > i {
+      svg {
         margin-bottom: -3px;
-        margin-right: 2px;
-        display: inline-block;
-        width: 16px;
-        height: 16px;
-        background-image: url(${star});
-        content: '';
       }
       &:last-child {
         font-weight: bold;
@@ -117,7 +111,7 @@ const Card = styled.li`
       width: 24px;
       height: 24px;
       margin-top: -5px;
-      background-image: url(${arrowRight});
+      background-image: url(${arrow});
       transform: translateX(-5px);
       transition: all 0.5s;
       content: '';

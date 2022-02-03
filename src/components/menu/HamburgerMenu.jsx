@@ -12,8 +12,7 @@ import React from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
 import Hamburger from '../../assets/icons/HamburgerIcon.svg'
-import ArrowLeftWhite from '../../assets/icons/ArrowLeftWhite.png'
-import CloseWhite from '../../assets/icons/CloseWhite.svg'
+import { ReactComponent as Close } from '../../assets/icons/Close.svg'
 import LogOutIcon from '../../assets/icons/LogOutIcon.svg'
 
 const HamburgerMenu = () => {
@@ -29,8 +28,9 @@ const HamburgerMenu = () => {
         <ModalInner click={click}>
           <Top>
             <div>
-              <i onClick={() => setClick(false)} />
-              <i onClick={() => setClick(false)} />
+              <i onClick={() => setClick(false)}>
+                <Close fill="#fff" width="22px" height="22px" />
+              </i>
             </div>
             <p
               onClick={() => {
@@ -100,7 +100,7 @@ const Top = styled.div`
   div {
     display: flex;
     padding: 6px 5px;
-    justify-content: space-between;
+    justify-content: end;
   }
   i {
     display: block;
@@ -113,12 +113,6 @@ const Top = styled.div`
     background-repeat: no-repeat;
     content: '';
     cursor: pointer;
-  }
-  i:first-child {
-    background-image: url(${ArrowLeftWhite});
-  }
-  i:last-child {
-    background-image: url(${CloseWhite});
   }
   p {
     display: block;
