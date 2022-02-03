@@ -2,8 +2,10 @@ import React from 'react'
 import styled from 'styled-components'
 import PropTypes from 'prop-types'
 import { Tag } from '..'
-import { ReactComponent as ArrowDown } from '../../assets/icons/ArrowDown.svg'
-import { ReactComponent as ArrowUp } from '../../assets/icons/ArrowUpBlue.svg'
+import {
+  ReactComponent as ArrowUp,
+  ReactComponent as ArrowDown,
+} from '../../assets/icons/Arrow.svg'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { FreeMode } from 'swiper'
 import 'swiper/css'
@@ -26,7 +28,11 @@ const FilterMenu = ({ showModal, openModal, capableLanguages }) => {
         <SwiperSlide>
           <button onClick={openModal}>
             <span>언어 선택</span>
-            {showModal ? <ArrowUp /> : <ArrowDown />}
+            {showModal ? (
+              <ArrowUp fill="#3D51FF" transform="rotate(90) scale(-1,1)" />
+            ) : (
+              <ArrowDown transform="rotate(90)" />
+            )}
           </button>
         </SwiperSlide>
         {capableLanguages.map(language => (
