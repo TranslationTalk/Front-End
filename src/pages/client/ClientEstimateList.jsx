@@ -11,6 +11,7 @@ import {
   NavigationUser,
   NoList,
   PriceCard,
+  Spinner,
   StatusMessage,
   SubPageHeader,
 } from '../../components'
@@ -21,14 +22,17 @@ const ClientEstimateList = () => {
   const navigate = useNavigate()
   const location = useLocation()
   const [estimate, setEstimate] = useState([])
+  const [loading, setLoading] = useState(false)
 
   // 비동기처리
   useEffect(() => {
+    setLoading(true)
     const fetchEstimateList = async () => {
       const {
         data: { data },
       } = await clientAPIs.requestEstimateList(`${location.state.requestId}`)
       setEstimate(data)
+      setLoading(false)
     }
     fetchEstimateList()
   }, [])
@@ -77,6 +81,7 @@ const ClientEstimateList = () => {
         />
       ))}
       <NavigationUser />
+      {loading && <Spinner loadingTitle="내 견적 가져오는 중" />}
     </ClientEstimateListPage>
   )
 }
