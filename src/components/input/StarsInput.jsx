@@ -10,8 +10,10 @@ onClick에는 (star) => setCurrentStar(star) 현재 별점을 클릭된 별점�
 import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
-import { ReactComponent as BlueStar } from '../../assets/icons/BlueStar.svg'
-import { ReactComponent as GrayStar } from '../../assets/icons/GrayStar.svg'
+import {
+  ReactComponent as BlueStar,
+  ReactComponent as GrayStar,
+} from '../../assets/icons/Star.svg'
 
 const starsArr = [1, 2, 3, 4, 5]
 
@@ -24,7 +26,7 @@ const StarsInput = ({ placeholder, currentValue, onClick }) => {
           star > currentValue ? (
             <GrayStar key={star} onClick={() => onClick(star)} />
           ) : (
-            <BlueStar key={star} onClick={() => onClick(star)} />
+            <BlueStar fill="#3D51FF" key={star} onClick={() => onClick(star)} />
           ),
         )}
       </Stars>

@@ -9,7 +9,7 @@ import propTypes from 'prop-types'
 import { Button } from '../index'
 import styled from 'styled-components'
 import { useLocation } from 'react-router-dom'
-import { ReactComponent as ArrowbackIcon } from '../../assets/icons/ArrowbackIcon.svg'
+import { ReactComponent as ArrowBack } from '../../assets/icons/Arrow.svg'
 
 const SubPageHeader = ({
   title,
@@ -23,7 +23,9 @@ const SubPageHeader = ({
 
   return (
     <Container shouldWrap={location !== '/'} useButton={useButton}>
-      <ArrowbackIcon onClick={() => history.back()} />
+      <ArrowWrap onClick={() => history.back()}>
+        <ArrowBack transform="scale(-1,1)" />
+      </ArrowWrap>
       {leftTitle ? (
         <LeftTitle>
           {leftTitle}
@@ -36,6 +38,14 @@ const SubPageHeader = ({
     </Container>
   )
 }
+
+const ArrowWrap = styled.div`
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  &:hover {
+    transform: translateX(-5px);
+  }
+`
 
 const Container = styled.div`
   width: 100%;
@@ -54,14 +64,6 @@ const Container = styled.div`
   padding: 16px;
   background-color: #fff;
   border-bottom: 1px solid rgba(0, 0, 0, 0.3);
-
-  & > svg {
-    cursor: pointer;
-    transition: all 0.3s ease-in-out;
-    &:hover {
-      transform: translateX(-5px);
-    }
-  }
 
   & > button {
     font-size: var(--fs-12);

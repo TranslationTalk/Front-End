@@ -7,8 +7,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
-import { ReactComponent as ReadDot } from '../../assets/icons/ReadDot.svg'
-import { ReactComponent as NotReadDot } from '../../assets/icons/NotReadDot.svg'
 // default image이어야 함
 import defaultThumb from '../../assets/images/ListThumb.png'
 
@@ -25,7 +23,7 @@ const ChatListCard = ({ name, profileUrl, isRead, onClick, auth }) => {
         </span>
         {/* 가져올 데이터가 없음 */}
         <p>2022.01.22</p>
-        <Dot>{isRead ? <ReadDot /> : <NotReadDot />}</Dot>
+        <Dot isRead={isRead} />
       </RightWrap>
     </Container>
   )
@@ -85,9 +83,11 @@ const Dot = styled.div`
   width: 8px;
   height: 8px;
   position: absolute;
-  top: 0;
-  right: 8px;
+  top: 14px;
+  right: 10px;
   transform: translateY(100%);
+  background-color: ${props => (props.isRead ? '#BCBCBC' : '#3D51FF')};
+  border-radius: 50%;
 `
 
 ChatListCard.propTypes = {
