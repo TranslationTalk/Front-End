@@ -11,6 +11,7 @@ import {
   NavigationUser,
   NoList,
   PageHeader,
+  Spinner,
   ToggleMenu,
   TopDownButton,
 } from '../../components'
@@ -23,14 +24,17 @@ const RequestList = () => {
   const [estimates, setEstimates] = useState([])
   const [clickNumber, setClickNumber] = useState(0)
   const [estimatesState, setEstimatesState] = useState('ready')
+  const [loading, setLoading] = useState(false)
 
   // 비동기 처리
   useEffect(() => {
+    setLoading(true)
     const fetchEstimateList = async () => {
       const {
         data: { data },
       } = await clientAPIs.requestList()
       setEstimates(data)
+      setLoading(false)
     }
     fetchEstimateList()
   }, [])
@@ -89,6 +93,7 @@ const RequestList = () => {
               )
             })
         )}
+        {loading && <Spinner loadingTitle="내 번역요청 가져오는 중" />}
       </ul>
       <NavigationUser />
       <TopDownButton />

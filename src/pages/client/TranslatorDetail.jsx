@@ -11,6 +11,7 @@ import {
   EstimateDetail,
   NoList,
   ReviewCard,
+  Spinner,
   SubPageHeader,
   ToggleMenu,
   TranslatorInfo,
@@ -24,11 +25,11 @@ const TranslatorDetail = () => {
   const [status, setsStatus] = useState('')
   const [review, setReview] = useState()
   const [clickNumber, setClickNumber] = useState(0)
-
-  console.log(estimate)
+  const [loading, setLoading] = useState(false)
 
   //비동기처리: 번역 견적
   useEffect(() => {
+    setLoading(true)
     const fetchEstimateList = async () => {
       const {
         data: { data },
@@ -38,6 +39,7 @@ const TranslatorDetail = () => {
       )
       setEstimate(data)
       setsStatus(data.status)
+      setLoading(false)
     }
     fetchEstimateList()
   }, [status])
@@ -61,7 +63,6 @@ const TranslatorDetail = () => {
       clientAPIs
         .addChatroom(location.state.estimateId)
         .then(data => {
-          console.log(data.data)
           alert(`roomId ${data.data.id}번 생성`)
           navigate(`/chat/${data.data.id}`, {
             state: {
@@ -192,6 +193,7 @@ const TranslatorDetail = () => {
           </>
         )}
       </section>
+      {loading && <Spinner loadingTitle="내 번역 가져오는 중" />}
     </TranslatorDetailPage>
   )
 }
