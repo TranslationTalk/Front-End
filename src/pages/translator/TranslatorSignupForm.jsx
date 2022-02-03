@@ -23,6 +23,7 @@ const initialState = {
     'https://tistory1.daumcdn.net/tistory/user/264290/profile/profileImg?v=1635480821401',
   language: '',
   email: '',
+  career: '번역 회사 근무',
   phoneNum: '',
   introduce: '',
   taxPossible: false,
