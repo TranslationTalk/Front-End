@@ -4,6 +4,7 @@ import styled from 'styled-components'
 import {
   Button,
   CommentBox,
+  StatusMessage,
   SubPageHeader,
   SummaryCard,
   TextAreaInput,
@@ -25,17 +26,43 @@ const EstimateForm = () => {
     offerPrice: '',
   })
 
+  const [checkForm, setCheckForm] = useState({
+    confirmedDate: true,
+    offerPrice: true,
+  })
+
   const handleChange = e => {
     const { id, value } = e.target
     setFormData({ ...formData, [id]: value })
   }
 
+  console.log(formData)
+
   const handleSubmit = async e => {
     e.preventDefault()
-    // 필요
-    await apis.sendEstimate(estimate.id, formData)
+    let check = Object.assign({}, checkForm)
 
-    navigate('/translator/translation/list')
+    formData.confirmedDate === ''
+      ? (check.confirmedDate = false)
+      : (check.confirmedDate = true)
+    formData.offerPrice === ''
+      ? (check.offerPrice = false)
+      : (check.offerPrice = true)
+
+    setCheckForm(check)
+
+    if (!Object.entries(check).find(value => value[1] === false)) {
+      // 필요
+      await apis.sendEstimate(estimate.id, formData)
+      navigate('/translator/translation/list')
+    }
+  }
+
+  //! form 입력 하지 않았을 시 메시지
+  const formMessage = (type, message) => {
+    return type ? null : (
+      <StatusMessage text={message} icon="info" color="#FF5F5F" />
+    )
   }
 
   return (
@@ -81,6 +108,7 @@ const EstimateForm = () => {
             </div>
           </InputWrap>
           <Line />
+          {formMessage(checkForm.confirmedDate, '목표 날짜를 선택해 주세요')}
           <InputWrap>
             <SectionTitle>견적금액</SectionTitle>
             <div>
@@ -93,6 +121,7 @@ const EstimateForm = () => {
             </div>
           </InputWrap>
           <Line />
+          {formMessage(checkForm.offerPrice, '요청 날짜를 선택해 주세요')}
           <Button content="견적 보내기" />
         </Form>
       </Wrap>
