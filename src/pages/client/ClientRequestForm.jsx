@@ -203,7 +203,7 @@ const ClientRequestForm = props => {
           name="phoneNumber"
           value={requestForm.phoneNumber}
           placeholder="전화번호"
-          type="tel"
+          type="phone"
           onChange={onChange}
         />
         {formMessage(checkForm.phoneNumber, '전화번호를 입력해 주세요')}
