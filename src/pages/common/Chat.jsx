@@ -8,13 +8,20 @@ import {
   SubPageHeader,
 } from '../../components'
 import { apis, clientAPIs } from '../../utils/axios'
-import DefaultProfile from '../../assets/images/grayStar.png'
+import DefaultProfile from '../../assets/images/thumbnail_middle.png'
 import io from 'socket.io-client'
 import styled from 'styled-components'
 
 const Chat = () => {
   const {
-    state: { estimateId, requestId, roomId, anothername, createdTime }, // isText와 offerPrice도 넘어와야 함
+    state: {
+      estimateId,
+      requestId,
+      roomId,
+      anothername,
+      createdTime,
+      translatorImg,
+    }, // isText와 offerPrice은 보류
   } = useLocation()
   const [chatContents, setChatContents] = useState([]) // 모든 채팅 내용
   const [chatSections, setChatSections] = useState([]) // 날짜별로 묶은 채팅
@@ -147,7 +154,7 @@ const Chat = () => {
               <ChatBalloon // 처음 요소는 번역톡 알림 컴포넌트 추가해서 넣어주어야 할 듯
                 key={chatContent.id}
                 name={anothername}
-                profileUrl={DefaultProfile}
+                profileUrl={translatorImg ? translatorImg : DefaultProfile}
                 date={chatContent.createdAt}
                 chat={chatContent.chat}
                 isSelf={chatContent?.User?.auth === auth} // 내 auth와 채팅의 auth가 같을 때 채팅 오른쪽에 배치
