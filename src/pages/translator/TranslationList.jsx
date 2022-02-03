@@ -255,6 +255,10 @@ const CheckBoxWrap = styled.div`
     & > input {
       display: none;
     }
+    & > label {
+      width: 100%;
+      cursor: pointer;
+    }
   }
   span {
     position: absolute;
