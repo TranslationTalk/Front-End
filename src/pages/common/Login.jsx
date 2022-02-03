@@ -4,9 +4,8 @@ import { Button, PageHeader } from '../../components/index'
 import { Footer } from '../../components/index'
 import loginBg from '../../assets/images/LoginBg.jpg'
 import loginBgBig from '../../assets/images/LoginBgBig.jpg'
+import { ReactComponent as Arrow } from '../../assets/icons/Arrow.svg'
 import loginLogo from '../../assets/icons/Logo.svg'
-import arrowRightWhite from '../../assets/icons/arrowRightWhite.svg'
-import arrowRight from '../../assets/icons/ArrowRight.svg'
 import MainSection2 from '../../assets/images/MainSection2.png'
 import MainSection3 from '../../assets/images/MainSection3.png'
 import MainVisionSection from '../../assets/images/MainVisionSection.jpg'
@@ -16,9 +15,25 @@ const redirectUriClient = `http://localhost:3000/oauth/callback/kakao/client`
 const redirectUriTranslator = `http://localhost:3000/oauth/callback/kakao/translator`
 
 const Login = () => {
+  const [scrollY, setScrollY] = useState(0)
+  const [innerWidth, setInnerWidth] = useState(window.innerWidth)
+
+  // innerWidth
+  const useResize = () => {
+    const listener = () => {
+      setInnerWidth(window.innerWidth)
+    }
+    useEffect(() => {
+      window.addEventListener('resize', listener)
+      return () => {
+        window.addEventListener('resize', listener)
+      }
+    }, [])
+    return innerWidth
+  }
+
   // 스크롤 위치
   const useScroll = () => {
-    const [scrollY, setScrollY] = useState(0)
     const listener = () => {
       setScrollY(window.pageYOffset)
     }
@@ -66,7 +81,13 @@ const Login = () => {
               href={`https://kauth.kakao.com/oauth/authorize?client_id=${kakaoClientId}&redirect_uri=${redirectUriTranslator}&response_type=code`}
             >
               번역가로 로그인하기
-              <i />
+              <i>
+                {useResize() > 640 ? (
+                  <Arrow fill="#000" width="24px" height="24px" />
+                ) : (
+                  <Arrow fill="#fff" width="24px" height="24px" />
+                )}
+              </i>
             </a>
           </div>
         </div>
@@ -203,11 +224,10 @@ const LoginSection = styled.section`
       }
       i {
         display: inline-block;
-        width: 16px;
-        height: 16px;
-        background-image: url(${arrowRightWhite});
-        content: '';
         transition: all 0.5s;
+        svg {
+          margin-bottom: -5px;
+        }
       }
       &:hover i {
         transform: translateX(5px);
@@ -238,12 +258,9 @@ const LoginSection = styled.section`
           font-size: 24px;
           color: #000;
           text-shadow: none;
-        }
-        i {
-          margin-bottom: -2px;
-          width: 24px;
-          height: 24px;
-          background-image: url(${arrowRight});
+          i svg {
+            margin-bottom: -2px;
+          }
         }
       }
     }

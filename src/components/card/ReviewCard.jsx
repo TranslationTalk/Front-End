@@ -7,7 +7,7 @@ date: 리뷰 작성날짜 '2022-01-15T04:33:14.000Z' //string
 */
 import React from 'react'
 import PropTypes from 'prop-types'
-import star from '../../assets/icons/Grade.svg'
+import { ReactComponent as Star } from '../../assets/icons/Star.svg'
 import profile from '../../assets/images/TranslatorProfile.png'
 import styled from 'styled-components'
 
@@ -19,6 +19,9 @@ const ReviewCard = ({ userName, score, comment, date }) => {
         <div>
           <h4>{userName}</h4>
           <p>
+            <span>
+              <Star fill="#FF5F5F" width="16px" height="16px" />
+            </span>
             <span className="score">
               {score}
               {/* 점수가 한자리수 이면 '.0' 추가*/}
@@ -55,21 +58,15 @@ const Card = styled.div`
   p {
     font-size: var(--fs-12);
     line-height: 1.4;
+    span:first-child svg {
+      display: inline-block;
+      margin-bottom: -2px;
+    }
     span {
       line-height: 20px;
     }
     .score {
       font-weight: 500;
-      &::before {
-        display: inline-block;
-        width: 16px;
-        height: 16px;
-        margin-right: 2px;
-        margin-bottom: -1px;
-        background-image: url(${star});
-        background-size: cover;
-        content: '';
-      }
     }
     .date {
       color: var(--gray-c4);
