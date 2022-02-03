@@ -132,7 +132,7 @@ const ToggleWrap = styled.div`
   transform: translateX(-50%);
   margin-top: 56px;
   background-color: var(--white);
-  z-index: 5;
+  z-index: 1;
   & > div {
     padding-top: 13px;
     margin: 0;
