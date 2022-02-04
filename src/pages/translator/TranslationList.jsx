@@ -170,7 +170,7 @@ const TranslationList = () => {
 const Wrap = styled.div`
   height: 100%;
   background-color: var(--light-gray);
-  padding-top: 115px;
+  padding: 115px 0 72px;
   position: relative;
   min-height: 100vh;
 `
