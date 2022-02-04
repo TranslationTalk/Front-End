@@ -20,16 +20,21 @@ const KakaoForTranslatorRedirectHandler = () => {
         // sessionStorage에 auth랑 token 저장
         sessionStorage.setItem('token', data.token)
         sessionStorage.setItem('auth', data.auth)
-        // sessionStorage 에 저장? 다른데 못 가도록 처리 필요
 
-        if (data.isProfile) {
-          // 가입 폼 제출했으면
-          navigate('/translator/list')
+        if (data.approve) {
+          if (data.isProfile) {
+            // 가입 폼 제출했으면
+            navigate('/translator/list')
+          } else {
+            // 아직 가입 폼이 없으면
+            navigate('/translator/signup')
+          }
+          alert('로그인 성공.')
         } else {
-          // 아직 가입 폼이 없으면
-          navigate('/translator/signup')
+          // 맨 처음 승인이 안되었는데 로그인이 성공되면 (가입 폼 없으면)
+          navigate('/')
+          alert('번역가 승인을 기다려주세요.')
         }
-        alert('로그인 성공.')
       } catch (error) {
         const errorMessage = error.response.data.message
         navigate('/')
