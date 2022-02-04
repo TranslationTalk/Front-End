@@ -71,6 +71,7 @@ const TranslatorDetail = () => {
               requestId: location.state.requestId,
               anothername: estimate.name,
               createdTime: data.data.createdAt,
+              translatorImg: estimate.profileUrl,
             },
           })
         })
@@ -83,6 +84,7 @@ const TranslatorDetail = () => {
           requestId: location.state.requestId,
           anothername: estimate.name,
           createdTime: estimate.roomCreateAt,
+          translatorImg: estimate.profileUrl,
         },
       })
     }
