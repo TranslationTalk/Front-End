@@ -30,7 +30,6 @@ const TranslatorEstimateDetail = () => {
   }, [])
 
   const gotoChatroom = () => {
-    // chat 경로 바뀜 translator/chat/
     navigate(`/chat/${estimateDetail.roomId}`, {
       state: {
         estimateId: estimate.id,
@@ -50,7 +49,12 @@ const TranslatorEstimateDetail = () => {
     // 작업 완료하면, 채팅방에서 자동으로 '작업 완료 되었습니다.' 보내주는 기능 추가 필요
     alert('작업 완료 처리가 되었습니다.')
     navigate(`/chat/${estimateDetail.roomId}`, {
-      state: { roomId: estimateDetail.roomId },
+      state: {
+        estimateId: estimate.id,
+        roomId: estimateDetail.roomId,
+        anothername: estimateDetail.username,
+        createdTime: estimateDetail.roomCreateAt,
+      },
     })
   }
 
