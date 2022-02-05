@@ -135,7 +135,7 @@ const TranslatorDetail = () => {
           name={estimate.name}
           profileUrl={estimate.profileUrl}
           totalTrans={estimate.totalTrans}
-          totalReivews={estimate.totalReviews}
+          totalReviews={estimate.totalReviews}
           avgReviews={estimate.avgReviews}
           taxPossible={estimate.taxPossible}
           cashPossible={estimate.cashPossible}
@@ -175,7 +175,7 @@ const TranslatorDetail = () => {
               review?.map(el => (
                 <ReviewCard
                   key={el.id}
-                  userName={el.clientId}
+                  userName={Number(el.username)}
                   score={el.score}
                   comment={el.comment}
                   date={el.reviewDate}
