@@ -47,10 +47,10 @@ const HamburgerMenu = () => {
                 <a href="https://cafe.naver.com/etranscafe">카페 이동하기</a>
               </li>
               <li>
-                <Link to={''}>약관</Link>
+                <Link to="/policy/terms">약관</Link>
               </li>
               <li>
-                <Link to={''}>개인정보취급방침</Link>
+                <Link to="/policy/privacy">개인정보취급방침</Link>
               </li>
             </ul>
           </Buttom>
