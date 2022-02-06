@@ -72,6 +72,11 @@ const ChatList = () => {
               onClick={() => handleClick(chatroom)}
               auth={auth}
               profileUrl={chatroom.profileUrl}
+              field={chatroom?.Estimate?.Request.field}
+              languages={[
+                chatroom?.Estimate?.Request.beforeLanguage,
+                chatroom?.Estimate?.Request.afterLanguage,
+              ]}
             />
           ))
         )}

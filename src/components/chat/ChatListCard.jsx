@@ -10,7 +10,15 @@ import styled from 'styled-components'
 // default image이어야 함
 import defaultThumb from '../../assets/images/ListThumb.png'
 
-const ChatListCard = ({ name, profileUrl, isRead, onClick, auth }) => {
+const ChatListCard = ({
+  name,
+  profileUrl,
+  isRead,
+  onClick,
+  auth,
+  field,
+  languages,
+}) => {
   return (
     <Container onClick={onClick}>
       <LeftWrap>
@@ -21,8 +29,15 @@ const ChatListCard = ({ name, profileUrl, isRead, onClick, auth }) => {
           <span>{name}</span>
           {auth === 'translator' ? '유저' : '번역가'}님
         </span>
-        {/* 가져올 데이터가 없음 */}
-        <p>2022.01.22</p>
+        <BottomWrap>
+          {auth === 'translator' && (
+            <p>
+              {field} | {languages[0]} - {languages[1]}
+            </p>
+          )}
+          {/* 백엔드 수정 중 */}
+          <p>2022.01.22</p>
+        </BottomWrap>
         <Dot isRead={isRead} />
       </RightWrap>
     </Container>
@@ -53,6 +68,14 @@ const RightWrap = styled.div`
   & > p {
     margin-top: 4px;
   }
+`
+
+const BottomWrap = styled.div`
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+  color: var(--gray);
+  font-size: var(--fs-12);
 `
 
 const Container = styled.div`
@@ -86,7 +109,7 @@ const Dot = styled.div`
   width: 8px;
   height: 8px;
   position: absolute;
-  top: 14px;
+  top: 8px;
   right: 10px;
   transform: translateY(100%);
   background-color: ${props => (props.isRead ? '#BCBCBC' : '#3D51FF')};
@@ -99,6 +122,8 @@ ChatListCard.propTypes = {
   isRead: PropTypes.bool.isRequired,
   onClick: PropTypes.func,
   auth: PropTypes.string,
+  field: PropTypes.string,
+  languages: PropTypes.array,
 }
 
 export default ChatListCard
