@@ -24,7 +24,6 @@ const ChatList = () => {
         auth === 'translator'
           ? await apis.getChatroomListTranslator()
           : await apis.getChatroomListClient()
-      console.log(data) // profileUrl 받아야 함
       setChatList(data)
 
       setLoading(false)

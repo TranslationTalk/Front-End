@@ -36,8 +36,6 @@ const EstimateForm = () => {
     setFormData({ ...formData, [id]: value })
   }
 
-  console.log(formData)
-
   const handleSubmit = async e => {
     e.preventDefault()
     let check = Object.assign({}, checkForm)

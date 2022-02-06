@@ -15,8 +15,8 @@ import styled from 'styled-components'
 const Chat = () => {
   const {
     state: {
-      estimateId,
-      requestId,
+      // estimateId,
+      // requestId,
       roomId,
       anothername,
       createdTime,
@@ -33,7 +33,6 @@ const Chat = () => {
       const {
         data: { data },
       } = await apis.getChatContents(roomId)
-      console.log(data)
 
       setChatContents(data)
       makeSectionByDate(data)
@@ -41,20 +40,20 @@ const Chat = () => {
 
     createAndFetchChatroom()
 
-    // 이름 가져오기.
-    // 지금은 여기서 fetching을 하지만, 이게 아니라 클라이언트에서 받아오거나
-    // 처음 로그인했을 때 정보를 저장해두었다가 가져와야 한다.
-    const getMyInfo = async () => {
-      const {
-        data: { data },
-      } = await apis.getTranslatorMypage()
-      console.log(data)
-      // setName(data.name)
-    }
-    if (auth === 'translator') {
-      // translator 일 때만 info를 가져올 수 있으므로
-      getMyInfo()
-    }
+    // // 이름 가져오기.
+    // // 지금은 여기서 fetching을 하지만, 이게 아니라 클라이언트에서 받아오거나
+    // // 처음 로그인했을 때 정보를 저장해두었다가 가져와야 한다.
+    // const getMyInfo = async () => {
+    //   const {
+    //     data: { data },
+    //   } = await apis.getTranslatorMypage()
+    //   console.log(data)
+    //   // setName(data.name)
+    // }
+    // if (auth === 'translator') {
+    //   // translator 일 때만 info를 가져올 수 있으므로
+    //   getMyInfo()
+    // }
   }, [])
 
   // chatting web socket
@@ -95,13 +94,13 @@ const Chat = () => {
     //   console.error(error)
     //   // 이미 확정하셨습니다. 알림창
     // }
-    console.log(estimateId)
+    // console.log(estimateId)
   }
 
   const handleConfirmTranslator = async () => {
     // 직접 확정하는 것은 보류
     // await clientAPIs.TranslatorConfirmed(requestId, estimateId)
-    console.log(estimateId, requestId)
+    // console.log(estimateId, requestId)
   }
 
   const makeSectionByDate = chatList => {

@@ -80,7 +80,6 @@ const TranslationList = () => {
   }
 
   const closeModal = () => {
-    console.log(capableLanguages)
     setShowModal(false)
   }
 

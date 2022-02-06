@@ -94,10 +94,7 @@ const TranslatorMyPageSetting = () => {
     // 기존 프로필 이미지 삭제
     deleteFile('profile', prevFileUrl)
 
-    const {
-      data: { data },
-    } = await apis.modifyTranslatorMypage(formData)
-    console.log(data)
+    await apis.modifyTranslatorMypage(formData)
     setFormData(initialState)
 
     navigate('/translator/mypage')

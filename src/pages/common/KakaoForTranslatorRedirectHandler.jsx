@@ -11,11 +11,8 @@ const KakaoForTranslatorRedirectHandler = () => {
       let params = new URL(document.location.toString()).searchParams
       let code = params.get('code') // 인가코드 받는 부분
 
-      console.log(code)
-
       try {
         const { data } = await apis.translatorLogin(code)
-        console.log(data)
 
         // sessionStorage에 auth랑 token 저장
         sessionStorage.setItem('token', data.token)

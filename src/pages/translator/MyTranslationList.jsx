@@ -31,8 +31,6 @@ const MyTranslationList = () => {
       setEstimates(data)
 
       setLoading(false)
-
-      console.log(data)
     }
     fetchEstimates()
     // 필터 적용
@@ -51,7 +49,6 @@ const MyTranslationList = () => {
 
   // ToggleMenu filter
   useEffect(() => {
-    console.log(clickNumber)
     switch (clickNumber) {
       case 0:
         // 보낸 견적 (ready)

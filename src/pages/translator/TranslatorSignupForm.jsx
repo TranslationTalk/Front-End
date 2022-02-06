@@ -46,8 +46,6 @@ const TranslatorSignupForm = () => {
     introduce: true,
   })
 
-  console.log(formData)
-
   const navigate = useNavigate()
 
   const handleSubmit = async e => {
@@ -71,10 +69,7 @@ const TranslatorSignupForm = () => {
       // 파일 업로드
       uploadFile(file, `profile/${fileName}`)
 
-      const {
-        data: { data },
-      } = await apis.postTranslatorMypage(formData)
-      console.log(data)
+      await apis.postTranslatorMypage(formData)
       setFormData(initialState)
 
       navigate('/translator/list')

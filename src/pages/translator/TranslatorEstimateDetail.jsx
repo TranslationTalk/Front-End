@@ -24,7 +24,6 @@ const TranslatorEstimateDetail = () => {
         data: { data },
       } = await apis.getEstimate(estimate.id)
       setEstimateDetail(data)
-      console.log(data)
     }
     fetchEstimate()
   }, [])
@@ -41,9 +40,7 @@ const TranslatorEstimateDetail = () => {
   }
 
   const finishWork = async () => {
-    console.log('작업 완료')
-    const data = await apis.finishEstimate(estimate.id)
-    console.log(data)
+    await apis.finishEstimate(estimate.id)
     // 일단 작업 완료 후 채팅방으로 이동하는 것으로 함
 
     // 작업 완료하면, 채팅방에서 자동으로 '작업 완료 되었습니다.' 보내주는 기능 추가 필요
