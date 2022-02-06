@@ -48,6 +48,20 @@ const ChatList = () => {
     })
   }
 
+  const getFullDate = date => {
+    const year = new Date(date).getFullYear()
+    const month =
+      new Date(date).getMonth() < 10
+        ? `0${new Date(date).getMonth()}`
+        : new Date(date).getMonth()
+    const day =
+      new Date(date).getDate() < 10
+        ? `0${new Date(date).getDate()}`
+        : new Date(date).getDate()
+
+    return `${year}.${month}.${day}`
+  }
+
   return (
     <>
       <PageHeader title={auth === 'translator' ? '내 상담' : '채팅'} />
@@ -76,6 +90,7 @@ const ChatList = () => {
                 chatroom?.Estimate?.Request.beforeLanguage,
                 chatroom?.Estimate?.Request.afterLanguage,
               ]}
+              lastChatDate={getFullDate(chatroom?.lastChatDate)}
             />
           ))
         )}

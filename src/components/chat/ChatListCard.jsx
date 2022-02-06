@@ -18,6 +18,7 @@ const ChatListCard = ({
   auth,
   field,
   languages,
+  lastChatDate,
 }) => {
   return (
     <Container onClick={onClick}>
@@ -35,10 +36,10 @@ const ChatListCard = ({
               {field} | {languages[0]} - {languages[1]}
             </p>
           )}
-          {/* 백엔드 수정 중 */}
-          <p>2022.01.22</p>
+          <p>{lastChatDate}</p>
         </BottomWrap>
-        <Dot isRead={isRead} />
+        {/* 백엔드 수정 중 */}
+        <Dot isRead={!isRead} />
       </RightWrap>
     </Container>
   )
@@ -124,6 +125,7 @@ ChatListCard.propTypes = {
   auth: PropTypes.string,
   field: PropTypes.string,
   languages: PropTypes.array,
+  lastChatDate: PropTypes.string,
 }
 
 export default ChatListCard
