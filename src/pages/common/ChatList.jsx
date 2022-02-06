@@ -44,6 +44,7 @@ const ChatList = () => {
             ? chatroom.translatorName
             : chatroom.Estimate.Request.User.username,
         createdTime: chatroom.createdAt,
+        translatorImg: chatroom.profileUrl,
       },
     })
   }
@@ -70,6 +71,7 @@ const ChatList = () => {
               }
               onClick={() => handleClick(chatroom)}
               auth={auth}
+              profileUrl={chatroom.profileUrl}
             />
           ))
         )}

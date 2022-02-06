@@ -75,7 +75,10 @@ const Container = styled.div`
 const LeftWrap = styled.div`
   padding-bottom: 5px;
   & img {
+    width: 48px;
+    height: 48px;
     margin-right: 10px;
+    border-radius: 10px;
   }
 `
 
