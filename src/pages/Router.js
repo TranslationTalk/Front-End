@@ -5,6 +5,8 @@ import Login from './common/Login'
 import Chat from './common/Chat'
 import ChatList from './common/ChatList'
 import NotFound from './common/NotFound'
+import PrivacyPolicy from './common/PrivacyPolicy'
+import TermsOfUse from './common/TermsOfUse'
 // client
 import ClientEstimateList from './client/ClientEstimateList'
 import ClientHome from './client/ClientHome'
@@ -43,6 +45,8 @@ const Router = () => {
         />
         <Route path="/chat/:roomid" element={<Chat />} />
         <Route path="/chat/list" element={<ChatList />} />
+        <Route path="/policy/privacy" element={<PrivacyPolicy />} />
+        <Route path="/policy/terms" element={<TermsOfUse />} />
         {/* client */}
         <Route path="/client/main" element={<ClientHome />} />
         <Route path="/client/request/list" element={<RequestList />} />

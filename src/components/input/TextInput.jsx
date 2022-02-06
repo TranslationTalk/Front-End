@@ -27,18 +27,22 @@ const TextInput = ({
     if (type === 'date') {
       const current = new Date()
       const currentYear = current.getFullYear()
-      const currentMonth = current.getMonth() + 1
-      const currentDate = current.getDate()
-      const date = `${currentYear}-${
-        currentMonth < 10 ? '0' + currentMonth : currentMonth
-      }-${currentDate}`
+      let currentMonth = current.getMonth() + 1
+      let currentDate = current.getDate()
+      if (currentMonth < 10) {
+        currentMonth = '0' + currentMonth
+      }
+      if (currentDate < 10) {
+        currentDate = '0' + currentDate
+      }
+      const date = `${currentYear}-${currentMonth}-${currentDate}`
       return date
     }
   }
 
-  // type='tel'
+  // type='phone'
   // 숫자만 입력 가능
-  if (type === 'tel') {
+  if (type === 'phone') {
     value = value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1')
   }
 
@@ -56,7 +60,7 @@ const TextInput = ({
     />
   )
 }
-console.log()
+
 const Input = styled.input`
   width: 100%;
   padding: ${props => (props.padding ? props.padding : '11px 12px')};

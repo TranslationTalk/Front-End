@@ -27,9 +27,10 @@ const TranslatorDetail = () => {
   const [clickNumber, setClickNumber] = useState(0)
   const [loading, setLoading] = useState(false)
 
-  //비동기처리: 번역 견적
+  // 비동기 처리
   useEffect(() => {
     setLoading(true)
+    //비동기처리: 번역 견적
     const fetchEstimateList = async () => {
       const {
         data: { data },
@@ -40,22 +41,35 @@ const TranslatorDetail = () => {
       setEstimate(data)
       setsStatus(data.status)
       setLoading(false)
+
+      //비동기처리: 번역가 리뷰 (data.translatorId)
+      const {
+        data: { data: reviewData },
+      } = await clientAPIs.requestReview(data.translatorId)
+      setReview(reviewData)
+      const reviewList = async () => {
+        // 번역가 리뷰
+        // totalReviews,avgReviews를 Estimate에 재할당
+        setEstimate(prev => ({
+          ...prev,
+          totalReviews: reviewData.length,
+          avgReviews: avgRevies(reviewData),
+        }))
+      }
+      reviewList()
     }
+
     fetchEstimateList()
   }, [status])
 
-  //비동기처리: 번역가 리뷰
-  useEffect(() => {
-    if (!estimate.translatorId) return
-    const reviewList = async () => {
-      const {
-        data: { data },
-      } = await clientAPIs.requestReview(estimate.translatorId)
-      setReview(data)
-    }
-    reviewList()
-  }, [estimate])
-
+  //평균 평점 구하기
+  const avgRevies = reviews => {
+    let sumScores = 0
+    reviews?.forEach(item => {
+      sumScores += item.score
+    })
+    return Number((sumScores / reviews.length).toFixed(1))
+  }
   // 상담하기 Btn
   // 채팅방 생성 -> navigate로 바로 채팅방이동
   const consultBtn = () => {
@@ -71,6 +85,7 @@ const TranslatorDetail = () => {
               requestId: location.state.requestId,
               anothername: estimate.name,
               createdTime: data.data.createdAt,
+              translatorImg: estimate.profileUrl,
             },
           })
         })
@@ -83,6 +98,7 @@ const TranslatorDetail = () => {
           requestId: location.state.requestId,
           anothername: estimate.name,
           createdTime: estimate.roomCreateAt,
+          translatorImg: estimate.profileUrl,
         },
       })
     }
@@ -133,7 +149,7 @@ const TranslatorDetail = () => {
           name={estimate.name}
           profileUrl={estimate.profileUrl}
           totalTrans={estimate.totalTrans}
-          totalReivews={estimate.totalReviews}
+          totalReviews={estimate.totalReviews}
           avgReviews={estimate.avgReviews}
           taxPossible={estimate.taxPossible}
           cashPossible={estimate.cashPossible}
@@ -167,13 +183,13 @@ const TranslatorDetail = () => {
           //번역가 리뷰
 
           <>
-            {review.length === 0 ? (
+            {review?.length === 0 ? (
               <NoList listName="아직 리뷰가 없어요" />
             ) : (
               review?.map(el => (
                 <ReviewCard
                   key={el.id}
-                  userName={el.clientId}
+                  userName={Number(el.username)}
                   score={el.score}
                   comment={el.comment}
                   date={el.reviewDate}

@@ -20,9 +20,7 @@ const StatusMessage = ({ text, color, icon }) => {
       iconImg = alarmerrorImg
       break
     default:
-      console.log(
-        icon + 'StatusMessage 컴포넌트 icon props를 잘못 입력하셨습니다.',
-      )
+      break
   }
 
   return (

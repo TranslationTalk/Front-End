@@ -48,15 +48,6 @@ const Login = () => {
 
   return (
     <LoginPage>
-      <Test>
-        {/* 배포전 삭제 */}
-        <Button
-          content="링크페이지"
-          onClick={() => {
-            location.href = '/test'
-          }}
-        />
-      </Test>
       <PageHeader />
 
       {/* 로그인 section */}
@@ -136,14 +127,6 @@ const Login = () => {
     </LoginPage>
   )
 }
-
-// 배포전 삭제
-const Test = styled.div`
-  position: fixed;
-  top: 10px;
-  right: 10px;
-  z-index: 10;
-`
 
 // 스크롤 애니메이션
 const LoginPage = styled.div`

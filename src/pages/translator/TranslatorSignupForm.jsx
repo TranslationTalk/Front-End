@@ -194,6 +194,7 @@ const TranslatorSignupForm = () => {
         <TextInput
           name="phoneNum"
           type="phone"
+          value={formData.phoneNum}
           placeholder="전화번호"
           onChange={handleChange}
         />
