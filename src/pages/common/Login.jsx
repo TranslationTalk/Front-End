@@ -212,7 +212,7 @@ const LoginSection = styled.section`
           margin-bottom: -5px;
         }
       }
-      a:last-child i {
+      a:last-child:hover i {
         transform: translateX(5px);
       }
     }
