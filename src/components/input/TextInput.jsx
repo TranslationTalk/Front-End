@@ -60,7 +60,7 @@ const TextInput = ({
     />
   )
 }
-console.log()
+
 const Input = styled.input`
   width: 100%;
   padding: ${props => (props.padding ? props.padding : '11px 12px')};

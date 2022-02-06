@@ -26,8 +26,6 @@ const RequestList = () => {
   const [estimatesState, setEstimatesState] = useState('ready')
   const [loading, setLoading] = useState(false)
 
-  console.log(estimates)
-
   // 비동기 처리
   useEffect(() => {
     setLoading(true)
