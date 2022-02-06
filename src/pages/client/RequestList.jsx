@@ -26,6 +26,8 @@ const RequestList = () => {
   const [estimatesState, setEstimatesState] = useState('ready')
   const [loading, setLoading] = useState(false)
 
+  console.log(estimates)
+
   // 비동기 처리
   useEffect(() => {
     setLoading(true)
@@ -42,9 +44,15 @@ const RequestList = () => {
   // card클릭 시 받은 견적 list로 이동
   // 요청id state로 넘김
   const cardClick = estimate => {
-    navigate('/client/estimate/list', {
-      state: { requestId: estimate.id, createdTime: estimate.createdAt },
-    })
+    if (estimate.status === 'ready') {
+      navigate('/client/estimate/list', {
+        state: { requestId: estimate.id, createdTime: estimate.createdAt },
+      })
+    } else {
+      navigate('/client/estimate/detail/', {
+        state: { requestId: estimate.id, estimateId: estimate.estimateId },
+      })
+    }
   }
 
   // 토글 메뉴 선택된 넘버 set
