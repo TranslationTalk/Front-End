@@ -1,0 +1,44 @@
+name: Build and deploy
+
+on: 
+  push:
+    branches: [master]
+    
+  # Run workflow manually
+  workflow_dispatch: 
+  
+jobs:
+  build: 
+    name: Build
+    runs-on: ubuntu-latest
+    steps: 
+      - name: Checkout repository
+        uses: actions/checkout@master
+      - name: Install dependencies
+        run: yarn ci
+      - name: Build dependencies
+        run: yarn build
+      - name: Archive production artifact
+        uses: actions/upload-artifact@master
+        with:
+          name: build
+          path: build
+  deploy: 
+    name: Deploy
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+      - name: Deploy to Firebase Hosting
+        uses: FirebaseExtended/action-hosting-deploy@v0
+        with: 
+          name: build
+          path: build
+      - name: Deploy to Firebase
+        uses: TranslationTalk/Front-End@master
+        with:
+          args: deploy --only hosting
+        env: 
+          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
+

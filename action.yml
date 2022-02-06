@@ -1,0 +1,9 @@
+name: 'firebase-actions'
+description: 'Firebase Action'
+inputs:
+  github-token:
+    description: 'github token'
+    required: true
+runs:
+  using: 'node12'
+  main: 'build/static/js/main.6324e11a.js'

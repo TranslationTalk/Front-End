@@ -11,8 +11,8 @@ import MainSection3 from '../../assets/images/MainSection3.png'
 import MainVisionSection from '../../assets/images/MainVisionSection.jpg'
 
 const kakaoClientId = process.env.REACT_APP_KAKAO_CLIENT_ID
-const redirectUriClient = `https://translation-talk-efa1a.web.app/oauth/callback/kakao/client`
-const redirectUriTranslator = `https://translation-talk-efa1a.web.app/oauth/callback/kakao/translator`
+const redirectUriClient = `https://translation-talk-efa1a.firebaseapp.com/oauth/callback/kakao/client`
+const redirectUriTranslator = `https://translation-talk-efa1a.firebaseapp.com/oauth/callback/kakao/translator`
 
 const Login = () => {
   const [scrollY, setScrollY] = useState(0)
