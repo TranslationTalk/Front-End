@@ -24,7 +24,6 @@ const ChatList = () => {
         auth === 'translator'
           ? await apis.getChatroomListTranslator()
           : await apis.getChatroomListClient()
-      console.log(data) // profileUrl 받아야 함
       setChatList(data)
 
       setLoading(false)
@@ -44,6 +43,7 @@ const ChatList = () => {
             ? chatroom.translatorName
             : chatroom.Estimate.Request.User.username,
         createdTime: chatroom.createdAt,
+        translatorImg: chatroom.profileUrl,
       },
     })
   }
@@ -70,6 +70,12 @@ const ChatList = () => {
               }
               onClick={() => handleClick(chatroom)}
               auth={auth}
+              profileUrl={chatroom.profileUrl}
+              field={chatroom?.Estimate?.Request.field}
+              languages={[
+                chatroom?.Estimate?.Request.beforeLanguage,
+                chatroom?.Estimate?.Request.afterLanguage,
+              ]}
             />
           ))
         )}
