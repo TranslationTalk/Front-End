@@ -2,7 +2,7 @@ import axios from 'axios'
 
 const instance = axios.create({
   // 기본적으로 우리가 바라볼 서버의 주소
-  baseURL: 'http://52.79.79.67:3000/',
+  baseURL: 'https://52.79.79.67:3000/',
 
   // 헤더에 넣을 정보
   headers: {
