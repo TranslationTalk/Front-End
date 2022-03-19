@@ -1,7 +1,14 @@
+## 👩‍🏫 프로젝트 설명
+
+번역 요청을 하고 싶은 의뢰자와 번역가를 매칭해주는 웹 어플리케이션.
+
+의뢰자가 번역 요청을 올리고, 번역가가 할 수 있는 요청을 골라 견적서를 보내주고,  
+가격과 데드라인이 요청자 마음에 든다면 번역가를 확정하여 채팅을 성사시킵니다.
+
 ## 💿 실행 방법
 
 ```
-$ git clone https://github.com/pre-onboarding-team3/wanted-codestates-project-3-7.git
+$ git clone https://github.com/TranslationTalk/Front-End.git
 
 $ npm install
 
@@ -35,6 +42,11 @@ $ npm run start
 
 ![녹화_2022_03_19_21_20_58_722](https://user-images.githubusercontent.com/87519250/159121236-33082406-e0ca-4a0c-a66b-049da0ae1087.gif)
 
+### 메인 페이지 UI (모바일 대응)
+
+| PC 화면 | 모바일 화면 |
+| --- | --- |
+| ![PC화면](https://user-images.githubusercontent.com/80020227/159121582-e9f04d91-f75e-44b1-933b-a6d8abad605b.png) | ![모바일화면](https://user-images.githubusercontent.com/80020227/159121585-1ec0eeee-e6fe-465e-8c56-a59db45803df.png) |
 
 ## ✨ 주요 기능
 
